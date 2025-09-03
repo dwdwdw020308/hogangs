@@ -1,0 +1,117 @@
+/* 커스텀 프로퍼티(마스크 반경/중심) 애니메이션 가능하도록 등록 */
+@property --r {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+@property --cx {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 50%;
+}
+@property --cy {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 50%;
+}
+
+/* 오버레이: 처음엔 흰 화면 + 구멍 없음(반경 0) */
+.landing-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+
+    /* 센터-아웃 원형 구멍 마스크 (터질 때만 구멍이 커진다) */
+    --r: 0px;
+    --cx: 50%;
+    --cy: 50%;
+    -webkit-mask-image: radial-gradient(
+        circle var(--r) at var(--cx) var(--cy),
+        transparent 98%,
+        black 100%
+    );
+    mask-image: radial-gradient(
+        circle var(--r) at var(--cx) var(--cy),
+        transparent 98%,
+        black 100%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    /* 살짝 지연 후 확장: 스플래시가 잠깐 보였다가 구멍이 커지도록 */
+    transition: --r 5s ease-out 0.07s;
+}
+
+/* 팝 이후: 구멍을 화면 끝까지 확장(안→밖) */
+.landing-overlay.pop {
+    --r: 160vmax;
+}
+
+/* 비눗방울 */
+.bubble {
+    width: 500px;
+    height: 500px;
+    cursor: pointer;
+    animation: float 4s ease-in-out infinite;
+    /* 발광 느낌 */
+    filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.55))
+        drop-shadow(0 0 40px rgba(255, 0, 255, 0.15));
+}
+
+/* 비눗방울 그룹/스플래시의 기준점을 중앙으로 */
+.bubble__group,
+.bubble__splash {
+    transform-origin: 100px 100px; /* viewBox 기준 */
+}
+
+/* 평소엔 스플래시 숨김 */
+.bubble__splash {
+    opacity: 0;
+}
+
+/* 팝 트리거: 비눗방울 수축 + 스플래시(파티클) 확산 */
+.landing-overlay.pop .bubble__group {
+    animation: collapse 0.25s ease-in forwards;
+}
+
+.landing-overlay.pop .bubble__splash {
+    opacity: 1;
+    animation: splash 0.23s ease-out forwards;
+}
+
+/* 둥실둥실 */
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-28px) scale(1.02);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 터질 때 본체 축소 */
+@keyframes collapse {
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* 대시 원이 퍼지듯(파티클 느낌) */
+@keyframes splash {
+    from {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+    to {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
