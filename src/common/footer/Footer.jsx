@@ -1,7 +1,6 @@
-import './style.scss';
 const Footer = () => {
     return (
-        <footer>
+        <footer id="footer">
             <div className="inner">
                 <h3 className="logo">logo</h3>
                 <div className="middle">

@@ -1,7 +1,6 @@
-import './style.scss';
 const Header = () => {
     return (
-        <header>
+        <header id="header">
             <div className="inner">
                 <h2 className="logo">logo</h2>
 
