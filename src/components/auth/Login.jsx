@@ -18,8 +18,18 @@ const Login = () => {
                             </form>
                         </div>
                         <div className="bottom">
-                            <button>로그인</button>
-                            <span className="join-btn">회원가입</span>
+                            <div className="btnWrap">
+                                <button>로그인</button>
+                                <span className="join-btn">회원가입</span>
+                            </div>
+                            <div className="snsBox">
+                                <div className="text">SNS 간편로그인</div>
+                                <div className="snsWrap">
+                                    <img src="/login/google.png" alt="" />
+                                    <img src="/login/kakao.png" alt="" />
+                                    <img src="/login/naver.png" alt="" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
