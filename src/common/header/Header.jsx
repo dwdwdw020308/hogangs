@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Login from '../../components/auth/login';
 
+import { Link } from 'react-router-dom';
+
 const Header = () => {
     const [loginModal, setLoginModal] = useState(true);
     return (
@@ -10,7 +12,9 @@ const Header = () => {
 
                 <nav>
                     <ul>
-                        <li>About Us</li>
+                        <li>
+                            <Link to="/about">AboutUs</Link>
+                        </li>
                         <li>Videos</li>
                         <li>Hotel</li>
                         <li>Grooming</li>
