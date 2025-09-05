@@ -18,8 +18,8 @@ node_modules/
 .vscode/
 
 # Environment variables
-.env
-.env.*
+# .env
+# .env.*
 
 
 .DS_Store
