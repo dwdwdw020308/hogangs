@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Header = () => {
     return (
         <header id="header">
@@ -6,7 +8,9 @@ const Header = () => {
 
                 <nav>
                     <ul>
-                        <li>About Us</li>
+                        <li>
+                            <Link to="/about">AboutUs</Link>
+                        </li>
                         <li>Videos</li>
                         <li>Hotel</li>
                         <li>Grooming</li>
