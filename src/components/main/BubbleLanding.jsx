@@ -116,6 +116,10 @@ export default function BubbleLanding({ onClose }) {
             const r = cRect.width / 2;
             const r2 = r * r;
 
+            const innerFactor = 0.74;
+            const rInner = r * innerFactor;
+            const r2Inner = rInner * rInner;
+
             const items = Array.from(list.querySelectorAll('li'));
             let best = null;
             for (const li of items) {
@@ -128,7 +132,7 @@ export default function BubbleLanding({ onClose }) {
                 if (best === null || d2 < best.d2) best = { li, d2 };
             }
             items.forEach((li) => li.classList.remove('in-bubble'));
-            if (best && best.d2 <= r2) best.li.classList.add('in-bubble');
+            if (best && best.d2 <= r2Inner) best.li.classList.add('in-bubble');
         };
 
         gsap.ticker.add(tick);
@@ -193,6 +197,7 @@ export default function BubbleLanding({ onClose }) {
 
     return (
         <div ref={overlayRef} className={`landing-overlay ${popped ? 'pop' : ''}`}>
+            <h2 className="logo"></h2>
             {/* 강아지 행진 레이어 */}
             <div className="mung-content">
                 <ul ref={ulRef}>
@@ -276,6 +281,8 @@ export default function BubbleLanding({ onClose }) {
             >
                 {showParticles && generateParticles()}
             </div>
+
+            <div className="shape"></div>
         </div>
     );
 }

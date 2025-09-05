@@ -150,3 +150,21 @@ body.no-scroll {
         --dog-size: calc(var(--bubble-size) * 1);
     }
 }
+
+.shape {
+    position: absolute;
+    bottom: 85px;
+    width: 100%;
+    height: 65px;
+    background: url('/main/Bone-shape.png') no-repeat center;
+}
+
+.logo {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px;
+    height: 190px;
+    background: url('/main/Logo.png') no-repeat center;
+}
