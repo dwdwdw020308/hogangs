@@ -1,10 +1,17 @@
-/* 한 곳에서 사이즈를 통제 (버블/강아지 연동) */
+@property --r {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+}
+
 .landing-overlay {
-    --bubble-size: 380px; /* 버블 지름 */
-    --dog-size: calc(var(--bubble-size) * 0.98); /* 강아지 거의 꽉 차게 */
+    --bubble-size: 380px;
+    --dog-size: calc(var(--bubble-size) * 0.98);
     --bg: #fd7333;
     --cx: 50%;
     --cy: 50%;
+    --r: 0px;
+
     position: fixed;
     inset: 0;
     z-index: 9999;
@@ -12,13 +19,27 @@
     display: grid;
     place-items: center;
 
-    /* Visual 가리기 → 팝 시 중심에서 원형 축소하며 reveal */
-    clip-path: circle(160vmax at var(--cx) var(--cy));
-    transition: clip-path 0.9s ease-out, opacity 0.2s ease;
+    -webkit-mask: radial-gradient(
+        circle var(--r) at var(--cx) var(--cy),
+        transparent 0 var(--r),
+        #fff calc(var(--r) + 1px) 100%
+    );
+    mask: radial-gradient(
+        circle var(--r) at var(--cx) var(--cy),
+        transparent 0 var(--r),
+        #fff calc(var(--r) + 1px) 100%
+    );
+    transition: --r 1s ease-out;
 }
+
+/* pop: 파편 연출만 */
 .landing-overlay.pop {
-    clip-path: circle(0 at var(--cx) var(--cy));
     pointer-events: none;
+}
+
+/* reveal: 화면 리빌 시작 */
+.landing-overlay.reveal {
+    --r: 160vmax;
 }
 
 body.no-scroll {
@@ -44,8 +65,8 @@ body.no-scroll {
 
         .dog {
             position: relative;
-            width: var(--dog-size); /* ← 버블과 연동 */
-            aspect-ratio: 1 / 1;
+            width: var(--dog-size);
+            aspect-ratio: 1/1;
             display: grid;
             place-items: center;
             filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.25));
@@ -60,7 +81,7 @@ body.no-scroll {
             }
             .variant {
                 opacity: 0;
-            } /* 기본은 일반 얼굴 */
+            }
         }
 
         /* JS가 '가장 가까운 1개'에만 추가 */
@@ -75,7 +96,7 @@ body.no-scroll {
     }
 }
 
-/* 버블: CSS drop-shadow 제거 (사각형 잔상 방지) */
+/* 버블 */
 .bubble-wrap {
     width: var(--bubble-size);
     height: var(--bubble-size);

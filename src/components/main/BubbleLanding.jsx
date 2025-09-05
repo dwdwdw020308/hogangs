@@ -56,7 +56,7 @@ export default function BubbleLanding({ onClose }) {
                 onUpdate: () => {
                     const x = Math.abs(parseFloat(gsap.getProperty(ul, 'x')) || 0);
                     const half = ul.scrollWidth / 2;
-                    if (x >= half) gsap.set(ul, { x: -(x - half) }); // 절반에서 부드럽게 래핑
+                    if (x >= half) gsap.set(ul, { x: -(x - half) });
                 },
             });
         };
@@ -91,7 +91,7 @@ export default function BubbleLanding({ onClose }) {
                 onStart: () => shift(20),
             });
 
-        // 버블 둥실둥실 (래퍼 높이의 4.5%)
+        // 버블 둥실둥실
         if (bubbleRef.current) {
             const b = bubbleRef.current;
             const floatAmt = () => (b.getBoundingClientRect().height || 400) * 0.045;
@@ -127,9 +127,7 @@ export default function BubbleLanding({ onClose }) {
                 const d2 = dx * dx + dy * dy;
                 if (best === null || d2 < best.d2) best = { li, d2 };
             }
-            // 전체 off
             items.forEach((li) => li.classList.remove('in-bubble'));
-            // 가장 가까운 한 개만, 진짜 원 안에 있을 때만 on
             if (best && best.d2 <= r2) best.li.classList.add('in-bubble');
         };
 
@@ -164,7 +162,7 @@ export default function BubbleLanding({ onClose }) {
         return arr;
     };
 
-    // 버블 팝 → 원형 리빌로 Visual 등장
+    // 버블 팝 → 중앙에서 바깥으로 리빌
     const handlePop = () => {
         if (popped) return;
         const overlay = overlayRef.current;
@@ -185,18 +183,12 @@ export default function BubbleLanding({ onClose }) {
         setPopped(true);
         setShowParticles(true);
 
-        const finish = () => onClose && onClose();
-        const onEnd = (e) => {
-            if (e?.propertyName?.includes('clip-path')) {
-                overlay.removeEventListener('transitionend', onEnd);
-                setTimeout(finish, 350);
-            }
-        };
-        overlay.addEventListener('transitionend', onEnd, { once: true });
+        // 0.5초 뒤 → reveal 시작
         setTimeout(() => {
-            overlay.removeEventListener('transitionend', onEnd);
-            finish();
-        }, 1600);
+            overlay.classList.add('reveal');
+            // 리빌 애니메이션 끝난 뒤 Visual로 전환
+            setTimeout(() => onClose && onClose(), 1200);
+        }, 500);
     };
 
     return (
@@ -215,7 +207,7 @@ export default function BubbleLanding({ onClose }) {
                 </ul>
             </div>
 
-            {/* 버블 (사각형 잔상 방지: overflow="visible", SVG 필터 사용) */}
+            {/* 버블 */}
             <div className="bubble-wrap" aria-hidden={popped ? 'true' : 'false'}>
                 <svg
                     ref={bubbleRef}
@@ -234,7 +226,6 @@ export default function BubbleLanding({ onClose }) {
                             <stop offset="90%" stopColor="rgba(255,200,255,0.08)" />
                             <stop offset="100%" stopColor="rgba(255,255,255,0.02)" />
                         </radialGradient>
-
                         <linearGradient id="subtle-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stopColor="rgba(255,200,200,0.3)" />
                             <stop offset="25%" stopColor="rgba(200,255,200,0.3)" />
@@ -242,8 +233,6 @@ export default function BubbleLanding({ onClose }) {
                             <stop offset="75%" stopColor="rgba(255,255,200,0.3)" />
                             <stop offset="100%" stopColor="rgba(255,200,255,0.3)" />
                         </linearGradient>
-
-                        {/* 부드러운 외곽광 + 그림자 (CSS drop-shadow 미사용) */}
                         <filter id="bubble-filter" x="-60%" y="-60%" width="220%" height="220%">
                             <feGaussianBlur in="SourceGraphic" stdDeviation="0.3" result="soft" />
                             <feMerge>
@@ -251,7 +240,6 @@ export default function BubbleLanding({ onClose }) {
                                 <feMergeNode in="SourceGraphic" />
                             </feMerge>
                         </filter>
-
                         <filter id="bubble-shadow" x="-60%" y="-60%" width="220%" height="220%">
                             <feDropShadow
                                 dx="0"
