@@ -197,7 +197,7 @@ export default function BubbleLanding({ onClose }) {
 
     return (
         <div ref={overlayRef} className={`landing-overlay ${popped ? 'pop' : ''}`}>
-            <h2 className="logo"></h2>
+            <h2 className="bubble-logo"></h2>
             {/* 강아지 행진 레이어 */}
             <div className="mung-content">
                 <ul ref={ulRef}>
@@ -250,7 +250,7 @@ export default function BubbleLanding({ onClose }) {
                                 dx="0"
                                 dy="10"
                                 stdDeviation="10"
-                                flood-color="rgba(0,0,0,0.28)"
+                                floodColor="rgba(0,0,0,0.28)"
                             />
                         </filter>
                     </defs>
