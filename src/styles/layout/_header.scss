@@ -1,0 +1,63 @@
+@use './../utils' as *;
+
+#header {
+    width: 100%;
+    height: 120px;
+    @include flexbox();
+    background: transparent;
+    position: fixed;
+    z-index: 999;
+
+    .inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        .logo {
+            background: var(--Grey-grey-200, #b6b6b6);
+            width: 117px;
+            height: 44px;
+            cursor: pointer;
+            @include flexbox();
+        }
+
+        nav {
+            width: 495px;
+            height: 28px;
+
+            ul {
+                width: 100%;
+                height: 100%;
+                @include flexbox();
+                gap: 80px;
+                li {
+                    color: #fff;
+                    cursor: pointer;
+                    @include fontFormat();
+                }
+            }
+        }
+
+        .top-menu {
+            width: 131px;
+            height: 28px;
+
+            @include flexbox($justify: space-between);
+            @include fontFormat();
+            .btn {
+                cursor: pointer;
+            }
+            .bar {
+                width: 1px;
+                height: 14px;
+                background: #fefefc;
+            }
+            i {
+                width: 20px;
+                height: 20px;
+                @include flexbox();
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,6 @@
+@mixin fontFormat($color: #fff, $family: 'Pridi', $size: 18px, $weight: 400) {
+    font-family: $family;
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+}

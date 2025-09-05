@@ -1,0 +1,30 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Pridi&display=swap');
+
+// 기존에 있던 다른 전역 스타일
+$primary-color: #007bff;
+$font-family: sans-serif;
+
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    font-family: $font-family;
+    background: #f9f9f9;
+    color: #333;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+}
+.main {
+    width: 100%;
+    overflow: hidden;
+}
+
+.inner {
+    width: 1400px;
+}

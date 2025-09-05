@@ -1,0 +1,19 @@
+@use './../utils' as *;
+
+#visual {
+    width: 100%;
+    height: calc(1080px - 280px);
+    background-image: url('/main/main-image01.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: relative;
+    overflow: hidden;
+    .curve {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+    }
+}
