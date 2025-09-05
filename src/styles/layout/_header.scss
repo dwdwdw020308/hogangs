@@ -24,19 +24,16 @@
         nav {
             width: 495px;
             height: 28px;
+
             ul {
                 width: 100%;
                 height: 100%;
                 @include flexbox();
                 gap: 80px;
                 li {
+                    color: #fff;
                     cursor: pointer;
-                    color: var(--Grey-grey-900, #292929);
-                    font-family: Pridi;
-                    font-size: 18px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: normal;
+                    @include fontFormat();
                 }
             }
         }
@@ -44,15 +41,16 @@
         .top-menu {
             width: 131px;
             height: 28px;
+
             @include flexbox($justify: space-between);
+            @include fontFormat();
             .btn {
                 cursor: pointer;
-                color: var(--Grey-grey-900, #292929);
-                font-family: Pridi;
-                font-size: 18px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: normal;
+            }
+            .bar {
+                width: 1px;
+                height: 14px;
+                background: #fefefc;
             }
             i {
                 width: 20px;

@@ -1,117 +1,131 @@
-/* 커스텀 프로퍼티(마스크 반경/중심) 애니메이션 가능하도록 등록 */
-@property --r {
-    syntax: '<length>';
-    inherits: false;
-    initial-value: 0px;
-}
-@property --cx {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 50%;
-}
-@property --cy {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 50%;
-}
-
-/* 오버레이: 처음엔 흰 화면 + 구멍 없음(반경 0) */
+/* 한 곳에서 사이즈를 통제 (버블/강아지 연동) */
 .landing-overlay {
+    --bubble-size: 380px; /* 버블 지름 */
+    --dog-size: calc(var(--bubble-size) * 0.98); /* 강아지 거의 꽉 차게 */
+    --bg: #fd7333;
+    --cx: 50%;
+    --cy: 50%;
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: #fff;
+    background: var(--bg);
     display: grid;
     place-items: center;
-    overflow: hidden;
 
-    /* 센터-아웃 원형 구멍 마스크 (터질 때만 구멍이 커진다) */
-    --r: 0px;
-    --cx: 50%;
-    --cy: 50%;
-    -webkit-mask-image: radial-gradient(
-        circle var(--r) at var(--cx) var(--cy),
-        transparent 98%,
-        black 100%
-    );
-    mask-image: radial-gradient(
-        circle var(--r) at var(--cx) var(--cy),
-        transparent 98%,
-        black 100%
-    );
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-
-    /* 살짝 지연 후 확장: 스플래시가 잠깐 보였다가 구멍이 커지도록 */
-    transition: --r 5s ease-out 0.07s;
+    /* Visual 가리기 → 팝 시 중심에서 원형 축소하며 reveal */
+    clip-path: circle(160vmax at var(--cx) var(--cy));
+    transition: clip-path 0.9s ease-out, opacity 0.2s ease;
 }
-
-/* 팝 이후: 구멍을 화면 끝까지 확장(안→밖) */
 .landing-overlay.pop {
-    --r: 160vmax;
+    clip-path: circle(0 at var(--cx) var(--cy));
+    pointer-events: none;
 }
 
-/* 비눗방울 */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* 강아지 무한 행진 라인 */
+.mung-content {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    ul {
+        display: flex;
+        align-items: center;
+        gap: clamp(80px, 8vw, 120px);
+        height: 100%;
+        padding: 0 80px;
+        will-change: transform;
+
+        li {
+            list-style: none;
+        }
+
+        .dog {
+            position: relative;
+            width: var(--dog-size); /* ← 버블과 연동 */
+            aspect-ratio: 1 / 1;
+            display: grid;
+            place-items: center;
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.25));
+
+            img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                transition: opacity 0.25s linear, filter 0.25s linear, transform 0.25s;
+            }
+            .variant {
+                opacity: 0;
+            } /* 기본은 일반 얼굴 */
+        }
+
+        /* JS가 '가장 가까운 1개'에만 추가 */
+        li.in-bubble .dog {
+            img {
+                opacity: 0;
+            }
+            .variant {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+/* 버블: CSS drop-shadow 제거 (사각형 잔상 방지) */
+.bubble-wrap {
+    width: var(--bubble-size);
+    height: var(--bubble-size);
+    position: relative;
+    z-index: 2;
+    background: transparent;
+}
 .bubble {
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
+    display: block;
     cursor: pointer;
-    animation: float 4s ease-in-out infinite;
-    /* 발광 느낌 */
-    filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.55))
-        drop-shadow(0 0 40px rgba(255, 0, 255, 0.15));
+    background: transparent;
 }
 
-/* 비눗방울 그룹/스플래시의 기준점을 중앙으로 */
-.bubble__group,
-.bubble__splash {
-    transform-origin: 100px 100px; /* viewBox 기준 */
+/* 팝 파편 */
+.particles-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    .bubble-particle {
+        position: absolute;
+        left: var(--origin-x);
+        top: var(--origin-y);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        transform: translate(-50%, -50%);
+        animation: burst 700ms ease-out forwards;
+    }
 }
-
-/* 평소엔 스플래시 숨김 */
-.bubble__splash {
-    opacity: 0;
-}
-
-/* 팝 트리거: 비눗방울 수축 + 스플래시(파티클) 확산 */
-.landing-overlay.pop .bubble__group {
-    animation: collapse 0.25s ease-in forwards;
-}
-
-.landing-overlay.pop .bubble__splash {
-    opacity: 1;
-    animation: splash 0.23s ease-out forwards;
-}
-
-/* 둥실둥실 */
-@keyframes float {
+@keyframes burst {
     0% {
-        transform: translateY(0) scale(1);
-    }
-    50% {
-        transform: translateY(-28px) scale(1.02);
-    }
-    100% {
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* 터질 때 본체 축소 */
-@keyframes collapse {
-    to {
-        transform: scale(0);
-        opacity: 0;
-    }
-}
-
-/* 대시 원이 퍼지듯(파티클 느낌) */
-@keyframes splash {
-    from {
-        transform: scale(0.5);
+        transform: translate(-50%, -50%) translate(0, 0) scale(1);
         opacity: 1;
     }
-    to {
-        transform: scale(1.6);
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(0.6);
         opacity: 0;
+    }
+}
+
+/* 반응형(옵션) */
+@media (max-width: 768px) {
+    .landing-overlay {
+        --bubble-size: 300px;
+        --dog-size: calc(var(--bubble-size) * 1);
     }
 }

@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.11.0",
+    "gsap": "^3.13.0",
     "icons": "^1.0.0",
     "normalize.css": "^8.0.1",
     "react": "^19.1.0",
