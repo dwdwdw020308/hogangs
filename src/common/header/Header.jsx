@@ -1,4 +1,8 @@
+import { useState } from 'react';
+import Login from '../../components/auth/login';
+
 const Header = () => {
+    const [loginModal, setLoginModal] = useState(true);
     return (
         <header id="header">
             <div className="inner">
@@ -35,6 +39,7 @@ const Header = () => {
                     </li>
                 </ul>
             </div>
+            {loginModal && <Login />}
         </header>
     );
 };
