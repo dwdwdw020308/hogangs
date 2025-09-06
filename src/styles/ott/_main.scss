@@ -1,0 +1,29 @@
+@use './../utils' as *;
+
+.ottmain-visual {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-top: 120px;
+    background: #292929;
+    .title {
+        strong {
+            padding-top: 70px;
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+        h2 {
+            font-size: 100px;
+            font-weight: 600;
+            color: #fc5000;
+            line-height: 100px;
+        }
+    }
+    .posterlist {
+    }
+    .img {
+        // border: 1px red solid;
+    }
+}
