@@ -1,1 +1,31 @@
+/* Content2.scss */
 @use './../utils/' as *;
+
+/* AOS distance override - 전체에 일괄 적용 */
+html body [data-aos="fade-up"] {
+  transform: translate3d(0, 50px, 0) !important; /* 시작 위치 */
+}
+html body [data-aos="fade-up"].aos-animate {
+  transform: translate3d(0, 0, 0) !important;    /* 최종 위치 */
+}
+
+#content2 {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  background-color: #fff;
+  padding: 5.4688vw 13.5417vw;
+
+  .slogan { padding-bottom: 4.4333vw; }
+
+  .texttitle {
+    padding-bottom: 4.4333vw;
+    li { font-size: 24px; }
+  }
+
+  .dogicon {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+}
