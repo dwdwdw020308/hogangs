@@ -3,6 +3,7 @@ import { Main } from './pages';
 import Layout from './common/Layout';
 import './styles/index.scss';
 import AboutUs from './pages/About';
+import MyPage from './pages/mypage';
 
 const App = () => {
     return (
@@ -12,6 +13,7 @@ const App = () => {
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Main />} />
                         <Route path="about" element={<AboutUs />} />
+                        <Route path="mypage" element={<MyPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
