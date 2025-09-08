@@ -7,21 +7,30 @@ export default function BubbleLanding({ onClose }) {
     const [origin, setOrigin] = useState({ x: '50%', y: '50%' });
 
     const overlayRef = useRef(null);
+    const bubbleWrapRef = useRef(null);
     const bubbleRef = useRef(null);
     const circleRef = useRef(null);
     const ulRef = useRef(null);
+    const logoRef = useRef(null); // ✅ 로고 ref
+    const shapeRef = useRef(null);
+
+    const marchTl = useRef(null);
 
     useEffect(() => {
+        // 페이지 진입 시 스크롤 잠금
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+
         const ul = ulRef.current;
         if (!ul) return;
 
-        // 초기화 후 원본 2개만 구성 (Strict Mode 대비)
+        // 초기화 후 원본 2개만 구성
         ul.innerHTML = '';
-        const base = [
+        const originals = [
             { normal: '/main/ganady.png', variant: '/main/ganady01.png' },
             { normal: '/main/ganady.png', variant: '/main/ganady01.png' },
         ];
-        base.forEach(() => {
+        originals.forEach(() => {
             const li = document.createElement('li');
             li.innerHTML = `
         <div class="dog">
@@ -44,14 +53,14 @@ export default function BubbleLanding({ onClose }) {
         ensureWidth();
         window.addEventListener('resize', ensureWidth);
 
-        // ===== 탱글 회전 + 좌측 진행(래핑) → li(.dog) 단위로 적용 =====
+        // ===== 행진 타임라인(처음엔 pause) =====
         const hodus = ul.querySelectorAll('.dog');
-        const tl = gsap.timeline({ repeat: -1 });
+        const tl = gsap.timeline({ repeat: -1, paused: true });
 
         const shift = (px) => {
             gsap.to(ul, {
                 x: `-=${px}`,
-                duration: px / 22,
+                duration: px / 100, // 빠르게 이동
                 ease: 'linear',
                 onUpdate: () => {
                     const x = Math.abs(parseFloat(gsap.getProperty(ul, 'x')) || 0);
@@ -64,14 +73,14 @@ export default function BubbleLanding({ onClose }) {
         tl.to(hodus, {
             rotation: -15,
             x: -6,
-            duration: 0.9,
+            duration: 0.7,
             ease: 'sine.inOut',
-            onStart: () => shift(20),
+            onStart: () => shift(100),
         })
             .to(hodus, {
                 rotation: 15,
                 x: 6,
-                duration: 0.9,
+                duration: 0.7,
                 ease: 'sine.inOut',
                 onStart: () => shift(20),
             })
@@ -80,31 +89,55 @@ export default function BubbleLanding({ onClose }) {
                 x: 0,
                 scaleY: 0.72,
                 scaleX: 1.18,
-                duration: 0.35,
+                duration: 0.28,
                 ease: 'power1.out',
             })
             .to(hodus, {
                 scaleY: 1,
                 scaleX: 1,
-                duration: 0.9,
+                duration: 0.7,
                 ease: 'elastic.out(1, 0.4)',
                 onStart: () => shift(20),
             });
 
-        // 버블 둥실둥실
-        if (bubbleRef.current) {
-            const b = bubbleRef.current;
-            const floatAmt = () => (b.getBoundingClientRect().height || 400) * 0.045;
-            gsap.to(b, {
-                y: -floatAmt(),
-                duration: 2.4,
-                repeat: -1,
-                yoyo: true,
-                ease: 'sine.inOut',
-            });
-        }
+        marchTl.current = tl;
 
-        // ===== 한 번에 하나만 전환: 버블 중심과 가장 가까운 li만 in-bubble =====
+        // ===== 인트로: 같은 행진 라인을 크게 보여주고 축소 =====
+        gsap.set(ul, { scale: 1.5, opacity: 0, transformOrigin: '50% 50%' });
+        gsap.set(bubbleWrapRef.current, { opacity: 0 });
+        gsap.set(logoRef.current, { opacity: 0, y: -10 }); // ✅ 로고 처음엔 숨김
+        gsap.set(shapeRef.current, { opacity: 0, y: -10 }); // ✅ 로고 처음엔 숨김
+
+        const introTl = gsap.timeline({
+            defaults: { ease: 'power2.out' },
+            onComplete: () => {
+                // 인트로가 끝나면 행진 시작 & 버블/로고 페이드인
+                marchTl.current?.play();
+                gsap.to(bubbleWrapRef.current, { opacity: 1, duration: 0.6, ease: 'power1.out' });
+                gsap.to(logoRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }); // ✅ 이제 로고 나타남
+                gsap.to(shapeRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }); // ✅ 이제 로고 나타남
+
+                // 버블 둥실둥실
+                if (bubbleRef.current) {
+                    const b = bubbleRef.current;
+                    const floatAmt = () => (b.getBoundingClientRect().height || 400) * 0.045;
+                    gsap.to(b, {
+                        y: -floatAmt(),
+                        duration: 2.4,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'sine.inOut',
+                    });
+                }
+            },
+        });
+
+        introTl
+            .to(ul, { opacity: 1, duration: 0.35 })
+            .to(ul, { duration: 0.6 }) // hold 시간(확대 상태 더 오래 보기)
+            .to(ul, { scale: 1.0, duration: 1.4 }, '<');
+
+        // ===== 버블 판정: "가까운 1개" + 더 안쪽에서만 바뀜 =====
         const tick = () => {
             const circle = circleRef.current;
             const list = ulRef.current;
@@ -114,11 +147,9 @@ export default function BubbleLanding({ onClose }) {
             const cx = cRect.left + cRect.width / 2;
             const cy = cRect.top + cRect.height / 2;
             const r = cRect.width / 2;
-            const r2 = r * r;
 
             const innerFactor = 0.74;
-            const rInner = r * innerFactor;
-            const r2Inner = rInner * rInner;
+            const rInner2 = (r * innerFactor) ** 2;
 
             const items = Array.from(list.querySelectorAll('li'));
             let best = null;
@@ -132,21 +163,23 @@ export default function BubbleLanding({ onClose }) {
                 if (best === null || d2 < best.d2) best = { li, d2 };
             }
             items.forEach((li) => li.classList.remove('in-bubble'));
-            if (best && best.d2 <= r2Inner) best.li.classList.add('in-bubble');
+            if (best && best.d2 <= rInner2) best.li.classList.add('in-bubble');
         };
 
         gsap.ticker.add(tick);
         window.addEventListener('resize', tick);
 
         return () => {
+            document.body.style.overflow = prevOverflow;
+            introTl.kill();
+            marchTl.current?.kill();
             gsap.ticker.remove(tick);
             window.removeEventListener('resize', tick);
             window.removeEventListener('resize', ensureWidth);
-            tl.kill();
         };
     }, []);
 
-    // 파편 생성
+    // 파편
     const generateParticles = () => {
         const arr = [];
         for (let i = 0; i < 28; i++) {
@@ -166,7 +199,7 @@ export default function BubbleLanding({ onClose }) {
         return arr;
     };
 
-    // 버블 팝 → 중앙에서 바깥으로 리빌
+    // 팝 → 중앙에서 바깥으로 리빌
     const handlePop = () => {
         if (popped) return;
         const overlay = overlayRef.current;
@@ -187,18 +220,18 @@ export default function BubbleLanding({ onClose }) {
         setPopped(true);
         setShowParticles(true);
 
-        // 0.5초 뒤 → reveal 시작
         setTimeout(() => {
             overlay.classList.add('reveal');
-            // 리빌 애니메이션 끝난 뒤 Visual로 전환
             setTimeout(() => onClose && onClose(), 1200);
         }, 500);
     };
 
     return (
         <div ref={overlayRef} className={`landing-overlay ${popped ? 'pop' : ''}`}>
-            <h2 className="bubble-logo"></h2>
-            {/* 강아지 행진 레이어 */}
+            {/* ✅ 로고: 인트로 동안 숨김, 인트로 끝나고 페이드인 */}
+            <h2 ref={logoRef} className="landing-logo" aria-hidden={popped ? 'true' : 'false'} />
+
+            {/* 강아지 행진 */}
             <div className="mung-content">
                 <ul ref={ulRef}>
                     {['/main/ganady.png', '/main/ganady01.png'].map((_, idx) => (
@@ -212,8 +245,12 @@ export default function BubbleLanding({ onClose }) {
                 </ul>
             </div>
 
-            {/* 버블 */}
-            <div className="bubble-wrap" aria-hidden={popped ? 'true' : 'false'}>
+            {/* 버블 (인트로 끝날 때 페이드인) */}
+            <div
+                ref={bubbleWrapRef}
+                className="bubble-wrap"
+                aria-hidden={popped ? 'true' : 'false'}
+            >
                 <svg
                     ref={bubbleRef}
                     className={`bubble ${popped ? 'popping' : ''}`}
@@ -282,7 +319,7 @@ export default function BubbleLanding({ onClose }) {
                 {showParticles && generateParticles()}
             </div>
 
-            <div className="shape"></div>
+            <div ref={shapeRef} className="landing-shape"></div>
         </div>
     );
 }

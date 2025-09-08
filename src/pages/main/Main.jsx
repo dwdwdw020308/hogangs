@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import BubbleLanding from '../../components/main/BubbleLanding';
+
 import ChannelTalk from '../../components/main/ChannelTalk';
 import Visual from '../../components/main/Visual';
 
