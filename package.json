@@ -12,6 +12,7 @@
   "dependencies": {
     "@channel.io/channel-web-sdk-loader": "^2.0.0",
     "@reduxjs/toolkit": "^2.8.2",
+    "aos": "^2.3.4",
     "axios": "^1.11.0",
     "gsap": "^3.13.0",
     "icons": "^1.0.0",
@@ -22,7 +23,8 @@
     "react-router-dom": "^7.7.0",
     "sass": "^1.91.0",
     "styled-components": "^6.1.19",
-    "styled-reset": "^4.5.2"
+    "styled-reset": "^4.5.2",
+    "sweetalert2": "^11.23.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
