@@ -1,6 +1,26 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ onJoin, onClose }) => {
+    const navigate = useNavigate();
+    const socialLogin = (sns) => {
+        switch (sns) {
+            case 'google':
+                const GOOGLE_LOGIN_URL = import.meta.env.VITE_GOOGLE_LOGIN_URL;
+                const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+                const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
+
+                const url =
+                    `${GOOGLE_LOGIN_URL}?` +
+                    `client_id=${GOOGLE_CLIENT_ID}` +
+                    `&redirect_uri=${GOOGLE_REDIRECT_URI}` +
+                    `&response_type=code` +
+                    `&scope=email profile openid`;
+
+                window.open(url, '_blank', 'width=500,height=600');
+                break;
+        }
+    };
     return (
         <div className="login-overlay">
             <div className="login-modal">
@@ -45,7 +65,13 @@ const Login = ({ onJoin, onClose }) => {
                             <div className="snsBox">
                                 <div className="text">SNS 간편로그인</div>
                                 <div className="snsWrap">
-                                    <img src="/auth/google.png" alt="" />
+                                    <img
+                                        onClick={() => {
+                                            socialLogin('google');
+                                        }}
+                                        src="/auth/google.png"
+                                        alt=""
+                                    />
                                     <img src="/auth/kakao.png" alt="" />
                                     <img src="/auth/naver.png" alt="" />
                                 </div>

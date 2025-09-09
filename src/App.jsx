@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Main, Ott } from './pages';
+import { Auth, AuthCallback, Main, Ott } from './pages';
 import Layout from './common/Layout';
 import './styles/index.scss';
 import AboutUs from './pages/About';
@@ -14,6 +14,8 @@ const App = () => {
                         <Route path="/ott" element={<Ott />} />
                         <Route path="about" element={<AboutUs />} />
                     </Route>
+                    <Route path="auth" element={<Auth />} />
+                    <Route path="authcallback" element={<AuthCallback />} />
                 </Routes>
             </BrowserRouter>
         </>
