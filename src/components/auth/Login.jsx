@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ onJoin, onClose }) => {
@@ -21,6 +21,7 @@ const Login = ({ onJoin, onClose }) => {
                 break;
         }
     };
+
     return (
         <div className="login-overlay">
             <div className="login-modal">
@@ -65,6 +66,7 @@ const Login = ({ onJoin, onClose }) => {
                             <div className="snsBox">
                                 <div className="text">SNS 간편로그인</div>
                                 <div className="snsWrap">
+
                                     <img
                                         onClick={() => {
                                             socialLogin('google');
@@ -72,6 +74,7 @@ const Login = ({ onJoin, onClose }) => {
                                         src="/auth/google.png"
                                         alt=""
                                     />
+
                                     <img src="/auth/kakao.png" alt="" />
                                     <img src="/auth/naver.png" alt="" />
                                 </div>
