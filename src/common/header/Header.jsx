@@ -1,8 +1,11 @@
+
 import { useEffect, useState } from 'react';
+
 import Login from '../../components/auth/Login';
 
 import { Link } from 'react-router-dom';
 import Join from '../../components/auth/join';
+
 import useAuthStore from '../../store/useAuthStore';
 
 const Header = () => {

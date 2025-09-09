@@ -1,0 +1,63 @@
+@use './../utils/' as *;
+
+#vidoescontent1 {
+    height: 100vh;
+    position: relative;
+    background: #ffffff;
+    .topbar {
+        background-color: #002041;
+        height: 50vh;
+        .topheader {
+            width: 100%;
+            padding: 5vw 10vw;
+            top: 20%;
+            position: absolute;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            gap: 1.3021vw;
+            img {
+                border-radius: 100%;
+            }
+            p {
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                letter-spacing: 0.24px;
+                color: var(--Black, #060606);
+            }
+        }
+    }
+    .nav {
+        padding: 10vw;
+        position: absolute;
+        bottom: 22%;
+        display: flex;
+        justify-content: space-evenly;
+
+        ul {
+            cursor: pointer;
+            width: 17.7083vw;
+            height: 7.6563vw;
+            background: var(--White, #fefefe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.5208vw;
+            margin-left: 2vw;
+            box-shadow: 0 0 2px 0 var(--color-alpha-shadow1, rgba(0, 0, 0, 0.05)),
+                4px 4px 8px 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08));
+            &:nth-of-type(2) {
+                background-image: url('/public/mypage/Box-01.png');
+                background-size: cover;
+            }
+            li {
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+            }
+        }
+    }
+}
