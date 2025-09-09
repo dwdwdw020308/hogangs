@@ -1,6 +1,28 @@
 import React from 'react';
+import useAuthStore from '../../store/useAuthStore';
 
-const Step1 = ({ onNext, onClose, step }) => {
+const Step1 = ({ setStep, step, user, setUser }) => {
+    const closeJoinModal = useAuthStore((s) => s.closeJoinModal);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUser((prev) => ({ ...prev, [name]: value }));
+    };
+    const handleNext = () => {
+        if (!user.email || !user.email.includes('@') || !user.email.endsWith('.com')) {
+            alert('옳바른 이메일 주소를 입력해주세요.');
+            return;
+        }
+        if (!user.password || user.password.length < 5) {
+            alert('비밀번호는 6자리 이상이어야 합니다.');
+            return;
+        }
+        if (!user.passwordCheck || user.password !== user.passwordCheck) {
+            alert('비밀번호가 일치하지 않습니다');
+            return;
+        }
+        setStep(step + 1);
+    };
+
     return (
         <div className="join-overlay">
             <div className="join-modal">
@@ -8,7 +30,7 @@ const Step1 = ({ onNext, onClose, step }) => {
                     <img src="/auth/joinBg1.png" alt="" />
                 </div>
                 <div className="right">
-                    <i className="close-btn" onClick={onClose}>
+                    <i className="close-btn" onClick={closeJoinModal}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -26,8 +48,8 @@ const Step1 = ({ onNext, onClose, step }) => {
                         <div className="top">
                             <h2>회원가입</h2>
                             <ul className="steps">
-                                <li className={step === 1 ? 'on' : ''}>1</li>
-                                <li className={step === 2 ? 'on' : ''}>2</li>
+                                <li className={step >= 1 ? 'on' : ''}>1</li>
+                                <li className={step >= 2 ? 'on' : ''}>2</li>
                                 <li className={step === 3 ? 'on' : ''}>3</li>
                             </ul>
                         </div>
@@ -35,16 +57,31 @@ const Step1 = ({ onNext, onClose, step }) => {
                             <form>
                                 <input
                                     type="text"
-                                    name=""
-                                    id=""
+                                    name="email"
+                                    value={user.email}
+                                    onChange={handleChange}
                                     placeholder="이메일 주소"
                                     autoFocus
                                 />
-                                <input type="text" name="" id="" placeholder="비밀번호" />
-                                <input type="text" name="" id="" placeholder="비밀번호 확인" />
+                                <input
+                                    type="password"
+                                    name="password"
+                                    value={user.password}
+                                    onChange={handleChange}
+                                    placeholder="비밀번호(6자리 이상)"
+                                />
+                                <input
+                                    type="password"
+                                    name="passwordCheck"
+                                    value={user.passwordCheck}
+                                    onChange={handleChange}
+                                    placeholder="비밀번호 확인"
+                                />
                             </form>
                             <div className="next-btn">
-                                <button onClick={onNext}>다음</button>
+                                <button type="button" onClick={handleNext}>
+                                    다음
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,10 @@
-
 import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../../store/useAuthStore';
 
-const Login = ({ onJoin, onClose }) => {
+const Login = () => {
+    const closeLoginModal = useAuthStore((s) => s.closeLoginModal);
+    const setJoinModal = useAuthStore((s) => s.setJoinModal);
+
     const navigate = useNavigate();
     const socialLogin = (sns) => {
         switch (sns) {
@@ -21,6 +24,10 @@ const Login = ({ onJoin, onClose }) => {
                 break;
         }
     };
+    const openJoinFromLogin = () => {
+        closeLoginModal();
+        setJoinModal(true);
+    };
 
     return (
         <div className="login-overlay">
@@ -29,7 +36,7 @@ const Login = ({ onJoin, onClose }) => {
                     <img src="/auth/loginBg.png" alt="" />
                 </div>
                 <div className="right">
-                    <i className="close-btn" onClick={onClose}>
+                    <i className="close-btn" onClick={closeLoginModal}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -54,19 +61,13 @@ const Login = ({ onJoin, onClose }) => {
                         <div className="bottom">
                             <div className="btnWrap">
                                 <button>로그인</button>
-                                <span
-                                    className="join-btn"
-                                    onClick={() => {
-                                        onJoin();
-                                    }}
-                                >
+                                <span className="join-btn" onClick={openJoinFromLogin}>
                                     회원가입
                                 </span>
                             </div>
                             <div className="snsBox">
                                 <div className="text">SNS 간편로그인</div>
                                 <div className="snsWrap">
-
                                     <img
                                         onClick={() => {
                                             socialLogin('google');
