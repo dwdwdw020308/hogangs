@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Main } from './pages';
+import { Auth, AuthCallback, Main, Ott } from './pages';
 import Layout from './common/Layout';
 import './styles/index.scss';
 import AboutUs from './pages/About';
@@ -13,10 +13,13 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Main />} />
+                        <Route path="/ott" element={<Ott />} />
                         <Route path="about" element={<AboutUs />} />
                         <Route path="mypage" element={<MyPage />} />
                         <Route path="videos" element={<Videos />} />
                     </Route>
+                    <Route path="auth" element={<Auth />} />
+                    <Route path="authcallback" element={<AuthCallback />} />
                 </Routes>
             </BrowserRouter>
         </>

@@ -59,7 +59,6 @@
             letter-spacing: 0.36px;
           }
           .steps {
-            display: flex;
             @include flexbox();
             gap: 16px;
             li {
@@ -67,14 +66,13 @@
               @include flexbox();
               width: 25px;
               height: 25px;
+              line-height: 26px;
               border-radius: 50%;
               border: 1px solid #959595;
               color: var(--Grey-grey-300, #959595);
               background: #efefef;
-              text-align: center;
               font-family: Pretendard;
               font-size: 12px;
-              font-style: normal;
               font-weight: 700;
               &::after {
                 content: "";
@@ -134,6 +132,7 @@
               font-size: 16px;
               font-style: normal;
               font-weight: 700;
+              cursor: pointer;
             }
           }
         }

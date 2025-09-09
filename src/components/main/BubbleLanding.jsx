@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
+import { setCookie } from '../../utils/Cookie';
 
 export default function BubbleLanding({ onClose }) {
     const [popped, setPopped] = useState(false);
@@ -219,6 +220,9 @@ export default function BubbleLanding({ onClose }) {
 
         setPopped(true);
         setShowParticles(true);
+
+        // cookie 적용
+        setCookie('landing', '1', 1);
 
         setTimeout(() => {
             overlay.classList.add('reveal');
