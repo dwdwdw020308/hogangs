@@ -5,6 +5,7 @@ import Login from '../../components/auth/Login';
 
 import { Link } from 'react-router-dom';
 import Join from '../../components/auth/join';
+import Login from '../../components/auth/login';
 
 import useAuthStore from '../../store/useAuthStore';
 

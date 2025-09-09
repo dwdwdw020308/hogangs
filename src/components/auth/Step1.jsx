@@ -35,7 +35,8 @@ const Step1 = ({ onNext, onClose, step }) => {
                             <form>
                                 <input
                                     type="text"
-                                    name=""
+                                    name="name"
+                                    value={name}
                                     id=""
                                     placeholder="이메일 주소"
                                     autoFocus
