@@ -1,12 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Login from '../../components/auth/Login';
 
 import { Link } from 'react-router-dom';
 import Join from '../../components/auth/join';
+import useAuthStore from '../../store/useAuthStore';
 
 const Header = () => {
-    const [loginModal, setLoginModal] = useState(false);
-    const [joinModal, setJoinModal] = useState(false);
+    const loginModal = useAuthStore((state) => state.loginModal);
+    const joinModal = useAuthStore((state) => state.joinModal);
+
+    const { setLoginModal, setJoinModal } = useAuthStore();
+    useEffect(() => {
+        // 팝업이면(부모가 존재) 리스너 등록하지 않음
+        if (window.opener) return;
+
+        const bc = new BroadcastChannel('auth');
+        const onMsg = (e) => {
+            // 최상위 창(부모)에서만 처리
+            if (window !== window.top) return;
+            if (e?.data?.type === 'OPEN_JOIN') {
+                setLoginModal(false);
+                setJoinModal(true);
+            }
+        };
+
+        bc.addEventListener('message', onMsg);
+
+        // 추가: postMessage 경로도 지원(오리진 다를 때 대비)
+        const onWinMsg = (e) => {
+            if (e.origin !== window.location.origin) return;
+            if (e?.data?.type === 'OPEN_JOIN') {
+                setLoginModal(false);
+                setJoinModal(true);
+            }
+        };
+        window.addEventListener('message', onWinMsg);
+
+        return () => {
+            bc.removeEventListener('message', onMsg);
+            bc.close();
+            window.removeEventListener('message', onWinMsg);
+        };
+    }, [setJoinModal, setLoginModal]);
+
     return (
         <header id="header">
             <div className="inner">
