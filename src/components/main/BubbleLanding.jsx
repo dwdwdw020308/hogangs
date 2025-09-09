@@ -1,11 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
+
 import { setCookie } from '../../utils/Cookie';
 
 export default function BubbleLanding({ onClose }) {
     const [popped, setPopped] = useState(false);
     const [showParticles, setShowParticles] = useState(false);
     const [origin, setOrigin] = useState({ x: '50%', y: '50%' });
+    const [startMarquee, setStartMarquee] = useState(false);
 
     const overlayRef = useRef(null);
     const bubbleWrapRef = useRef(null);
@@ -14,10 +16,60 @@ export default function BubbleLanding({ onClose }) {
     const ulRef = useRef(null);
     const logoRef = useRef(null); // ✅ 로고 ref
     const shapeRef = useRef(null);
+    const marqueeStopRef = useRef(null); // ticker 정리용
+
+    const shapeFrameRef = useRef(null); // div.landing-shape
+    const shapeTrackRef = useRef(null); // ul.shape-track
 
     const marchTl = useRef(null);
 
     useEffect(() => {
+        const waitImages = async (el) => {
+            const imgs = Array.from(el.querySelectorAll('img'));
+            await Promise.all(
+                imgs.map((img) =>
+                    img.complete
+                        ? Promise.resolve()
+                        : new Promise((res) => {
+                              img.addEventListener('load', res, { once: true });
+                              img.addEventListener('error', res, { once: true });
+                          })
+                )
+            );
+        };
+
+        // ✅ ModifiersPlugin 없이 끊김 없는 무한 배너
+        const startMarquee = async (speed = 160) => {
+            const track = shapeTrackRef.current; // ul.shape-track
+            if (!track) return;
+
+            // 두 세트 구성(중복 방지)
+            if (!track.dataset.cloned) {
+                track.innerHTML += track.innerHTML;
+                track.dataset.cloned = 'true';
+            }
+
+            await waitImages(track);
+
+            const half = track.scrollWidth / 2; // 원본 세트 길이
+            if (!half) return;
+
+            // 이전 루프 정리
+            if (marqueeStopRef.current) marqueeStopRef.current();
+            gsap.set(track, { x: 0 });
+
+            let x = 0;
+            const tick = () => {
+                const dr = gsap.ticker.deltaRatio(); // 프레임 보정
+                x -= (speed / 60) * dr; // px/frame
+                if (x <= -half) x += half; // 랩핑
+                gsap.set(track, { x });
+            };
+
+            gsap.ticker.add(tick);
+            marqueeStopRef.current = () => gsap.ticker.remove(tick);
+        };
+
         // 페이지 진입 시 스크롤 잠금
         const prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
@@ -107,7 +159,7 @@ export default function BubbleLanding({ onClose }) {
         gsap.set(ul, { scale: 1.5, opacity: 0, transformOrigin: '50% 50%' });
         gsap.set(bubbleWrapRef.current, { opacity: 0 });
         gsap.set(logoRef.current, { opacity: 0, y: -10 }); // ✅ 로고 처음엔 숨김
-        gsap.set(shapeRef.current, { opacity: 0, y: -10 }); // ✅ 로고 처음엔 숨김
+        gsap.set(shapeFrameRef.current, { opacity: 0, y: -10 }); // ✅ 로고 처음엔 숨김
 
         const introTl = gsap.timeline({
             defaults: { ease: 'power2.out' },
@@ -116,7 +168,15 @@ export default function BubbleLanding({ onClose }) {
                 marchTl.current?.play();
                 gsap.to(bubbleWrapRef.current, { opacity: 1, duration: 0.6, ease: 'power1.out' });
                 gsap.to(logoRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }); // ✅ 이제 로고 나타남
-                gsap.to(shapeRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }); // ✅ 이제 로고 나타남
+                gsap.to(shapeFrameRef.current, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        startMarquee(100);
+                    },
+                }); // ✅ 이제 로고 나타남
 
                 // 버블 둥실둥실
                 if (bubbleRef.current) {
@@ -174,6 +234,7 @@ export default function BubbleLanding({ onClose }) {
             document.body.style.overflow = prevOverflow;
             introTl.kill();
             marchTl.current?.kill();
+
             gsap.ticker.remove(tick);
             window.removeEventListener('resize', tick);
             window.removeEventListener('resize', ensureWidth);
@@ -323,7 +384,26 @@ export default function BubbleLanding({ onClose }) {
                 {showParticles && generateParticles()}
             </div>
 
-            <div ref={shapeRef} className="landing-shape"></div>
+            <div ref={shapeFrameRef} className="landing-shape">
+                {' '}
+                {/* 프레임: 고정 */}
+                <ul ref={shapeTrackRef} className="shape-track">
+                    {' '}
+                    {/* 트랙: 이동 */}
+                    <li>
+                        <img className="bone" src="/main/Bone-shape.png" alt="" />
+                    </li>
+                    <li>
+                        <img className="bone" src="/main/Bone-shape.png" alt="" />
+                    </li>
+                    <li>
+                        <img className="bone" src="/main/Bone-shape.png" alt="" />
+                    </li>
+                    <li>
+                        <img className="bone" src="/main/Bone-shape.png" alt="" />
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 }
