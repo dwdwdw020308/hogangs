@@ -79,12 +79,12 @@ time,
 mark,
 audio,
 video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -100,61 +100,86 @@ hgroup,
 menu,
 nav,
 section {
-    display: block;
+  display: block;
 }
+html {
+  // Firefox 전용
+  scrollbar-color: #b0dad8 #fff; // thumb, track
+  scrollbar-width: thin;
+
+  // Chrome, Edge, Safari 전용
+  &::-webkit-scrollbar {
+    width: 10px; // 세로 스크롤 두께
+    height: 10px; // 가로 스크롤 두께
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #b0dad8; // 트랙 색상
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #b0dad8; // 스크롤바 색상
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #b0dad8; // hover 시 색상
+  }
+}
+
 html,
 body {
-    font-size: 10px;
+  font-size: 10px;
 }
 body {
-    line-height: 1.5;
-    font-size: 1.6rem;
-    overflow-x: hidden;
-    overscroll-behavior: none;
+  line-height: 1.5;
+  font-size: 1.6rem;
+  overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 a {
-    list-style: none;
-    color: #333;
-    text-decoration: none;
+  list-style: none;
+  color: #333;
+  text-decoration: none;
 }
 
 ol,
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 blockquote,
 q {
-    quotes: none;
+  quotes: none;
 }
 
 blockquote {
-    &:before,
-    &:after {
-        content: '';
-        content: none;
-    }
+  &:before,
+  &:after {
+    content: "";
+    content: none;
+  }
 }
 
 q {
-    &:before,
-    &:after {
-        content: '';
-        content: none;
-    }
+  &:before,
+  &:after {
+    content: "";
+    content: none;
+  }
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
 }
 .main {
-    width: 100%;
-    overflow: hidden;
+  width: 100%;
+  overflow: hidden;
 }
 
 .inner {
-    width: 1400px;
+  width: 1400px;
 }

@@ -1,64 +1,78 @@
-import { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
-import Join from '../../components/auth/join';
-import Login from '../../components/auth/login';
+import { useEffect, useState } from "react";
 
-import useAuthStore from '../../store/useAuthStore';
+import Login from "../../components/auth/Login";
+
+import { Link, useNavigate } from "react-router-dom";
+import Join from "../../components/auth/join";
+
+import useAuthStore from "../../store/useAuthStore";
+
 
 const Header = () => {
-    const loginModal = useAuthStore((state) => state.loginModal);
-    const joinModal = useAuthStore((state) => state.joinModal);
+  const loginModal = useAuthStore((state) => state.loginModal);
+  const joinModal = useAuthStore((state) => state.joinModal);
+  const navigate = useNavigate();
 
-    const { setLoginModal, setJoinModal } = useAuthStore();
-    useEffect(() => {
-        // 팝업이면(부모가 존재) 리스너 등록하지 않음
-        if (window.opener) return;
+  const { setLoginModal, setJoinModal } = useAuthStore();
+  useEffect(() => {
+    // 팝업이면(부모가 존재) 리스너 등록하지 않음
+    if (window.opener) return;
 
-        const bc = new BroadcastChannel('auth');
-        const onMsg = (e) => {
-            // 최상위 창(부모)에서만 처리
-            if (window !== window.top) return;
-            if (e?.data?.type === 'OPEN_JOIN') {
-                setLoginModal(false);
-                setJoinModal(true);
-            }
-        };
+    const bc = new BroadcastChannel("auth");
+    const onMsg = (e) => {
+      // 최상위 창(부모)에서만 처리
+      if (window !== window.top) return;
+      if (e?.data?.type === "OPEN_JOIN") {
+        setLoginModal(false);
+        setJoinModal(true);
+      }
+    };
 
-        bc.addEventListener('message', onMsg);
+    bc.addEventListener("message", onMsg);
 
-        // 추가: postMessage 경로도 지원(오리진 다를 때 대비)
-        const onWinMsg = (e) => {
-            if (e.origin !== window.location.origin) return;
-            if (e?.data?.type === 'OPEN_JOIN') {
-                setLoginModal(false);
-                setJoinModal(true);
-            }
-        };
-        window.addEventListener('message', onWinMsg);
+    // 추가: postMessage 경로도 지원(오리진 다를 때 대비)
+    const onWinMsg = (e) => {
+      if (e.origin !== window.location.origin) return;
+      if (e?.data?.type === "OPEN_JOIN") {
+        setLoginModal(false);
+        setJoinModal(true);
+      }
+    };
+    window.addEventListener("message", onWinMsg);
 
-        return () => {
-            bc.removeEventListener('message', onMsg);
-            bc.close();
-            window.removeEventListener('message', onWinMsg);
-        };
-    }, [setJoinModal, setLoginModal]);
+    return () => {
+      bc.removeEventListener("message", onMsg);
+      bc.close();
+      window.removeEventListener("message", onWinMsg);
+    };
+  }, [setJoinModal, setLoginModal]);
 
-    return (
-        <header id="header">
-            <div className="inner">
-                <h2 className="logo">logo</h2>
+  return (
+    <header id="header">
+      <div className="inner">
+        <h2
+          onClick={() => {
+            navigate("/");
+          }}
+          className="logo"
+        ></h2>
 
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/about">AboutUs</Link>
-                        </li>
-                        <li>Videos</li>
-                        <li>Hotel</li>
-                        <li>Grooming</li>
-                    </ul>
-                </nav>
+        <nav>
+          <ul>
+            <li
+              onClick={() => {
+                navigate("/about");
+              }}
+            >
+              Brand Story
+            </li>
+            <li>Videos</li>
+            <li>Hotel</li>
+            <li>Grooming</li>
+          </ul>
+        </nav>
+
 
                 <ul className="top-menu">
                     <li className="btn" onClick={() => setLoginModal(true)}>
@@ -97,6 +111,7 @@ const Header = () => {
             {joinModal && <Join />}
         </header>
     );
+
 };
 
 export default Header;

@@ -5,7 +5,7 @@ import Visual from '../../components/main/Visual';
 import { getCookie, setCookie } from '../../utils/Cookie';
 import Section1 from '../../components/main/sections/Section1';
 import Section2 from '../../components/main/sections/Section2';
-import BgFixed from '../../components/main/BgFixed';
+
 
 const Main = () => {
     const [landingOn, setLandingOn] = useState(false); // 기본값 false → 쿠키 체크 후 결정
@@ -53,6 +53,7 @@ const Main = () => {
                 <Visual aria-hidden={landingOn} />
 
                 <Section1 />
+                <Section2 />
             </div>
             {landingOn && <BubbleLanding onClose={handleCloseLanding} />}
             <ChannelTalk />

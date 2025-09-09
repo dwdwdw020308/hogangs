@@ -1,63 +1,174 @@
-@use './../utils' as *;
+@use "./../utils" as *;
 
 #header {
-    width: 100%;
-    height: 120px;
-    @include flexbox();
-    background: transparent;
-    position: fixed;
-    z-index: 999;
+  width: 100%;
+  height: 94px;
+  @include flexbox();
+  background: #fefefe;
+  position: fixed;
+  z-index: 999;
 
-    .inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 100%;
-        .logo {
-            background: var(--Grey-grey-200, #b6b6b6);
-            width: 117px;
-            height: 44px;
-            cursor: pointer;
-            @include flexbox();
-        }
-
-        nav {
-            width: 495px;
-            height: 28px;
-
-            ul {
-                width: 100%;
-                height: 100%;
-                @include flexbox();
-                gap: 80px;
-                li {
-                    color: #fff;
-                    cursor: pointer;
-                    @include fontFormat();
-                }
-            }
-        }
-
-        .top-menu {
-            width: 131px;
-            height: 28px;
-
-            @include flexbox($justify: space-between);
-            @include fontFormat();
-            .btn {
-                cursor: pointer;
-            }
-            .bar {
-                width: 1px;
-                height: 14px;
-                background: #fefefc;
-            }
-            i {
-                width: 20px;
-                height: 20px;
-                @include flexbox();
-                cursor: pointer;
-            }
-        }
+  .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    .logo {
+      background: url("/main/Logo-confirmed.png") no-repeat center/contain;
+      width: 117px;
+      height: 44px;
+      cursor: pointer;
+      @include flexbox();
     }
+
+    nav {
+      width: 495px;
+      height: 28px;
+
+      ul {
+        width: 100%;
+        height: 100%;
+        @include flexbox();
+        gap: 80px;
+        li {
+          position: relative;
+          width: auto;
+          white-space: nowrap;
+          cursor: pointer;
+
+          @include fontFormat(
+            $color: #292929,
+            $family: "Paperlogy",
+            $weight: 500
+          );
+
+          letter-spacing: 0.18px;
+
+          &:hover {
+            color: #8bbab7;
+            font-weight: 600;
+            opacity: 0.8;
+            background: radial-gradient(
+              50% 50% at 50% 50%,
+              #d8f3f1 0%,
+              rgba(216, 243, 241, 0) 100%
+            );
+          }
+
+          &::after {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 100%;
+            background: #8bbab7;
+            position: absolute;
+            left: 50%;
+            top: -30px; // 시작은 위쪽에 배치
+            transform: translateX(-50%);
+            opacity: 0; // 처음엔 숨김
+          }
+
+          &:hover::after {
+            opacity: 1;
+            animation: dropBounce 1.5s ease-out forwards;
+          }
+          &.active {
+            color: #8bbab7;
+            font-weight: 600;
+            opacity: 0.8;
+            background: radial-gradient(
+              50% 50% at 50% 50%,
+              #d8f3f1 0%,
+              rgba(216, 243, 241, 0) 100%
+            );
+            &::after {
+              content: "";
+              width: 5px;
+              height: 5px;
+              border-radius: 100%;
+              background: #8bbab7;
+              position: absolute;
+              left: 50%;
+              top: -14px;
+              transform: translateX(-50%);
+              opacity: 1;
+            }
+          }
+        }
+
+        @keyframes dropBounce {
+          0% {
+            top: -80px; // 훨씬 위에서 시작
+            opacity: 0;
+          }
+          30% {
+            top: -8px; // 빠르게 내려옴 (목표보다 더 내려감)
+            opacity: 1;
+          }
+          50% {
+            top: -30px; // 위로 확 튕김
+          }
+          70% {
+            top: -12px; // 다시 내려옴
+          }
+          85% {
+            top: -20px; // 작은 튕김
+          }
+          100% {
+            top: -14px; // 최종 위치에 정착
+          }
+        }
+      }
+    }
+
+    .top-menu {
+      width: 131px;
+      height: 28px;
+
+      @include flexbox($justify: space-between);
+      @include fontFormat();
+      .btn {
+        cursor: pointer;
+        position: relative;
+        @include fontFormat(
+          $color: #292929,
+          $family: "Paperlogy",
+          $weight: 500
+        );
+
+        &:hover {
+          color: #8bbab7;
+          font-weight: 600;
+          opacity: 0.8;
+          background: radial-gradient(
+            50% 50% at 50% 50%,
+            #d8f3f1 0%,
+            rgba(216, 243, 241, 0) 100%
+          );
+        }
+      }
+      .bar {
+        width: 1px;
+        height: 14px;
+        background: #292929;
+      }
+      i {
+        width: 20px;
+        height: 20px;
+        @include flexbox();
+        cursor: pointer;
+        &:hover {
+          opacity: 0.8;
+          background: radial-gradient(
+            50% 50% at 50% 50%,
+            #d8f3f1 0%,
+            rgba(216, 243, 241, 0) 100%
+          );
+          path {
+            fill: #8bbab7;
+          }
+        }
+      }
+    }
+  }
 }
