@@ -1,5 +1,6 @@
-const Step1 = ({ onNext, onClose }) => {
-    const onClickSubmit = () => {};
+import React from 'react';
+
+const Step1 = ({ onNext, onClose, step }) => {
     return (
         <div className="join-overlay">
             <div className="join-modal">
@@ -25,14 +26,20 @@ const Step1 = ({ onNext, onClose }) => {
                         <div className="top">
                             <h2>회원가입</h2>
                             <ul className="steps">
-                                <li className="on">1</li>
-                                <li>2</li>
-                                <li>3</li>
+                                <li className={step === 1 ? 'on' : ''}>1</li>
+                                <li className={step === 2 ? 'on' : ''}>2</li>
+                                <li className={step === 3 ? 'on' : ''}>3</li>
                             </ul>
                         </div>
                         <div className="bottom">
                             <form>
-                                <input type="text" name="" id="" placeholder="이메일 주소" />
+                                <input
+                                    type="text"
+                                    name=""
+                                    id=""
+                                    placeholder="이메일 주소"
+                                    autoFocus
+                                />
                                 <input type="text" name="" id="" placeholder="비밀번호" />
                                 <input type="text" name="" id="" placeholder="비밀번호 확인" />
                             </form>

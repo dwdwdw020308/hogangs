@@ -46,7 +46,7 @@ const Login = ({ onJoin, onClose }) => {
                         <div className="top">
                             <h2>로그인</h2>
                             <form>
-                                <input type="text" name="" id="" placeholder="이메일" />
+                                <input type="text" name="" id="" placeholder="이메일" autoFocus />
                                 <input type="text" name="" id="" placeholder="비밀번호" />
                             </form>
                         </div>
