@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MyContent1 = () => {
+const VideosContent1 = () => {
     return (
-        <section id="mycontent1">
+        <section id="vidoescontent1">
             <div className="topbar">
                 <div className="topheader">
                     <img src="/mypage/image103.png" alt="" />
@@ -11,14 +11,14 @@ const MyContent1 = () => {
                 </div>
             </div>
             <div className="nav">
-                <ul>
-                    <li>MyPage</li>
-                </ul>
-                <Link to={'/videos'}>
+                <Link to={'/mypage'}>
                     <ul>
-                        <li>Videos</li>
+                        <li>MyPage</li>
                     </ul>
                 </Link>
+                <ul>
+                    <li>Videos</li>
+                </ul>
                 <ul>
                     <li>Hotel</li>
                 </ul>
@@ -30,4 +30,4 @@ const MyContent1 = () => {
     );
 };
 
-export default MyContent1;
+export default VideosContent1;
