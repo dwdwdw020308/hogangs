@@ -1,4 +1,10 @@
-@forward './visual';
-@forward './bgfixed';
-@forward './section';
-@forward './bubble';
+@forward "./visual";
+@forward "./bgfixed";
+@forward "./section";
+@forward "./bubble";
+
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: url("/Paw.svg") 16 16, auto; /* 16 16은 핫스팟(중심점) */
+  }
+}
