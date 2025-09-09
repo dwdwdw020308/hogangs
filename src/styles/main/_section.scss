@@ -1,0 +1,9 @@
+@use './../utils' as *;
+
+#section1 {
+    width: 100%;
+    height: 100vh;
+    border: 1px solid red;
+    position: relative;
+    overflow: hidden; /* ★ 바깥으로 새는 거 가리기 */
+}

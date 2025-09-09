@@ -1,31 +1,41 @@
-/* Content2.scss */
 @use './../utils/' as *;
 
-/* AOS distance override - 전체에 일괄 적용 */
-html body [data-aos="fade-up"] {
-  transform: translate3d(0, 50px, 0) !important; /* 시작 위치 */
-}
-html body [data-aos="fade-up"].aos-animate {
-  transform: translate3d(0, 0, 0) !important;    /* 최종 위치 */
-}
-
 #content2 {
-  width: 100%;
-  margin: auto;
-  text-align: center;
-  background-color: #fff;
-  padding: 5.4688vw 13.5417vw;
+    font-family: Pretendard;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    background-color: #fff;
+    padding: 5.4688vw 13.5417vw;
 
-  .slogan { padding-bottom: 4.4333vw; }
+    .slogan {
+        padding-bottom: 4.4333vw;
+    }
 
-  .texttitle {
-    padding-bottom: 4.4333vw;
-    li { font-size: 24px; }
-  }
+    .texttitle {
+        li.textline {
+            font-size: 22px;
+            font-weight: 300;
 
-  .dogicon {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
+            background: linear-gradient(90deg, #292929 0%, #292929 50%, #c9c9c9 50%, #cecece 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            background-size: 200% 100%;
+            background-position: 100% 0; // 시작은 회색
+        }
+    }
+
+    .dogicon {
+        display: flex;
+        justify-content: center;
+        padding-top: 80px;
+
+        span {
+            img {
+                margin-right: 1.0417vw;
+                width: 60px;
+            }
+        }
+    }
 }
