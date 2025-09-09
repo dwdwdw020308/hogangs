@@ -100,5 +100,7 @@
         left: 50%;
         transform: translatex(-50%);
         line-height: 0;
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
     }
 }

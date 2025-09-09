@@ -25,14 +25,18 @@ const Visual = () => {
                     <div className="posterlist">
                         {Array.from({ length: 20 }, (_, i) => (
                             <div className="poster" key={i}>
-                                <img src={posters[i % posters.length]} alt="poster" />
+                                <img
+                                    src={posters[i % posters.length]}
+                                    alt="poster"
+                                    draggable={false}
+                                />
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
-            <div className="img">
-                <img src="/ott/dog.png" alt="강아지이미지" />
+            <div className="img ">
+                <img src="/ott/dog.png" alt="강아지이미지" draggable={false} />
             </div>
         </div>
     );

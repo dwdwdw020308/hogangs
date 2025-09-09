@@ -18,8 +18,8 @@ const EventBanner = () => {
                     </strong>
 
                     <div className="imgs">
-                        <img src="/ott/con4_img1.png" alt="호텔들어가는이미지" />
-                        <img src="/ott/con4_img2.png" alt="영화보는이미지" />
+                        <img src="/ott/con4_img1.png" alt="호텔들어가는이미지" draggable={false} />
+                        <img src="/ott/con4_img2.png" alt="영화보는이미지" draggable={false} />
                     </div>
                 </div>
                 <div className="slide">
@@ -33,14 +33,14 @@ const EventBanner = () => {
                     </strong>
                     <div className="imgs">
                         <div className="left">
-                            <img src="/ott/con4_dog1.png" alt="강아지1" />
-                            <img src="/ott/con4_dog2.png" alt="강아지2" />
-                            <img src="/ott/con4_dog3.png" alt="강아지3" />
+                            <img src="/ott/con4_dog1.png" alt="강아지1" draggable={false} />
+                            <img src="/ott/con4_dog2.png" alt="강아지2" draggable={false} />
+                            <img src="/ott/con4_dog3.png" alt="강아지3" draggable={false} />
                         </div>
                         <div className="right">
-                            <img src="/ott/con4_dog4.png" alt="강아지4" />
-                            <img src="/ott/con4_dog5.png" alt="강아지5" />
-                            <img src="/ott/con4_dog6.png" alt="강아지6" />
+                            <img src="/ott/con4_dog4.png" alt="강아지4" draggable={false} />
+                            <img src="/ott/con4_dog5.png" alt="강아지5" draggable={false} />
+                            <img src="/ott/con4_dog6.png" alt="강아지6" draggable={false} />
                         </div>
                     </div>
                 </div>

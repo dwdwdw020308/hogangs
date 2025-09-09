@@ -1,0 +1,36 @@
+@use './../utils' as *;
+
+.card {
+    margin: 160px 260px;
+    text-align: center;
+    strong {
+        font-family: Paperlogy;
+        font-size: 48px;
+        font-weight: 600;
+        span {
+            color: var(--green-normal-hover, #9dbf78);
+        }
+    }
+    p {
+        color: var(--Grey-grey-600, #585858);
+        font-size: 24px;
+        line-height: 140%;
+        margin: 16px 0 68px;
+    }
+    .desc {
+        color: var(--Grey-grey-300, #959595);
+        font-size: 18px;
+        line-height: 140%;
+        margin-top: 32px;
+        span {
+            color: var(--green-normal-hover, #9dbf78);
+        }
+    }
+    .swiper {
+        width: 100%;
+    }
+    .swiper-wrapper {
+        display: flex;
+        width: 100%;
+    }
+}
