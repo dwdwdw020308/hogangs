@@ -58,8 +58,12 @@ const Header = () => {
 
         <nav>
           <ul>
-            <li>
-              <Link to="/about">Brand Story</Link>
+            <li
+              onClick={() => {
+                navigate("/about");
+              }}
+            >
+              Brand Story
             </li>
             <li>Videos</li>
             <li>Hotel</li>
