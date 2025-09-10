@@ -4,8 +4,15 @@
         transform: translateX(-50%);
     }
 }
+@keyframes scroll {
+    to {
+        transform: translateX(-50%);
+    }
+}
 
 .ottmain-visual {
+    position: relative;
+    height: 985px;
     position: relative;
     height: 985px;
     width: 100%;
@@ -17,11 +24,41 @@
         strong {
             font-family: Paperlogy;
             letter-spacing: 0.24px;
+            font-family: Paperlogy;
+            letter-spacing: 0.24px;
             padding-top: 70px;
             display: block;
             font-size: 24px;
+            font-size: 24px;
             font-weight: 600;
             color: #fff;
+            margin-bottom: 8px;
+            span {
+                color: #e5ffc5;
+                position: relative;
+                &:nth-of-type(2) {
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        width: 4px;
+                        height: 4px;
+                        background: #e5ffc5;
+                        border-radius: 50%;
+                        top: -8px;
+                        left: 8px;
+                    }
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        width: 4px;
+                        height: 4px;
+                        background: #e5ffc5;
+                        border-radius: 50%;
+                        top: -8px;
+                        right: 8px;
+                    }
+                }
+            }
             margin-bottom: 8px;
             span {
                 color: #e5ffc5;
@@ -55,11 +92,50 @@
             font-size: 88px;
             font-weight: 700;
             color: #ade86b;
+            font-family: Paperlogy;
+            font-size: 88px;
+            font-weight: 700;
+            color: #ade86b;
             line-height: 100px;
+            margin-top: 8px;
+            letter-spacing: 2.64px;
             margin-top: 8px;
             letter-spacing: 2.64px;
         }
     }
+    .movie-film {
+        background-image: url('/ott/filmbg.png');
+        border-width: 1px 0;
+        padding: 34px 0;
+        margin-top: 28px;
+        overflow: hidden;
+        height: auto;
+        width: 100%;
+        .film-inner {
+            margin: 32px 0;
+            width: 1000vw;
+            display: flex;
+            .posterlist {
+                display: flex;
+                animation: scroll 40s infinite linear;
+                opacity: 50%;
+                .poster {
+                    background-color: #000;
+                    color: #fff;
+                    width: 230px;
+                    height: 328px;
+                    text-align: center;
+                    margin-right: 16px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                        width: 230px;
+                        height: 328px;
+                    }
+                }
+            }
+        }
     .movie-film {
         background-image: url('/ott/filmbg.png');
         border-width: 1px 0;
@@ -100,5 +176,7 @@
         left: 50%;
         transform: translatex(-50%);
         line-height: 0;
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
     }
 }

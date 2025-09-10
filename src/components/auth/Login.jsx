@@ -31,7 +31,7 @@ const Login = () => {
 
     return (
         <div className="login-overlay">
-            <div className="login-modal">
+            {/* <div className="login-modal">
                 <div className="left">
                     <img src="/auth/loginBg.png" alt="" />
                 </div>
@@ -83,7 +83,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
