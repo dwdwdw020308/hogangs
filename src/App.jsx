@@ -4,11 +4,13 @@ import Layout from "./common/Layout";
 import "./styles/index.scss";
 import AboutUs from "./pages/About";
 import Videos from "./pages/videos";
+import ScrollTop from "./components/util/ScrollTop";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
+        <ScrollTop />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Main />} />
