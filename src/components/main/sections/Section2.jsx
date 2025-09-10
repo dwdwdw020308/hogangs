@@ -33,7 +33,7 @@ export default function Section2() {
                 .fromTo(
                     bgRef.current,
                     { opacity: 0, scale: 0.6, filter: 'blur(6px)' },
-                    { opacity: 1, scale: 2.5, filter: 'blur(0px)', ease: 'none' }
+                    { opacity: 1, scale: 1.8, filter: 'blur(0px)', ease: 'none' }
                 );
 
             // 타임라인 참조 저장
