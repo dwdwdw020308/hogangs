@@ -3,7 +3,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-const PHOTOS = ['/main/pic.png', '/main/pic.png', '/main/pic.png', '/main/pic.png'];
+const PHOTOS = [
+    '/main/Mainbubble-01.png',
+    '/main/Mainbubble-02.png',
+    '/main/Mainbubble-03.png',
+    '/main/Mainbubble-04.png',
+    '/main/Mainbubble-05.png',
+];
 
 export default function Section1() {
     const root = useRef(null);
