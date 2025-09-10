@@ -88,18 +88,32 @@ const Header = () => {
                     className="logo"
                 ></h2>
 
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/about">AboutUs</Link>
-                        </li>
-                        <li>
-                            <Link to="/ott">Video</Link>
-                        </li>
-                        <li>Hotel</li>
-                        <li>Grooming</li>
-                    </ul>
-                </nav>
+        <nav>
+          <ul>
+            <li
+              onClick={() => {
+                navigate("/about");
+              }}
+            >
+              AboutUs
+            </li>
+            <li
+              onClick={() => {
+                navigate("/ott");
+              }}
+            >
+              Video
+            </li>
+            <li
+              onClick={() => {
+                navigate("/hotel");
+              }}
+            >
+              Hotel
+            </li>
+            <li>Grooming</li>
+          </ul>
+        </nav>
 
                 <ul className="top-menu">
                     <li className="btn" onClick={() => setLoginModal(true)}>
