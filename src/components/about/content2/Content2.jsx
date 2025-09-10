@@ -111,13 +111,13 @@ const Content2 = () => {
             </ul>
 
             <div className="dogicon">
-                <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
                     <img src="/about/01.png" alt="" />
                 </span>
-                <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+                <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
                     <img src="/about/02.png" alt="" />
                 </span>
-                <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
+                <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1200">
                     <img src="/about/03.png" alt="" />
                 </span>
             </div>
