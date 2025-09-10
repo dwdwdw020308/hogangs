@@ -90,11 +90,15 @@ const Header = () => {
 
         <nav>
           <ul>
-            <li>
-              <Link to="/about">AboutUs</Link>
+            <li onClick={()=>{
+              navigate('/about')
+            }}>
+              AboutUs
             </li>
-            <li>
-              <Link to="/ott">Video</Link>
+            <li onClick={()=>{
+              navigate('/ott')
+            }}>
+              Video
             </li>
             <li>Hotel</li>
             <li>Grooming</li>
