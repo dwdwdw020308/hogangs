@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useNavigate } from 'react-router-dom';
 gsap.registerPlugin(ScrollTrigger);
 
 const PHOTOS = [
@@ -14,6 +15,8 @@ const PHOTOS = [
 export default function Section1() {
     const root = useRef(null);
     const bgRef = useRef(null);
+
+    const navigate = useNavigate();
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
@@ -158,12 +161,22 @@ export default function Section1() {
             </div>
             <div className="inner">
                 <div className="copy">
-                    <div className="copy-line">
+                    <div
+                        className="copy-line"
+                        onClick={() => {
+                            navigate('/hotel');
+                        }}
+                    >
                         <h3>강아지의 두 번째 집, 호강스 호텔</h3>
                         <p>편안한 휴식과 안전한 돌봄</p>
                         <span>호텔 예약 현황 확인하기</span>
                     </div>
-                    <div className="copy-line">
+                    <div
+                        className="copy-line"
+                        onClick={() => {
+                            navigate('/hotel');
+                        }}
+                    >
                         <h3>건강하게, 예쁘게, 호강스 미용</h3>
                         <p>사랑을 담은 세심한 케어</p>
                         <span>미용 예약 현황 확인하기</span>

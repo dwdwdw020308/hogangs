@@ -1,7 +1,7 @@
 .section1 {
     background: #fff;
     color: #111;
-    // background-image: url('/main/main-image01.png');
+    // background-image: url('/main/Gradient.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -14,7 +14,7 @@
 
     .copy {
         position: fixed;
-        top: 50%;
+        top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: min(900px, 90%);
@@ -34,6 +34,14 @@
         line-height: 1.7;
         opacity: 0;
         transition: opacity 0.2s;
+        cursor: pointer;
+        background-image: url('/main/Gradient.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto;
+        z-index: 10;
+        background: transparent;
+
         h3 {
             color: var(--Grey-grey-600, #585858);
             text-align: center;
@@ -47,7 +55,6 @@
         p {
             color: var(--Black, #060606);
             text-align: center;
-            /* Paperogy-Bold/40px */
             font-family: Paperlogy;
             font-size: 40px;
             font-style: normal;
@@ -60,19 +67,16 @@
         span {
             color: var(--Grey-grey-600, #585858);
             text-align: center;
-            /* Medium/24px */
             font-family: Pretendard;
             font-size: 24px;
             font-style: normal;
             font-weight: 500;
             line-height: normal;
-            cursor: pointer;
-
-            /* ✅ hover 색 부드럽게 */
             transition: color 0.2s;
-            &:hover {
-                color: #4a9f99;
-            }
+        }
+
+        &:hover span {
+            color: #4a9f99;
         }
     }
 
@@ -110,6 +114,7 @@
         }
     }
 }
+
 .reveal-pin-wrap {
     height: 100vh;
     position: relative;
@@ -157,6 +162,8 @@
             line-height: normal;
             letter-spacing: -0.9px;
         }
+
+        /* ✅ headline 텍스트 리빌용 */
         .headline {
             color: var(--Green-green-800, #4a9f99);
             text-align: center;
@@ -166,7 +173,21 @@
             font-weight: 800;
             line-height: normal;
             letter-spacing: -1.4px;
+
+            display: inline-block;
+            perspective: 800px; /* 3D 효과용 시야 */
         }
+
+        .headline .chars {
+            display: inline-block;
+        }
+
+        .headline .char {
+            display: inline-block;
+            transform-origin: top center; /* 앞으로 기울였다 펴지게 */
+            will-change: transform, opacity;
+        }
+
         .endtext {
             color: var(--Grey-grey-700, #454545);
             text-align: center;
@@ -179,15 +200,18 @@
         }
     }
 }
+
 #section3 {
     background-color: #eef9f8;
+
     .inner {
         padding: 5vw 10vw;
+
         .textcontent {
             text-align: center;
+
             h2 {
                 color: var(--Green-green-800, #4a9f99);
-                /* Paperogy-Bold/64px */
                 font-family: Paperlogy;
                 font-size: 64px;
                 font-style: normal;
@@ -196,10 +220,10 @@
                 letter-spacing: 0.64px;
                 padding-bottom: 1.0417vw;
             }
+
             p {
                 color: var(--Grey-grey-900, #292929);
                 text-align: center;
-                /* Paperogy-SemiBold/36px */
                 font-family: Paperlogy;
                 font-size: 36px;
                 font-style: normal;
