@@ -1,95 +1,118 @@
-@use "./../utils" as *;
+@use './../utils' as *;
 
 #footer {
-  background: var(--Grey-grey-800, #353535);
-  width: 100%;
-
-  .inner {
-    height: 490px;
+    background: var(--Grey-grey-800, #353535);
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 100px;
     position: relative;
-    // top: 50px;
-    margin: auto;
-    .logo {
-      width: 117px;
-      height: 44px;
-      @include flexbox();
-      margin-bottom: 44px;
-      background: url("/main/Logo-confirmed.png") no-repeat center/contain;
-    }
-    .middle {
-      width: 770px;
-      height: 89px;
-      display: flex;
-      flex-flow: column;
-      gap: 16px;
-      margin-bottom: 55px;
-      .first {
-        width: 770px;
-        height: 19px;
-        @include flexbox($justify: space-between);
-        li {
-          color: var(--Grey-grey-100, #cecece);
-          /* Regular/16px */
-          font-family: Pretendard;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: normal;
-        }
-      }
-      .second {
-        width: 359px;
-        height: 19px;
-        @include flexbox($justify: space-between);
-        li {
-          color: var(--Grey-grey-100, #cecece);
-          font-family: Pretendard;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: normal;
-        }
-      }
-      span {
-        color: var(--Grey-grey-100, #cecece);
-        font-family: Pretendard;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-    }
-
-    .icons {
-      position: absolute;
-      top: 88px;
-      right: 0;
-      width: 284px;
-      height: 56px;
-      @include flexbox($justify: space-between);
-      li {
-        cursor: pointer;
-        width: 56px;
-        height: 56px;
-        @include flexbox();
-        border-radius: 56px;
-        background: var(--Grey-grey-400, #818181);
-        &:hover {
-          background-color: #fff;
-        }
-      }
-    }
+    overflow: hidden;
     .text_bg {
-      position: absolute;
-      bottom: 19px;
-
-      right: 0;
-      width: 939px;
-      height: 212px;
-      background-image: url("/footer/text.png");
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: 0 30px;
+        position: absolute;
+        bottom: -10px;
+        right: 0;
+        width: 1212px;
+        height: 212px;
+        color: var(--Grey-grey-700, #454545);
+        text-align: right;
+        font-family: Paperlogy;
+        font-size: 110px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 106px; /* 96.364% */
     }
-  }
+    .inner {
+        height: 340px;
+        position: relative;
+        // top: 50px;
+        margin: auto;
+        .logo {
+            width: 103px;
+            height: 52px;
+            @include flexbox();
+            margin-bottom: 44px;
+            background: url('/main/Logo-confirmed.png') no-repeat center/contain;
+        }
+        .middle {
+            width: 770px;
+            height: 89px;
+            display: flex;
+            flex-flow: column;
+            gap: 16px;
+            margin-bottom: 55px;
+            .first {
+                width: 770px;
+                height: 19px;
+                @include flexbox($justify: space-between);
+                li {
+                    color: var(--Grey-grey-100, #cecece);
+                    /* Regular/16px */
+                    font-family: Pretendard;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    strong {
+                        font-weight: 600;
+                    }
+                }
+            }
+            .second {
+                width: 359px;
+                height: 19px;
+                @include flexbox($justify: space-between);
+                li {
+                    color: var(--Grey-grey-100, #cecece);
+                    font-family: Pretendard;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    strong {
+                        font-weight: 600;
+                    }
+                }
+            }
+            span {
+                color: var(--Grey-grey-100, #cecece);
+                font-family: Pretendard;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+        .bottom-nav {
+            width: 658px;
+            height: 19px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--Grey-grey-100, #cecece);
+            font-family: Pretendard;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        .icons {
+            position: absolute;
+            top: 88px;
+            right: 0;
+            width: 284px;
+            height: 56px;
+            @include flexbox($justify: space-between);
+            li {
+                cursor: pointer;
+                width: 56px;
+                height: 56px;
+                @include flexbox();
+                border-radius: 56px;
+                background: var(--Grey-grey-400, #818181);
+                &:hover {
+                    background-color: #fff;
+                }
+            }
+        }
+    }
 }

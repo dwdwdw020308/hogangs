@@ -1,16 +1,30 @@
-@import "normalize.css";
-@import url("https://fonts.googleapis.com/css2?family=Pridi&display=swap");
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Pridi&display=swap');
 
 @font-face {
-  font-family: "Paperlogy";
-  src: url("/fonts/paperlogy/Paperlogy-4Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
+    font-family: 'Paperlogy';
+    src: url('/fonts/paperlogy/Paperlogy-4Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "Paperlogy";
-  src: url("/fonts/paperlogy/Paperlogy-6SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
+    font-family: 'Paperlogy';
+    src: url('/fonts/paperlogy/Paperlogy-6SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paperlogy';
+    src: url('/fonts/paperlogy/Paperlogy-7Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paperlogy';
+    src: url('/fonts/paperlogy/Paperlogy-8ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
 }

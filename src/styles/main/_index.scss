@@ -1,10 +1,15 @@
-@forward "./visual";
-@forward "./bgfixed";
-@forward "./section";
-@forward "./bubble";
+@forward './visual';
+@forward './bgfixed';
+@forward './section';
+@forward './bubble';
 
-@media (hover: hover) and (pointer: fine) {
-  body {
-    cursor: url("/Paw.svg") 16 16, auto; /* 16 16은 핫스팟(중심점) */
-  }
+.paw-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    pointer-events: none; /* 클릭 방해 X */
+    z-index: 9999;
+    will-change: transform; /* x/y 변환 */
 }
