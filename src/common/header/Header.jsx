@@ -90,17 +90,27 @@ const Header = () => {
 
         <nav>
           <ul>
-            <li onClick={()=>{
-              navigate('/about')
-            }}>
+            <li
+              onClick={() => {
+                navigate("/about");
+              }}
+            >
               AboutUs
             </li>
-            <li onClick={()=>{
-              navigate('/ott')
-            }}>
+            <li
+              onClick={() => {
+                navigate("/ott");
+              }}
+            >
               Video
             </li>
-            <li>Hotel</li>
+            <li
+              onClick={() => {
+                navigate("/hotel");
+              }}
+            >
+              Hotel
+            </li>
             <li>Grooming</li>
           </ul>
         </nav>
