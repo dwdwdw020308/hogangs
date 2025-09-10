@@ -1,5 +1,13 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { Auth, AuthCallback, Main, MyPage, NotFiles, Ott } from "./pages";
+import {
+  Auth,
+  AuthCallback,
+  Hotel,
+  Main,
+  MyPage,
+  NotFiles,
+  Ott,
+} from "./pages";
 import Layout from "./common/Layout";
 import "./styles/index.scss";
 import AboutUs from "./pages/About";
@@ -18,6 +26,7 @@ const App = () => {
             <Route path="about" element={<AboutUs />} />
             <Route path="mypage" element={<MyPage />} />
             <Route path="videos" element={<Videos />} />
+            <Route path="hotel" element={<Hotel />} />
           </Route>
           <Route path="*" element={<NotFiles />} />
           <Route path="auth" element={<Auth />} />

@@ -5,3 +5,4 @@ export { default as AuthCallback } from "./auth/AuthCallback";
 export { default as Auth } from "./auth/Auth";
 export { default as MyPage } from "./MyPage";
 export { default as NotFiles } from "./notfiles/NotFiles";
+export { default as Hotel } from "./hotel/Hotel";

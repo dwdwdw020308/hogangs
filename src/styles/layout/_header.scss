@@ -46,7 +46,7 @@
           letter-spacing: 0.18px;
 
           &:hover {
-            color: #8bbab7;
+            color: #7abab6;
             font-weight: 600;
             opacity: 0.5;
             background: radial-gradient(
@@ -61,7 +61,7 @@
             width: 5px;
             height: 5px;
             border-radius: 100%;
-            background: #8bbab7;
+            background: #7abab6;
             position: absolute;
             left: 50%;
             top: -30px; // 시작은 위쪽에 배치
@@ -74,7 +74,7 @@
             animation: dropBounce 1.5s ease-out forwards;
           }
           &.active {
-            color: #8bbab7;
+            color: #7abab6;
             font-weight: 600;
             opacity: 0.5;
             background: radial-gradient(
@@ -87,7 +87,7 @@
               width: 5px;
               height: 5px;
               border-radius: 100%;
-              background: #8bbab7;
+              background: #7abab6;
               position: absolute;
               left: 50%;
               top: -14px;
@@ -139,7 +139,7 @@
         );
 
         &:hover {
-          color: #8bbab7;
+          color: #7abab6;
           font-weight: 600;
           // opacity: 0.5;
           // background: radial-gradient(
@@ -161,7 +161,7 @@
         cursor: pointer;
         &:hover {
           path {
-            fill: #8bbab7;
+            fill: #7abab6;
           }
         }
       }
