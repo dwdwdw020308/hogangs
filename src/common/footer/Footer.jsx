@@ -2,27 +2,65 @@ const Footer = () => {
     return (
         <footer id="footer">
             <div className="inner">
-                <h3 className="logo">logo</h3>
+                <h3 className="logo"></h3>
                 <div className="middle">
                     <ul className="first">
-                        <li className="text">상호 땡땡땡</li>
+                        <li className="text">
+                            <p>
+                                <strong>상호 </strong> <span>호강스</span>
+                            </p>
+                        </li>
                         <li>|</li>
-                        <li className="text">대표자 강미선</li>
+                        <li className="text">
+                            <p>
+                                <strong>대표자 </strong> <span>강미선</span>
+                            </p>
+                        </li>
                         <li>|</li>
-                        <li className="text">사업장 주소 비밀임</li>
+                        <li className="text">
+                            <p>
+                                <strong>사업장 주소 </strong> <span>비밀</span>
+                            </p>
+                        </li>
                         <li>|</li>
-                        <li className="text">사업자 등록번호 1004-1004</li>
+                        <li className="text">
+                            <p>
+                                <strong>사업자 등록번호 </strong> <span>215-87-4395</span>
+                            </p>
+                        </li>
                         <li>|</li>
-                        <li className="text">통신판매업 2025-서울강남-0000</li>
+                        <li className="text">
+                            <p>
+                                <strong>통신판매업 </strong> <span>2025-서울강남-0000</span>
+                            </p>
+                        </li>
                     </ul>
                     <ul className="second">
-                        <li className="text">고객센터 02-1234-5678</li>
+                        <li className="text">
+                            <p>
+                                <span>고객센터 </span>
+                                <strong>02-1234-5678</strong>
+                            </p>
+                        </li>
                         <li>|</li>
-                        <li className="text">운영시간 09:00 ~ 18:00 </li>
+                        <li className="text">
+                            <p>
+                                <span>운영시간 </span>
+                                <strong>09:00 ~ 18:00 </strong>
+                            </p>
+                        </li>
                     </ul>
                     <span>© 2025 Hogangs. All rights reserved</span>
                 </div>
-
+                <ul className="bottom-nav">
+                    <li>이용약관</li>
+                    <li>|</li>
+                    <li>개인정보 처리방침</li>
+                    <li>|</li>
+                    <li>안전보상제도</li>
+                    <li>|</li>
+                    <li>미용돌보미 메뉴</li>
+                </ul>
                 <ul className="icons">
                     <li>
                         <svg
@@ -105,8 +143,8 @@ const Footer = () => {
                         </svg>
                     </li>
                 </ul>
-                <div className="text_bg"></div>
             </div>
+            <div className="text_bg">The Premium Life Your Dog Deserves</div>
         </footer>
     );
 };

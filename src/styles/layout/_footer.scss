@@ -3,18 +3,35 @@
 #footer {
     background: var(--Grey-grey-800, #353535);
     width: 100%;
-
+    padding-top: 50px;
+    padding-bottom: 100px;
+    position: relative;
+    overflow: hidden;
+    .text_bg {
+        position: absolute;
+        bottom: -10px;
+        right: 0;
+        width: 1212px;
+        height: 212px;
+        color: var(--Grey-grey-700, #454545);
+        text-align: right;
+        font-family: Paperlogy;
+        font-size: 110px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 106px; /* 96.364% */
+    }
     .inner {
-        height: 490px;
+        height: 340px;
         position: relative;
-        top: 50px;
+        // top: 50px;
         margin: auto;
         .logo {
-            width: 117px;
-            height: 44px;
+            width: 103px;
+            height: 52px;
             @include flexbox();
             margin-bottom: 44px;
-            background: var(--Grey-grey-200, #b6b6b6);
+            background: url('/main/Logo-confirmed.png') no-repeat center/contain;
         }
         .middle {
             width: 770px;
@@ -35,6 +52,9 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: normal;
+                    strong {
+                        font-weight: 600;
+                    }
                 }
             }
             .second {
@@ -48,6 +68,9 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: normal;
+                    strong {
+                        font-weight: 600;
+                    }
                 }
             }
             span {
@@ -59,7 +82,19 @@
                 line-height: normal;
             }
         }
-
+        .bottom-nav {
+            width: 658px;
+            height: 19px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--Grey-grey-100, #cecece);
+            font-family: Pretendard;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
         .icons {
             position: absolute;
             top: 88px;
@@ -78,17 +113,6 @@
                     background-color: #fff;
                 }
             }
-        }
-        .text_bg {
-            position: absolute;
-            bottom: 19px;
-
-            right: 0;
-            width: 939px;
-            height: 212px;
-            background-image: url('/footer/text.png');
-            background-repeat: no-repeat;
-            background-size: contain;
         }
     }
 }

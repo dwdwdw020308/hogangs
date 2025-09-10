@@ -17,3 +17,39 @@ body {
         // padding-right: 5%;
     }
 }
+
+// /* 대상 요소 위에서 기본 커서 숨김 */
+// .cursor-none,
+// .cursor-none * {
+//     cursor: none !important;
+// }
+
+// .hg-cursor {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     pointer-events: none;
+//     z-index: 9999;
+//     transform: translate(-50%, -50%) scale(0.82);
+//     opacity: 0; /* show()/hide()로 제어 */
+//     will-change: transform, opacity;
+// }
+
+// .hg-ring {
+//     position: absolute;
+//     inset: 0;
+// }
+// .hg-text {
+//     fill: #bfe0dc;
+//     font-weight: 600;
+// }
+// .hg-label {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     color: #fff;
+//     font-weight: 800;
+//     font-size: 20px;
+//     white-space: nowrap;
+// }

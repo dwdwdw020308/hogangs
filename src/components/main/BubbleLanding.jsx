@@ -1,11 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
+
 import { setCookie } from '../../utils/Cookie';
+import HogangsCursor from '../util/HogangsCursor';
 
 export default function BubbleLanding({ onClose }) {
     const [popped, setPopped] = useState(false);
     const [showParticles, setShowParticles] = useState(false);
     const [origin, setOrigin] = useState({ x: '50%', y: '50%' });
+    const [startMarquee, setStartMarquee] = useState(false);
 
     const overlayRef = useRef(null);
     const bubbleWrapRef = useRef(null);
@@ -14,10 +17,60 @@ export default function BubbleLanding({ onClose }) {
     const ulRef = useRef(null);
     const logoRef = useRef(null); // ✅ 로고 ref
     const shapeRef = useRef(null);
+    const marqueeStopRef = useRef(null); // ticker 정리용
+
+    const shapeFrameRef = useRef(null); // div.landing-shape
+    const shapeTrackRef = useRef(null); // ul.shape-track
 
     const marchTl = useRef(null);
 
     useEffect(() => {
+        const waitImages = async (el) => {
+            const imgs = Array.from(el.querySelectorAll('img'));
+            await Promise.all(
+                imgs.map((img) =>
+                    img.complete
+                        ? Promise.resolve()
+                        : new Promise((res) => {
+                              img.addEventListener('load', res, { once: true });
+                              img.addEventListener('error', res, { once: true });
+                          })
+                )
+            );
+        };
+
+        // ✅ ModifiersPlugin 없이 끊김 없는 무한 배너
+        const startMarquee = async (speed = 160) => {
+            const track = shapeTrackRef.current; // ul.shape-track
+            if (!track) return;
+
+            // 두 세트 구성(중복 방지)
+            if (!track.dataset.cloned) {
+                track.innerHTML += track.innerHTML;
+                track.dataset.cloned = 'true';
+            }
+
+            await waitImages(track);
+
+            const half = track.scrollWidth / 2; // 원본 세트 길이
+            if (!half) return;
+
+            // 이전 루프 정리
+            if (marqueeStopRef.current) marqueeStopRef.current();
+            gsap.set(track, { x: 0 });
+
+            let x = 0;
+            const tick = () => {
+                const dr = gsap.ticker.deltaRatio(); // 프레임 보정
+                x -= (speed / 60) * dr; // px/frame
+                if (x <= -half) x += half; // 랩핑
+                gsap.set(track, { x });
+            };
+
+            gsap.ticker.add(tick);
+            marqueeStopRef.current = () => gsap.ticker.remove(tick);
+        };
+
         // 페이지 진입 시 스크롤 잠금
         const prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
@@ -107,7 +160,7 @@ export default function BubbleLanding({ onClose }) {
         gsap.set(ul, { scale: 1.5, opacity: 0, transformOrigin: '50% 50%' });
         gsap.set(bubbleWrapRef.current, { opacity: 0 });
         gsap.set(logoRef.current, { opacity: 0, y: -10 }); // ✅ 로고 처음엔 숨김
-        gsap.set(shapeRef.current, { opacity: 0, y: -10 }); // ✅ 로고 처음엔 숨김
+        gsap.set(shapeFrameRef.current, { opacity: 0, y: -10 }); // ✅ 로고 처음엔 숨김
 
         const introTl = gsap.timeline({
             defaults: { ease: 'power2.out' },
@@ -116,7 +169,15 @@ export default function BubbleLanding({ onClose }) {
                 marchTl.current?.play();
                 gsap.to(bubbleWrapRef.current, { opacity: 1, duration: 0.6, ease: 'power1.out' });
                 gsap.to(logoRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }); // ✅ 이제 로고 나타남
-                gsap.to(shapeRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }); // ✅ 이제 로고 나타남
+                gsap.to(shapeFrameRef.current, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        startMarquee(100);
+                    },
+                }); // ✅ 이제 로고 나타남
 
                 // 버블 둥실둥실
                 if (bubbleRef.current) {
@@ -174,6 +235,7 @@ export default function BubbleLanding({ onClose }) {
             document.body.style.overflow = prevOverflow;
             introTl.kill();
             marchTl.current?.kill();
+
             gsap.ticker.remove(tick);
             window.removeEventListener('resize', tick);
             window.removeEventListener('resize', ensureWidth);
@@ -231,99 +293,135 @@ export default function BubbleLanding({ onClose }) {
     };
 
     return (
-        <div ref={overlayRef} className={`landing-overlay ${popped ? 'pop' : ''}`}>
-            {/* ✅ 로고: 인트로 동안 숨김, 인트로 끝나고 페이드인 */}
-            <h2 ref={logoRef} className="landing-logo" aria-hidden={popped ? 'true' : 'false'} />
+        <>
+            <HogangsCursor
+                src="/main/circle.svg" // <- 네가 넣은 경로
+                size={150}
+                speed={3} // 숫자 작을수록 빠름(초/회전)
+                centerText="클릭!"
+            />
+            <div ref={overlayRef} className={`landing-overlay ${popped ? 'pop' : ''}`}>
+                {/* ✅ 로고: 인트로 동안 숨김, 인트로 끝나고 페이드인 */}
+                <h2
+                    ref={logoRef}
+                    className="landing-logo"
+                    aria-hidden={popped ? 'true' : 'false'}
+                />
 
-            {/* 강아지 행진 */}
-            <div className="mung-content">
-                <ul ref={ulRef}>
-                    {['/main/ganady.png', '/main/ganady01.png'].map((_, idx) => (
-                        <li key={idx}>
-                            <div className="dog">
-                                <img src="/main/ganady.png" alt="" />
-                                <img className="variant" src="/main/ganady01.png" alt="" />
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                {/* 강아지 행진 */}
+                <div className="mung-content">
+                    <ul ref={ulRef}>
+                        {['/main/ganady.png', '/main/ganady01.png'].map((_, idx) => (
+                            <li key={idx}>
+                                <div className="dog">
+                                    <img src="/main/ganady.png" alt="" />
+                                    <img className="variant" src="/main/ganady01.png" alt="" />
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
-            {/* 버블 (인트로 끝날 때 페이드인) */}
-            <div
-                ref={bubbleWrapRef}
-                className="bubble-wrap"
-                aria-hidden={popped ? 'true' : 'false'}
-            >
-                <svg
-                    ref={bubbleRef}
-                    className={`bubble ${popped ? 'popping' : ''}`}
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="xMidYMid meet"
-                    overflow="visible"
-                    onClick={handlePop}
-                    aria-label="bubble"
+                {/* 버블 (인트로 끝날 때 페이드인) */}
+                <div
+                    ref={bubbleWrapRef}
+                    className="bubble-wrap"
+                    aria-hidden={popped ? 'true' : 'false'}
                 >
-                    <defs>
-                        <radialGradient id="natural-bubble-grad" cx="30%" cy="30%" r="70%">
-                            <stop offset="0%" stopColor="rgba(255,255,255,0.3)" />
-                            <stop offset="30%" stopColor="rgba(255,255,255,0.1)" />
-                            <stop offset="70%" stopColor="rgba(200,230,255,0.05)" />
-                            <stop offset="90%" stopColor="rgba(255,200,255,0.08)" />
-                            <stop offset="100%" stopColor="rgba(255,255,255,0.02)" />
-                        </radialGradient>
-                        <linearGradient id="subtle-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stopColor="rgba(255,200,200,0.3)" />
-                            <stop offset="25%" stopColor="rgba(200,255,200,0.3)" />
-                            <stop offset="50%" stopColor="rgba(200,200,255,0.3)" />
-                            <stop offset="75%" stopColor="rgba(255,255,200,0.3)" />
-                            <stop offset="100%" stopColor="rgba(255,200,255,0.3)" />
-                        </linearGradient>
-                        <filter id="bubble-filter" x="-60%" y="-60%" width="220%" height="220%">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="0.3" result="soft" />
-                            <feMerge>
-                                <feMergeNode in="soft" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
-                        <filter id="bubble-shadow" x="-60%" y="-60%" width="220%" height="220%">
-                            <feDropShadow
-                                dx="0"
-                                dy="10"
-                                stdDeviation="10"
-                                floodColor="rgba(0,0,0,0.28)"
+                    <svg
+                        ref={bubbleRef}
+                        className={`bubble ${popped ? 'popping' : ''}`}
+                        viewBox="0 0 100 100"
+                        preserveAspectRatio="xMidYMid meet"
+                        overflow="visible"
+                        onClick={handlePop}
+                        aria-label="bubble"
+                        data-cursor="hogangs"
+                    >
+                        <defs>
+                            <radialGradient id="natural-bubble-grad" cx="30%" cy="30%" r="70%">
+                                <stop offset="0%" stopColor="rgba(255,255,255,0.3)" />
+                                <stop offset="30%" stopColor="rgba(255,255,255,0.1)" />
+                                <stop offset="70%" stopColor="rgba(200,230,255,0.05)" />
+                                <stop offset="90%" stopColor="rgba(255,200,255,0.08)" />
+                                <stop offset="100%" stopColor="rgba(255,255,255,0.02)" />
+                            </radialGradient>
+                            <linearGradient id="subtle-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="rgba(255,200,200,0.3)" />
+                                <stop offset="25%" stopColor="rgba(200,255,200,0.3)" />
+                                <stop offset="50%" stopColor="rgba(200,200,255,0.3)" />
+                                <stop offset="75%" stopColor="rgba(255,255,200,0.3)" />
+                                <stop offset="100%" stopColor="rgba(255,200,255,0.3)" />
+                            </linearGradient>
+                            <filter id="bubble-filter" x="-60%" y="-60%" width="220%" height="220%">
+                                <feGaussianBlur
+                                    in="SourceGraphic"
+                                    stdDeviation="0.3"
+                                    result="soft"
+                                />
+                                <feMerge>
+                                    <feMergeNode in="soft" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                            <filter id="bubble-shadow" x="-60%" y="-60%" width="220%" height="220%">
+                                <feDropShadow
+                                    dx="0"
+                                    dy="10"
+                                    stdDeviation="10"
+                                    floodColor="rgba(0,0,0,0.28)"
+                                />
+                            </filter>
+                        </defs>
+
+                        <g filter="url(#bubble-shadow)">
+                            <circle
+                                ref={circleRef}
+                                cx="50"
+                                cy="50"
+                                r="48"
+                                fill="url(#natural-bubble-grad)"
+                                stroke="url(#subtle-rainbow)"
+                                strokeWidth="1"
+                                filter="url(#bubble-filter)"
                             />
-                        </filter>
-                    </defs>
+                            <ellipse cx="40" cy="36" rx="12" ry="7" fill="rgba(255,255,255,0.4)" />
+                            <circle cx="45" cy="32" r="2" fill="rgba(255,255,255,0.5)" />
+                            <circle cx="60" cy="42" r="1.5" fill="rgba(255,255,255,0.3)" />
+                            <circle cx="35" cy="55" r="1.2" fill="rgba(255,255,255,0.25)" />
+                        </g>
+                    </svg>
+                </div>
 
-                    <g filter="url(#bubble-shadow)">
-                        <circle
-                            ref={circleRef}
-                            cx="50"
-                            cy="50"
-                            r="48"
-                            fill="url(#natural-bubble-grad)"
-                            stroke="url(#subtle-rainbow)"
-                            strokeWidth="1"
-                            filter="url(#bubble-filter)"
-                        />
-                        <ellipse cx="40" cy="36" rx="12" ry="7" fill="rgba(255,255,255,0.4)" />
-                        <circle cx="45" cy="32" r="2" fill="rgba(255,255,255,0.5)" />
-                        <circle cx="60" cy="42" r="1.5" fill="rgba(255,255,255,0.3)" />
-                        <circle cx="35" cy="55" r="1.2" fill="rgba(255,255,255,0.25)" />
-                    </g>
-                </svg>
+                {/* 팝 파편 */}
+                <div
+                    className="particles-container"
+                    style={{ '--origin-x': origin.x, '--origin-y': origin.y }}
+                >
+                    {showParticles && generateParticles()}
+                </div>
+
+                <div ref={shapeFrameRef} className="landing-shape">
+                    {' '}
+                    {/* 프레임: 고정 */}
+                    <ul ref={shapeTrackRef} className="shape-track">
+                        {' '}
+                        {/* 트랙: 이동 */}
+                        <li>
+                            <img className="bone" src="/main/Bone-shape.png" alt="" />
+                        </li>
+                        <li>
+                            <img className="bone" src="/main/Bone-shape.png" alt="" />
+                        </li>
+                        <li>
+                            <img className="bone" src="/main/Bone-shape.png" alt="" />
+                        </li>
+                        <li>
+                            <img className="bone" src="/main/Bone-shape.png" alt="" />
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-            {/* 팝 파편 */}
-            <div
-                className="particles-container"
-                style={{ '--origin-x': origin.x, '--origin-y': origin.y }}
-            >
-                {showParticles && generateParticles()}
-            </div>
-
-            <div ref={shapeRef} className="landing-shape"></div>
-        </div>
+        </>
     );
 }

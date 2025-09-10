@@ -1,7 +1,10 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../../store/useAuthStore';
 
-const Login = ({ onJoin, onClose }) => {
+const Login = () => {
+    const closeLoginModal = useAuthStore((s) => s.closeLoginModal);
+    const setJoinModal = useAuthStore((s) => s.setJoinModal);
+
     const navigate = useNavigate();
     const socialLogin = (sns) => {
         switch (sns) {
@@ -21,6 +24,11 @@ const Login = ({ onJoin, onClose }) => {
                 break;
         }
     };
+    const openJoinFromLogin = () => {
+        closeLoginModal();
+        setJoinModal(true);
+    };
+
     return (
         <div className="login-overlay">
             <div className="login-modal">
@@ -28,7 +36,7 @@ const Login = ({ onJoin, onClose }) => {
                     <img src="/auth/loginBg.png" alt="" />
                 </div>
                 <div className="right">
-                    <i className="close-btn" onClick={onClose}>
+                    <i className="close-btn" onClick={closeLoginModal}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -53,12 +61,7 @@ const Login = ({ onJoin, onClose }) => {
                         <div className="bottom">
                             <div className="btnWrap">
                                 <button>로그인</button>
-                                <span
-                                    className="join-btn"
-                                    onClick={() => {
-                                        onJoin();
-                                    }}
-                                >
+                                <span className="join-btn" onClick={openJoinFromLogin}>
                                     회원가입
                                 </span>
                             </div>
@@ -72,6 +75,7 @@ const Login = ({ onJoin, onClose }) => {
                                         src="/auth/google.png"
                                         alt=""
                                     />
+
                                     <img src="/auth/kakao.png" alt="" />
                                     <img src="/auth/naver.png" alt="" />
                                 </div>

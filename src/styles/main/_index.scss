@@ -2,3 +2,14 @@
 @forward './bgfixed';
 @forward './section';
 @forward './bubble';
+
+.paw-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    pointer-events: none; /* 클릭 방해 X */
+    z-index: 9999;
+    will-change: transform; /* x/y 변환 */
+}
