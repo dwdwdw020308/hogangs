@@ -6,13 +6,13 @@
     background-image: url('/main/Main.png');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 0 0%;
+    background-position: 0 70%;
 
     position: relative;
     overflow: hidden;
     .curve {
         position: absolute;
-        bottom: 0;
+        bottom: -10%;
         left: 0;
         width: 100%;
         height: auto;
