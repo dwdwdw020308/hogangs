@@ -9,7 +9,7 @@ const Reservation = () => {
       <div className="inner">
         <p className="title">
           <span>이번 주 호강’s </span>
-          <span className="color">예약 시간표</span>
+          <span className="color">호텔 예약 시간표</span>
         </p>
 
         <div className="calendar">
