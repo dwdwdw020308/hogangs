@@ -85,7 +85,7 @@ const Step2 = ({ setStep, step, user, setUser }) => {
                             />
                         </svg>
                     </i>
-                    <div className="join-inner">
+                    <div className="join-inner2">
                         <div className="top">
                             <h2>회원가입</h2>
                             <ul className="steps">

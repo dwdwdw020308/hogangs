@@ -24,7 +24,7 @@ const Step3 = () => {
                             />
                         </svg>
                     </i>
-                    <div className="join-inner">
+                    <div className="join-inner3">
                         <div className="top">
                             <h2>가입 완료</h2>
                         </div>
