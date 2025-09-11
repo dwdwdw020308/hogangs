@@ -26,11 +26,15 @@
             color: var(--green-normal-hover, #9dbf78);
         }
     }
-    .swiper {
-        width: 100%;
-    }
-    .swiper-wrapper {
+    // .swiper {
+    //     width: 100%;
+    // }
+    // .swiper-wrapper {
+    //     display: flex;
+    //     width: 100%;
+    // }
+    .card-list {
         display: flex;
-        width: 100%;
+        justify-content: space-between;
     }
 }
