@@ -243,7 +243,6 @@
     }
 }
 
-
 #section5 {
     .text {
         display: flex;
@@ -299,6 +298,9 @@
         height: 100%;
         object-fit: cover;
         border-radius: 20px;
+    }
+}
+
 #main_Section4List {
     width: 100%;
     height: 2009px;
@@ -363,6 +365,7 @@
             }
         }
     }
+
     .main_Section4item {
         background-image: url('main/cilp.png');
         position: relative;
@@ -398,12 +401,12 @@
                 line-height: normal;
                 padding-bottom: 1.0417vw;
             }
-            > img {
+            img {
                 padding-bottom: 20px;
             }
             .star {
                 padding-bottom: 26px;
-                > img {
+                img {
                 }
                 span {
                     padding-left: 10px;
