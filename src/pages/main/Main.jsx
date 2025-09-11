@@ -7,7 +7,11 @@ import Section1 from '../../components/main/sections/Section1';
 import Section2 from '../../components/main/sections/Section2';
 import gsap from 'gsap';
 import Section3 from '../../components/main/sections/Section3';
+
+import Section5 from '../../components/main/sections/Section5';
+
 import Section4List from '../../components/main/sections/Section4List';
+
 
 const Main = () => {
     const [landingOn, setLandingOn] = useState(false); // 기본값 false → 쿠키 체크 후 결정
@@ -79,7 +83,11 @@ const Main = () => {
                 <Section1 />
                 <Section2 />
                 <Section3 />
+
+                <Section5 />
+
                 <Section4List />
+
             </div>
             {landingOn && <BubbleLanding onClose={handleCloseLanding} />}
             <ChannelTalk />

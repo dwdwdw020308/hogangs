@@ -2,7 +2,7 @@ import React from 'react';
 import useAuthStore from '../../store/useAuthStore';
 
 const Step3 = () => {
-    const closeJoinModal = useAuthStore((s) => s.closeJoinModal);
+    const setJoinModal = useAuthStore((state) => state.closeJoinModal);
     return (
         <div className="join-overlay">
             <div className="join-modal">
@@ -10,7 +10,7 @@ const Step3 = () => {
                     <img src="/auth/joinBg3.png" alt="" />
                 </div>
                 <div className="right">
-                    <i className="close-btn" onClick={closeJoinModal}>
+                    <i className="close-btn" onClick={() => setJoinModal(false)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
