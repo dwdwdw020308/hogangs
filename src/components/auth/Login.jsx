@@ -1,37 +1,37 @@
-import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../../store/useAuthStore';
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/useAuthStore";
 
 const Login = () => {
-    const closeLoginModal = useAuthStore((s) => s.closeLoginModal);
-    const setJoinModal = useAuthStore((s) => s.setJoinModal);
+  const closeLoginModal = useAuthStore((s) => s.closeLoginModal);
+  const setJoinModal = useAuthStore((s) => s.setJoinModal);
 
-    const navigate = useNavigate();
-    const socialLogin = (sns) => {
-        switch (sns) {
-            case 'google':
-                const GOOGLE_LOGIN_URL = import.meta.env.VITE_GOOGLE_LOGIN_URL;
-                const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-                const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
+  const navigate = useNavigate();
+  const socialLogin = (sns) => {
+    switch (sns) {
+      case "google":
+        const GOOGLE_LOGIN_URL = import.meta.env.VITE_GOOGLE_LOGIN_URL;
+        const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+        const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
 
-                const url =
-                    `${GOOGLE_LOGIN_URL}?` +
-                    `client_id=${GOOGLE_CLIENT_ID}` +
-                    `&redirect_uri=${GOOGLE_REDIRECT_URI}` +
-                    `&response_type=code` +
-                    `&scope=email profile openid`;
+        const url =
+          `${GOOGLE_LOGIN_URL}?` +
+          `client_id=${GOOGLE_CLIENT_ID}` +
+          `&redirect_uri=${GOOGLE_REDIRECT_URI}` +
+          `&response_type=code` +
+          `&scope=email profile openid`;
 
-                window.open(url, '_blank', 'width=500,height=600');
-                break;
-        }
-    };
-    const openJoinFromLogin = () => {
-        closeLoginModal();
-        setJoinModal(true);
-    };
+        window.open(url, "_blank", "width=500,height=600");
+        break;
+    }
+  };
+  const openJoinFromLogin = () => {
+    closeLoginModal();
+    setJoinModal(true);
+  };
 
-    return (
-        <div className="login-overlay">
-            {/* <div className="login-modal">
+  return (
+    <div className="login-overlay">
+      {/* <div className="login-modal">
                 <div className="left">
                     <img src="/auth/loginBg.png" alt="" />
                 </div>
@@ -84,8 +84,8 @@ const Login = () => {
                     </div>
                 </div>
             </div> */}
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Login;

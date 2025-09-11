@@ -1,15 +1,71 @@
+import React, { useEffect, useRef, useState } from 'react';
+
 const Visual = () => {
-  return (
-    <section id="main_visual">
-      <svg
-        className="curve"
-        viewBox="0 0 1440 180"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path fill="#fff" d="M0,0 Q720,200 1440,0 L1440,180 L0,180 Z"></path>
-      </svg>
-    </section>
-  );
+    const introRef = useRef(null);
+    const overlayRef = useRef(null);
+    const captionRef = useRef(null);
+
+    useEffect(() => {
+        const inViewport = (el) => {
+            if (!el) return 0;
+
+            const H = window.innerHeight;
+            const r = el.getBoundingClientRect();
+            const t = r.top;
+            const b = r.bottom;
+
+            return Math.max(0, t > 0 ? H - t : b < H ? b : H);
+        };
+
+        const handleScrollResize = () => {
+            const window_offset = inViewport(introRef.current);
+
+            if (overlayRef.current) {
+                overlayRef.current.style.height = `${window_offset}px`;
+            }
+
+            if (captionRef.current) {
+                captionRef.current.style.bottom = `${window_offset / 4}px`;
+            }
+        };
+
+        handleScrollResize();
+
+        window.addEventListener('scroll', handleScrollResize);
+        window.addEventListener('resize', handleScrollResize);
+
+        return () => {
+            window.removeEventListener('scroll', handleScrollResize);
+            window.removeEventListener('resize', handleScrollResize);
+        };
+    }, []);
+
+    return (
+        <section id="main-visual">
+            <figure className="intro" ref={introRef}>
+                <img src="/main/dog.png" alt="" />
+                <figcaption className="caption" ref={captionRef}></figcaption>
+                <span className="overlay" ref={overlayRef}>
+                    <svg
+                        version="1.1"
+                        id="circle"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 -300 500 550"
+                        enableBackground="new 0 0 500 250"
+                        preserveAspectRatio="none"
+                    >
+                        <path
+                            fill="#FFFFFF"
+                            d="M250,246.5c-97.85,0-186.344-40.044-250-104.633V250h500V141.867C436.344,206.456,347.85,246.5,250,246.5z"
+                        />
+                    </svg>
+                </span>
+            </figure>
+        </section>
+    );
 };
 
 export default Visual;

@@ -21,7 +21,7 @@ const Content1 = () => {
 
             const tween = gsap.fromTo(
                 img,
-                { scale: 1.3, y: -270 },
+                { scale: 1.3, y: -250 },
                 {
                     scale: 0.3,
                     y: 550,
