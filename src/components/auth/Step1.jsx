@@ -1,13 +1,15 @@
 import React from 'react';
 import useAuthStore from '../../store/useAuthStore';
+import axios from 'axios';
 
 const Step1 = ({ setStep, step, user, setUser }) => {
-    const closeJoinModal = useAuthStore((s) => s.closeJoinModal);
+    const setJoinModal = useAuthStore((state) => state.setJoinModal);
+    const apiUrl = import.meta.env.VITE_API_URL;
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUser((prev) => ({ ...prev, [name]: value }));
     };
-    const handleNext = () => {
+    const handleNext = async () => {
         if (!user.email || !user.email.includes('@') || !user.email.endsWith('.com')) {
             alert('옳바른 이메일 주소를 입력해주세요.');
             return;
@@ -20,7 +22,14 @@ const Step1 = ({ setStep, step, user, setUser }) => {
             alert('비밀번호가 일치하지 않습니다');
             return;
         }
-        setStep(step + 1);
+
+        const res = await axios.post(apiUrl + '/user/duplicate', { email: user.email });
+        console.log(res.data.error);
+        if (res.data.error === 0) {
+            setStep(step + 1);
+        } else {
+            alert('이미 가입된 이메일입니다.');
+        }
     };
 
     return (
@@ -30,7 +39,7 @@ const Step1 = ({ setStep, step, user, setUser }) => {
                     <img src="/auth/joinBg1.png" alt="" />
                 </div>
                 <div className="right">
-                    <i className="close-btn" onClick={closeJoinModal}>
+                    <i className="close-btn" onClick={() => setJoinModal(false)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
