@@ -29,9 +29,9 @@ const Login = () => {
     setJoinModal(true);
   };
 
-  return (
-    <div className="login-overlay">
-      {/* <div className="login-modal">
+    return (
+        <div className="login-overlay">
+            <div className="login-modal">
                 <div className="left">
                     <img src="/auth/loginBg.png" alt="" />
                 </div>
@@ -83,9 +83,9 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-            </div> */}
-    </div>
-  );
+            </div>
+        </div>
+    );
 };
 
 export default Login;
