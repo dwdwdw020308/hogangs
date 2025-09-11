@@ -13,7 +13,7 @@ const Hotel = () => {
             <Reservation />
             <IntroduceService />
             <CareService />
-            {/* <Price /> */}
+            <Price />
             <HotelInteraction />
             <Photo />
         </>

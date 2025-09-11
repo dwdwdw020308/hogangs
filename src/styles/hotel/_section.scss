@@ -151,7 +151,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #8bbab7;
+    background: #b7e2df;
     .inner {
         height: 358px;
         display: flex;
@@ -239,53 +239,10 @@
 
 #hotel_price {
     width: 100%;
-    min-height: 1000px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    background-color: #fefefe;
-    .top_bg {
+    img {
         width: 100%;
-        height: 1000px;
-        background: url('/hotel/hotel_price.png') no-repeat center/cover;
-        position: absolute;
-        top: 0;
-    }
-    .inner {
-        height: 2040px;
-        display: flex;
-        flex-flow: column;
-        padding-top: 483px;
-        align-items: center;
-        .title {
-            text-align: center;
-            margin-bottom: 58px;
-            .color {
-                color: var(--Green-green-800, #4a9f99);
-                font-family: Paperlogy;
-                font-size: 48px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: normal;
-            }
-            span {
-                color: var(--Black, #060606);
-                font-family: Paperlogy;
-                font-size: 48px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: normal;
-            }
-        }
-
-        .time {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 64px;
-            .in {
-            }
-        }
+        height: auto;
+        display: block;
     }
 }
 //hotel_price
@@ -701,4 +658,4 @@
         background: url('/hotel/photo/text.png') no-repeat center/contain;
         z-index: 1;
     }
-}
+} //hotel_photo_section
