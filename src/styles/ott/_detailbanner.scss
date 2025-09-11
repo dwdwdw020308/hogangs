@@ -1,0 +1,106 @@
+@use './../utils' as *;
+.DetailBanner {
+    background: linear-gradient(0deg, rgba(6, 6, 6, 0.7) 0%, rgba(108, 108, 108, 0) 100%),
+        url('/ott/detail-big.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 1080px;
+    // margin-top: 85px;
+    padding: 358px 0 0 160px;
+    .title-box {
+        h2 {
+            color: var(--White, #fefefe);
+            font-family: Paperlogy;
+            font-size: 96px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        strong {
+            color: var(--White, #fefefe);
+            opacity: 0.7;
+            font-size: 28px;
+            font-weight: 800;
+        }
+        ul {
+            display: flex;
+            gap: 20px;
+            color: var(--Grey-grey-50, #efefef);
+            font-weight: 700;
+            font-size: 20px;
+            margin-top: 32px;
+            line-height: 1;
+            li {
+            }
+        }
+    }
+    .line {
+        width: 1600px;
+        height: 1px;
+        background: #b6b6b6;
+        margin-top: 40px;
+    }
+    .desc-box {
+        display: flex;
+        margin-top: 70px;
+        .left {
+            position: relative;
+            img {
+                border-radius: 10px;
+                // width: 395px;
+                // height: 244px;
+            }
+            button {
+                position: absolute;
+                left: 165px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                img {
+                }
+            }
+        }
+        .center {
+            margin-left: 50px;
+            p {
+                color: var(--White, #fefefe);
+                line-height: 170%;
+                font-size: 20px;
+                font-weight: 500;
+            }
+            ul {
+                margin-top: 102px;
+                display: flex;
+                gap: 20px;
+                li {
+                    button {
+                        background: transparent;
+                        width: 140px;
+                        height: 40px;
+                        border: 1px solid var(--Green-green-200, #e2f8f7);
+                        border-radius: 40px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: var(--Green-green-200, #e2f8f7);
+                        cursor: pointer;
+                        svg {
+                            margin-right: 8px;
+                        }
+                    }
+                }
+            }
+        }
+        .right {
+            img {
+                position: absolute;
+                right: 160px;
+            }
+            p {
+            }
+        }
+    }
+}
