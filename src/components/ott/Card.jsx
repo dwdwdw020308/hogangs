@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { Navigation } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 
 const Card = () => {
     const [flip, setFlip] = useState({});
@@ -24,37 +24,32 @@ const Card = () => {
                 오늘 <span>뭐</span>볼까?
             </strong>
             <p>쉿! 카드 뒤에 호강이 PICK 영상이 숨어있어요!</p>
-            <Swiper
-                modules={[Navigation]}
-                slidesPerView={3}
-                spaceBetween={30}
-                slidesPerGroup={1}
-                loop={true}
-            >
+            <div className="card-list">
                 {cards.map((card) => (
-                    <SwiperSlide key={card.id}>
-                        <ReactCardFlip isFlipped={flip[card.id]} flipDirection="horizontal">
-                            <div
-                                className="card-front"
-                                onClick={() => toggleFlip(card.id)}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                <img src={card.front} alt="앞면이미지" />
-                            </div>
-                            {/* 앞 */}
-                            <div
-                                className="card-back"
-                                onClick={() => toggleFlip(card.id)}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                <img src={card.back} alt="뒷면이미지" />
-                            </div>
-                            {/* 뒤 */}
-                        </ReactCardFlip>
-                        {/* 프레임 */}
-                    </SwiperSlide>
+                    <ReactCardFlip
+                        key={card.id}
+                        isFlipped={flip[card.id]}
+                        flipDirection="horizontal"
+                    >
+                        <div
+                            className="card-front"
+                            onClick={() => toggleFlip(card.id)}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            <img src={card.front} alt="앞면이미지" />
+                        </div>
+                        {/* 앞 */}
+                        <div
+                            className="card-back"
+                            onClick={() => toggleFlip(card.id)}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            <img src={card.back} alt="뒷면이미지" />
+                        </div>
+                        {/* 뒤 */}
+                    </ReactCardFlip>
                 ))}
-            </Swiper>
+            </div>
             <p className="desc">
                 * 카드를 <span>클릭</span>해 보세요, 카드 뒷면이 보여요!
             </p>

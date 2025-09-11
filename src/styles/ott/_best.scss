@@ -107,14 +107,34 @@
             }
         }
     }
-    .btn {
+    .btns {
         position: absolute;
         top: 400px;
-        left: 437px;
+        left: 410px;
         display: flex;
-        gap: 18px;
-        cursor: pointer;
     }
+
+    .icon-btn {
+        position: relative;
+        background: none;
+        border: none;
+        font-size: 42px;
+        width: 42px;
+        cursor: pointer;
+        margin-right: 18px;
+    }
+    .icon {
+        position: absolute;
+        transition: all 0.2s ease;
+        opacity: 0;
+    }
+    .icon.show {
+        opacity: 1;
+    }
+    .icon.hide {
+        opacity: 0;
+    }
+
     .progress {
         // width: 100%;
         width: 1076px;

@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { PiArrowCircleLeftThin, PiArrowCircleRightThin } from 'react-icons/pi';
+import {
+    PiArrowCircleLeftThin,
+    PiArrowCircleRightThin,
+    PiCaretCircleRightThin,
+    PiCaretCircleLeftThin,
+} from 'react-icons/pi';
 
 const Best = () => {
     const best5 = [
@@ -43,6 +48,10 @@ const Best = () => {
     const [movies, setMovies] = useState(best5);
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    //버튼 호버했을때
+    const [hoverLeft, setHoverLeft] = useState(false);
+    const [hoverRight, setHoverRight] = useState(false);
+
     const handleNext = () => {
         setMovies((prev) => {
             const [first, ...rest] = prev;
@@ -76,7 +85,7 @@ const Best = () => {
                             className={`poster ${idx === 0 ? 'active' : 'inactive'}`}
                             key={movie.id}
                         >
-                            <img src={movie.img} alt={movie.title} />
+                            <img src={movie.img} alt={movie.title} draggable={false} />
                             <p className="title">{movie.title}</p>
                             <span className="date">{movie.date}</span>
                             <div className="btn">
@@ -86,9 +95,34 @@ const Best = () => {
                     ))}
                 </div>
                 {/* 버튼 */}
-                <div className="btn">
-                    <PiArrowCircleLeftThin size={42} onClick={handlePrev} />
-                    <PiArrowCircleRightThin size={42} onClick={handleNext} />
+                <div className="btns">
+                    <button
+                        className="icon-btn"
+                        onMouseEnter={() => setHoverLeft(true)}
+                        onMouseLeave={() => setHoverLeft(false)}
+                        onClick={handlePrev}
+                    >
+                        <span className={`icon ${hoverLeft ? 'hide' : 'show'}`}>
+                            <PiArrowCircleLeftThin />
+                        </span>
+                        <span className={`icon ${hoverLeft ? 'show' : 'hide'}`}>
+                            <PiCaretCircleLeftThin />
+                        </span>
+                    </button>
+
+                    <button
+                        className="icon-btn"
+                        onMouseEnter={() => setHoverRight(true)}
+                        onMouseLeave={() => setHoverRight(false)}
+                        onClick={handleNext}
+                    >
+                        <span className={`icon ${hoverRight ? 'hide' : 'show'}`}>
+                            <PiArrowCircleRightThin />
+                        </span>
+                        <span className={`icon ${hoverRight ? 'show' : 'hide'}`}>
+                            <PiCaretCircleRightThin />
+                        </span>
+                    </button>
                 </div>
                 {/* 짧은 진행률 */}
                 <div className="progress">
