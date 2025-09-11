@@ -14,7 +14,7 @@ const Section3 = () => {
                     src="https://www.youtube.com/embed/a0rBbgh05oc?autoplay=1&mute=1&controls=1"
                     title="강아지 광고"
                     frameBorder="0"
-                    allow="autoplay; encrypted-media" 
+                    allow="autoplay; encrypted-media"
                     allowFullScreen
                 ></iframe>
             </div>
