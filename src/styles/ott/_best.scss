@@ -35,19 +35,17 @@
         .slide-wrapper {
             display: flex;
             gap: 20px;
-            // align-items: end;
-            // transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); // 부드럽게 이동
         }
 
         .poster {
             width: 302px;
             flex-shrink: 0;
             opacity: 0.5;
-            // transform: scale(0.85);
-            // transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
             img {
-                width: 100%;
+                // width: 100%;
+                width: 302px;
+                height: 429px;
                 display: block;
             }
 
@@ -86,8 +84,9 @@
                     border-radius: 42px;
                     padding: 10.4px 38.75px 9.6px 37.25px;
                     position: absolute;
-                    left: 90px;
-                    top: 220px;
+                    left: 40%;
+                    transform: translate(-40%, -45%);
+                    top: 45%;
                 }
                 &:hover {
                     // opacity: 0.5;
