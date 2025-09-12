@@ -1,9 +1,11 @@
 import React from 'react';
 import useAuthStore from '../../store/useAuthStore';
+import { hashPassword } from '../../utils/Crypto';
+import axios from 'axios';
 
 const Step2 = ({ setStep, step, user, setUser }) => {
-    const closeJoinModal = useAuthStore((s) => s.closeJoinModal);
-
+    const setJoinModal = useAuthStore((state) => state.closeJoinModal);
+    const apiUrl = import.meta.env.VITE_API_URL;
     const years = Array.from({ length: 100 }, (_, i) => 2011 - i);
     const months = Array.from({ length: 12 }, (_, i) => i + 1);
     const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -40,7 +42,7 @@ const Step2 = ({ setStep, step, user, setUser }) => {
         const { name, value } = e.target;
         setUser((prev) => ({ ...prev, [name]: value }));
     };
-    const handleNext = (e) => {
+    const handleNext = async (e) => {
         e.preventDefault();
         if (!user.name?.trim()) {
             alert('이름을 입력해주세요');
@@ -61,7 +63,25 @@ const Step2 = ({ setStep, step, user, setUser }) => {
             alert('휴대폰 번호 4자리씩 입력');
             return;
         }
-        setStep(step + 1);
+
+        const phoneNumber = user.tel.replace(/-/g, '');
+        const birthDate = `${year}${month.padStart(2, '0')}${day.padStart(2, '0')}`;
+
+        const newUser = {
+            name: user.name,
+            email: user.email,
+            password: hashPassword(user.password),
+            phone: phoneNumber, //0101234567
+            birth: birthDate, //19900605
+        };
+
+        const res = await axios.post(apiUrl + '/user', newUser);
+        console.log(res.data);
+        if (res.data.error === 0) {
+            setStep(step + 1);
+        } else {
+            alert('다시 확인해주세요.');
+        }
     };
     const [telFirst, telMiddle, telLast] = user.tel.split('-');
     return (
@@ -71,7 +91,7 @@ const Step2 = ({ setStep, step, user, setUser }) => {
                     <img src="/auth/joinBg2.png" alt="" />
                 </div>
                 <div className="right">
-                    <i className="close-btn" onClick={closeJoinModal}>
+                    <i className="close-btn" onClick={() => setJoinModal(false)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"

@@ -6,6 +6,10 @@ const useAuthStore = create((set, get) => ({
     nextStep: () => set((state) => ({ step: state.step + 1 })),
     prevStep: () => set((state) => ({ step: Math.max(1, state.step - 1) })),
 
+    isLogin: false,
+    setLogin: (value) => set({ isLogin: value }),
+    setUser: (user) => set({ user }),
+
     loginModal: false,
     joinModal: false,
 
@@ -17,8 +21,8 @@ const useAuthStore = create((set, get) => ({
         set({ joinModal: value });
     },
 
-    closeLoginModal: () => set({ loginModal: false }),
-    closeJoinModal: () => set({ joinModal: false }),
+    // closeLoginModal: () => set({ loginModal: false }),
+    // closeJoinModal: () => set({ joinModal: false }),
 }));
 
 export default useAuthStore;

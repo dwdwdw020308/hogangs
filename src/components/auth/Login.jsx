@@ -1,33 +1,54 @@
-import { useNavigate } from "react-router-dom";
-import useAuthStore from "../../store/useAuthStore";
+import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../../store/useAuthStore';
+import axios from 'axios';
+import { useState } from 'react';
+import { hashPassword } from '../../utils/Crypto';
 
 const Login = () => {
-  const closeLoginModal = useAuthStore((s) => s.closeLoginModal);
-  const setJoinModal = useAuthStore((s) => s.setJoinModal);
+    const setLoginModal = useAuthStore((state) => state.setLoginModal);
+    const setJoinModal = useAuthStore((state) => state.setJoinModal);
+    const setLogin = useAuthStore((state) => state.setLogin);
+    const setUser = useAuthStore((state) => state.setUser);
+    const apiUrl = import.meta.env.VITE_API_URL;
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
-  const socialLogin = (sns) => {
-    switch (sns) {
-      case "google":
-        const GOOGLE_LOGIN_URL = import.meta.env.VITE_GOOGLE_LOGIN_URL;
-        const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-        const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
+    const socialLogin = (sns) => {
+        switch (sns) {
+            case 'google':
+                const GOOGLE_LOGIN_URL = import.meta.env.VITE_GOOGLE_LOGIN_URL;
+                const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+                const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
 
-        const url =
-          `${GOOGLE_LOGIN_URL}?` +
-          `client_id=${GOOGLE_CLIENT_ID}` +
-          `&redirect_uri=${GOOGLE_REDIRECT_URI}` +
-          `&response_type=code` +
-          `&scope=email profile openid`;
+                const url =
+                    `${GOOGLE_LOGIN_URL}?` +
+                    `client_id=${GOOGLE_CLIENT_ID}` +
+                    `&redirect_uri=${GOOGLE_REDIRECT_URI}` +
+                    `&response_type=code` +
+                    `&scope=email profile openid`;
 
-        window.open(url, "_blank", "width=500,height=600");
-        break;
-    }
-  };
-  const openJoinFromLogin = () => {
-    closeLoginModal();
-    setJoinModal(true);
-  };
+                window.open(url, '_blank', 'width=500,height=600');
+                break;
+        }
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const res = await axios.post(apiUrl + '/login', {
+            email,
+            password: hashPassword(password),
+        });
+
+        if (res.data.error === 0) {
+            setLogin(true);
+            setUser(res.data.user);
+            navigate('/');
+            setLoginModal(false);
+        } else {
+            alert('이메일 또는 비밀번호가 일치하지 않습니다.');
+        }
+    };
 
     return (
         <div className="login-overlay">
@@ -36,7 +57,7 @@ const Login = () => {
                     <img src="/auth/loginBg.png" alt="" />
                 </div>
                 <div className="right">
-                    <i className="close-btn" onClick={closeLoginModal}>
+                    <i className="close-btn" onClick={() => setLoginModal(false)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -54,14 +75,33 @@ const Login = () => {
                         <div className="top">
                             <h2>로그인</h2>
                             <form>
-                                <input type="text" name="" id="" placeholder="이메일" autoFocus />
-                                <input type="text" name="" id="" placeholder="비밀번호" />
+                                <input
+                                    type="text"
+                                    value={email}
+                                    name=""
+                                    id=""
+                                    placeholder="이메일"
+                                    onChange={(e) => {
+                                        setEmail(e.target.value);
+                                    }}
+                                    autoFocus
+                                />
+                                <input
+                                    type="password"
+                                    value={password}
+                                    name=""
+                                    id=""
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="비밀번호"
+                                />
                             </form>
                         </div>
                         <div className="bottom">
                             <div className="btnWrap">
-                                <button>로그인</button>
-                                <span className="join-btn" onClick={openJoinFromLogin}>
+                                <button type="submit" onClick={handleLogin}>
+                                    로그인
+                                </button>
+                                <span className="join-btn" onClick={() => setJoinModal(true)}>
                                     회원가입
                                 </span>
                             </div>
