@@ -1,38 +1,37 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CurveHeadLine = () => {
     const tpRef = useRef(null);
+    const textRef = useRef(null);
     const svgRef = useRef(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const ctx = gsap.context(() => {
             const tp = tpRef.current;
 
-            gsap.fromTo(
-                tp,
-                { attr: { startOffset: '-200%' }, opacity: 0, letterSpacing: 2 },
-                {
-                    attr: { startOffset: '28%' },
-                    opacity: 1,
-                    letterSpacing: 0.5,
-                    duration: 1.5,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: svgRef.current,
-                        start: 'top bottom',
-                        end: 'top 20%',
-                        // markers: true,
-                        once: true,
-                    },
-                }
-            );
+            gsap.set(tpRef.current, {
+                attr: { startOffset: '-200%' },
+            });
+            gsap.set(textRef.current, { opacity: 0, letterSpacing: 2 });
 
-            return () => ctx.revert();
+            ScrollTrigger.create({
+                trigger: svgRef.current,
+                start: 'top 80%',
+                // end: 'top 20%',
+                markers: true,
+                onEnter: () => {
+                    gsap.to(tpRef.current, {
+                        attr: { startOffset: '28%' },
+                    });
+                    gsap.to(textRef.current, { opacity: 1, letterSpacing: 0.5 });
+                },
+            });
         }, svgRef);
+        return () => ctx.revert();
     }, []);
 
     return (
@@ -46,7 +45,7 @@ const CurveHeadLine = () => {
         >
             <path id="curve" d="M80,180 C380,20 820,20 1120,180" fill="none" />
 
-            <text fontSize="68" fontWeight="700" fontFamily="Paperlogy">
+            <text ref={textRef} fontSize="68" fontWeight="700" fontFamily="Paperlogy">
                 <textPath ref={tpRef} href="#curve" startOffset="0%">
                     {/* 부분 색상 분리 */}
                     <tspan fill="#060606">호강</tspan>
