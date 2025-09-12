@@ -12,6 +12,7 @@
         display: flex;
         flex-flow: column;
         align-items: center;
+
         .title {
             margin-bottom: 82px;
             span {
@@ -35,6 +36,7 @@
         .calendar {
             width: 100%;
             height: 538px;
+            position: relative;
             .list {
                 width: 100%;
                 height: 100%;
@@ -139,6 +141,34 @@
                         }
                     }
                 }
+            }
+            .prev,
+            .next {
+                width: 50px;
+                height: 50px;
+                border: 1px solid #959595;
+                border-radius: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:hover {
+                    border-color: #b7e2df;
+                    path {
+                        fill: #b7e2df;
+                    }
+                }
+            }
+            .prev {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: -100px;
+            }
+            .next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: -100px;
             }
         }
     }
