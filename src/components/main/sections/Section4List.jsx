@@ -114,7 +114,7 @@ export default function Section4List() {
             const items = gsap.utils.toArray(
                 itemsRef.current.querySelectorAll('.main_Section4item')
             );
-
+            const k = 5000;
             // ✅ 가로 스크롤
             gsap.to(items, {
                 xPercent: -70 * (items.length - 1),
@@ -124,7 +124,7 @@ export default function Section4List() {
                     pin: true,
                     scrub: 1,
                     start: '25% top',
-                    end: () => `+=700`,
+                    end: () => `+=${k}`,
                     // markers: true,
                 },
             });

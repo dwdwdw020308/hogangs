@@ -40,7 +40,8 @@
         background-position: center;
         background-size: auto;
         z-index: 10;
-        height: 10.4167vw;
+        height: 15.4167vw;
+        background-position: center calc(10% - 1vw);
 
         h3 {
             color: var(--Grey-grey-600, #585858);
@@ -51,6 +52,8 @@
             font-weight: 600;
             line-height: normal;
             letter-spacing: 0.26px;
+            position: absolute;
+            top: 20%;
         }
         p {
             color: var(--Black, #060606);
@@ -61,8 +64,7 @@
             font-weight: 700;
             line-height: normal;
             letter-spacing: 0.4px;
-            padding-top: 0.7292vw;
-            padding-bottom: 1.7708vw;
+            position: absolute;
         }
         span {
             color: var(--Grey-grey-600, #585858);
@@ -73,6 +75,8 @@
             font-weight: 500;
             line-height: normal;
             transition: color 0.2s;
+            position: absolute;
+            top: 70%;
         }
 
         &:hover span {
@@ -125,14 +129,13 @@
         position: absolute;
         top: 0;
         left: 50%;
-        width: 60%; /* ✅ 원하는 가로 비율 */
+        width: 60%;
         height: 100%;
-        transform: translateX(-50%); /* 중앙 정렬 */
+        transform: translateX(-50%);
         pointer-events: none;
         will-change: transform, opacity, filter;
         transform-origin: center;
         opacity: 0;
-
         background: radial-gradient(
             40% 40% at 50% 50%,
             rgba(183, 255, 255, 0.55) 0%,
@@ -150,47 +153,80 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.6rem;
+        gap: 2.4rem;
 
         .eyebrow {
             color: var(--Grey-grey-600, #585858);
-            text-align: center;
             font-family: Paperlogy;
             font-size: 90px;
-            font-style: normal;
             font-weight: 800;
-            line-height: normal;
             letter-spacing: -0.9px;
         }
 
-        /* ✅ headline 텍스트 리빌용 */
-        .headline {
-            color: var(--Green-green-800, #4a9f99);
+        /* ===== 제자리 3D 텍스트 플립(최적화) ===== */
+        .swap3d {
+            position: relative;
+            display: inline-block;
             text-align: center;
-            font-family: Paperlogy;
-            font-size: 140px;
-            font-style: normal;
-            font-weight: 800;
-            line-height: normal;
-            letter-spacing: -1.4px;
+            perspective: 1000px; /* 카메라는 부모에 */
+            margin-top: 2vw;
+            margin-bottom: 0.5vw;
 
-            display: inline-block;
-            perspective: 800px; /* 3D 효과용 시야 */
+            /* 레이아웃 고정용(더 긴 문구) — pane과 동일 타이포 */
+            .swap3d__sizer {
+                visibility: hidden;
+                white-space: nowrap;
+                font: italic 800 clamp(24px, 3.8vw, 90px) / 1.15 Paperlogy, sans-serif;
+                letter-spacing: -1px;
+            }
+
+            .swap3d-stage {
+                position: absolute;
+                inset: 0;
+                transform-style: preserve-3d;
+                will-change: transform;
+
+                .pane {
+                    position: absolute;
+                    inset: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    white-space: nowrap;
+
+                    /* 텍스트(네 값 유지) */
+                    color: var(--Green-green-800, #4a9f99);
+                    font-family: Paperlogy;
+                    font-size: 140px;
+                    font-weight: 800;
+                    letter-spacing: -1.4px;
+                    font-style: italic;
+                    line-height: 1.6;
+
+                    transform-origin: bottom center;
+                    backface-visibility: hidden;
+                    -webkit-backface-visibility: hidden;
+                    transform: translateZ(0.001px);
+                    -webkit-font-smoothing: antialiased;
+                    text-rendering: geometricPrecision;
+                }
+
+                /* 초기 각도 (rotateX만 사용) */
+                .pane--out {
+                    transform: rotateX(0deg) translateZ(0.001px);
+                }
+                .pane--in {
+                    transform: rotateX(-90deg) translateZ(0.001px);
+                }
+            }
         }
-
-        .headline .chars {
-            display: inline-block;
-        }
-
-        .headline .char {
-            display: inline-block;
-            transform-origin: top center; /* 앞으로 기울였다 펴지게 */
-            will-change: transform, opacity;
-        }
-
         .endtext {
+            padding-top: 34px;
             color: var(--Grey-grey-700, #454545);
             text-align: center;
+            /* Paperogy-SemiBold/36px */
             font-family: Paperlogy;
             font-size: 36px;
             font-style: normal;
@@ -198,6 +234,7 @@
             line-height: normal;
             letter-spacing: 0.36px;
         }
+        /* ===== // 제자리 3D 텍스트 플립 ===== */
     }
 }
 
