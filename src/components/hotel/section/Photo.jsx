@@ -12,25 +12,25 @@ const Photo = () => {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.set(img1Ref.current, { y: 200, opacity: 0 });
-            gsap.set(img2Ref.current, { y: 200, opacity: 0 });
-            gsap.set(img3Ref.current, { y: 200, opacity: 0 });
-            gsap.set(img4Ref.current, { y: 200, opacity: 0 });
+            const items = [img1Ref.current, img2Ref.current, img3Ref.current, img4Ref.current];
+
+            gsap.set(items, { y: 68, opacity: 0 });
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: scopeRef.current,
-                    duration: 4,
+                    // duration: 5,
                     start: 'top 80%',
                     end: 'bottom top',
                     // markers: true,
                 },
+                defaults: { duration: 0.8, ease: 'power2.out' },
             });
 
-            tl.to(img1Ref.current, { y: 0, opacity: 1 })
-                .to(img2Ref.current, { y: 0, opacity: 1 })
-                .to(img3Ref.current, { y: 0, opacity: 1 })
-                .to(img4Ref.current, { y: 0, opacity: 1 });
+            tl.to(img1Ref.current, { y: 0, opacity: 1, duration: 0.8 })
+                .to(img2Ref.current, { y: 0, opacity: 1, duration: 0.8 })
+                .to(img3Ref.current, { y: 0, opacity: 1, duration: 0.8 })
+                .to(img4Ref.current, { y: 0, opacity: 1, duration: 0.8 });
         }, scopeRef);
 
         return () => ctx.revert();
