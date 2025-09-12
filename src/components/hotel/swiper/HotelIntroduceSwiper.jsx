@@ -81,7 +81,7 @@ const HotelIntroduceSwiper = () => {
             spaceBetween={64} // ✅ gap 대신 Swiper 옵션으로
             centeredSlides={true} // ✅ 가운데 슬라이드가 활성
             loop={true}
-            loopAdditionalSlides={1} // 소수 슬라이드에서 루프 끊김 방지
+            // loopAdditionalSlides={1} // 소수 슬라이드에서 루프 끊김 방지
             autoplay={{ delay: 5000, disableOnInteraction: false }}
             speed={600}
         >
