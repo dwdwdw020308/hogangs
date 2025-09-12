@@ -23,7 +23,7 @@ const Photo = () => {
                     duration: 4,
                     start: 'top 80%',
                     end: 'bottom top',
-                    markers: true,
+                    // markers: true,
                 },
             });
 
@@ -52,7 +52,16 @@ const Photo = () => {
                 <img src="/hotel/photo/3.png" alt="" className="img3" ref={img3Ref} />
                 <img src="/hotel/photo/4.png" alt="" className="img4" ref={img4Ref} />
             </div>
-            <div className="text"></div>
+
+            {/* text marquee */}
+            <div className="text_marquee_area">
+                <div className="marquee_wrapper">
+                    <div className="marquee__inner">
+                        <span>PREMIUM LIFE YOUR DOG</span>
+                        <span>PREMIUM LIFE YOUR DOG</span>
+                    </div>
+                </div>
+            </div>
         </section>
     );
 };

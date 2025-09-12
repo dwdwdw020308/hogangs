@@ -514,7 +514,7 @@
                         p {
                             color: #666;
                             text-align: center;
-                            font-family: Roboto;
+                            font-family: Pretendard;
                             font-size: 14px;
                             font-style: normal;
                             font-weight: 400;
@@ -570,7 +570,7 @@
                         p {
                             color: #666;
                             text-align: center;
-                            font-family: Roboto;
+                            font-family: Pretendard;
                             font-size: 16px;
                             font-style: normal;
                             font-weight: 400;
@@ -650,12 +650,57 @@
             z-index: 2;
         }
     }
-    .text {
+    .text_marquee_area {
         width: 100%;
-        height: 259px;
         position: absolute;
         bottom: 51px;
-        background: url('/hotel/photo/text.png') no-repeat center/contain;
-        z-index: 1;
+        .marquee_wrapper {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            background: white;
+            .marquee__inner {
+                display: inline-flex;
+                animation: marquee 10s linear infinite;
+                span {
+                    -webkit-text-stroke-width: 5px;
+                    -webkit-text-stroke-color: var(--Green-green-500, #b7e2df);
+                    font-family: Paperlogy;
+                    font-size: 220px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
+                    letter-spacing: 8.8px;
+                    text-transform: uppercase;
+                    color: transparent;
+                    -webkit-text-stroke: 1px #b7e2df; /* 기본 라인 텍스트 */
+
+                    /* 내부 색상용 배경 (가운데에서 퍼지도록 radial-gradient 사용) */
+                    background: radial-gradient(circle, #c2f0ed 0%, transparent 60%);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: 0% 0%; /* hover 전에는 완전 작게 */
+                    -webkit-background-clip: text;
+                    background-clip: text;
+
+                    transition: background-size 0.8s ease;
+                }
+                &:hover span {
+                    -webkit-text-stroke: 0px;
+                    background-size: 200% 200%; /* hover 시 크게 확장 */
+                }
+            }
+        }
     }
 } //hotel_photo_section
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}

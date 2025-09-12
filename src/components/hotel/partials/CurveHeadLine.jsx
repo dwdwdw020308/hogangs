@@ -22,7 +22,7 @@ const CurveHeadLine = () => {
                 trigger: svgRef.current,
                 start: 'top 80%',
                 // end: 'top 20%',
-                markers: true,
+                // markers: true,
                 onEnter: () => {
                     gsap.to(tpRef.current, {
                         attr: { startOffset: '28%' },
