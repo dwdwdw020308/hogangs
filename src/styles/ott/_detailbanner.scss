@@ -67,9 +67,9 @@
             margin-left: 50px;
             p {
                 color: var(--White, #fefefe);
-                line-height: 170%;
+                line-height: 160%;
                 font-size: 20px;
-                font-weight: 500;
+                font-weight: 400;
             }
             ul {
                 margin-top: 102px;
@@ -80,15 +80,20 @@
                         background: transparent;
                         width: 140px;
                         height: 40px;
-                        border: 1px solid var(--Green-green-200, #e2f8f7);
+                        border: 1px solid var(--White, #fefefe);
                         border-radius: 40px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        color: var(--Green-green-200, #e2f8f7);
+                        color: var(--White, #fefefe);
                         cursor: pointer;
                         svg {
                             margin-right: 8px;
+                        }
+                    }
+                    &:nth-of-type(2) {
+                        svg {
+                            margin-right: 4px;
                         }
                     }
                 }
@@ -97,10 +102,48 @@
         .right {
             img {
                 position: absolute;
-                right: 160px;
+                right: 140px;
             }
-            p {
-            }
+        }
+    }
+    .video-fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transform-origin: var(--origin);
+        animation: zoomIn 0.5s ease forwards;
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .close {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            font-size: 36px;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 100000;
+        }
+    }
+    @keyframes zoomIn {
+        from {
+            transform: scale(0.3);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
         }
     }
 }

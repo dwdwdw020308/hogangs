@@ -76,6 +76,10 @@ const Best = () => {
                 <strong>인기 영화 TOP 5</strong>
                 <h2>{movies[0].title}</h2>
                 <p>{movies[0].desc}</p>
+                <span>
+                    BEST <br />
+                    MOVIE
+                </span>
             </div>
 
             {/* 오른쪽 이미지 */}

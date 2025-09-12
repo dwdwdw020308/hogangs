@@ -28,22 +28,21 @@ const Photo = () => {
     ];
     return (
         <div className="video-photo">
-            <div className="inner">
-                <Swiper
-                    modules={[Grid, Scrollbar]}
-                    grid={{ rows: 3, fill: 'row' }}
-                    slidesPerView={3}
-                    spaceBetween={20}
-                    // loop={false}
-                    scrollbar={{ hide: false, draggable: true }}
-                >
-                    {photo.map((photo) => (
-                        <SwiperSlide>
-                            <img src={photo.img} alt={photo.title} />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            </div>
+            <Swiper
+                modules={[Grid, Scrollbar]}
+                grid={{ rows: 3, fill: 'row' }}
+                slidesPerView={3}
+                spaceBetween={20}
+                slidesPerGroup={3}
+                // loop={false}
+                scrollbar={{ hide: false, draggable: true }}
+            >
+                {photo.map((photo) => (
+                    <SwiperSlide>
+                        <img src={photo.img} alt={photo.title} />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
         </div>
     );
 };
