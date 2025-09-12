@@ -1,64 +1,65 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Section5 = () => {
     const sectionRef = useRef(null);
-    const img1Ref = useRef(null);
-    const img2Ref = useRef(null);
+    const galleryRef = useRef(null);
+
+    const images = Array.from({ length: 18 }, (_, i) => `/main/instaDog${i + 1}.png`);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
+            const gallery = galleryRef.current;
+            const items = gallery.querySelectorAll('.item');
+
+            // ✅ 초기 상태: grid 자체는 크게 확대
+            gsap.set(gallery, { scale: 3.1, transformOrigin: 'center center' });
+
+            // ✅ 초기 상태: 모든 아이템 숨기고 중앙 2개만 보이기
+            items.forEach((el, i) => {
+                if (i === 8 || i === 9) {
+                    gsap.set(el, { opacity: 1 });
+                } else {
+                    gsap.set(el, { opacity: 0 });
+                }
+            });
+
+            // ✅ 스크롤 시 grid 축소 + 모든 아이템 나타나기
+            gsap.to(gallery, {
+                scale: 1,
+                ease: 'power2.inOut',
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: 'top top',
-                    end: '+=100%',
+                    end: '+=200%',
                     scrub: true,
                     pin: true,
+                    onUpdate: (self) => {
+                        // 스크롤 진행 비율에 따라 opacity도 점점 보이도록
+                        gsap.to(items, {
+                            opacity: 1,
+                            duration: 0.5,
+                            overwrite: 'auto',
+                        });
+                    },
                 },
             });
-
-            // 이미지1: 1800x864 → 890x890 (좌측으로 이동)
-            tl.to(img1Ref.current, {
-                width: 890,
-                height: 890,
-                x: '-455px', // 절반 이동해서 좌측 카드처럼
-                ease: 'power2.out',
-            });
-
-            // 이미지2: 0 → 890x890 (우측 카드로 등장)
-            tl.fromTo(
-                img2Ref.current,
-                { width: 0, height: 0, opacity: 0 },
-                { width: 890, height: 890, opacity: 1, ease: 'power2.out' },
-                '<'
-            );
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <section id="section5" ref={sectionRef} className="about-sec1">
-            <div className="text">
-                <p>Instagram</p>
-                <h2>오늘도 예쁘개 찰칵</h2>
-            </div>
-            <div className="horiz-layout">
-                {/* 처음엔 큰 이미지 */}
-                <div className="card" ref={img1Ref}>
-                    <img src="/main/section5_img1.png" alt="강아지 1" />
-                    <h3>hogangs</h3>
-                </div>
-
-                {/* 두 번째 이미지는 나중에 등장 */}
-                <div className="card" ref={img2Ref}>
-                    <img src="/main/section5_img2.png" alt="강아지 2" />
-                    <h3>@hogangs</h3>
-                </div>
+        <section className="section5" ref={sectionRef}>
+            <div className="gallery" ref={galleryRef}>
+                {images.map((src, i) => (
+                    <div className="item" key={i}>
+                        <img src={src} alt={`instaDog${i + 1}`} />
+                    </div>
+                ))}
             </div>
         </section>
     );
