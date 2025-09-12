@@ -32,11 +32,10 @@ const Content = ({ day }) => {
                     const reserved = reservedSet.has(time);
 
                     return (
-                        // <li className={"disable"}>
-                        <li key={idx}>
+                        <li key={idx} className={reserved ? 'disable' : ''}>
                             <div className="context">
                                 <span className="time">{time}</span>
-                                <span>{reserved ? '예약된 호강이가 있어요' : '예약 가능'}</span>
+                                <span>{reserved ? '예약된 호강이가 있어요' : '호강하러 가기'}</span>
                             </div>
                         </li>
                     );

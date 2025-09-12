@@ -5,10 +5,15 @@ import Join from '../../components/auth/join';
 import useAuthStore from '../../store/useAuthStore';
 import NotLoginH from './NotLogin';
 import LoginMenu from './LoginMenu';
+import useCommonStore from '../../store/useCommonStore';
 
 const Header = () => {
     const loginModal = useAuthStore((state) => state.loginModal);
     const joinModal = useAuthStore((state) => state.joinModal);
+
+    // header menu active추가
+    const activeMenu = useCommonStore((state) => state.activeMenu);
+
     const [hidden, setHidden] = useState(false); // header 숨김 상태
     const timeoutRef = useRef(null);
 
@@ -97,6 +102,7 @@ const Header = () => {
                             onClick={() => {
                                 navigate('/about');
                             }}
+                            className={activeMenu === '/about' ? 'active' : ''}
                         >
                             AboutUs
                         </li>
@@ -104,6 +110,7 @@ const Header = () => {
                             onClick={() => {
                                 navigate('/ott');
                             }}
+                            className={activeMenu === '/ott' ? 'active' : ''}
                         >
                             Video
                         </li>
@@ -111,6 +118,7 @@ const Header = () => {
                             onClick={() => {
                                 navigate('/hotel');
                             }}
+                            className={activeMenu === '/hotel' ? 'active' : ''}
                         >
                             Hotel
                         </li>
