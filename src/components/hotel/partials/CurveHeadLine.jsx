@@ -23,9 +23,11 @@ const CurveHeadLine = () => {
                 start: 'top 80%',
                 // end: 'top 20%',
                 // markers: true,
+
                 onEnter: () => {
                     gsap.to(tpRef.current, {
                         attr: { startOffset: '28%' },
+                        duration: 3,
                     });
                     gsap.to(textRef.current, { opacity: 1, letterSpacing: 0.5 });
                 },
@@ -48,8 +50,8 @@ const CurveHeadLine = () => {
             <text ref={textRef} fontSize="68" fontWeight="700" fontFamily="Paperlogy">
                 <textPath ref={tpRef} href="#curve" startOffset="0%">
                     {/* 부분 색상 분리 */}
-                    <tspan fill="#060606">호강</tspan>
-                    <tspan fill="#4A9F99">할 준비, 됐개?</tspan>
+                    <tspan fill="#4A9F99">호강</tspan>
+                    <tspan fill="#060606 ">할 준비, 됐개?</tspan>
                 </textPath>
             </text>
         </svg>

@@ -8,11 +8,10 @@ const IntroduceService = () => {
                 <div className="title">
                     <CurveHeadLine />
                 </div>
-                <span>집 떠나도 두려움 0% 행복은 100% 호강스에서 오늘도 호강하게!</span>
+                <span>집 떠나도 행복하게, 호강스에서 편안하게</span>
                 <HotelIntroduceSwiper />
             </div>
         </section>
     );
 };
-
 export default IntroduceService;
