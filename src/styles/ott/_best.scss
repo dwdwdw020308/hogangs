@@ -8,6 +8,7 @@
     .left {
         width: 407px;
         padding-right: 50px;
+        // background-image: url('/ott/bg-best.png');
         strong {
             color: #83a959;
             font-size: 20px;
@@ -26,6 +27,16 @@
             color: var(--Grey-grey-700, #454545);
             font-size: 18px;
             white-space: pre-line;
+        }
+        span {
+            font-size: 240px;
+            font-weight: 800;
+            line-height: 249px;
+            color: #7abab6;
+            opacity: 0.05;
+            position: absolute;
+            left: -22px;
+            bottom: -24px;
         }
     }
 
@@ -108,7 +119,7 @@
     }
     .btns {
         position: absolute;
-        top: 400px;
+        top: 364px;
         left: 410px;
         display: flex;
     }

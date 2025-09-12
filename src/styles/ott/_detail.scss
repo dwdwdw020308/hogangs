@@ -6,29 +6,29 @@
         ul {
             position: relative;
             display: flex;
-            // gap: 24px;
+            gap: 30px;
             text-align: center;
             margin-top: 28px;
-            &::after {
-                content: '';
-                width: 1400px;
-                height: 2px;
-                position: absolute;
-                bottom: 0;
-                background: var(--Grey-grey-100, #cecece);
-                left: 0;
-            }
+            border-bottom: 2px solid #cecece;
             li {
                 color: var(--Grey-grey-200, #b6b6b6);
                 font-size: 18px;
                 font-weight: 600;
-                width: 80px;
+                // width: 80px;
                 cursor: pointer;
+                padding-bottom: 10px;
+                position: relative;
                 &.active {
                     color: var(--Green-green-800, #4a9f99);
-                    border-bottom: 2px solid var(--Green-green-800, #4a9f99);
-                    padding-bottom: 10px;
-                    z-index: 2;
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        width: 100%;
+                        height: 2px;
+                        background: #4a9f99;
+                    }
                 }
             }
         }
