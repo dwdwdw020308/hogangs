@@ -1,0 +1,19 @@
+@use './../utils' as *;
+
+.video-photo {
+    margin-top: 60px;
+    .swiper {
+        .swiper-slide {
+            &:nth-last-child(3) {
+                margin-bottom: 72px;
+            }
+        }
+        .swiper-scrollbar {
+            background: #e9e9e9;
+        }
+        .swiper-scrollbar-drag {
+            background: #7e9565;
+        }
+        margin-bottom: 180px;
+    }
+}
