@@ -1,5 +1,8 @@
 import { getWeekDays, ymd } from '../../../utils/Date';
 import Content from './Content';
+import { getWeekDays, ymd } from '../../../utils/Date';
+import HotelReservationSwiper from '../swiper/HotelReservationSwiper';
+import Content from './Content';
 
 const Reservation = () => {
     const baseDate = new Date();
@@ -18,6 +21,17 @@ const Reservation = () => {
                             <Content key={idx} day={day} />
                         ))}
                     </ul>
+                </div>
+            </div>
+        </section>
+    );
+                <div className="calendar">
+                    {/* <ul className="list">
+                        {days.map((day, idx) => (
+                            <Content key={idx} day={day} />
+                        ))}
+                    </ul> */}
+                    <HotelReservationSwiper />
                 </div>
             </div>
         </section>

@@ -81,6 +81,7 @@ const Main = () => {
                 <Section2 />
                 <Section3 />
                 <Section4List />
+                <Section5 />
             </div>
             {landingOn && <BubbleLanding onClose={handleCloseLanding} />}
             <ChannelTalk />
