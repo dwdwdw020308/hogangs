@@ -3,6 +3,7 @@ import useAuthStore from '../../store/useAuthStore';
 import axios from 'axios';
 import { useState } from 'react';
 import { hashPassword } from '../../utils/Crypto';
+import { b64url, randomVerifier } from '../../utils/GoogleLogin';
 
 const Login = () => {
     const setLoginModal = useAuthStore((state) => state.setLoginModal);
@@ -14,19 +15,42 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const socialLogin = (sns) => {
+    const socialLogin = async (sns) => {
         switch (sns) {
             case 'google':
                 const GOOGLE_LOGIN_URL = import.meta.env.VITE_GOOGLE_LOGIN_URL;
                 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
                 const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
 
-                const url =
-                    `${GOOGLE_LOGIN_URL}?` +
-                    `client_id=${GOOGLE_CLIENT_ID}` +
-                    `&redirect_uri=${GOOGLE_REDIRECT_URI}` +
-                    `&response_type=code` +
-                    `&scope=email profile openid`;
+                const code_verifier = randomVerifier(64);
+                const hash = await crypto.subtle.digest(
+                    'SHA-256',
+                    new TextEncoder().encode(code_verifier)
+                );
+                const code_challenge = b64url(hash);
+
+                // 콜백에서 읽도록 저장(사용 후 AuthCallback에서 반드시 제거)
+                localStorage.setItem('pkce_verifier', code_verifier);
+
+                // (선택) CSRF 방지용 state도 저장해두면 더 안전
+                const state = crypto.randomUUID();
+                localStorage.setItem('oauth_state', state);
+
+                // 2) 인가 URL 구성
+                const params = new URLSearchParams({
+                    client_id: GOOGLE_CLIENT_ID,
+                    redirect_uri: GOOGLE_REDIRECT_URI,
+                    response_type: 'code',
+                    scope: 'openid email profile',
+                    code_challenge: code_challenge,
+                    code_challenge_method: 'S256',
+                    state,
+
+                    // access_type: 'offline', // refresh_token이 필요하면 사용
+                    // prompt: 'consent',      // 매번 동의가 필요하면 사용
+                });
+
+                const url = `${GOOGLE_LOGIN_URL}?${params.toString()}`;
 
                 window.open(url, '_blank', 'width=500,height=600');
                 break;

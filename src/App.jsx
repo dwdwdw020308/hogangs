@@ -31,7 +31,7 @@ const App = () => {
                     <Route path="hotel" element={<Hotel />} />
                 </Route>
                 <Route path="*" element={<NotFiles />} />
-                <Route path="auth" element={<Auth />} />
+                <Route path="oauth" element={<Auth />} />
                 <Route path="authcallback" element={<AuthCallback />} />
             </Routes>
         </>

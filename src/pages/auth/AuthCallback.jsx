@@ -1,63 +1,63 @@
+// AuthCallback.jsx
+import React, { useEffect } from 'react';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import useAuthStore from '../../store/useAuthStore';
 
-const AuthCallback = () => {
-    const [status, setStatus] = useState('처리 중...');
-
+export default function AuthCallback() {
+    const { setLogin, setUser, setLoginModal } = useAuthStore();
     const apiUrl = import.meta.env.VITE_API_URL;
+
     useEffect(() => {
         (async () => {
             try {
-                const params = new URLSearchParams(window.location.search);
-                const code = params.get('code');
-                const error = params.get('error');
-
-                if (error) throw new Error(error);
+                const sp = new URLSearchParams(window.location.search);
+                const code = sp.get('code');
+                const err = sp.get('error');
+                if (err) throw new Error(err);
                 if (!code) throw new Error('코드가 없습니다.');
 
-                const res = await axios.post(
-                    `${apiUrl.replace(/\/$/, '')}/sns/google`,
-                    { code },
-                    {
-                        headers: { 'Content-Type': 'application/json' },
-                        withCredentials: false,
+                // PKCE: 인가 전에 저장한 verifier 꺼내기
+                const code_verifier = localStorage.getItem('pkce_verifier') || undefined;
+
+                // 서버로 교환 요청
+                const body = { code, code_verifier };
+
+                const res = await axios.post(`${apiUrl.replace(/\/$/, '')}/sns/google`, body, {
+                    headers: { 'Content-Type': 'application/json' },
+                });
+
+                const { user, isLinked, snsEmail } = res.data;
+                if (isLinked && user) {
+                    // 부모에게 로그인 성공 전파
+                    if (window.opener) {
+                        window.opener.postMessage(
+                            { type: 'LOGIN_SUCCESS', payload: { user } },
+                            window.location.origin
+                        );
                     }
-                );
-                // res.userId 값이 없으면 회원가입로 전환
-
-                const userId = res?.data?.userId ?? res?.data?.data?.userId;
-                const isNewUser = !userId; // '', null, undefined, 0 모두 신규 취급 원치 않으면 조정
-
-                if (isNewUser) {
-                    // 1) 부모창에게만 postMessage
+                } else {
+                    // 회원가입 오픈
                     if (window.opener) {
                         window.opener.postMessage({ type: 'OPEN_JOIN' }, window.location.origin);
-                    } else {
-                        // 2) 혹시 모를 대비(같은 오리진 다탭): BroadcastChannel도 함께 송신
-                        const bc = new BroadcastChannel('auth');
-                        bc.postMessage({ type: 'OPEN_JOIN' });
-                        bc.close();
                     }
-                    // 레이스 방지(부모가 리스너 세팅/렌더 반영할 시간)
-                    setTimeout(() => window.close(), 120);
-                } else {
-                    window.close();
                 }
+
+                // 재요청 방지: URL의 ?code 제거
+                window.history.replaceState({}, document.title, window.location.pathname);
+                // PKCE 정리
+                localStorage.removeItem('pkce_verifier');
+
+                // 창 닫기
+                window.close();
             } catch (e) {
-                console.error(e);
-                // if (window.opener) {
-                //     window.opener.postMessage(
-                //         { type: 'GOOGLE_AUTH_ERROR', error: String(e) },
-                //         window.location.origin
-                //     );
-                // }
-                // setStatus('로그인 실패');
-                // setTimeout(() => window.close(), 1200);
+                console.error('AuthCallback error:', e);
+                sessionStorage.removeItem('pkce_verifier');
+                // 필요하면 부모창 알림/에러 표시 넣기
+                // if (window.opener) window.opener.postMessage({ type: "GOOGLE_AUTH_ERROR" }, window.location.origin);
+                // setTimeout(() => window.close(), 1000);
             }
         })();
     }, []);
-    return <div></div>;
-};
 
-export default AuthCallback;
+    return <div />;
+}

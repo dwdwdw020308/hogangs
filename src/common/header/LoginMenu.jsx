@@ -1,8 +1,8 @@
-import React from 'react';
 import useAuthStore from '../../store/useAuthStore';
 
 const LoginMenu = () => {
     const user = useAuthStore((state) => state.user);
+
     return (
         <div className="login-menu">
             <div className="profile">
