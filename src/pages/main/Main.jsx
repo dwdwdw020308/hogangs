@@ -7,6 +7,7 @@ import Section1 from '../../components/main/sections/Section1';
 import Section2 from '../../components/main/sections/Section2';
 import gsap from 'gsap';
 import Section3 from '../../components/main/sections/Section3';
+import Section5 from '../../components/main/sections/Section5'
 
 import Section4List from '../../components/main/sections/Section4List';
 
