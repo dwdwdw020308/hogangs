@@ -2,14 +2,13 @@ import useAuthStore from '../../store/useAuthStore';
 
 const LoginMenu = () => {
     const user = useAuthStore((state) => state.user);
-
+    const profile = user != null ? user.profile : '';
+    const name = user != null ? user.name : '';
     return (
         <div className="login-menu">
-            <div className="profile">
-                <img src="" alt="" />
-            </div>
+            <div className="profile">{<img src={profile} alt="" />}</div>
             <div className="name">
-                <p>{user.name}님</p>
+                <p>{name}님</p>
             </div>
             <i>
                 <svg
