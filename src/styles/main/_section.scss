@@ -1,447 +1,541 @@
 .section1 {
-    background: #fff;
-    color: #111;
-    // background-image: url('/main/Gradient.png');
+  background: #fff;
+  color: #111;
+  // background-image: url('/main/Gradient.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  .inner {
+    margin-inline: auto;
+    padding: 5vh 10vh;
+    position: relative;
+  }
+
+  .copy {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(900px, 90%);
+    text-align: center;
+    z-index: 10;
+    opacity: 0;
+    z-index: 10; /* 배경 오버레이 위 */
+  }
+
+  .copy-line {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: clamp(18px, 2.4vw, 28px);
+    line-height: 1.7;
+    opacity: 0;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    background-image: url("/main/Gradient.png");
     background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    background-position: center;
+    background-size: auto;
+    z-index: 10;
+    height: 15.4167vw;
+    background-position: center calc(10% - 1vw);
 
-    .inner {
-        margin-inline: auto;
-        padding: 5vh 10vh;
-        position: relative;
+    h3 {
+      color: var(--Grey-grey-600, #585858);
+      text-align: center;
+      font-family: Paperlogy;
+      font-size: 26px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      letter-spacing: 0.26px;
+      position: absolute;
+      top: 20%;
+    }
+    p {
+      color: var(--Black, #060606);
+      text-align: center;
+      font-family: Paperlogy;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      position: absolute;
+    }
+    span {
+      color: var(--Grey-grey-600, #585858);
+      text-align: center;
+      font-family: Pretendard;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      transition: color 0.2s;
+      position: absolute;
+      top: 70%;
     }
 
-    .copy {
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: min(900px, 90%);
-        text-align: center;
-        z-index: 10;
-        opacity: 0;
-        z-index: 10; /* 배경 오버레이 위 */
+    &:hover span {
+      color: #4a9f99;
+    }
+  }
+
+  .photo-list {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .photo {
+    position: relative;
+    z-index: 1;
+    margin: 40vh 0;
+    max-width: 520px;
+    border-radius: 100%;
+    overflow: hidden;
+    background: #f4f4f4;
+    will-change: transform;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
 
-    .copy-line {
-        position: absolute;
-        inset: 0;
-        display: grid;
-        place-items: center;
-        font-weight: 700;
-        font-size: clamp(18px, 2.4vw, 28px);
-        line-height: 1.7;
-        opacity: 0;
-        transition: opacity 0.2s;
-        cursor: pointer;
-        background-image: url('/main/Gradient.png');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: auto;
-        z-index: 10;
-        height: 15.4167vw;
-        background-position: center calc(10% - 1vw);
-
-        h3 {
-            color: var(--Grey-grey-600, #585858);
-            text-align: center;
-            font-family: Paperlogy;
-            font-size: 26px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: normal;
-            letter-spacing: 0.26px;
-            position: absolute;
-            top: 20%;
-        }
-        p {
-            color: var(--Black, #060606);
-            text-align: center;
-            font-family: Paperlogy;
-            font-size: 40px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: normal;
-            letter-spacing: 0.4px;
-            position: absolute;
-        }
-        span {
-            color: var(--Grey-grey-600, #585858);
-            text-align: center;
-            font-family: Pretendard;
-            font-size: 24px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-            transition: color 0.2s;
-            position: absolute;
-            top: 70%;
-        }
-
-        &:hover span {
-            color: #4a9f99;
-        }
+    &.right {
+      justify-self: end;
+      margin-right: 60px;
     }
-
-    .photo-list {
-        display: grid;
-        grid-template-columns: 1fr;
+    &.left {
+      justify-self: start;
+      margin-left: 60px;
     }
-
-    .photo {
-        position: relative;
-        z-index: 1;
-        margin: 40vh 0;
-        max-width: 520px;
-        border-radius: 100%;
-        overflow: hidden;
-        background: #f4f4f4;
-        will-change: transform;
-
-        img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-
-        &.right {
-            justify-self: end;
-            margin-right: 60px;
-        }
-        &.left {
-            justify-self: start;
-            margin-left: 60px;
-        }
-    }
+  }
 }
 
 .reveal-pin-wrap {
-    height: 100vh;
+  height: 100vh;
+  position: relative;
+  background: #ffffff;
+  overflow: hidden;
+
+  .reveal-pin-bg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 60%;
+    height: 100%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    will-change: transform, opacity, filter;
+    transform-origin: center;
+    opacity: 0;
+    background: radial-gradient(
+      40% 40% at 50% 50%,
+      rgba(183, 255, 255, 0.55) 0%,
+      rgba(228, 255, 255, 0.35) 35%,
+      rgba(245, 255, 254, 0.2) 55%,
+      transparent 70%
+    );
+  }
+
+  .reveal-pin-content {
     position: relative;
-    background: #ffffff;
-    overflow: hidden;
+    top: 30%;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
 
-    .reveal-pin-bg {
+    .eyebrow {
+      color: var(--Grey-grey-600, #585858);
+      font-family: Paperlogy;
+      font-size: 90px;
+      font-weight: 800;
+      letter-spacing: -0.9px;
+    }
+
+    /* ===== 제자리 3D 텍스트 플립(최적화) ===== */
+    .swap3d {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      perspective: 1000px; /* 카메라는 부모에 */
+      margin-top: 2vw;
+      margin-bottom: 0.5vw;
+
+      /* 레이아웃 고정용(더 긴 문구) — pane과 동일 타이포 */
+      .swap3d__sizer {
+        visibility: hidden;
+        white-space: nowrap;
+        font: italic 800 clamp(24px, 3.8vw, 90px) / 1.15 Paperlogy, sans-serif;
+        letter-spacing: -1px;
+      }
+
+      .swap3d-stage {
         position: absolute;
-        top: 0;
-        left: 50%;
-        width: 60%;
-        height: 100%;
-        transform: translateX(-50%);
-        pointer-events: none;
-        will-change: transform, opacity, filter;
-        transform-origin: center;
-        opacity: 0;
-        background: radial-gradient(
-            40% 40% at 50% 50%,
-            rgba(183, 255, 255, 0.55) 0%,
-            rgba(228, 255, 255, 0.35) 35%,
-            rgba(245, 255, 254, 0.2) 55%,
-            transparent 70%
-        );
+        inset: 0;
+        transform-style: preserve-3d;
+        will-change: transform;
+
+        .pane {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          white-space: nowrap;
+
+          /* 텍스트(네 값 유지) */
+          color: var(--Green-green-800, #4a9f99);
+          font-family: Paperlogy;
+          font-size: 140px;
+          font-weight: 800;
+          letter-spacing: -1.4px;
+          font-style: italic;
+          line-height: 1.6;
+
+          transform-origin: bottom center;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          transform: translateZ(0.001px);
+          -webkit-font-smoothing: antialiased;
+          text-rendering: geometricPrecision;
+        }
+
+        /* 초기 각도 (rotateX만 사용) */
+        .pane--out {
+          transform: rotateX(0deg) translateZ(0.001px);
+        }
+        .pane--in {
+          transform: rotateX(-90deg) translateZ(0.001px);
+        }
+      }
     }
-
-    .reveal-pin-content {
-        position: relative;
-        top: 30%;
-        z-index: 2;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2.4rem;
-
-        .eyebrow {
-            color: var(--Grey-grey-600, #585858);
-            font-family: Paperlogy;
-            font-size: 90px;
-            font-weight: 800;
-            letter-spacing: -0.9px;
-        }
-
-        /* ===== 제자리 3D 텍스트 플립(최적화) ===== */
-        .swap3d {
-            position: relative;
-            display: inline-block;
-            text-align: center;
-            perspective: 1000px; /* 카메라는 부모에 */
-            margin-top: 2vw;
-            margin-bottom: 0.5vw;
-
-            /* 레이아웃 고정용(더 긴 문구) — pane과 동일 타이포 */
-            .swap3d__sizer {
-                visibility: hidden;
-                white-space: nowrap;
-                font: italic 800 clamp(24px, 3.8vw, 90px) / 1.15 Paperlogy, sans-serif;
-                letter-spacing: -1px;
-            }
-
-            .swap3d-stage {
-                position: absolute;
-                inset: 0;
-                transform-style: preserve-3d;
-                will-change: transform;
-
-                .pane {
-                    position: absolute;
-                    inset: 0;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 100%;
-                    height: 100%;
-                    white-space: nowrap;
-
-                    /* 텍스트(네 값 유지) */
-                    color: var(--Green-green-800, #4a9f99);
-                    font-family: Paperlogy;
-                    font-size: 140px;
-                    font-weight: 800;
-                    letter-spacing: -1.4px;
-                    font-style: italic;
-                    line-height: 1.6;
-
-                    transform-origin: bottom center;
-                    backface-visibility: hidden;
-                    -webkit-backface-visibility: hidden;
-                    transform: translateZ(0.001px);
-                    -webkit-font-smoothing: antialiased;
-                    text-rendering: geometricPrecision;
-                }
-
-                /* 초기 각도 (rotateX만 사용) */
-                .pane--out {
-                    transform: rotateX(0deg) translateZ(0.001px);
-                }
-                .pane--in {
-                    transform: rotateX(-90deg) translateZ(0.001px);
-                }
-            }
-        }
-        .endtext {
-            padding-top: 34px;
-            color: var(--Grey-grey-700, #454545);
-            text-align: center;
-            /* Paperogy-SemiBold/36px */
-            font-family: Paperlogy;
-            font-size: 36px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: normal;
-            letter-spacing: 0.36px;
-        }
-        /* ===== // 제자리 3D 텍스트 플립 ===== */
+    .endtext {
+      padding-top: 34px;
+      color: var(--Grey-grey-700, #454545);
+      text-align: center;
+      /* Paperogy-SemiBold/36px */
+      font-family: Paperlogy;
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      letter-spacing: 0.36px;
     }
+    /* ===== // 제자리 3D 텍스트 플립 ===== */
+  }
 }
 
 #section3 {
-    background-color: #eef9f8;
+  background-color: #eef9f8;
 
-    .inner {
-        padding: 5vw 10vw;
+  .inner {
+    padding: 5vw 10vw;
 
-        .textcontent {
-            text-align: center;
+    .textcontent {
+      text-align: center;
 
-            h2 {
-                color: var(--Green-green-800, #4a9f99);
-                font-family: Paperlogy;
-                font-size: 64px;
-                font-style: normal;
-                font-weight: 700;
-                line-height: normal;
-                letter-spacing: 0.64px;
-                padding-bottom: 1.0417vw;
-            }
+      h2 {
+        color: var(--Green-green-800, #4a9f99);
+        font-family: Paperlogy;
+        font-size: 64px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        padding-bottom: 1.0417vw;
+      }
 
-            p {
-                color: var(--Grey-grey-900, #292929);
-                text-align: center;
-                font-family: Paperlogy;
-                font-size: 36px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: normal;
-                letter-spacing: 0.36px;
-            }
-        }
+      p {
+        color: var(--Grey-grey-900, #292929);
+        text-align: center;
+        font-family: Paperlogy;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.36px;
+      }
     }
-    .video {
-        padding-bottom: 5vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        iframe {
-        }
+  }
+  .video {
+    padding-bottom: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    iframe {
     }
+  }
 }
 
 #main_Section4List {
-    width: 100%;
-    height: 2009px;
-    background-color: #fefefe;
+  width: 100%;
+  height: 2009px;
+  background-color: #fefefe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  .rotating-bg {
+    width: 1612px;
+    height: 1621px;
+    background: url("/main/Hogangs.png") no-repeat center/contain;
+    position: absolute;
+  }
+  .items {
     display: flex;
+  }
+
+  .inner {
+    height: 770px;
+    background-color: transparent;
+    flex-flow: column;
     align-items: center;
-    justify-content: center;
+
+    h2 {
+      color: var(--Grey-grey-600, #585858);
+      text-align: center;
+      /* Paperogy-SemiBold/48px */
+      font-family: Paperlogy;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      padding-bottom: 1.0417vw;
+    }
+    .text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 84px;
+      p {
+        color: var(--Black, #060606);
+        text-align: center;
+        /* Paperogy-Bold/64px */
+        font-family: Paperlogy;
+        font-size: 64px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.64px;
+        margin-right: 0.5208vw;
+      }
+      span {
+        color: var(--Green-green-800, #4a9f99);
+        /* Paperogy-Bold/64px */
+        font-family: Paperlogy;
+        font-size: 64px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.64px;
+      }
+    }
+  }
+
+  .main_Section4item {
+    background-image: url("main/cilp.png");
     position: relative;
-    .rotating-bg {
-        width: 1612px;
-        height: 1621px;
-        background: url('/main/Hogangs.png') no-repeat center/contain;
+    .con1 {
+      box-shadow: 0 0 2px 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08)),
+        0 var(--shadow-y-3, 8px) var(--shadow-blur-3, 16px) 0
+          var(--color-alpha-shadow3, rgba(0, 0, 0, 0.12));
+      position: relative;
+      width: 18.6979vw;
+      height: 25.5208vw;
+      border-radius: 1.0417vw;
+      margin-right: 30px;
+      text-align: center;
+      &:nth-child(odd) {
+        background-image: url("/main/ReviewsContent01.png");
+      }
+      &:nth-child(even) {
+        background-image: url("/main/ReviewsContent02.png");
+      }
+      .cilp {
         position: absolute;
-    }
-    .items {
-        display: flex;
-    }
+        right: 10%;
+        top: -2%;
+      }
 
-    .inner {
-        height: 770px;
-        background-color: transparent;
-        flex-flow: column;
-        align-items: center;
-
-        h2 {
-            color: var(--Grey-grey-600, #585858);
-            text-align: center;
-            /* Paperogy-SemiBold/48px */
-            font-family: Paperlogy;
-            font-size: 48px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: normal;
-            padding-bottom: 1.0417vw;
+      .h3 {
+        padding-top: 2.8125vw;
+        color: var(--Black, #060606);
+        font-family: Paperlogy;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        padding-bottom: 1.0417vw;
+      }
+      img {
+        padding-bottom: 20px;
+      }
+      .star {
+        padding-bottom: 26px;
+        img {
         }
-        .text {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-bottom: 84px;
-            p {
-                color: var(--Black, #060606);
-                text-align: center;
-                /* Paperogy-Bold/64px */
-                font-family: Paperlogy;
-                font-size: 64px;
-                font-style: normal;
-                font-weight: 700;
-                line-height: normal;
-                letter-spacing: 0.64px;
-                margin-right: 0.5208vw;
-            }
-            span {
-                color: var(--Green-green-800, #4a9f99);
-                /* Paperogy-Bold/64px */
-                font-family: Paperlogy;
-                font-size: 64px;
-                font-style: normal;
-                font-weight: 700;
-                line-height: normal;
-                letter-spacing: 0.64px;
-            }
+        span {
+          padding-left: 10px;
+          color: var(--Black, #060606);
+          text-align: center;
+          /* Medium/18px */
+          font-family: Pretendard;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
         }
+      }
+      p {
+        word-break: keep-all;
+        color: var(--Grey-grey-900, #515151);
+        text-align: center;
+        /* Medium/16px */
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 20.8px */
+        padding: 0 23px;
+      }
     }
-
-    .main_Section4item {
-        background-image: url('main/cilp.png');
-        position: relative;
-        .con1 {
-            box-shadow: 0 0 2px 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08)),
-                0 var(--shadow-y-3, 8px) var(--shadow-blur-3, 16px) 0
-                    var(--color-alpha-shadow3, rgba(0, 0, 0, 0.12));
-            position: relative;
-            width: 18.6979vw;
-            height: 25.5208vw;
-            border-radius: 1.0417vw;
-            margin-right: 30px;
-            text-align: center;
-            &:nth-child(odd) {
-                background-image: url('/main/ReviewsContent01.png');
-            }
-            &:nth-child(even) {
-                background-image: url('/main/ReviewsContent02.png');
-            }
-            .cilp {
-                position: absolute;
-                right: 10%;
-                top: -2%;
-            }
-
-            .h3 {
-                padding-top: 2.8125vw;
-                color: var(--Black, #060606);
-                font-family: Paperlogy;
-                font-size: 24px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: normal;
-                padding-bottom: 1.0417vw;
-            }
-            img {
-                padding-bottom: 20px;
-            }
-            .star {
-                padding-bottom: 26px;
-                img {
-                }
-                span {
-                    padding-left: 10px;
-                    color: var(--Black, #060606);
-                    text-align: center;
-                    /* Medium/18px */
-                    font-family: Pretendard;
-                    font-size: 18px;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: normal;
-                }
-            }
-            p {
-                word-break: keep-all;
-                color: var(--Grey-grey-900, #515151);
-                text-align: center;
-                /* Medium/16px */
-                font-family: Pretendard;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 500;
-                line-height: 130%; /* 20.8px */
-                padding: 0 23px;
-            }
-        }
-    }
+  }
 }
 
-.section5 {
+#main_section5 {
+  position: relative;
+  min-height: 400vh;
+  overflow: hidden;
+  background: #fff;
+
+  .title {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
     flex-direction: column;
+    margin: 100px 0;
 
-    .gallery {
-        display: grid;
-        grid-template-columns: repeat(6, 287px);
-        grid-template-rows: repeat(3, 287px);
-        gap: 20px;
-        justify-content: center;
-        align-content: center;
-
-        .item {
-            width: 287px;
-            height: 287px;
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 20px;
-                transform-origin: center center; // ✅ 애니메이션 기준점
-            }
-        }
+    p {
+      color: #585858;
+      text-align: center;
+      font-family: Paperlogy, sans-serif;
+      font-size: 36px;
+      font-weight: 600;
     }
+
+    h2 {
+      color: #060606;
+      text-align: center;
+      font-family: Paperlogy, sans-serif;
+      font-size: 64px;
+      font-weight: 700;
+
+      span {
+        color: #4a9f99;
+      }
+    }
+  }
+
+  .pin-section {
+    height: 100vh;
+    position: relative;
+  }
+
+  .cards-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .insta-dog1 {
+      position: absolute;
+      width: 1800px;
+      height: 864px;
+      border-radius: 30px;
+      object-fit: cover;
+    }
+
+    .insta-dog2 {
+      position: absolute;
+      opacity: 0;
+      border-radius: 30px;
+      object-fit: cover;
+      background: #060606;
+    }
+
+    .card-text {
+      position: absolute;
+      color: var(--White, #fefefe);
+      font-size: 48px;
+      font-weight: 700;
+      font-family: Paperlogy, sans-serif;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .insta-text {
+      position: absolute;
+      color: white;
+      font-size: 48px;
+      font-weight: 600;
+      font-family: Paperlogy, sans-serif;
+      text-align: center;
+      opacity: 0; // ✅ 기본 숨김
+      pointer-events: none;
+
+      p {
+        margin: 0;
+      }
+
+      &.insta-text1 {
+        left: 25%; // 왼쪽 카드 중앙
+        top: 50%;
+        transform: translate(-50%, -50%);
+        .logo {
+          display: block;
+          margin: 0 auto 87px; // ✅ 로고와 텍스트 사이 gap 87px
+          width: 196px;
+          height: 98.828px;
+          opacity: 0.5;
+        }
+      }
+
+      &.insta-text2 {
+        left: 75%; // 오른쪽 카드 중앙
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  .grid-wrap {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+
+    .grid-item {
+      width: 287px;
+      height: 287px;
+      border-radius: 18px;
+      object-fit: cover;
+    }
+  }
 }
