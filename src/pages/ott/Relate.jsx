@@ -40,7 +40,7 @@ const Relate = () => {
             <em>감독/출연</em>
             <ul className="list">
                 {person.map((person) => (
-                    <li>
+                    <li key={person.id}>
                         <img src={person.img} alt={person.name} />
                         <div className="info">
                             <p className="name">{person.name}</p>
