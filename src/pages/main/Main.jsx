@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import BubbleLanding from "../../components/main/BubbleLanding";
 import ChannelTalk from "../../components/main/ChannelTalk";
@@ -10,6 +9,7 @@ import gsap from "gsap";
 import Section3 from "../../components/main/sections/Section3";
 import Section4List from "../../components/main/sections/Section4List";
 import Section5 from "../../components/main/sections/Section5";
+import HogangsCursor from "../../components/util/HogangsCursor";
 
 const Main = () => {
   const [landingOn, setLandingOn] = useState(false); // 기본값 false → 쿠키 체크 후 결정
@@ -93,6 +93,7 @@ const Main = () => {
         className="paw-fixed"
         aria-hidden
       />
+      <HogangsCursor src="/main/circle.svg" size={150} speed={3} />
     </>
   );
 };
