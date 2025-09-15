@@ -120,9 +120,9 @@ const Header = () => {
                         </li>
                         <li
                             onClick={() => {
-                                navigate('/ott');
+                                navigate('/video');
                             }}
-                            className={activeMenu === '/ott' ? 'active' : ''}
+                            className={activeMenu === '/video' ? 'active' : ''}
                         >
                             Video
                         </li>
