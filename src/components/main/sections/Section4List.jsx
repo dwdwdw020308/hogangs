@@ -104,7 +104,7 @@ export default function Section4List() {
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: 'top bottom',
-                    end: 'bottom top',
+                    end: '+=6000',
                     scrub: true,
                     // markers: true,
                 },
