@@ -1,7 +1,6 @@
 .section1 {
   background: #fff;
   color: #111;
-  // background-image: url('/main/Gradient.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -21,7 +20,6 @@
     text-align: center;
     z-index: 10;
     opacity: 0;
-    z-index: 10; /* 배경 오버레이 위 */
   }
 
   .copy-line {
@@ -37,20 +35,17 @@
     cursor: pointer;
     background-image: url("/main/Gradient.png");
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center calc(10% - 1vw);
     background-size: auto;
     z-index: 10;
     height: 15.4167vw;
-    background-position: center calc(10% - 1vw);
 
     h3 {
       color: var(--Grey-grey-600, #585858);
       text-align: center;
       font-family: Paperlogy;
       font-size: 26px;
-      font-style: normal;
       font-weight: 600;
-      line-height: normal;
       letter-spacing: 0.26px;
       position: absolute;
       top: 20%;
@@ -60,9 +55,7 @@
       text-align: center;
       font-family: Paperlogy;
       font-size: 40px;
-      font-style: normal;
       font-weight: 700;
-      line-height: normal;
       letter-spacing: 0.4px;
       position: absolute;
     }
@@ -71,9 +64,7 @@
       text-align: center;
       font-family: Pretendard;
       font-size: 24px;
-      font-style: normal;
       font-weight: 500;
-      line-height: normal;
       transition: color 0.2s;
       position: absolute;
       top: 70%;
@@ -143,6 +134,8 @@
       rgba(245, 255, 254, 0.2) 55%,
       transparent 70%
     );
+    backdrop-filter: blur(0.8px);
+    -webkit-backdrop-filter: blur(0.8px);
   }
 
   .reveal-pin-content {
@@ -163,16 +156,15 @@
       letter-spacing: -0.9px;
     }
 
-    /* ===== 제자리 3D 텍스트 플립(최적화) ===== */
+    /* ===== 제자리 3D 텍스트 플립 ===== */
     .swap3d {
       position: relative;
       display: inline-block;
       text-align: center;
-      perspective: 1000px; /* 카메라는 부모에 */
+      perspective: 1000px;
       margin-top: 2vw;
       margin-bottom: 0.5vw;
 
-      /* 레이아웃 고정용(더 긴 문구) — pane과 동일 타이포 */
       .swap3d__sizer {
         visibility: hidden;
         white-space: nowrap;
@@ -192,11 +184,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 100%;
-          height: 100%;
           white-space: nowrap;
 
-          /* 텍스트(네 값 유지) */
           color: var(--Green-green-800, #4a9f99);
           font-family: Paperlogy;
           font-size: 140px;
@@ -213,7 +202,6 @@
           text-rendering: geometricPrecision;
         }
 
-        /* 초기 각도 (rotateX만 사용) */
         .pane--out {
           transform: rotateX(0deg) translateZ(0.001px);
         }
@@ -222,22 +210,20 @@
         }
       }
     }
+
     .endtext {
       padding-top: 34px;
       color: var(--Grey-grey-700, #454545);
       text-align: center;
-      /* Paperogy-SemiBold/36px */
       font-family: Paperlogy;
       font-size: 36px;
-      font-style: normal;
       font-weight: 600;
-      line-height: normal;
       letter-spacing: 0.36px;
     }
-    /* ===== // 제자리 3D 텍스트 플립 ===== */
   }
 }
 
+/* ========= #section3 정리 (중첩/괄호 수정) ========= */
 #section3 {
   background-color: #eef9f8;
   position: relative;
@@ -245,14 +231,13 @@
   background: #eef9f8;
   overflow: hidden;
 
-  /* 밝기/투명도 한 방에 튜닝하려고 변수 둠 */
-  --sheer-base: #efefef;     /* 기본 쉬어색 */
-  --sheer-mint: #8BBAB7;     /* 민트 음영 */
-  --mint-alpha: 0.12;        /* 민트 알파 강도 (밝기 조절 포인트1) */
-  --pleat-gap: 18px;         /* 주름 간격(밝게 보이려면 살짝 넓게) */
-  --pleat-light: 10px;       /* 밝은 스트라이프 폭 */
-  --curtain-opacity: 0.82;   /* 전체 투명도 (밝기 조절 포인트2) */
-  --edge-shadow: 0.05;       /* 가장자리 그림자 강도 (밝기 조절 포인트3) */
+  --sheer-base: #efefef;
+  --sheer-mint: #8bbab7;
+  --mint-alpha: 0.12;
+  --pleat-gap: 18px;
+  --pleat-light: 10px;
+  --curtain-opacity: 0.82;
+  --edge-shadow: 0.05;
 
   .s3-curtain {
     position: absolute;
@@ -261,50 +246,36 @@
     width: 52vw;
     z-index: 10;
 
-    /* ✨ 훨씬 밝게: 흰기운 우세 + 민트 음영 아주 살짝 */
-    background:
-      /* 주름(플리츠) – 밝은:어두운 = 10px:8px */
-      repeating-linear-gradient(
+    background: repeating-linear-gradient(
         90deg,
-        rgba(239,239,239, var(--curtain-opacity)) 0,
-        rgba(239,239,239, var(--curtain-opacity)) var(--pleat-light),
-        rgba(139,186,183, var(--mint-alpha)) var(--pleat-light),
-        rgba(139,186,183, var(--mint-alpha)) calc(var(--pleat-light) + (var(--pleat-gap) - var(--pleat-light)))
+        rgba(239, 239, 239, var(--curtain-opacity)) 0,
+        rgba(239, 239, 239, var(--curtain-opacity)) var(--pleat-light),
+        rgba(139, 186, 183, var(--mint-alpha)) var(--pleat-light),
+        rgba(139, 186, 183, var(--mint-alpha))
+          calc(var(--pleat-light) + (var(--pleat-gap) - var(--pleat-light)))
       ),
-      /* 상하 밝기 보정(밝게!) */
-      linear-gradient(180deg,
-        rgba(255,255,255, 0.92) 0%,
-        rgba(239,239,239, 0.86) 60%,
-        rgba(255,255,255, 0.92) 100%
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.92) 0%,
+        rgba(239, 239, 239, 0.86) 60%,
+        rgba(255, 255, 255, 0.92) 100%
       );
 
-    /* ❌ 어둡게 만드는 multiply 제거 */
-    /* background-blend-mode: multiply; */
-
-    /* 뒤 배경 은은히 비치게 (밝아보임) */
     backdrop-filter: blur(0.8px);
     -webkit-backdrop-filter: blur(0.8px);
-
-    /* 그림자도 아주 약하게 */
-    box-shadow:
-      inset -10px 0 18px rgba(0,0,0,var(--edge-shadow)),
-      0 6px 12px rgba(0,0,0,0.04);
-
-    /* 전체 톤을 더 밝게 만들고 싶으면 opacity로 한번 더 띄우기 */
+    box-shadow: inset -10px 0 18px rgba(0, 0, 0, var(--edge-shadow)),
+      0 6px 12px rgba(0, 0, 0, 0.04);
     opacity: 0.95;
   }
-
-  .s3-curtain--left  { left: 0; }
+  .s3-curtain--left {
+    left: 0;
+  }
   .s3-curtain--right {
     right: 0;
-    /* 오른쪽 가장자리 방향만 반대로 */
-    box-shadow:
-      inset 10px 0 18px rgba(0,0,0,var(--edge-shadow)),
-      0 6px 12px rgba(0,0,0,0.04);
+    box-shadow: inset 10px 0 18px rgba(0, 0, 0, var(--edge-shadow)),
+      0 6px 12px rgba(0, 0, 0, 0.04);
   }
 
-  .inner {
-    padding: 5vw 10vw;
   .inner {
     position: relative;
     z-index: 2;
@@ -318,45 +289,13 @@
         color: var(--Green-green-800, #4a9f99);
         font-family: Paperlogy;
         font-size: 64px;
-        font-style: normal;
         font-weight: 700;
-        line-height: normal;
         letter-spacing: 0.64px;
         padding-bottom: 1.0417vw;
       }
-
       p {
         color: var(--Grey-grey-900, #292929);
         text-align: center;
-        font-family: Paperlogy;
-        font-size: 36px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        letter-spacing: 0.36px;
-      }
-    }
-  }
-  .video {
-    padding-bottom: 5vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    iframe {
-    }
-  }
-}
-    .textcontent {
-      h2 {
-        color: var(--Green-green-800, #4a9f99);
-        font-family: Paperlogy;
-        font-size: 64px;
-        font-weight: 700;
-        letter-spacing: 0.64px;
-        padding-bottom: 1.0417vw;
-      }
-      p {
-        color: var(--Grey-grey-900, #292929);
         font-family: Paperlogy;
         font-size: 36px;
         font-weight: 600;
@@ -376,7 +315,7 @@
       border-radius: 24px;
       overflow: hidden;
       background: #000;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 
       iframe {
         display: block;
@@ -387,25 +326,18 @@
     }
   }
 
-  /* 모바일은 더 밝게 보이도록 주름 촘촘 + 투명도 ↑ */
   @media (max-width: 1024px) {
     --pleat-gap: 14px;
     --pleat-light: 8px;
     --curtain-opacity: 0.88;
-    --mint-alpha: 0.10;
-    .s3-curtain { width: 58vw; }
+    --mint-alpha: 0.1;
+
+    .s3-curtain {
+      width: 58vw;
+    }
   }
 }
-
-
-
-
-
-
-
-
-
-
+/* ========= // #section3 ========= */
 
 #main_Section4List {
   width: 100%;
@@ -415,12 +347,14 @@
   align-items: center;
   justify-content: center;
   position: relative;
+
   .rotating-bg {
     width: 1612px;
     height: 1621px;
     background: url("/main/Hogangs.png") no-repeat center/contain;
     position: absolute;
   }
+
   .items {
     display: flex;
   }
@@ -434,12 +368,9 @@
     h2 {
       color: var(--Grey-grey-600, #585858);
       text-align: center;
-      /* Paperogy-SemiBold/48px */
       font-family: Paperlogy;
       font-size: 48px;
-      font-style: normal;
       font-weight: 600;
-      line-height: normal;
       padding-bottom: 1.0417vw;
     }
     .text {
@@ -447,26 +378,21 @@
       justify-content: center;
       align-items: center;
       padding-bottom: 84px;
+
       p {
         color: var(--Black, #060606);
         text-align: center;
-        /* Paperogy-Bold/64px */
         font-family: Paperlogy;
         font-size: 64px;
-        font-style: normal;
         font-weight: 700;
-        line-height: normal;
         letter-spacing: 0.64px;
         margin-right: 0.5208vw;
       }
       span {
         color: var(--Green-green-800, #4a9f99);
-        /* Paperogy-Bold/64px */
         font-family: Paperlogy;
         font-size: 64px;
-        font-style: normal;
         font-weight: 700;
-        line-height: normal;
         letter-spacing: 0.64px;
       }
     }
@@ -475,22 +401,24 @@
   .main_Section4item {
     background-image: url("main/cilp.png");
     position: relative;
+
     .con1 {
-      box-shadow: 0 0 2px 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08)),
-        0 var(--shadow-y-3, 8px) var(--shadow-blur-3, 16px) 0
-          var(--color-alpha-shadow3, rgba(0, 0, 0, 0.12));
+      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.08),
+        0 8px 16px 0 rgba(0, 0, 0, 0.12);
       position: relative;
       width: 18.6979vw;
       height: 25.5208vw;
       border-radius: 1.0417vw;
       margin-right: 30px;
       text-align: center;
+
       &:nth-child(odd) {
         background-image: url("/main/ReviewsContent01.png");
       }
       &:nth-child(even) {
         background-image: url("/main/ReviewsContent02.png");
       }
+
       .cilp {
         position: absolute;
         right: 10%;
@@ -502,40 +430,33 @@
         color: var(--Black, #060606);
         font-family: Paperlogy;
         font-size: 24px;
-        font-style: normal;
         font-weight: 600;
-        line-height: normal;
         padding-bottom: 1.0417vw;
       }
       img {
         padding-bottom: 20px;
       }
+
       .star {
         padding-bottom: 26px;
-        img {
-        }
         span {
           padding-left: 10px;
           color: var(--Black, #060606);
           text-align: center;
-          /* Medium/18px */
           font-family: Pretendard;
           font-size: 18px;
-          font-style: normal;
           font-weight: 500;
-          line-height: normal;
         }
       }
+
       p {
         word-break: keep-all;
         color: var(--Grey-grey-900, #515151);
         text-align: center;
-        /* Medium/16px */
         font-family: Pretendard;
         font-size: 16px;
-        font-style: normal;
         font-weight: 500;
-        line-height: 130%; /* 20.8px */
+        line-height: 130%;
         padding: 0 23px;
       }
     }
@@ -607,7 +528,7 @@
 
     .card-text {
       position: absolute;
-      color: var(--White, #fefefe);
+      color: #fefefe;
       font-size: 48px;
       font-weight: 700;
       font-family: Paperlogy, sans-serif;
@@ -617,12 +538,12 @@
 
     .insta-text {
       position: absolute;
-      color: white;
+      color: #fff;
       font-size: 48px;
       font-weight: 600;
       font-family: Paperlogy, sans-serif;
       text-align: center;
-      opacity: 0; // ✅ 기본 숨김
+      opacity: 0;
       pointer-events: none;
 
       p {
@@ -630,20 +551,19 @@
       }
 
       &.insta-text1 {
-        left: 25%; // 왼쪽 카드 중앙
+        left: 25%;
         top: 50%;
         transform: translate(-50%, -50%);
         .logo {
           display: block;
-          margin: 0 auto 87px; // ✅ 로고와 텍스트 사이 gap 87px
+          margin: 0 auto 87px;
           width: 196px;
           height: 98.828px;
           opacity: 0.5;
         }
       }
-
       &.insta-text2 {
-        left: 75%; // 오른쪽 카드 중앙
+        left: 75%;
         top: 50%;
         transform: translate(-50%, -50%);
       }
