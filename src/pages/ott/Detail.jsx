@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DetailBanner from './DetailBanner';
 import Relate from './Relate';
 import Photo from './Photo';
 import Review from './Review';
 
 const Detail = () => {
-    const [activeTab, setActiveTab] = useState('relate');
+    const [activeTab, setActiveTab] = useState(() => {
+        return sessionStorage.getItem('activeTab') || 'relate';
+    });
+    useEffect(() => {
+        sessionStorage.setItem('activeTab', activeTab);
+    }, [activeTab]);
     return (
         <div className="detail-page">
             {/* 상단비주얼배너 */}
