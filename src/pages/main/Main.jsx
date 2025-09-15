@@ -9,6 +9,7 @@ import gsap from 'gsap';
 import Section3 from '../../components/main/sections/Section3';
 
 import Section4List from '../../components/main/sections/Section4List';
+import Section5 from '../../components/main/sections/Section5';
 
 const Main = () => {
     const [landingOn, setLandingOn] = useState(false); // 기본값 false → 쿠키 체크 후 결정

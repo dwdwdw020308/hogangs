@@ -1,9 +1,12 @@
 @use './../utils' as *;
 
 .detail-relate {
-    padding: 38px 260px 160px 260px;
+    padding: 60px 260px 160px 260px;
     overflow: hidden;
     position: relative;
+    strong {
+        line-height: 1;
+    }
     strong,
     em {
         font-size: 20px;
