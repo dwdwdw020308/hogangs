@@ -1,0 +1,121 @@
+#grooming_photo_section {
+  width: 100%;
+  height: 1317px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  position: relative;
+  .inner {
+    height: 997px;
+    position: relative;
+    .right {
+      width: 587px;
+      display: flex;
+      flex-flow: column;
+      gap: 62px;
+      align-items: end;
+      position: absolute;
+      right: 0;
+      top: 0;
+      .logo {
+        width: 172px;
+        height: 87px;
+        background: url("/grooming/Logo-confirmed.png") no-repeat center/contain;
+      }
+      span {
+        white-space: normal;
+        text-align: right;
+        color: #353535;
+        font-family: Pretendard;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 130%; /* 28.6px */
+      }
+    }
+
+    .img1 {
+      width: 708px;
+      height: 432px;
+      position: absolute;
+      left: 0;
+      top: 20px;
+    }
+    .img2 {
+      width: 549px;
+      height: 358px;
+      position: absolute;
+      right: -100px;
+      bottom: 172px;
+    }
+    .img3 {
+      width: 421px;
+      height: 286px;
+      position: absolute;
+      left: -80px;
+      bottom: 231px;
+    }
+    .img4 {
+      width: 268px;
+      height: 185px;
+      position: absolute;
+      right: 382px;
+      bottom: 69px;
+      z-index: 2;
+    }
+  }
+  .text_marquee_area {
+    width: 100%;
+    position: absolute;
+    bottom: 51px;
+    .marquee_wrapper {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+      background: white;
+      .marquee__inner {
+        display: inline-flex;
+        animation: marquee 30s linear infinite;
+        span {
+          -webkit-text-stroke-width: 5px;
+          -webkit-text-stroke-color: var(--Green-green-500, #b7e2df);
+          font-family: Paperlogy;
+          font-size: 220px;
+          font-style: normal;
+          font-weight: 900;
+          line-height: normal;
+          letter-spacing: 8.8px;
+          text-transform: uppercase;
+          color: transparent;
+          -webkit-text-stroke: 1px #b7e2df; /* 기본 라인 텍스트 */
+
+          /* 내부 색상용 배경 (가운데에서 퍼지도록 radial-gradient 사용) */
+          background: radial-gradient(circle, #c2f0ed 0%, transparent 60%);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 0% 0%; /* hover 전에는 완전 작게 */
+          -webkit-background-clip: text;
+          background-clip: text;
+
+          transition: background-size 0.8s ease;
+        }
+        &:hover span {
+          -webkit-text-stroke: 0px;
+          background-size: 200% 200%; /* hover 시 크게 확장 */
+        }
+      }
+    }
+  }
+} //grooming_photo_section
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

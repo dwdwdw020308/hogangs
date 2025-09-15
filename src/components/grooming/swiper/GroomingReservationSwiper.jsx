@@ -1,11 +1,9 @@
 import { useRef } from "react";
-
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import Content from "../section/Content";
-import { getWeekDays, getWeekStartsOfMonth } from "../../../utils/Date";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getWeekDays, getWeekStartsOfMonth } from "../../../utils/Date";
+import CurrentReservation from "./content/CurrentReservation";
 
-const HotelReservationSwiper = ({
+const GroomingReservationSwiper = ({
   monthDate = new Date(),
   weekStartsOn = 0,
 }) => {
@@ -15,7 +13,9 @@ const HotelReservationSwiper = ({
   return (
     <>
       <Swiper
-        className="hotel_reservation_swiper"
+        className="grooming_reservation_swiper"
+        // modules={[Navigation]}
+        // navigation
         slidesPerView={1}
         loop={false}
         onSwiper={(sw) => (swiperRef.current = sw)}
@@ -26,7 +26,7 @@ const HotelReservationSwiper = ({
             <SwiperSlide key={weekStart.toISOString()}>
               <ul className="list">
                 {days.map((d) => (
-                  <Content key={d.toISOString()} day={d} />
+                  <CurrentReservation key={d.toISOString()} day={d} />
                 ))}
               </ul>
             </SwiperSlide>
@@ -65,4 +65,4 @@ const HotelReservationSwiper = ({
   );
 };
 
-export default HotelReservationSwiper;
+export default GroomingReservationSwiper;

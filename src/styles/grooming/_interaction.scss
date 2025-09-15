@@ -1,0 +1,185 @@
+#grooming_interaction {
+  width: 100%;
+  height: 1100px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: #b7e2df;
+  .left {
+    width: 462px;
+    height: 780px;
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    left: 260px;
+    gap: 114px;
+    .top {
+      width: 100%;
+      height: 371px;
+      display: flex;
+      flex-flow: column;
+      gap: 50px;
+      .title {
+        width: 100%;
+        height: 132px;
+        display: flex;
+        flex-flow: column;
+        strong {
+          display: block;
+          color: #fefefe;
+          font-family: Paperlogy;
+          font-size: 48px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 66px; /* 137.5% */
+          letter-spacing: 0.48px;
+        }
+        span {
+          display: inline;
+          color: #fefefe;
+          font-family: Paperlogy;
+          font-size: 48px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 66px;
+          letter-spacing: 0.48px;
+          &.color {
+            color: #4a9f99;
+          }
+        }
+      }
+      .context {
+        width: 100%;
+        height: auto;
+        p {
+          color: #fefefe;
+          font-family: Pretendard;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 27px; /* 135% */
+        }
+      }
+    }
+    .bottom {
+      width: 343px;
+      height: 295px;
+      .grooming_interaction_swiper {
+        width: 100%;
+        height: 100%;
+        .swiper-slide {
+          width: 100%;
+          height: 87px;
+          border-radius: 20px;
+          background: #fefefe;
+          opacity: 0.5;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .inner {
+            width: 294px;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .profile {
+              width: 50px;
+              height: 50px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: #fff;
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: 100%;
+              }
+            }
+            .reply {
+              width: 223px;
+              display: -webkit-box;
+              -webkit-line-clamp: 2; /* 2줄까지만 보여주기 */
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              line-height: 22.308px;
+              color: #000;
+              font-family: Pretendard;
+              font-size: 15.615px;
+              font-weight: 400;
+            }
+          }
+        }
+        .swiper-slide-active {
+          opacity: 1;
+        }
+        .swiper-slide-next {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  .rolling_area {
+    width: 1019px;
+    height: 100%; // 섹션 높이만큼 마스크
+    display: grid;
+    grid-template-columns: repeat(3, 330px);
+    gap: 16px;
+    position: absolute;
+    right: 60px;
+  }
+
+  .col {
+    position: relative;
+    overflow: hidden; // 마스크
+    width: 330px;
+
+    .track {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: roll-up 53s linear infinite; // 기본: 위로
+      will-change: transform;
+    }
+
+    &.down .track {
+      // 가운데만 아래로
+      animation-name: roll-down;
+      animation-duration: 64s;
+    }
+
+    img {
+      width: 330px;
+      height: 470px;
+      display: block;
+      object-fit: cover;
+    }
+  }
+
+  // 시작 타이밍 살짝 다르게 (자연스러움)
+  .col:nth-child(1) .track {
+    animation-delay: -2s;
+  }
+  .col:nth-child(2) .track {
+    animation-delay: -5s;
+  }
+  .col:nth-child(3) .track {
+    animation-delay: -1s;
+  }
+} //grooming_interaction
+
+@keyframes roll-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+@keyframes roll-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
