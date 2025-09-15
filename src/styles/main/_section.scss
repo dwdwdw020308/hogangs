@@ -240,9 +240,76 @@
 
 #section3 {
   background-color: #eef9f8;
+  position: relative;
+  min-height: 100vh;
+  background: #eef9f8;
+  overflow: hidden;
+
+  /* 밝기/투명도 한 방에 튜닝하려고 변수 둠 */
+  --sheer-base: #efefef;     /* 기본 쉬어색 */
+  --sheer-mint: #8BBAB7;     /* 민트 음영 */
+  --mint-alpha: 0.12;        /* 민트 알파 강도 (밝기 조절 포인트1) */
+  --pleat-gap: 18px;         /* 주름 간격(밝게 보이려면 살짝 넓게) */
+  --pleat-light: 10px;       /* 밝은 스트라이프 폭 */
+  --curtain-opacity: 0.82;   /* 전체 투명도 (밝기 조절 포인트2) */
+  --edge-shadow: 0.05;       /* 가장자리 그림자 강도 (밝기 조절 포인트3) */
+
+  .s3-curtain {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 52vw;
+    z-index: 10;
+
+    /* ✨ 훨씬 밝게: 흰기운 우세 + 민트 음영 아주 살짝 */
+    background:
+      /* 주름(플리츠) – 밝은:어두운 = 10px:8px */
+      repeating-linear-gradient(
+        90deg,
+        rgba(239,239,239, var(--curtain-opacity)) 0,
+        rgba(239,239,239, var(--curtain-opacity)) var(--pleat-light),
+        rgba(139,186,183, var(--mint-alpha)) var(--pleat-light),
+        rgba(139,186,183, var(--mint-alpha)) calc(var(--pleat-light) + (var(--pleat-gap) - var(--pleat-light)))
+      ),
+      /* 상하 밝기 보정(밝게!) */
+      linear-gradient(180deg,
+        rgba(255,255,255, 0.92) 0%,
+        rgba(239,239,239, 0.86) 60%,
+        rgba(255,255,255, 0.92) 100%
+      );
+
+    /* ❌ 어둡게 만드는 multiply 제거 */
+    /* background-blend-mode: multiply; */
+
+    /* 뒤 배경 은은히 비치게 (밝아보임) */
+    backdrop-filter: blur(0.8px);
+    -webkit-backdrop-filter: blur(0.8px);
+
+    /* 그림자도 아주 약하게 */
+    box-shadow:
+      inset -10px 0 18px rgba(0,0,0,var(--edge-shadow)),
+      0 6px 12px rgba(0,0,0,0.04);
+
+    /* 전체 톤을 더 밝게 만들고 싶으면 opacity로 한번 더 띄우기 */
+    opacity: 0.95;
+  }
+
+  .s3-curtain--left  { left: 0; }
+  .s3-curtain--right {
+    right: 0;
+    /* 오른쪽 가장자리 방향만 반대로 */
+    box-shadow:
+      inset 10px 0 18px rgba(0,0,0,var(--edge-shadow)),
+      0 6px 12px rgba(0,0,0,0.04);
+  }
 
   .inner {
     padding: 5vw 10vw;
+  .inner {
+    position: relative;
+    z-index: 2;
+    padding: 5vw 10vw;
+    text-align: center;
 
     .textcontent {
       text-align: center;
@@ -279,6 +346,66 @@
     }
   }
 }
+    .textcontent {
+      h2 {
+        color: var(--Green-green-800, #4a9f99);
+        font-family: Paperlogy;
+        font-size: 64px;
+        font-weight: 700;
+        letter-spacing: 0.64px;
+        padding-bottom: 1.0417vw;
+      }
+      p {
+        color: var(--Grey-grey-900, #292929);
+        font-family: Paperlogy;
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: 0.36px;
+      }
+    }
+  }
+
+  .video {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 5vw;
+    display: flex;
+    justify-content: center;
+
+    .video-frame {
+      border-radius: 24px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+
+      iframe {
+        display: block;
+        max-width: min(90vw, 1800px);
+        width: 100%;
+        height: clamp(220px, 46vw, 817px);
+      }
+    }
+  }
+
+  /* 모바일은 더 밝게 보이도록 주름 촘촘 + 투명도 ↑ */
+  @media (max-width: 1024px) {
+    --pleat-gap: 14px;
+    --pleat-light: 8px;
+    --curtain-opacity: 0.88;
+    --mint-alpha: 0.10;
+    .s3-curtain { width: 58vw; }
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 #main_Section4List {
   width: 100%;

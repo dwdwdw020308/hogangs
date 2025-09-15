@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../store/useAuthStore';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { hashPassword } from '../../utils/Crypto';
 import { b64url, randomVerifier } from '../../utils/GoogleLogin';
+import { KAKAO_REDIRECT_URI, GOOGLE_REDIRECT_URI } from '../../config';
 
 const Login = () => {
     const setLoginModal = useAuthStore((state) => state.setLoginModal);
@@ -14,13 +15,15 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const KAKAO_JAVASCRIPT_KEY = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
 
     const socialLogin = async (sns) => {
+        let url = '';
         switch (sns) {
             case 'google':
                 const GOOGLE_LOGIN_URL = import.meta.env.VITE_GOOGLE_LOGIN_URL;
                 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-                const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
+                const REDIRECT_URI = GOOGLE_REDIRECT_URI;
 
                 const code_verifier = randomVerifier(64);
                 const hash = await crypto.subtle.digest(
@@ -39,7 +42,7 @@ const Login = () => {
                 // 2) 인가 URL 구성
                 const params = new URLSearchParams({
                     client_id: GOOGLE_CLIENT_ID,
-                    redirect_uri: GOOGLE_REDIRECT_URI,
+                    redirect_uri: REDIRECT_URI,
                     response_type: 'code',
                     scope: 'openid email profile',
                     code_challenge: code_challenge,
@@ -50,8 +53,13 @@ const Login = () => {
                     // prompt: 'consent',      // 매번 동의가 필요하면 사용
                 });
 
-                const url = `${GOOGLE_LOGIN_URL}?${params.toString()}`;
+                url = `${GOOGLE_LOGIN_URL}?${params.toString()}`;
 
+                window.open(url, '_blank', 'width=500,height=600');
+                break;
+            case 'kakao':
+                const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
+                url = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
                 window.open(url, '_blank', 'width=500,height=600');
                 break;
         }
@@ -73,7 +81,18 @@ const Login = () => {
             alert('이메일 또는 비밀번호가 일치하지 않습니다.');
         }
     };
-
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://developers.kakao.com/sdk/js/kakao.min.js';
+        script.async = true;
+        script.onload = () => {
+            if (window.Kakao && !window.Kakao.isInitialized()) {
+                window.Kakao.init(KAKAO_JAVASCRIPT_KEY);
+                console.log('Kakao SDK initialized');
+            }
+        };
+        document.head.appendChild(script);
+    }, []);
     return (
         <div className="login-overlay">
             <div className="login-modal">
@@ -140,7 +159,13 @@ const Login = () => {
                                         alt=""
                                     />
 
-                                    <img src="/auth/kakao.png" alt="" />
+                                    <img
+                                        onClick={() => {
+                                            socialLogin('kakao');
+                                        }}
+                                        src="/auth/kakao.png"
+                                        alt=""
+                                    />
                                     <img src="/auth/naver.png" alt="" />
                                 </div>
                             </div>

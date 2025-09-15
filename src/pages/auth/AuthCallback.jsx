@@ -2,10 +2,11 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import useAuthStore from '../../store/useAuthStore';
+import { API_URL } from '../../config';
 
 export default function AuthCallback() {
     const { setLogin, setUser, setLoginModal } = useAuthStore();
-    const apiUrl = import.meta.env.VITE_API_URL;
+    const apiUrl = API_URL;
 
     useEffect(() => {
         (async () => {
@@ -21,12 +22,15 @@ export default function AuthCallback() {
 
                 // 서버로 교환 요청
                 const body = { code, code_verifier };
+                const url = `${apiUrl.replace(/\/$/, '')}/sns/google`;
 
-                const res = await axios.post(`${apiUrl.replace(/\/$/, '')}/sns/google`, body, {
+                const res = await axios.post(url, body, {
                     headers: { 'Content-Type': 'application/json' },
                 });
 
-                const { user, isLinked, snsEmail } = res.data;
+                let { user, isLinked, snsEmail, picture } = res.data;
+
+                user = { ...user, profileImage: picture };
                 if (isLinked && user) {
                     // 부모에게 로그인 성공 전파
                     if (window.opener) {
