@@ -1,61 +1,215 @@
 @use './../utils/' as *;
 
 #mycontent1 {
-    height: 100vh;
-    position: relative;
+    min-height: 100vh;
     background: #ffffff;
-    .topbar {
-        background-color: #002041;
-        height: 50vh;
-        .topheader {
-            width: 100%;
-            padding: 5vw 10vw;
-            top: 20%;
-            position: absolute;
+    margin-top: 134px;
+    padding-bottom: 190px;
+    .inner {
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+        .title {
             display: flex;
-            justify-content: end;
-            align-items: center;
-            gap: 1.3021vw;
-            img {
-                border-radius: 100%;
-            }
-            p {
-                font-size: 24px;
+            align-items: flex-end;
+            gap: 20px;
+            align-self: stretch;
+            h2 {
+                color: #000;
+                font-family: Paperlogy;
+                font-size: 30px;
                 font-style: normal;
                 font-weight: 600;
                 line-height: normal;
-                letter-spacing: 0.24px;
-                color: var(--Black, #060606);
+            }
+            span {
+                cursor: pointer;
+                color: var(--Grey-grey-400, #818181);
+                font-family: Pretendard;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 130%; /* 20.8px */
+            }
+        }
+        .dogInfo {
+            display: flex;
+            flex-direction: column;
+            gap: 34px;
+            .infoBox {
+                display: flex;
+                flex-direction: column;
+                width: 463px;
+                height: 454px;
+                padding: 77px 84px 76.737px 83px;
+                justify-content: center;
+                align-items: center;
+                border-radius: 30px;
+                background: var(--Grey-grey-10, #f8f8f8);
+                gap: 40px;
+                .text {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 14px;
+                    strong {
+                        color: var(--Black, #060606);
+                        text-align: center;
+                        font-family: Paperlogy;
+                        font-size: 22px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        letter-spacing: 0.22px;
+                    }
+                    p {
+                        color: var(--Grey-grey-800, #353535);
+                        text-align: center;
+                        font-family: Pretendard;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 130%; /* 20.8px */
+                    }
+                }
+                .btn {
+                    button {
+                        border-radius: 56px;
+                        background: var(--Green-green-750, #7abab6);
+                        width: 202px;
+                        height: 52px;
+                        border: none;
+                        color: var(--White, #fff);
+                        font-family: Paperlogy;
+                        font-size: 18px;
+                        font-weight: 600;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .ownerInfo {
+            display: flex;
+            flex-direction: column;
+            gap: 34px;
+            dl {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 18px;
+                align-self: stretch;
+                .row {
+                    display: flex;
+                    gap: 6px;
+                    dt {
+                        width: 65px;
+                        color: var(--Grey-grey-600, #585858);
+                        font-family: Pretendard;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 130%; /* 20.8px */
+                    }
+                    dd {
+                        width: 327px;
+                        color: var(--Grey-grey-900, #292929);
+                        font-family: Pretendard;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 130%; /* 23.4px */
+                    }
+                }
+            }
+        }
+        .coupon {
+            display: flex;
+            flex-direction: column;
+            gap: 34px;
+            .tab {
+                width: 100%;
+                height: 54px;
+                display: flex;
+                gap: 37px;
+                border-bottom: 1px solid #cecece;
+                li {
+                    cursor: pointer;
+                    color: var(--Grey-grey-300, #959595);
+                    font-family: Paperlogy;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    letter-spacing: 0.24px;
+                    &.on {
+                        color: var(--Black, #060606);
+                    }
+                }
+            }
+            .couponList {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                width: 100%;
+                gap: 39px;
             }
         }
     }
-    .nav {
-        padding: 10vw;
-        position: absolute;
-        bottom: 22%;
-        display: flex;
-        justify-content: space-evenly;
+}
 
-        ul {
-            cursor: pointer;
-            width: 17.7083vw;
-            height: 7.6563vw;
-            background: var(--White, #fefefe);
+#couponItem {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    .couponImg {
+        background-image: url(/mypage/coupon.png);
+        background-repeat: no-repeat;
+        display: flex;
+        width: 438px;
+        height: 205px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 9.92px;
+        .txt {
             display: flex;
+            width: 100%;
+            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            border-radius: 0.5208vw;
-            margin-left: 2vw;
-            box-shadow: 0 0 2px 0 var(--color-alpha-shadow1, rgba(0, 0, 0, 0.05)),
-                4px 4px 8px 0 var(--color-alpha-shadow2, rgba(0, 0, 0, 0.08));
-            &:nth-of-type(0) {
-                background-image: url('/public/mypage/Box-01.png');
-                background-size: cover;
-            }
-            li {
-                font-size: 24px;
+            align-items: flex-start;
+            gap: 9.919px;
+            padding-left: 30px;
+            span {
+                display: flex;
+                width: 65px;
+                padding: 3px 12px;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                color: var(--White, #fefefe);
+                text-align: center;
+                font-family: Paperlogy;
+                font-size: 12px;
                 font-style: normal;
-                font-weight: 500;
+                font-weight: 600;
+                line-height: normal;
+                border-radius: 30px;
+                background: var(--Green-green-750, #7abab6);
+            }
+            h3 {
+                color: var(--Black, #060606);
+                font-family: Paperlogy;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                letter-spacing: 0.32px;
+            }
+            p {
+                color: var(--Black, #060606);
+                font-family: Pretendard;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
                 line-height: normal;
             }
         }
