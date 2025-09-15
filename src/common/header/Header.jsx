@@ -10,6 +10,7 @@ import useCommonStore from '../../store/useCommonStore';
 const Header = () => {
     const loginModal = useAuthStore((state) => state.loginModal);
     const joinModal = useAuthStore((state) => state.joinModal);
+    const isLogin = useAuthStore((state) => state.isLogin);
 
     // header menu active추가
     const activeMenu = useCommonStore((state) => state.activeMenu);
@@ -19,40 +20,51 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    const { setLoginModal, setJoinModal } = useAuthStore();
-    const { isLogin, setIsLogin } = useAuthStore();
+    const { setLoginModal, setJoinModal, setUser, setLogin } = useAuthStore();
+
     useEffect(() => {
-        // 팝업이면(부모가 존재) 리스너 등록하지 않음
+        // 팝업이면(자식창) 여기 리스너는 필요 없음
         if (window.opener) return;
 
-        const bc = new BroadcastChannel('auth');
-        const onMsg = (e) => {
-            // 최상위 창(부모)에서만 처리
-            if (window !== window.top) return;
-            if (e?.data?.type === 'OPEN_JOIN') {
-                setLoginModal(false);
-                setJoinModal(true);
+        const handleMessage = (data) => {
+            const { type, payload } = data || {};
+            switch (type) {
+                case 'LOGIN_SUCCESS':
+                    setUser(payload?.user);
+                    setLogin(true);
+                    setLoginModal(false);
+                    break;
+                case 'OPEN_JOIN':
+                    setLoginModal(false);
+                    setJoinModal(true);
+                    break;
+                case 'GOOGLE_AUTH_ERROR':
+                    // 필요하면 에러 토스트 등
+                    setLoginModal(false);
+                    break;
+                default:
+                    break;
             }
         };
 
-        bc.addEventListener('message', onMsg);
+        // 1) BroadcastChannel 수신
+        const bc = new BroadcastChannel('auth');
+        const onBC = (e) => handleMessage(e.data);
+        bc.addEventListener('message', onBC);
 
-        // 추가: postMessage 경로도 지원(오리진 다를 때 대비)
+        // 2) postMessage 수신(백업 경로)
         const onWinMsg = (e) => {
-            if (e.origin !== window.location.origin) return;
-            if (e?.data?.type === 'OPEN_JOIN') {
-                setLoginModal(false);
-                setJoinModal(true);
-            }
+            if (e.origin !== window.location.origin) return; // 동일 오리진만
+            handleMessage(e.data);
         };
         window.addEventListener('message', onWinMsg);
 
         return () => {
-            bc.removeEventListener('message', onMsg);
+            bc.removeEventListener('message', onBC);
             bc.close();
             window.removeEventListener('message', onWinMsg);
         };
-    }, [setJoinModal, setLoginModal]);
+    }, [setLogin, setUser, setLoginModal, setJoinModal]);
 
     useEffect(() => {
         let lastScrollY = window.scrollY;

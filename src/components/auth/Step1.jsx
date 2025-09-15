@@ -24,7 +24,7 @@ const Step1 = ({ setStep, step, user, setUser }) => {
         }
 
         const res = await axios.post(apiUrl + '/user/duplicate', { email: user.email });
-        console.log(res.data.error);
+
         if (res.data.error === 0) {
             setStep(step + 1);
         } else {

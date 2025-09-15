@@ -2,7 +2,7 @@ import React from 'react';
 import useAuthStore from '../../store/useAuthStore';
 
 const Step3 = () => {
-    const setJoinModal = useAuthStore((state) => state.closeJoinModal);
+    const { setJoinModal } = useAuthStore();
     return (
         <div className="join-overlay">
             <div className="join-modal">
@@ -58,7 +58,7 @@ const Step3 = () => {
                                 <p>반려견의 호강 라이프, 호강스에서 만나보세요</p>
                             </div>
                             <div className="next-btn">
-                                <button onClick={closeJoinModal}>확인</button>
+                                <button onClick={() => setJoinModal(false)}>확인</button>
                             </div>
                         </div>
                     </div>
