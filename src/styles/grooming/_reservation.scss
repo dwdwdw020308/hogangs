@@ -92,14 +92,14 @@
               bottom: 0;
               right: -10px;
               width: 0;
-              border-right: 2px dotted #7abab6; /* ✅ 세로 도트 */
+              border-right: 2px dotted #7abab6;
               pointer-events: none;
             }
             li {
               width: 180px;
-              //   height: 70px;
+              height: 70px;
               display: flex;
-              justify-content: space-between;
+              justify-content: center;
               align-items: center;
               background: #e2f8f7;
               border-radius: 20px;

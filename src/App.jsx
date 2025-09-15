@@ -25,12 +25,14 @@ import { useEffect } from "react";
 import useCommonStore from "./store/useCommonStore";
 
 const App = () => {
-  const { setActiveMenu } = useCommonStore();
+  const { setActiveMenu, setIsMain } = useCommonStore();
   const location = useLocation();
   const activeMenu = useCommonStore((s) => s.activeMenu);
   useEffect(() => {
     const pathname = location.pathname;
     setActiveMenu(pathname);
+    console.log(`pathname: ${pathname}`);
+    setIsMain(pathname);
   }, [location.pathname, setActiveMenu]);
   return (
     <>

@@ -1,37 +1,38 @@
 import gsap from "gsap";
-import { useRef } from "react";
+import { ScrollTrigger } from "gsap/all";
+import { useLayoutEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 const Scroll = () => {
   const sectionRef = useRef(null);
   const viewportRef = useRef(null);
-  const imgRef = useRef(null);
+  const stageRef = useRef(null);
   const barRef = useRef(null);
   const fillRef = useRef(null);
   const dotRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const img = imgRef.current;
       const bar = barRef.current;
       const fill = fillRef.current;
       const dot = dotRef.current;
+      const stage = stageRef.current;
 
       // 초기 상태
-      gsap.set(img, { scale: 0.9 });
+      gsap.set(stage, { scale: 0.25, transformOrigin: "center bottom" });
       gsap.set(fill, { width: 0 });
       gsap.set(dot, { x: 0 });
 
-      // 스크롤 진행 = 바 채움 + 도트 이동 + 이미지 확대
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger: sectionRef.current, // .story
           start: "top top",
-          end: "+=200%", // 스크롤 길이 (필요하면 조절)
-          scrub: 0.5, // 스크럽 동기화
-          pin: viewportRef.current, // 이미지/바를 고정
+          end: "+=240%", // 스크롤 길이(조절)
+          scrub: 0.6,
+          pin: viewportRef.current, // .story-viewport를 고정
           anticipatePin: 1,
-          invalidateOnRefresh: true, // 리사이즈 시 재계산
+          invalidateOnRefresh: true,
+          // scroller: innerRef.current, // 만약 .inner에 overflow: auto면 지정
           // markers: true,
         },
         defaults: { ease: "none" },
@@ -39,7 +40,7 @@ const Scroll = () => {
 
       tl.to(fill, { width: "100%" }, 0)
         .to(dot, { x: () => bar.clientWidth }, 0)
-        .to(img, { scale: 1.25 }, 0); // 최종 스케일 원하는 값으로
+        .to(stage, { scale: 1.9 }, 0);
     }, sectionRef);
 
     return () => ctx.revert();
@@ -51,12 +52,28 @@ const Scroll = () => {
         <div ref={sectionRef} className="story">
           <div ref={viewportRef} className="story-viewport">
             <div className="story-media">
-              <img
-                ref={imgRef}
-                src="/assets/example.jpg" // ▶︎ 이미지 경로
-                alt=""
-                className="story-img"
-              />
+              <div ref={stageRef} className="stage">
+                <img
+                  className="frame"
+                  src="/grooming/scroll/step1.jpg"
+                  alt=""
+                />
+                <img
+                  className="frame"
+                  src="/grooming/scroll/step2.jpg"
+                  alt=""
+                />
+                <img
+                  className="frame"
+                  src="/grooming/scroll/step3.jpg"
+                  alt=""
+                />
+                <img
+                  className="frame"
+                  src="/grooming/scroll/step4.jpg"
+                  alt=""
+                />
+              </div>
             </div>
 
             <div className="story-pagination">
@@ -64,11 +81,8 @@ const Scroll = () => {
                 <span ref={fillRef} className="fill" />
               </div>
               <div ref={dotRef} className="dot" aria-hidden>
-                🥰
+                <i></i>
               </div>
-
-              {/* 마일스톤 텍스트가 필요하면 여기에 넣기 */}
-              {/* <ul className="milestones"> ... </ul> */}
             </div>
           </div>
         </div>

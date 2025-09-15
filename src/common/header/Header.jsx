@@ -11,6 +11,7 @@ const Header = () => {
   const loginModal = useAuthStore((state) => state.loginModal);
   const joinModal = useAuthStore((state) => state.joinModal);
   const isLogin = useAuthStore((state) => state.isLogin);
+  const isMain = useCommonStore((state) => state.isMain);
 
   // header menu active추가
   const activeMenu = useCommonStore((state) => state.activeMenu);
@@ -84,13 +85,14 @@ const Header = () => {
       }, 500); // 0.5초 delay
     };
 
+    if (!isMain) return;
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, []);
+  }, [isMain]);
 
   return (
     <header
@@ -116,7 +118,7 @@ const Header = () => {
               }}
               className={activeMenu === "/about" ? "active" : ""}
             >
-              AboutUs
+              Brand Story
             </li>
             <li
               onClick={() => {
