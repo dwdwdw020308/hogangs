@@ -10,7 +10,7 @@
         display: block;
         margin-bottom: 34px;
         span {
-            color: #9dbf78;
+            color: var(--Green-green-750, #7abab6);
         }
     }
     .swiper {
@@ -82,7 +82,7 @@
     .swiper-pagination-bullet-active {
         width: 10px;
         height: 10px;
-        background: #7e9565;
+        background: var(--Green-green-700, #8bbab7);
         // position: absolute;
     }
 }

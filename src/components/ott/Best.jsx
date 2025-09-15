@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 import {
     PiArrowCircleLeftThin,
     PiArrowCircleRightThin,
@@ -45,61 +47,84 @@ const Best = () => {
             date: '2008',
         },
     ];
+
     const navigate = useNavigate();
-    const [movies, setMovies] = useState(best5);
+    const swiperRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    //버튼 호버했을때
     const [hoverLeft, setHoverLeft] = useState(false);
     const [hoverRight, setHoverRight] = useState(false);
 
+    const updateActiveSlide = () => {
+        if (swiperRef.current && swiperRef.current.swiper) {
+            const swiper = swiperRef.current.swiper;
+            const slides = swiper.slides;
+            slides.forEach((slide) => slide.classList.remove('first-active'));
+            const activeSlide = slides[swiper.activeIndex];
+            if (activeSlide) activeSlide.classList.add('first-active');
+        }
+    };
+
     const handleNext = () => {
-        setMovies((prev) => {
-            const [first, ...rest] = prev;
-            return [...rest, first];
-        });
-        setCurrentIndex((prev) => (prev + 1) % best5.length);
+        if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.slideNext();
+        }
     };
 
     const handlePrev = () => {
-        setMovies((prev) => {
-            const last = prev[prev.length - 1];
-            return [last, ...prev.slice(0, prev.length - 1)];
-        });
-        setCurrentIndex((prev) => (prev - 1 + best5.length) % best5.length);
+        if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.slidePrev();
+        }
     };
+
+    const handleSlideChange = (swiper) => {
+        setCurrentIndex(swiper.realIndex);
+        setTimeout(updateActiveSlide, 50);
+    };
+
+    useEffect(() => {
+        setTimeout(updateActiveSlide, 100);
+    }, []);
 
     return (
         <div className="best-movie">
-            {/* 왼쪽 텍스트 */}
             <div className="left">
                 <strong>인기 영화 TOP 5</strong>
-                <h2>{movies[0].title}</h2>
-                <p>{movies[0].desc}</p>
-                <span>
+                <h2>{best5[currentIndex].title}</h2>
+                <p>{best5[currentIndex].desc}</p>
+                <span className="bg">
                     BEST <br />
                     MOVIE
                 </span>
             </div>
 
-            {/* 오른쪽 이미지 */}
             <div className="right">
-                <div className="slide-wrapper">
-                    {movies.slice(0, 4).map((movie, idx) => (
-                        <div
-                            className={`poster ${idx === 0 ? 'active' : 'inactive'}`}
-                            key={movie.id}
-                        >
-                            <img src={movie.img} alt={movie.title} draggable={false} />
-                            <p className="title">{movie.title}</p>
-                            <span className="date">{movie.date}</span>
-                            <div className="btn" onClick={() => navigate(`/ott/${movie.id}`)}>
-                                <p>지금보러가기</p>
+                <Swiper
+                    ref={swiperRef}
+                    slidesPerView={3.5}
+                    slidesPerGroup={1}
+                    spaceBetween={20}
+                    loop={true}
+                    autoHeight={false}
+                    centeredSlides={false}
+                    onSlideChange={handleSlideChange}
+                    onSwiper={updateActiveSlide}
+                    className="slide-wrapper"
+                >
+                    {best5.map((movie) => (
+                        <SwiperSlide key={movie.id}>
+                            <div className="poster">
+                                <img src={movie.img} alt={movie.title} draggable={false} />
+                                <p className="title">{movie.title}</p>
+                                <span className="date">{movie.date}</span>
+                                <div className="btn" onClick={() => navigate(`/video/${movie.id}`)}>
+                                    <p>지금보러가기</p>
+                                </div>
                             </div>
-                        </div>
+                        </SwiperSlide>
                     ))}
-                </div>
-                {/* 버튼 */}
+                </Swiper>
+
                 <div className="btns">
                     <button
                         className="icon-btn"
@@ -129,14 +154,13 @@ const Best = () => {
                         </span>
                     </button>
                 </div>
-                {/* 짧은 진행률 */}
+
                 <div className="progress">
                     <div
                         className="bar"
                         style={{
-                            width: `${(3 / best5.length) * 100}%`,
-                            // width: '400px',
-                            transform: `translateX(${(currentIndex / best5.length) * 100}%)`,
+                            width: `${1076 / best5.length}px`,
+                            transform: `translateX(${(1076 / best5.length) * currentIndex}px)`,
                         }}
                     ></div>
                 </div>

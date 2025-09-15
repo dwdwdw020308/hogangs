@@ -8,7 +8,6 @@ import {
 import {
   Auth,
   AuthCallback,
-  Grooming,
   Hotel,
   Main,
   MyPage,
@@ -18,7 +17,7 @@ import {
 import Layout from "./common/Layout";
 import "./styles/index.scss";
 import AboutUs from "./pages/About";
-import Videos from "./pages/videos";
+
 import ScrollTop from "./components/util/ScrollTop";
 import Detail from "./pages/ott/Detail";
 import { useEffect } from "react";
@@ -31,7 +30,6 @@ const App = () => {
   useEffect(() => {
     const pathname = location.pathname;
     setActiveMenu(pathname);
-    console.log(`pathname: ${pathname}`);
     setIsMain(pathname);
   }, [location.pathname, setActiveMenu]);
   return (
@@ -40,13 +38,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
-          <Route path="/ott" element={<Ott />} />
-          <Route path="ott/:id" element={<Detail />} />
+          <Route path="/video" element={<Ott />} />
+          <Route path="video/:id" element={<Detail />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="mypage" element={<MyPage />} />
-          <Route path="videos" element={<Videos />} />
           <Route path="hotel" element={<Hotel />} />
-          <Route path="grooming" element={<Grooming />} />
         </Route>
         <Route path="*" element={<NotFiles />} />
         <Route path="oauth" element={<Auth />} />

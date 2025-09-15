@@ -9,7 +9,7 @@
         margin-bottom: 64px;
         display: block;
         span {
-            color: #9dbf78;
+            color: var(--Green-green-750, #7abab6);
         }
     }
     .swiper {
@@ -31,6 +31,6 @@
         background: #e9e9e9;
     }
     .swiper-scrollbar-drag {
-        background: #7e9565;
+        background: #7abab6;
     }
 }
