@@ -1,41 +1,118 @@
 @use './../utils/' as *;
 
 #content2 {
-    font-family: Pretendard;
-    width: 100%;
-    margin: auto;
-    text-align: center;
-    background-color: #fff;
-    padding: 5.4688vw 13.5417vw;
+  font-family: Pretendard;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  background-color: #fff;
+  padding: 5.4688vw 13.5417vw;
 
-    .slogan {
-        padding-bottom: 4.4333vw;
-    }
+  .slogan {
+    padding-bottom: 4.4333vw;
+  }
 
-    .texttitle {
-        li.textline {
-            font-size: 22px;
-            font-weight: 300;
+  .texttitle {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
-            background: linear-gradient(90deg, #292929 0%, #292929 50%, #c9c9c9 50%, #cecece 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+    li.textline {
+      /* =============== 기본 타이포 =============== */
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 1.7;
+      margin: 0 0 1.2rem;
+      position: relative;
+      overflow: hidden;
 
-            background-size: 200% 100%;
-            background-position: 100% 0; // 시작은 회색
+      /* =============== 애니메이션 튜닝 변수 =============== */
+      --stagger: 100ms; /* 단어 간 지연(속도) */
+      --dur: 0.6s;      /* 각 단어 재생시간 */
+      --rise: 0.5em;    /* 아래서 올라오는 높이 */
+      --blur: 2px;      /* 시작 블러 양 */
+      --gradDur: 900ms; /* (옵션) 그라데이션 슬라이드 시간 */
+
+      /* 네가 쓰던 백그라운드 슬라이드 유지 */
+      background-size: 200% 100%;
+      background-position: 100% 0; /* 시작은 회색(오른쪽 절반) */
+      transition: background-position var(--gradDur) ease;
+      color: var(--Grey-grey-800, #353535);
+text-align: center;
+/* Regular/24px */
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; /* 33.6px */
+
+      /* 단어 span 기본 상태 */
+      .word {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(var(--rise));
+        filter: blur(var(--blur));
+        will-change: transform, opacity, filter;
+      }
+
+      /* 뷰포트 진입 시 발동 (JS에서 .is-in 붙임) */
+      &.is-in {
+        background-position: 0 0; /* (옵션) 그라데이션이 왼→오 스윕 */
+
+        .word {
+          animation: text-fadeup var(--dur) ease forwards;
+          animation-delay: calc(var(--i) * var(--stagger));
         }
+      }
     }
+  }
 
-    .dogicon {
-        display: flex;
-        justify-content: center;
-        padding-top: 80px;
-
-        span {
-            img {
-                margin-right: 1.0417vw;
-                width: 60px;
-            }
-        }
+  /* 단어가 아래서 올라오며 페이드 + 블러 해제 */
+  @keyframes text-fadeup {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
     }
+  }
+
+  .dogicon {
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+    padding-bottom: 150px;
+
+    span {
+      img {
+        margin-right: 1.0417vw;
+        width: 60px;
+      }
+      &:last-child img { margin-right: 0; }
+    }
+  }
+
+  /* 사용자 접근성: 모션 줄이기 */
+  @media (prefers-reduced-motion: reduce) {
+    .texttitle .textline {
+      --stagger: 0ms;
+      --dur: 1ms;
+      --rise: 0;
+      --blur: 0;
+      transition: none;
+    }
+  }
+}
+
+
+.texttitle .textline.use-gradient {
+  background-image: linear-gradient(
+    90deg,
+    #8bbab7 0%,
+    #8bbab7 50%,
+    #efefef 50%,
+    #efefef 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; 
 }

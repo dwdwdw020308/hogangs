@@ -7,92 +7,73 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Content2 = () => {
-  const sectionRef = useRef(null);
+  const rootRef = useRef(null);
 
-  // ✅ GSAP/ScrollTrigger는 useLayoutEffect + context로 안전하게
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const q = gsap.utils.selector(section); // 섹션 내부에서만 선택
-    const list = q(".texttitle")[0];
-    const lines = q(".texttitle li");
-
-    // 레이아웃 세팅 (필요하면 최소화)
-    gsap.set(section, {
-      height: "100vh",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "0 10vw",
-      overflow: "hidden",
-      boxSizing: "border-box",
-      backgroundColor: "#fff",
-    });
-
-    if (list) {
-      gsap.set(list, {
-        margin: 0,
-        padding: 0,
-        listStyle: "none",
-        display: "flex",
-        flexDirection: "column",
-        rowGap: "0vh",
-      });
-    }
-
-    lines.forEach((el) => {
-      gsap.set(el, {
-        fontWeight: 700,
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        backgroundSize: "200% 100%",
-        backgroundPosition: "100% 0",
-        willChange: "background-position",
-      });
-    });
-
-    const liDistance = 500;
-    const totalDistance = Math.max(lines.length * liDistance, 800);
-
-    // ✅ context로 트윈/트리거 묶기
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        lines,
-        { backgroundPosition: "100% 0" },
-        {
-          backgroundPosition: "0% 0",
-          ease: "none",
-          stagger: 1,
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: `+=${totalDistance}`,
-            scrub: true,
-            pin: true,
-            anticipatePin: 1,
-            // 필요하면 pinSpacing 조정 가능
-            // pinSpacing: true,
-          },
-        }
-      );
-    }, section);
-
-    // ✅ 언마운트 시 pin/spacer 되돌리기 → removeChild 에러 방지
-    return () => {
-      ctx.revert(); // 이 한 줄이 pin/spacer, 인라인 스타일, 트윈/트리거 모두 정리
-    };
-  }, []);
-
-  // AOS는 별도(필요 시)
   useEffect(() => {
     AOS.init({ duration: 500, easing: "ease-out", once: false, offset: 0 });
     AOS.refresh();
   }, []);
 
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    // 1) .textline만 선택(다른 요소 영향 X)
+    const lines = Array.from(root.querySelectorAll(".texttitle .textline"));
+
+    // 유틸: 배열 셔플 (랜덤 스태거용)
+    const shuffle = (arr) => {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    };
+
+    // 2) 각 .textline을 “단어 span”으로 쪼개고, --i(지연 인덱스) 부여
+    lines.forEach((line) => {
+      if (line.dataset.split === "done") return;
+
+      const text = line.textContent.trim();
+      line.setAttribute("aria-label", text); // 접근성용 원문 보관
+      line.textContent = ""; // 비우고 다시 채움
+
+      const words = text.split(/\s+/).filter(Boolean);
+      const baseIndexArr = words.map((_, i) => i);
+      const randomOrder = shuffle(baseIndexArr); // 랜덤 순서
+
+      words.forEach((word, idx) => {
+        const span = document.createElement("span");
+        span.className = "word";
+        // 랜덤 순서에 맞는 인덱스를 --i로 저장 (애니메이션 지연에 사용)
+        span.style.setProperty("--i", String(randomOrder[idx]));
+        span.textContent = word + (idx < words.length - 1 ? " " : "");
+        line.appendChild(span);
+      });
+
+      line.dataset.split = "done";
+    });
+
+    // 3) 스크롤 진입 시에만 애니메이션 켜기 (is-in 클래스 토글)
+    const triggers = lines.map((el) =>
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 85%",
+        end: "bottom 20%",
+        onEnter: () => el.classList.add("is-in"),
+        onLeaveBack: () => el.classList.remove("is-in"),
+        // markers: true,
+      })
+    );
+
+    return () => {
+      triggers.forEach((t) => t.kill());
+    };
+  }, []);
+
   return (
-    <section id="content2" ref={sectionRef}>
+    <section id="content2" ref={rootRef}>
       <div className="slogan">
         <img
           data-aos="fade-up"
@@ -128,7 +109,11 @@ const Content2 = () => {
         <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
           <img src="/about/02.png" alt="" />
         </span>
-        <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
+        <span
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="1000"
+        >
           <img src="/about/03.png" alt="" />
         </span>
       </div>
