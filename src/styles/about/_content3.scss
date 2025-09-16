@@ -3,13 +3,14 @@
 #content3 {
     box-sizing: border-box;
     height: 100vh;
-    background: #e8f0dc;
+    background: #D8F3F1;
     padding: 5vw 10vw;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     background-image: url('/about/Brand_Identity.png');
+    background-repeat: no-repeat;
     &::after {
         content: '';
         position: absolute;

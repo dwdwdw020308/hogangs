@@ -87,8 +87,8 @@ export default function Content3() {
                     <img src={img} alt="" ref={imgRef} />
                 </div>
                 <div className="texts">
-                    <strong className="title">{title}</strong>
-                    <p className="desc">{desc}</p>
+                    <strong className="title" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" >{title}</strong>
+                    <p className="desc" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">{desc}</p>
                 </div>
             </div>
 
