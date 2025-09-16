@@ -13,6 +13,7 @@ const defaultReviews = [
         like: 5,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-09-11').getTime(),
     },
     {
         id: 2,
@@ -22,6 +23,7 @@ const defaultReviews = [
         like: 6,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-09-10').getTime(),
     },
     {
         id: 3,
@@ -31,6 +33,7 @@ const defaultReviews = [
         like: 7,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-09-05').getTime(),
     },
     {
         id: 4,
@@ -40,6 +43,7 @@ const defaultReviews = [
         like: 25,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-09-01').getTime(),
     },
     {
         id: 5,
@@ -49,6 +53,7 @@ const defaultReviews = [
         like: 1,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-08-23').getTime(),
     },
     {
         id: 6,
@@ -58,6 +63,7 @@ const defaultReviews = [
         like: 0,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-08-12').getTime(),
     },
     {
         id: 7,
@@ -67,6 +73,7 @@ const defaultReviews = [
         like: 5,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-08-12').getTime(),
     },
     {
         id: 8,
@@ -76,6 +83,7 @@ const defaultReviews = [
         like: 4,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-08-02').getTime(),
     },
     {
         id: 9,
@@ -85,6 +93,7 @@ const defaultReviews = [
         like: 22,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-07-22').getTime(),
     },
     {
         id: 10,
@@ -94,87 +103,83 @@ const defaultReviews = [
         like: 2,
         liked: false,
         isDefault: true,
+        createdAt: new Date('2025-07-12').getTime(),
     },
 ];
 
 const Review = () => {
-    // ✅ 초기화: 기본 리뷰 + 저장된 내 리뷰 합치기
+    // ✅ 초기화: 저장된 내 리뷰를 맨 앞에, 기본 리뷰를 뒤에 배치
     const [reviews, setReviews] = useState(() => {
         const saved = JSON.parse(localStorage.getItem('reviews')) || [];
-        return [...defaultReviews, ...saved];
+        const sortedSaved = saved.sort((a, b) => b.createdAt - a.createdAt);
+        return [...sortedSaved, ...defaultReviews];
     });
 
-    // 드롭다운
     const [openDropDown, setOpenDropDown] = useState(null);
     const toggleDropDown = (id) => {
         setOpenDropDown(openDropDown === id ? null : id);
     };
 
-    // 입력 상태
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(null);
     const [text, setText] = useState('');
-
-    // 수정 상태
     const [editingId, setEditingId] = useState(null);
 
-    // ✅ 로컬스토리지에는 내가 쓴 리뷰만 저장
     useEffect(() => {
         const userReviews = reviews.filter((r) => !r.isDefault);
         localStorage.setItem('reviews', JSON.stringify(userReviews));
     }, [reviews]);
 
-    // 평균 별점
     const averageRating =
         reviews.length > 0
             ? (reviews.reduce((sum, review) => sum + review.score, 0) / reviews.length).toFixed(1)
             : 0;
 
-    // 등록
     const onAdd = () => {
         if (!rating || text.trim() === '') {
             alert('별점과 리뷰를 입력해주세요');
             return;
         }
+        const now = Date.now();
         const newReview = {
-            id: Date.now(),
+            id: now,
             text,
             score: rating,
             date: new Date().toISOString().slice(0, 10),
             like: 0,
             liked: false,
             isDefault: false,
+            createdAt: now,
         };
         setReviews([newReview, ...reviews]);
         setRating(0);
         setText('');
     };
 
-    // 삭제
     const onDel = (id) => {
         setReviews(reviews.filter((review) => review.id !== id));
     };
 
-    // 수정 시작
     const onEdit = (id, text, score) => {
         setEditingId(id);
         setText(text);
         setRating(score);
     };
 
-    // 수정 완료
     const onSave = () => {
-        setReviews(
-            reviews.map((review) =>
-                review.id === editingId ? { ...review, text, score: rating } : review
-            )
+        const updatedReviews = reviews.map((review) =>
+            review.id === editingId
+                ? { ...review, text, score: rating, createdAt: Date.now() }
+                : review
         );
+        const editedReview = updatedReviews.find((r) => r.id === editingId);
+        const otherReviews = updatedReviews.filter((r) => r.id !== editingId);
+        setReviews([editedReview, ...otherReviews]);
         setEditingId(null);
         setText('');
         setRating(0);
     };
 
-    // 좋아요
     const handleLike = (id) => {
         setReviews(
             reviews.map((review) =>
@@ -189,11 +194,56 @@ const Review = () => {
         );
     };
 
+    // ✅ 정렬/페이지네이션
+    const [currentPage, setCurrentPage] = useState(1);
+    const [sortType, setSortType] = useState(0);
+    const reviewsPerPage = 5;
+
+    const getSortedReviews = () => {
+        const reviewsCopy = [...reviews];
+        switch (sortType) {
+            case 1:
+                return reviewsCopy.sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return b.createdAt - a.createdAt;
+                });
+            case 2:
+                return reviewsCopy.sort((a, b) => {
+                    if (a.score !== b.score) return a.score - b.score;
+                    return b.createdAt - a.createdAt;
+                });
+            default:
+                return reviewsCopy.sort((a, b) => b.createdAt - a.createdAt);
+        }
+    };
+
+    const sortedReviews = getSortedReviews();
+    const totalPage = Math.ceil(sortedReviews.length / reviewsPerPage);
+
+    const indexOfLast = currentPage * reviewsPerPage;
+    const indexOfFirst = indexOfLast - reviewsPerPage;
+    const currentReviews = sortedReviews.slice(indexOfFirst, indexOfLast);
+
+    const handleSortToggle = () => {
+        setSortType((prev) => (prev === 1 ? 2 : 1));
+        setCurrentPage(1);
+    };
+
+    const getSortText = () => {
+        switch (sortType) {
+            case 1:
+                return '별점 높은순';
+            case 2:
+                return '별점 낮은순';
+            default:
+                return '최신순';
+        }
+    };
+
     return (
         <div className="review-wrapper">
             <div className="inner">
                 <div className="reveiw-score">
-                    {/* 별점 */}
                     <div className="stars-box">
                         <strong>{rating}</strong>
                         <p>별점을 남겨주세요</p>
@@ -212,7 +262,6 @@ const Review = () => {
                             );
                         })}
                     </div>
-                    {/* 평균 별점 */}
                     <div className="average">
                         <strong>{averageRating}</strong>
                         <p>{reviews.length}개의 별점</p>
@@ -229,7 +278,10 @@ const Review = () => {
                     </div>
                 </div>
 
-                {/* 리뷰 작성/수정 폼 */}
+                <div className="sort-box">
+                    <button onClick={handleSortToggle}>{getSortText()}</button>
+                </div>
+
                 <div className="review-form">
                     <textarea
                         value={text}
@@ -247,11 +299,19 @@ const Review = () => {
                     )}
                 </div>
 
-                {/* 리뷰 리스트 */}
                 <div className="review-list">
                     <strong>리뷰 ({reviews.length})</strong>
-                    {reviews.map((review) => (
-                        <div key={review.id} className="review-item">
+                    <div className="like-filter">
+                        <p>좋아요순 </p>
+                        <img src="/ott/icon-filter.png" alt="좋아요순" />
+                    </div>
+                    {currentReviews.map((review, idx) => (
+                        <div
+                            key={review.id}
+                            className={`review-item ${
+                                idx === currentReviews.length - 1 ? 'last' : ''
+                            } ${!review.isDefault ? 'my-review' : ''}`}
+                        >
                             {[...Array(5)].map((_, i) => (
                                 <FaStar
                                     key={i}
@@ -297,6 +357,31 @@ const Review = () => {
                             </div>
                         </div>
                     ))}
+                    <div className="pagination">
+                        <button
+                            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                            disabled={currentPage === 1}
+                        >
+                            <img src="/ott/icon-prev.png" alt="이전버튼" />
+                            <span>이전</span>
+                        </button>
+                        {Array.from({ length: totalPage }, (_, i) => (
+                            <button
+                                key={i + 1}
+                                onClick={() => setCurrentPage(i + 1)}
+                                className={`current ${currentPage === i + 1 ? 'active' : ''}`}
+                            >
+                                {i + 1}
+                            </button>
+                        ))}
+                        <button
+                            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPage))}
+                            disabled={currentPage === totalPage}
+                        >
+                            <span>다음</span>
+                            <img src="/ott/icon-next.png" alt="다음버튼" />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
