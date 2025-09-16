@@ -31,20 +31,23 @@
 
     .content-box {
         position: relative;
+        top: 7%;
         text-align: center;
 
         .visual {
             margin-bottom: 1vw;
+        
 
             img {
             }
         }
 
         .texts {
-            transform: translateY(-300%);
+            transform: translateY(-250%);
             display: flex;
             flex-direction: column;
             gap: 30px;
+            white-space: pre-line;
             .title {
                 color: var(--Black, #060606);
                 text-align: center;
