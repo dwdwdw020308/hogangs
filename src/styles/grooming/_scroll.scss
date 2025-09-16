@@ -82,12 +82,13 @@
                                 color: rgba(0, 0, 0, 0.2);
 
                                 /* Medium/24px */
-                                font-family: Pretendard;
+                                font-family: Paperlogy;
                                 font-size: 24px;
                                 font-style: normal;
                                 font-weight: 500;
                                 line-height: normal;
                                 position: relative;
+                                text-align: left;
                             }
 
                             &.active .label {
@@ -100,9 +101,12 @@
                                 color: var(--Grey-grey-800, #353535);
                                 font-family: Pretendard;
                                 font-size: 18px;
-                                top: 120px;
+                                top: 110px;
                                 left: 20px;
                                 white-space: nowrap;
+                            }
+                            &:first-child .desc {
+                                left: 30px;
                             }
                             &:last-child .desc {
                                 left: 6px;
