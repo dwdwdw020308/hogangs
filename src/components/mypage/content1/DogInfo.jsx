@@ -1,178 +1,342 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
-const DogInfo = () => {
-    return (
-        <div className="dogInfoBox" id="dogInfoBox">
-            <div className="inner">
-                <div className="infoForm">
-                    <div className="title">
-                        <h2>호강이의 정보를 입력해주세요.</h2>
-                    </div>
-                    <div className="infoFormBox">
-                        <div className="infoLeft">
-                            <div className="hogangprofile">
-                                <img src="/mypage/hogangprofile.png" alt="hogangprofile" />
-                            </div>
-                            <div className="btnWrap">
-                                <button>사진변경</button>
-                                <button>삭제</button>
-                            </div>
-                        </div>
-                        <div className="infoRight">
-                            <div className="form-row">
-                                <label>이름</label>
-                                <input type="text" name="" id="" placeholder="예) 호강이" />
-                            </div>
-                            <div className="form-row">
-                                <label>성별</label>
-                                <div className="radioWrap">
-                                    <label>
-                                        <input type="radio" name="" id="" />
-                                        여자아이
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="" id="" />
-                                        남자아이
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <label>생일</label>
-                                <div className="selectWrap">
-                                    <select name="" id="">
-                                        <option value="">년도</option>
-                                    </select>
-                                    <select name="" id="">
-                                        <option value="">월</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <label>견종</label>
-                                <input type="text" name="" id="" placeholder="예) 비숑" />
-                            </div>
-                            <div className="form-row">
-                                <label>몸무게</label>
-                                <input type="text" name="" id="" placeholder="예) 2.8" />
-                                <p>kg</p>
-                            </div>
-                            <div className="form-row">
-                                <label>중성화</label>
-                                <div className="radioWrap">
-                                    <label>
-                                        <input type="radio" name="" id="" />
-                                        했어요
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="" id="" />
-                                        안했어요
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <label>동물병원</label>
-                                <input
-                                    type="text"
-                                    name=""
-                                    id=""
-                                    placeholder="예) 호강동물병원(강남구)"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="vaccination">
-                    <div className="title">
-                        <h2>지금까지 완료하신 예방접종 여부를 선택해주세요.</h2>
-                        <span>중복 선택 가능</span>
-                    </div>
-                    <div className="checkBox-Group">
-                        <label>
-                            <input type="checkbox" name="" id="" defaultChecked />
-                            <p>
-                                광견병 <span>1년 이내 접종완료</span>
-                            </p>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="" id="" />
-                            <p>
-                                종합백신 <span>2년 이내 접종완료</span>
-                            </p>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="" id="" />
-                            <p>
-                                코로나 <span>2년 이내 접종완료</span>
-                            </p>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="" id="" />
-                            <p>
-                                켄넬코프 <span>2년 이내 접종완료</span>
-                            </p>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="" id="" />
-                            <p>접종을 하지 않았습니다.</p>
-                        </label>
-                    </div>
-                </div>
-                <div className="parasite">
-                    <div className="title">
-                        <h2>내/외부 기생충 관련 예방접종 여부를 선택해주세요.</h2>
-                        <span>중복 선택 가능</span>
-                    </div>
-                    <div className="checkBox-Group">
-                        <label>
-                            <input type="checkbox" name="" id="" />
-                            <p>
-                                심장사상충 <span>1년 이내 접종완료</span>
-                            </p>
-                        </label>
-                        <label>
-                            <input type="checkbox" name="" id="" />
-                            <p>
-                                외부기생충 <span>1년 이내 접종완료</span>
-                            </p>
-                        </label>
-                    </div>
-                </div>
-                <div className="health">
-                    <div className="title">
-                        <h2>건강 관련 주의사항을 알려주세요!</h2>
-                        <span>*전영병이 있는 경우, 예약이 불가합니다.</span>
-                    </div>
+const DogInfo = ({ onSave, initialData }) => {
+  const [name, setName] = useState("");
+  const [birthYear, setBirthYear] = useState("");
+  const [birthMonth, setBirthMonth] = useState("");
+  const [vaccinations, setVaccinations] = useState([]);
+  const [parasites, setParasites] = useState([]);
+  const [gender, setGender] = useState("");
+  const [breed, setBreed] = useState("");
+  const [weight, setWeight] = useState("");
+  const [neutered, setNeutered] = useState("");
+  const [hospital, setHospital] = useState("");
+  const [healthNote, setHealthNote] = useState("");
+  const [moreNote, setMoreNote] = useState("");
 
-                    <div className="txt">
-                        <input
-                            type="text"
-                            name=""
-                            id=""
-                            placeholder="예) 알러지 음식, 슬개골 탈구, 피부병 등"
-                        />
-                    </div>
-                </div>
-                <div className="more">
-                    <div className="title">
-                        <h2>참고사항을 입력해주세요.</h2>
-                        <span>호강이에게 특이사항 또는 참고사항이 있다면 알려주세요.</span>
-                    </div>
+  //  수정 모드일 경우 initialData로 state 초기화
+  useEffect(() => {
+    if (initialData) {
+      setName(initialData.name || "");
+      setBirthYear(initialData.birthYear || "");
+      setBirthMonth(initialData.birthMonth || "");
+      setVaccinations(initialData.vaccinations || []);
+      setParasites(initialData.parasites || []);
+      setGender(initialData.gender || "");
+      setBreed(initialData.breed || "");
+      setWeight(initialData.weight || "");
+      setNeutered(initialData.neutered || "");
+      setHospital(initialData.hospital || "");
+      setHealthNote(initialData.healthNote || "");
+      setMoreNote(initialData.moreNote || "");
+    }
+  }, [initialData]);
 
-                    <div className="txt">
-                        <input
-                            type="text"
-                            name=""
-                            id=""
-                            placeholder="예) 우리 강아지는 생식만 먹어요. 남자를 무서워하는 편이에요!"
-                        />
-                    </div>
-                </div>
-                <div className="btn">
-                    <button>등록하기</button>
-                </div>
-            </div>
-        </div>
+  const handleSubmit = () => {
+    const today = new Date();
+    let age = null;
+
+    if (birthYear) {
+      age = today.getFullYear() - parseInt(birthYear, 10);
+      if (birthMonth && today.getMonth() + 1 < parseInt(birthMonth, 10)) {
+        age -= 1;
+      }
+    }
+
+    onSave({
+      name,
+      birthYear,
+      birthMonth,
+      age: age !== null ? `${age}` : "미입력",
+      vaccinations,
+      parasites,
+      gender,
+      breed,
+      weight,
+      neutered,
+      hospital,
+      healthNote,
+      moreNote,
+    });
+  };
+
+  //  예방접종 체크박스 선택 처리
+  const handleCheck = (value) => {
+    if (value === "none") {
+      setVaccinations(["none"]);
+    } else {
+      setVaccinations((prev) =>
+        prev.includes(value)
+          ? prev.filter((item) => item !== value)
+          : [...prev.filter((item) => item !== "none"), value]
+      );
+    }
+  };
+
+  //  기생충 체크박스 선택 처리
+  const handleParasiteCheck = (value) => {
+    setParasites((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value)
+        : [...prev, value]
     );
+  };
+
+  return (
+    <div className="dogInfoBox" id="dogInfoBox">
+      <div className="inner">
+        <div className="infoForm">
+          <div className="title">
+            <h2>호강이의 정보를 입력해주세요.</h2>
+          </div>
+          <div className="infoFormBox">
+            <div className="infoLeft">
+              <div className="hogangprofile">
+                <img src="/mypage/hogangprofile.png" alt="hogangprofile" />
+              </div>
+              <div className="btnWrap">
+                <button>사진변경</button>
+                <button>삭제</button>
+              </div>
+            </div>
+            <div className="infoRight">
+              <div className="form-row">
+                <label>이름</label>
+                <input
+                  type="text"
+                  placeholder="예) 호강이"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+
+              <div className="form-row">
+                <label>성별</label>
+                <div className="radioWrap">
+                  <label>
+                    <input
+                      type="radio"
+                      name="gender"
+                      checked={gender === "female"}
+                      onChange={() => setGender("female")}
+                    />{" "}
+                    여자아이
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="gender"
+                      checked={gender === "male"}
+                      onChange={() => setGender("male")}
+                    />{" "}
+                    남자아이
+                  </label>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <label>생일</label>
+                <div className="selectWrap">
+                  <select
+                    value={birthYear}
+                    onChange={(e) => setBirthYear(e.target.value)}
+                  >
+                    <option value="">년도</option>
+                    {Array.from(
+                      { length: 2025 - 1996 + 1 },
+                      (_, i) => 2025 - i
+                    ).map((year) => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={birthMonth}
+                    onChange={(e) => setBirthMonth(e.target.value)}
+                  >
+                    <option value="">월</option>
+                    {Array.from({ length: 12 }, (_, i) => i + 1).map(
+                      (month) => (
+                        <option key={month} value={month}>
+                          {month}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <label>견종</label>
+                <input
+                  type="text"
+                  placeholder="예) 비숑"
+                  value={breed}
+                  onChange={(e) => setBreed(e.target.value)}
+                />
+              </div>
+
+              <div className="form-row">
+                <label>몸무게</label>
+                <input
+                  type="text"
+                  placeholder="예) 2.8"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
+                />
+                <p>kg</p>
+              </div>
+
+              <div className="form-row">
+                <label>중성화</label>
+                <div className="radioWrap">
+                  <label>
+                    <input
+                      type="radio"
+                      name="neutered"
+                      checked={neutered === "yes"}
+                      onChange={() => setNeutered("yes")}
+                    />{" "}
+                    했어요
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="neutered"
+                      checked={neutered === "no"}
+                      onChange={() => setNeutered("no")}
+                    />{" "}
+                    안했어요
+                  </label>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <label>동물병원</label>
+                <input
+                  type="text"
+                  placeholder="예) 호강동물병원(강남구)"
+                  value={hospital}
+                  onChange={(e) => setHospital(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/*  예방접종 */}
+        <div className="vaccination">
+          <div className="title">
+            <h2>지금까지 완료하신 예방접종 여부를 선택해주세요.</h2>
+            <span>중복 선택 가능</span>
+          </div>
+          <div className="checkBox-Group">
+            <label>
+              <input
+                type="checkbox"
+                checked={vaccinations.includes("rabies")}
+                onChange={() => handleCheck("rabies")}
+              />
+              <p>광견병</p>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={vaccinations.includes("combo")}
+                onChange={() => handleCheck("combo")}
+              />
+              <p>종합백신</p>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={vaccinations.includes("corona")}
+                onChange={() => handleCheck("corona")}
+              />
+              <p>코로나</p>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={vaccinations.includes("kennel")}
+                onChange={() => handleCheck("kennel")}
+              />
+              <p>켄넬코프</p>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={vaccinations.includes("none")}
+                onChange={() => handleCheck("none")}
+              />
+              <p>접종을 하지 않았습니다</p>
+            </label>
+          </div>
+        </div>
+
+        {/* 기생충 */}
+        <div className="parasite">
+          <div className="title">
+            <h2>내/외부 기생충 관련 예방접종 여부를 선택해주세요.</h2>
+            <span>중복 선택 가능</span>
+          </div>
+          <div className="checkBox-Group">
+            <label>
+              <input
+                type="checkbox"
+                checked={parasites.includes("heartworm")}
+                onChange={() => handleParasiteCheck("heartworm")}
+              />
+              <p>심장사상충</p>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={parasites.includes("external")}
+                onChange={() => handleParasiteCheck("external")}
+              />
+              <p>외부기생충</p>
+            </label>
+          </div>
+        </div>
+
+        {/* 건강 정보 */}
+        <div className="health">
+          <div className="title">
+            <h2>건강 관련 주의사항을 알려주세요!</h2>
+          </div>
+          <div className="txt">
+            <input
+              type="text"
+              placeholder="예) 알러지 음식, 슬개골 탈구, 피부병 등"
+              value={healthNote}
+              onChange={(e) => setHealthNote(e.target.value)}
+            />
+          </div>
+        </div>
+
+        {/* 참고사항 */}
+        <div className="more">
+          <div className="title">
+            <h2>참고사항을 입력해주세요.</h2>
+          </div>
+          <div className="txt">
+            <input
+              type="text"
+              placeholder="예) 우리 강아지는 생식만 먹어요. 남자를 무서워해요!"
+              value={moreNote}
+              onChange={(e) => setMoreNote(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="btn">
+          <button onClick={handleSubmit}>등록하기</button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default DogInfo;
