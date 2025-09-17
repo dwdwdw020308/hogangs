@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Auth, AuthCallback, Grooming, Hotel, Main, MyPage, NotFiles, Ott } from './pages';
+import { Auth, AuthCallback, Grooming, Hotel, Main, MyPage, NotFiles, Ott, Reservation } from './pages';
 import Layout from './common/Layout';
 import './styles/index.scss';
 import AboutUs from './pages/About';
@@ -8,6 +8,11 @@ import ScrollTop from './components/util/ScrollTop';
 import Detail from './pages/ott/Detail';
 import { useEffect } from 'react';
 import useCommonStore from './store/useCommonStore';
+import AdminLogin from './pages/admin/AdminLogin';
+import RequireAdmin from './pages/admin/RequireAdmin';
+import AdminLayout from './common/AdminLayout';
+import AdminUsers from './pages/admin/AdminUsers';
+import AdminVideos from './pages/admin/AdminVideos';
 
 const App = () => {
     const { setActiveMenu, setIsMain } = useCommonStore();
@@ -30,10 +35,23 @@ const App = () => {
                     <Route path="mypage" element={<MyPage />} />
                     <Route path="hotel" element={<Hotel />} />
                     <Route path="grooming" element={<Grooming />} />
+                    <Route path="reservation" element={<Reservation />} />
                 </Route>
                 <Route path="*" element={<NotFiles />} />
                 <Route path="oauth" element={<Auth />} />
-                <Route path="authcallback" element={<AuthCallback />} />
+                <Route path="authCallback" element={<AuthCallback />} />
+
+                <Route path="admin/login" element={<AdminLogin />} />
+
+                <Route path="admin" element={<RequireAdmin />}>
+                    <Route element={<AdminLayout />}>
+                        <Route index element={<AdminUsers />} />
+                        <Route path="users" element={<AdminUsers />} />
+                        <Route path="video" element={<AdminVideos />} />
+                        {/*<Route path="reservation" element={<AdminReservation />} /> */}
+                    </Route>
+                </Route>
+
             </Routes>
         </>
     );

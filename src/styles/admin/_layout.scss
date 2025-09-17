@@ -1,0 +1,81 @@
+
+
+/* 레이아웃 컨테이너 */
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+  background: #f7f8fa;
+}
+
+/* 왼쪽 사이드바 */
+.admin-aside {
+  flex: 0 0 240px;          /* 고정 너비 */
+  background: #0f172a;      /* 남색 */
+  color: #fff;
+  padding: 20px 16px;
+  position: sticky;         /* 화면 스크롤해도 고정 */
+  top: 0;
+  height: 100vh;            /* 전고정 */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 6px 8px 12px;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #cbd5e1;
+  text-decoration: none;
+}
+.nav-link:hover {
+  background: rgba(255,255,255,0.06);
+}
+.nav-link.active {
+  background: #1e293b;
+  color: #fff;
+}
+
+/* 로그아웃 버튼 */
+.logout-btn {
+  margin-top: auto;               /* 아래 붙이기 */
+  background: #ef4444;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+/* 오른쪽 컨텐츠 */
+.admin-main {
+  flex: 1;                        /* 남은 공간 전부 */
+  padding: 24px 28px;
+  overflow: auto;                 /* 컨텐츠만 스크롤 */
+  background: #fff;
+  border-left: 1px solid #eaeef3;
+}
+
+/* 반응형(사이드바 위로) */
+@media (max-width: 960px) {
+  .admin-shell {
+    flex-direction: column;
+  }
+  .admin-aside {
+    height: auto;
+    position: static;
+    flex-basis: auto;
+  }
+}
