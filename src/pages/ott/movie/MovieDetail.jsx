@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-import DetailBanner from './DetailBanner';
-import Relate from './Relate';
-import Photo from './Photo';
-import Review from './Review';
+import DetailBanner from '../common/DetailBanner';
+import Relate from '../movie/Relate';
+import Photo from '../movie/Photo';
+import Review from '../movie/Review';
 
-const Detail = () => {
-    const [activeTab, setActiveTab] = useState(() => {
-        return sessionStorage.getItem('activeTab') || 'relate';
-    });
+const MovieDetail = () => {
+    // const [activeTab, setActiveTab] = useState(() => {
+    //     return sessionStorage.getItem('activeTab') || 'relate';
+    // });
+    const [activeTab, setActiveTab] = useState('relate');
+
     useEffect(() => {
         sessionStorage.setItem('activeTab', activeTab);
     }, [activeTab]);
@@ -48,4 +50,4 @@ const Detail = () => {
     );
 };
 
-export default Detail;
+export default MovieDetail;

@@ -9,3 +9,6 @@
 @forward './relate';
 @forward './photo';
 @forward './review';
+@forward './episode';
+
+@use './detail';
