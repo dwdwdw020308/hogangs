@@ -225,7 +225,7 @@ const Review = () => {
     const currentReviews = sortedReviews.slice(indexOfFirst, indexOfLast);
 
     const handleSortToggle = () => {
-        setSortType((prev) => (prev === 1 ? 2 : 1));
+        setSortType((prev) => (prev === 2 ? 0 : prev + 1));
         setCurrentPage(1);
     };
 
@@ -278,10 +278,6 @@ const Review = () => {
                     </div>
                 </div>
 
-                <div className="sort-box">
-                    <button onClick={handleSortToggle}>{getSortText()}</button>
-                </div>
-
                 <div className="review-form">
                     <textarea
                         value={text}
@@ -302,7 +298,7 @@ const Review = () => {
                 <div className="review-list">
                     <strong>리뷰 ({reviews.length})</strong>
                     <div className="like-filter">
-                        <p>좋아요순 </p>
+                        <p onClick={handleSortToggle}>{getSortText()}</p>
                         <img src="/ott/icon-filter.png" alt="좋아요순" />
                     </div>
                     {currentReviews.map((review, idx) => (

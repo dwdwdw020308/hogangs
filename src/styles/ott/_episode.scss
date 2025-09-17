@@ -1,0 +1,28 @@
+@use './../utils' as *;
+
+.episode {
+    padding: 60px 260px;
+    display: grid;
+    gap: 25px 130px;
+    grid-template-columns: repeat(2, 1fr);
+    .episode-item {
+        display: flex;
+        gap: 20px;
+        img {
+        }
+        .text-wrap {
+            strong {
+                font-size: 18px;
+                font-weight: 600;
+            }
+            p {
+                margin-top: 10px;
+                white-space: pre-line;
+                color: var(--Grey-grey-200, #b6b6b6);
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 130%;
+            }
+        }
+    }
+}
