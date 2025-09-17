@@ -15,7 +15,7 @@
         position: fixed;
         top: 35%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -300%);
         width: min(900px, 90%);
         text-align: center;
         z-index: 10;
@@ -30,15 +30,15 @@
         font-weight: 700;
         font-size: clamp(18px, 2.4vw, 28px);
         line-height: 1.7;
-        opacity: 0;
-        transition: opacity 0.2s;
-        cursor: pointer;
+        opacity: 0; /* ✅ DOM은 항상 유지 */
+        visibility: hidden; /* ✅ display:none 대신 visibility */
+        transition: opacity 0.2s, visibility 0.2s;
         background-image: url('/main/Gradient1.png');
         background-repeat: no-repeat;
         background-position: center calc(10% - 1vw);
         background-size: auto;
         z-index: 10;
-        height: 15.4167vw;
+        height: 20.4167vw;
 
         h3 {
             color: var(--Grey-grey-600, #585858);
@@ -481,7 +481,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-bottom: 84px;
+            padding-bottom: 50px;
 
             p {
                 color: var(--Black, #060606);
