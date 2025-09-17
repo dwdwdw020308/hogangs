@@ -3,13 +3,14 @@
 #content3 {
     box-sizing: border-box;
     height: 100vh;
-    background: #e8f0dc;
+    background: #d8f3f1;
     padding: 5vw 10vw;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     background-image: url('/about/Brand_Identity.png');
+    background-repeat: no-repeat;
     &::after {
         content: '';
         position: absolute;
@@ -30,6 +31,7 @@
 
     .content-box {
         position: relative;
+        top: 7%;
         text-align: center;
 
         .visual {
@@ -40,10 +42,11 @@
         }
 
         .texts {
-            transform: translateY(-300%);
+            transform: translateY(-250%);
             display: flex;
             flex-direction: column;
             gap: 30px;
+            white-space: pre-line;
             .title {
                 color: var(--Black, #060606);
                 text-align: center;

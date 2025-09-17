@@ -6,25 +6,29 @@ gsap.registerPlugin(ScrollTrigger);
 
 const DURATION = 5000;
 const slides = [
-    {
-        id: '01',
-        title: '따뜻한 두 번째 집',
-        desc: '보호자가 믿고 맡길 수 있는 신뢰감 있는 호텔 & 미용 서비스',
-        img: '/about/doghead.png',
-    },
-    {
-        id: '02',
-        title: '귀엽고 즐거운 경험',
-        desc: '강아지의 행복한 표정과 즐거움을 최우선으로',
-        img: '/about/doghead.png',
-    },
-    {
-        id: '03',
-        title: '사랑을 담은 세심한 케어',
-        desc: '단순 관리가 아닌 반려견을 가족처럼 아끼는 브랜드 철학',
-        img: '/about/doghead.png',
-    },
+  {
+    id: '01',
+    title: '따뜻한 두 번째 집',
+    desc: '보호자가 믿고 맡길 수 있는\n 신뢰감 있는 호텔 & 미용 서비스',
+    img: '/about/doghead.png',
+    focal: '50% 42%', 
+  },
+  {
+    id: '02',
+    title: '귀엽고 즐거운 경험',
+    desc: '강아지의 행복한 표정과\n 즐거움을 최우선으로',
+    img: '/about/doghead.png',
+    focal: '50% 42%',
+  },
+  {
+    id: '03',
+    title: '사랑을 담은 세심한 케어',
+    desc: '단순 관리가 아닌 반려견을\n 가족처럼 아끼는 브랜드 철학',
+    img: '/about/doghead.png',
+    focal: '50% 42%',
+  },
 ];
+
 
 export default function Content3() {
     const sectionRef = useRef(null);
@@ -81,14 +85,20 @@ export default function Content3() {
     const { id, title, desc, img } = slides[index];
     return (
         <section id="content3" ref={sectionRef}>
-            <h2>Brand Identity</h2>
+
             <div className="content-box fade" key={id}>
-                <div className="visual">
-                    <img src={img} alt="" ref={imgRef} />
-                </div>
+<div className="visual">
+  <img
+    ref={imgRef}
+    src={img}
+    alt=""
+    style={{ objectFit: 'cover', objectPosition: slides[index].focal }}
+  />
+</div>
+
                 <div className="texts">
-                    <strong className="title">{title}</strong>
-                    <p className="desc">{desc}</p>
+                    <strong className="title" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" >{title}</strong>
+                    <p className="desc" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">{desc}</p>
                 </div>
             </div>
 
