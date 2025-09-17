@@ -1,5 +1,6 @@
 :root { --header-h: 80px; }
 
+/* 섹션은 그대로 */
 #content1 {
   position: relative;
   width: 100vw;
@@ -10,9 +11,10 @@
   .stage {
     position: relative;
     width: 100%;
-    height: calc(100vh - var(--header-h));
-    height: calc(100dvh - var(--header-h));
-    @supports (height: 100svh) { height: calc(100svh - var(--header-h)); }
+    /* ✅ 헤더가 fixed면 빼면 안 됨 */
+    height: 100vh;
+    height: 100dvh;
+    @supports (height: 100svh) { height: 100svh; }
 
     margin: 0 auto;
     display: grid;
@@ -31,12 +33,16 @@
   .hero-frame {
     position: relative;
     width: 100%;
-    height: calc(100vh - var(--header-h));
-    height: calc(100dvh - var(--header-h));
-    @supports (height: 100svh) { height: calc(100svh - var(--header-h)); }
+    /* ✅ 여기서도 동일하게 꽉 채우기 */
+    height: 100vh;
+    height: 100dvh;
+    @supports (height: 100svh) { height: 100svh; }
+
+    /* ✅ figure 기본 여백 제거 */
+    margin: 0;
 
     overflow: hidden;
-    border-radius: 0px;
+    border-radius: 0;
     box-shadow: 0 12px 28px rgba(0,0,0,.08);
 
     .img-big,
@@ -45,6 +51,7 @@
       width: 100%; height: 100%;
       object-fit: cover;
       backface-visibility: hidden;
+      display: block; /* 이미지 인라인 간격 방지(안전을 위해) */
     }
   }
 
@@ -61,23 +68,11 @@
     visibility: hidden;
 
     .ch { display: inline-block; will-change: transform; transform: translateZ(0); }
-
     .accent .ch { color: #7ABAB6; }
-
     &.left  { justify-self: end;   text-align: right; }
     &.right { justify-self: start; text-align: left;  }
-
-    /* 옵션: 로딩 GIF처럼 반사 효과 */
-    &.with-reflect {
-    //   -webkit-box-reflect: below 0 linear-gradient(transparent 0, rgba(0,0,0,.16));  
-      /* 파폭 폴백은 생략 가능. 필요하면 ::after+mask로 커스텀 */
-    }
   }
-
 }
 
-html, body { overflow-x: clip; }
-
-@media (prefers-reduced-motion: reduce) {
-  #content1 .stage { transform: none !important; }
-}
+/* ✅ 브라우저 기본 마진으로 생기는 가장자리 띠 방지 */
+html, body { margin: 0; padding: 0; overflow-x: clip; }
