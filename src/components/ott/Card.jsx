@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
-import { Navigation } from 'swiper/modules';
-import { Swiper } from 'swiper/react';
+import { useNavigate } from 'react-router-dom';
 
 const Card = () => {
     const [flip, setFlip] = useState({});
@@ -17,6 +16,7 @@ const Card = () => {
         { id: 2, front: '/ott/card-front2.png', back: '/ott/card-back2.png' },
         { id: 3, front: '/ott/card-front3.png', back: '/ott/card-back3.png' },
     ];
+    const navigate = useNavigate();
 
     return (
         <div className="card">
@@ -44,7 +44,11 @@ const Card = () => {
                             onClick={() => toggleFlip(card.id)}
                             style={{ cursor: 'pointer' }}
                         >
-                            <img src={card.back} alt="뒷면이미지" />
+                            <img
+                                src={card.back}
+                                alt="뒷면이미지"
+                                onClick={() => navigate(`/video/movie/${card.id}`)}
+                            />
                         </div>
                         {/* 뒤 */}
                     </ReactCardFlip>
