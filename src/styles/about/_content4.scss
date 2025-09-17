@@ -3,16 +3,16 @@
 #content4 {
     color: #fefefe;
     width: 100%;
-    height: 140vh;
+    height: 190vh;
     background-image: url('/about/BrandStory_image.png');
     background-position: center;
     background-repeat: no-repeat;
-    // background-size: cover;  
+    // background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #FFF;
+    color: #fff;
 
     text-align: center;
     /* Paperogy-Bold/40px */
@@ -23,35 +23,31 @@
     line-height: normal;
     letter-spacing: 0.4px;
 
-    
-    .item1{
+    .item1 {
         position: relative;
-        h2{
-            position: absolute;
-            z-index: 1;
-            top: 45%;
-            left: 39%;
-
-        }
-    }
-    .item2{
-        position: relative;
-        h2{
-            position: absolute;
-            z-index: 1;
-            top: 45%;
-            left: 39%;
-
-        }
-    }
-    .item3{
-        position: relative;
-        h2{
+        h2 {
             position: absolute;
             z-index: 1;
             top: 45%;
             left: 39%;
         }
     }
-    
-}   
+    .item2 {
+        position: relative;
+        h2 {
+            position: absolute;
+            z-index: 1;
+            top: 45%;
+            left: 39%;
+        }
+    }
+    .item3 {
+        position: relative;
+        h2 {
+            position: absolute;
+            z-index: 1;
+            top: 45%;
+            left: 39%;
+        }
+    }
+}
