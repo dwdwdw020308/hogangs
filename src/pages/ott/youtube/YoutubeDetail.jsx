@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import DetailBanner from '../common/DetailBanner';
+import DetailBanner from '../youtube/DetailBanner';
 import Picks from './Picks';
 import '../../../styles/index.scss';
 import Episode from './Episode';
