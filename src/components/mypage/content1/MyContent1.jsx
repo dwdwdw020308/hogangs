@@ -4,12 +4,14 @@ import CouponItem from "./CouponItem";
 import ExpiredCouponItem from "./ExpiredCouponItem";
 import { useNavigate } from "react-router-dom";
 
-const MyContent1 = () => {
+const MyContent1 = ({ onUpdateDogProfile }) => {
+  //  props로 받음
   const [pageTab, setPageTab] = useState("default");
   const [userInfo, setUserInfo] = useState(null);
   const [dogProfiles, setDogProfiles] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
   const [couponTab, setCouponTab] = useState("available");
+  const [periodTab, setPeriodTab] = useState("3m"); // 기본 3개월
 
   const navigate = useNavigate();
 
@@ -30,13 +32,13 @@ const MyContent1 = () => {
       <div className="inner">
         {pageTab === "default" && (
           <>
-            {/*  강아지 정보 */}
+            {/* 🐶 강아지 정보 */}
             <div className="dogInfo">
               <div className="title">
                 <h2>호강이의 정보를 입력해주세요.</h2>
               </div>
               <div className="infoBox">
-                {/*  아무 것도 없을 때 */}
+                {/* 아무 것도 없을 때 */}
                 {dogProfiles.length === 0 && (
                   <div className="infoBox-empty">
                     <div className="puppyImg">
@@ -62,24 +64,38 @@ const MyContent1 = () => {
                   </div>
                 )}
 
-                {/*  등록된 강아지들 */}
+                {/* 등록된 강아지들 */}
                 {dogProfiles.map((dog, index) => (
                   <div key={index} className="infoBox-add">
                     <div className="edit">
                       <span
                         onClick={() => {
-                          setEditIndex(index); //  어떤 프로필 수정할지 기억
+                          setEditIndex(index);
                           setPageTab("dogInfo");
                         }}
                       >
                         프로필 수정하기
                       </span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="6"
+                        height="9"
+                        viewBox="0 0 6 9"
+                        fill="none"
+                      >
+                        <path
+                          d="M1 8.5L5 4.5L1 0.5"
+                          stroke="#7ABAB6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </div>
                     <div className="box">
                       <div className="top">
                         <div className="hogangPic">
                           <img
-                            src="/mypage/hogangPic.png"
+                            src={dog.profileImage || "/mypage/hogangPic.png"}
                             alt="hogangPic"
                             className="dog-photo"
                           />
@@ -110,7 +126,7 @@ const MyContent1 = () => {
                   </div>
                 ))}
 
-                {/*  추가 버튼 */}
+                {/* 추가 버튼 */}
                 {dogProfiles.length > 0 && (
                   <div className="infoBox-another">
                     <div className="puppyImg">
@@ -127,7 +143,7 @@ const MyContent1 = () => {
                     <div className="btn">
                       <button
                         onClick={() => {
-                          setEditIndex(null); //  새 추가 모드
+                          setEditIndex(null);
                           setPageTab("dogInfo");
                         }}
                       >
@@ -160,15 +176,7 @@ const MyContent1 = () => {
                 </div>
                 <div className="actions">
                   <span className="sns">SNS 연동하기</span>
-                  <span
-                    className="logout"
-                    // onClick={() => {
-                    //   localStorage.removeItem("user"); // ✅ user 삭제
-                    //   navigate("/"); // ✅ 메인으로 이동
-                    // }}
-                  >
-                    로그아웃
-                  </span>
+                  <span className="logout">로그아웃</span>
                 </div>
               </dl>
             </div>
@@ -178,24 +186,49 @@ const MyContent1 = () => {
               <div className="title">
                 <h2>쿠폰</h2>
               </div>
+              <div className="tab">
+                <ul className="couponTab">
+                  <li
+                    className={couponTab === "available" ? "on" : ""}
+                    onClick={() => setCouponTab("available")}
+                  >
+                    사용 가능 쿠폰
+                  </li>
+                  <li
+                    className={couponTab === "expired" ? "on" : ""}
+                    onClick={() => setCouponTab("expired")}
+                  >
+                    사용기간 만료 쿠폰
+                  </li>
+                </ul>
+                {/* 기간 탭 */}
+                <ul className="subTab">
+                  <li
+                    className={periodTab === "1m" ? "on" : ""}
+                    onClick={() => setPeriodTab("1m")}
+                  >
+                    1개월
+                  </li>
+                  <li
+                    className={periodTab === "3m" ? "on" : ""}
+                    onClick={() => setPeriodTab("3m")}
+                  >
+                    3개월
+                  </li>
+                  <li
+                    className={periodTab === "6m" ? "on" : ""}
+                    onClick={() => setPeriodTab("6m")}
+                  >
+                    6개월
+                  </li>
+                </ul>
+              </div>
 
-              <ul className="tab">
-                <li
-                  className={couponTab === "available" ? "on" : ""}
-                  onClick={() => setCouponTab("available")}
-                >
-                  사용 가능 쿠폰
-                </li>
-                <li
-                  className={couponTab === "expired" ? "on" : ""}
-                  onClick={() => setCouponTab("expired")}
-                >
-                  사용기간 만료 쿠폰
-                </li>
-              </ul>
               <div className="couponList">
                 {couponTab === "available" ? (
                   <>
+                    <CouponItem />
+                    <CouponItem />
                     <CouponItem />
                     <CouponItem />
                   </>
@@ -210,10 +243,11 @@ const MyContent1 = () => {
           </>
         )}
 
-        {/*  DogInfo 등록/수정 */}
+        {/* 🐶 DogInfo 등록/수정 */}
         {pageTab === "dogInfo" && (
           <DogInfo
             initialData={editIndex !== null ? dogProfiles[editIndex] : null}
+            isEdit={editIndex !== null}
             onSave={(data) => {
               if (editIndex !== null) {
                 // 수정 모드
@@ -223,7 +257,16 @@ const MyContent1 = () => {
               } else {
                 // 추가 모드
                 setDogProfiles((prev) => [...prev, data]);
+
+                //topheader는 첫 번째 강아지가 등록될 때만 업데이트
+                if (dogProfiles.length === 0 && onUpdateDogProfile) {
+                  onUpdateDogProfile({
+                    name: data.name || "호강이",
+                    profileImage: data.profileImage || "/mypage/hogangImg.png",
+                  });
+                }
               }
+
               setEditIndex(null);
               setPageTab("default");
             }}

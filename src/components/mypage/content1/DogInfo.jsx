@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const DogInfo = ({ onSave, initialData }) => {
   const [name, setName] = useState("");
@@ -14,7 +14,11 @@ const DogInfo = ({ onSave, initialData }) => {
   const [healthNote, setHealthNote] = useState("");
   const [moreNote, setMoreNote] = useState("");
 
-  //  수정 모드일 경우 initialData로 state 초기화
+  // ✅ 프로필 이미지 상태
+  const [profileImage, setProfileImage] = useState("/mypage/hogangprofile.png");
+  const fileInputRef = useRef(null);
+
+  // 수정 모드일 경우 initialData로 state 초기화
   useEffect(() => {
     if (initialData) {
       setName(initialData.name || "");
@@ -29,6 +33,7 @@ const DogInfo = ({ onSave, initialData }) => {
       setHospital(initialData.hospital || "");
       setHealthNote(initialData.healthNote || "");
       setMoreNote(initialData.moreNote || "");
+      setProfileImage(initialData.profileImage || "/mypage/hogangprofile.png");
     }
   }, [initialData]);
 
@@ -57,6 +62,11 @@ const DogInfo = ({ onSave, initialData }) => {
       hospital,
       healthNote,
       moreNote,
+      // ✅ 사진 수정 안했으면 기본 이미지 적용
+      profileImage:
+        profileImage === "/mypage/hogangprofile.png"
+          ? "/mypage/hogangImg.png"
+          : profileImage,
     });
   };
 
@@ -73,13 +83,33 @@ const DogInfo = ({ onSave, initialData }) => {
     }
   };
 
-  //  기생충 체크박스 선택 처리
+  // ✅ 기생충 체크박스 선택 처리
   const handleParasiteCheck = (value) => {
     setParasites((prev) =>
       prev.includes(value)
         ? prev.filter((item) => item !== value)
         : [...prev, value]
     );
+  };
+
+  // ✅ 사진 변경 핸들러
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result); // 미리보기로 반영
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDeleteImage = () => {
+    setProfileImage("/mypage/hogangprofile.png"); // 기본 이미지로 리셋
   };
 
   return (
@@ -91,13 +121,32 @@ const DogInfo = ({ onSave, initialData }) => {
           </div>
           <div className="infoFormBox">
             <div className="infoLeft">
-              <div className="hogangprofile">
-                <img src="/mypage/hogangprofile.png" alt="hogangprofile" />
+              <div
+                className={`hogangprofile ${
+                  profileImage !== "/mypage/hogangprofile.png"
+                    ? "filled"
+                    : "default"
+                }`}
+              >
+                <img src={profileImage} alt="hogangprofile" />
               </div>
+
               <div className="btnWrap">
-                <button>사진변경</button>
-                <button>삭제</button>
+                <button type="button" onClick={handleUploadClick}>
+                  사진변경
+                </button>
+                <button type="button" onClick={handleDeleteImage}>
+                  삭제
+                </button>
               </div>
+              {/* 숨겨진 파일 input */}
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                ref={fileInputRef}
+                onChange={handleFileChange}
+              />
             </div>
             <div className="infoRight">
               <div className="form-row">
@@ -225,7 +274,7 @@ const DogInfo = ({ onSave, initialData }) => {
           </div>
         </div>
 
-        {/*  예방접종 */}
+        {/* 예방접종 */}
         <div className="vaccination">
           <div className="title">
             <h2>지금까지 완료하신 예방접종 여부를 선택해주세요.</h2>
@@ -332,7 +381,9 @@ const DogInfo = ({ onSave, initialData }) => {
         </div>
 
         <div className="btn">
-          <button onClick={handleSubmit}>등록하기</button>
+          <button onClick={handleSubmit}>
+            {initialData ? "수정하기" : "등록하기"}
+          </button>
         </div>
       </div>
     </div>
