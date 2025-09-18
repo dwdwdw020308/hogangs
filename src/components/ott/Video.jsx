@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
 
 import 'swiper/css';
 import 'swiper/css/scrollbar';
@@ -18,6 +19,7 @@ const Video = () => {
         },
         { id: 7, img: '/ott/youtube7.png', title: '마라탕 같이 먹었어요' },
     ];
+    const navigate = useNavigate();
 
     return (
         <div className="youtube">
@@ -36,7 +38,11 @@ const Video = () => {
                 {video.map((video) => (
                     <SwiperSlide key={video.id} style={{ width: 480 }}>
                         <div className="slide-card">
-                            <img src={video.img} alt={video.title} />
+                            <img
+                                src={video.img}
+                                alt={video.title}
+                                onClick={() => navigate(`/video/youtube/${video.id}`)}
+                            />
                             <p>{video.title}</p>
                         </div>
                     </SwiperSlide>

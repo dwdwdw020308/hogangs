@@ -538,7 +538,8 @@
             height: 104px;
             border-radius: 17.323px;
             opacity: 0.7;
-            object-fit: fill;
+            object-fit: contain;
+            // object-fit: cover;
           }
           .bottom {
             display: block;

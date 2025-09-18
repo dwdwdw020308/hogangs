@@ -11,7 +11,7 @@ const DetailBanner = () => {
     const thumbRef = useRef(null); //이미지 위치(썸네일)
     const [like, setLike] = useState(false);
     const [recommended, setRecommended] = useState(false);
-
+    // localhost:3001/video?id=68ca9d15e0859865b492077f
     const play = () => {
         if (thumbRef.current) {
             const rect = thumbRef.current.getBoundingClientRect();
