@@ -14,7 +14,7 @@ const CurveHeadLine = () => {
       const tp = tpRef.current;
 
       gsap.set(tpRef.current, {
-        attr: { startOffset: "-200%" },
+        attr: { startOffset: '-30%' },
       });
       gsap.set(textRef.current, { opacity: 0, letterSpacing: 2 });
 

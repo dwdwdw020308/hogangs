@@ -1,0 +1,179 @@
+.admin_login_wrapper {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: url('https://res.cloudinary.com/dci1eujqw/image/upload/v1616769558/Codepen/waldemar-brandt-aThdSdgx0YM-unsplash_cnq4sb.jpg')
+        center/cover no-repeat fixed;
+}
+
+/* Card */
+.auth-card {
+    position: relative;
+    width: 960px;
+    max-width: calc(100vw - 32px);
+    height: 560px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+/* Forms (half-width) */
+.container__form {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    will-change: transform, opacity;
+}
+
+/* LEFT: Sign In */
+.container--signin {
+    left: 0;
+    z-index: 3;
+    opacity: 1;
+}
+
+/* RIGHT: Sign Up (처음엔 가려만 둔다 — 오버레이가 위에 있음) */
+.container--signup {
+    left: 50%;
+    z-index: 2;
+    opacity: 0;
+}
+
+/* Overlay (오른쪽 절반을 덮고 버튼 보여줌) */
+.container__overlay {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 5; /* 폼보다 위에서 버튼 클릭 가능 */
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay {
+    position: relative;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: url('https://res.cloudinary.com/dci1eujqw/image/upload/v1616769558/Codepen/waldemar-brandt-aThdSdgx0YM-unsplash_cnq4sb.jpg')
+        center/cover no-repeat fixed;
+    transition: transform 0.6s ease-in-out;
+    will-change: transform;
+}
+
+.overlay__panel {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.overlay--left {
+    transform: translateX(-20%);
+}
+.overlay--right {
+    right: 0;
+    transform: translateX(0);
+}
+
+/* ====== TOGGLE (Sign Up 활성화) ====== */
+.auth-card.signup-active {
+    /* 왼쪽 Sign In은 왼쪽 바깥으로 밀어냄 */
+    .container--signin {
+        transform: translateX(-100%);
+        opacity: 0;
+        z-index: 1;
+    }
+
+    /* 오른쪽 Sign Up을 보이게 */
+    .container--signup {
+        opacity: 1;
+        z-index: 3;
+    }
+
+    /* 오버레이를 왼쪽으로 이동 (버튼 반대편으로) */
+    .container__overlay {
+        transform: translateX(-100%);
+    }
+    .overlay {
+        transform: translateX(50%);
+    }
+    .overlay--left {
+        transform: translateX(0);
+    }
+    .overlay--right {
+        transform: translateX(20%);
+    }
+}
+
+/* Form look & feel */
+.form {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+}
+.form__title {
+    margin: 0 0 20px;
+    font-weight: 600;
+}
+
+.input {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.btn {
+    align-self: center;
+    padding: 12px 48px;
+    border-radius: 20px;
+    border: 1px solid #1677ff;
+    background-image: linear-gradient(90deg, #1677ff 0%, #62b3ff 74%);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.08rem;
+    cursor: pointer;
+}
+
+.link {
+    color: #1677ff;
+    font-size: 0.9rem;
+}
+
+/* Mobile: stack */
+@media (max-width: 640px) {
+    .auth-card {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+    }
+    .container__overlay {
+        display: none;
+    }
+    .container__form {
+        position: relative;
+        width: 100%;
+        transform: none !important;
+        opacity: 1 !important;
+        padding: 24px;
+        border-bottom: 1px solid #f1f1f1;
+    }
+}
