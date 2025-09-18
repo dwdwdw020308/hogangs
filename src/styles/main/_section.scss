@@ -1,5 +1,10 @@
+body {
+    background-image: url('/main/section1.png');
+    background-size: cover;
+}
+
 .section1 {
-    background-image: url('/main/section1_bg.png');
+    // background-image: url('/main/section1.png');
     color: #111;
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,23 +43,23 @@
         background-position: center calc(10% - 1vw);
         background-size: auto;
         z-index: 10;
-        height: 20.4167vw;
+        height: 16.4167vw;
 
         h3 {
             color: var(--Grey-grey-600, #585858);
             text-align: center;
             font-family: Paperlogy;
-            font-size: 26px;
+            font-size: 32px;
             font-weight: 600;
             letter-spacing: 0.26px;
             position: absolute;
-            top: 25%;
+            top: 20%;
         }
         p {
             color: var(--Black, #060606);
             text-align: center;
             font-family: Paperlogy;
-            font-size: 40px;
+            font-size: 50px;
             font-weight: 700;
             letter-spacing: 0.4px;
             position: absolute;
@@ -63,7 +68,7 @@
             color: var(--Grey-grey-600, #585858);
             text-align: center;
             font-family: Pretendard;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 500;
             transition: color 0.2s;
             position: absolute;
@@ -111,7 +116,7 @@
 }
 
 .reveal-pin-wrap {
-    background-image: url('/main/section2_bg.png');
+    // background-image: url('/main/section2.png');
     height: 100vh;
     position: relative;
     overflow: hidden;
@@ -222,7 +227,6 @@
     }
 }
 
-/* ========= #section3 정리 (중첩/괄호 수정) ========= */
 #section3 {
     /* ===== Brand Palette ===== */
     --bg: #eef9f8;
@@ -241,12 +245,12 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        width: 50vw; /* 좌: 50vw, 우: 50vw → 정확히 반반 */
+        width: 50vw;
         z-index: 10;
         will-change: transform, opacity;
         backface-visibility: hidden;
         transform: translateZ(0);
-        pointer-events: none; /* 클릭 막기 (필요하면 제거) */
+        pointer-events: none;
     }
     .s3-door--left {
         left: 0;
@@ -259,14 +263,14 @@
     .s3-door--img {
         background-repeat: no-repeat;
         background-position: center center;
-        background-size: cover; /* 문 비율 유지하며 꽉 차게. 필요 시 contain으로 교체 */
+        background-size: cover;
         image-rendering: -webkit-optimize-contrast;
     }
     .s3-door--left.s3-door--img {
-        background-image: url('/main/Door-left-1.png');
+        background-image: url('/main/Door-left.png');
     }
     .s3-door--right.s3-door--img {
-        background-image: url('/main/Door-right-1.png');
+        background-image: url('/main/Door-right.png');
     }
 
     /* ===== 컨텐츠 ===== */
@@ -280,15 +284,15 @@
             h2 {
                 color: var(--green-800);
                 font-family: Paperlogy;
-                font-size: 64px;
+                font-size: clamp(32px, 3.33vw, 64px);
                 font-weight: 700;
                 letter-spacing: 0.64px;
-                padding-bottom: 1.0417vw;
+                padding-bottom: 0.0417vw;
             }
             p {
                 color: var(--grey-900);
                 font-family: Paperlogy;
-                font-size: 36px;
+                font-size: clamp(18px, 1.875vw, 36px);
                 font-weight: 600;
                 letter-spacing: 0.36px;
             }
@@ -298,7 +302,7 @@
     .video {
         position: relative;
         z-index: 2;
-        padding-bottom: 5vw;
+        padding: 0vw 0 10vw;
         display: flex;
         justify-content: center;
 
