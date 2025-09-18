@@ -66,7 +66,7 @@ export default function AdminLogin() {
             <a href="#" className="link">
               Forgot your password?
             </a>
-            <button className="btn">Sign In</button>
+            <button className="admin_btn">Sign In</button>
           </form>
         </div>
 
@@ -77,7 +77,7 @@ export default function AdminLogin() {
             <input type="text" placeholder="User" className="input" />
             <input type="email" placeholder="Email" className="input" />
             <input type="password" placeholder="Password" className="input" />
-            <button className="btn">Sign Up</button>
+            <button className="admin_btn">Sign Up</button>
           </form>
         </div>
 
@@ -85,12 +85,12 @@ export default function AdminLogin() {
         <div className="container__overlay">
           <div className="admin_overlay">
             <div className="overlay__panel overlay--left">
-              <button className="btn" onClick={() => setMode("signin")}>
+              <button className="admin_btn" onClick={() => setMode("signin")}>
                 Sign In
               </button>
             </div>
             <div className="overlay__panel overlay--right">
-              <button className="btn" onClick={() => setMode("signup")}>
+              <button className="admin_btn" onClick={() => setMode("signup")}>
                 Sign Up
               </button>
             </div>

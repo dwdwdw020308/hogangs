@@ -1,0 +1,104 @@
+#hotel_reservation_calendar {
+  width: 100%;
+  height: 988px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .inner {
+    height: 768px;
+    display: flex;
+    justify-content: space-between;
+    .step_area {
+      width: 340px;
+      height: 546px;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      gap: 62px;
+      .board {
+        width: 100%;
+        height: 428px;
+        border-radius: 14.831px;
+        border: 0.742px solid #cecece;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        .title {
+          width: 282px;
+          color: #4a9f99;
+          font-family: Paperlogy;
+          font-size: 17.797px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          letter-spacing: 0.178px;
+        }
+        .steps {
+          width: 282px;
+          display: flex;
+          flex-flow: column;
+          gap: 34px;
+
+          li {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .context {
+              width: 231px;
+              height: 100px;
+              display: flex;
+              flex-flow: column;
+              .text1 {
+                color: #818181;
+                font-family: Pretendard;
+                font-size: 13.348px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+              }
+              .text2 {
+                color: #959595;
+                font-family: Pretendard;
+                font-size: 8.898px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+              }
+            }
+            i {
+              width: 30px;
+              height: 30px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-radius: 100%;
+              background: #959595;
+              color: #b6b6b6;
+              text-align: center;
+              font-family: Pretendard;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: normal;
+              svg {
+                // display: none;
+                display: block;
+              }
+            }
+            &.check {
+              i {
+                svg {
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

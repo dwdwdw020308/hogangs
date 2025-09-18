@@ -1,11 +1,11 @@
-
+import Calendar from "./hotel/Calendar";
 
 const Hotel = () => {
-    return (
-        <section id='hotel_reservation_section'>
-            
-        </section>
-    );
+  return (
+    <>
+      <Calendar />
+    </>
+  );
 };
 
 export default Hotel;

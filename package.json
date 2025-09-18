@@ -15,6 +15,7 @@
     "aos": "^2.3.4",
     "axios": "^1.11.0",
     "crypto-js": "^4.2.0",
+    "date-fns": "^4.1.0",
     "gsap": "^3.13.0",
     "icons": "^1.0.0",
     "locomotive-scroll": "^4.1.4",
