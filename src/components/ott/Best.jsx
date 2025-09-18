@@ -117,7 +117,10 @@ const Best = () => {
                                 <img src={movie.img} alt={movie.title} draggable={false} />
                                 <p className="title">{movie.title}</p>
                                 <span className="date">{movie.date}</span>
-                                <div className="btn" onClick={() => navigate(`/video/${movie.id}`)}>
+                                <div
+                                    className="btn"
+                                    onClick={() => navigate(`/video/movie/${movie.id}`)}
+                                >
                                     <p>지금보러가기</p>
                                 </div>
                             </div>

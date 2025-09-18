@@ -1,5 +1,5 @@
 .section1 {
-    background: #fff;
+    background-image: url('/main/section1_bg.png');
     color: #111;
     background-repeat: no-repeat;
     background-size: cover;
@@ -33,7 +33,7 @@
         opacity: 0;
         transition: opacity 0.2s;
         cursor: pointer;
-        background-image: url('/main/Gradient.png');
+        background-image: url('/main/Gradient1.png');
         background-repeat: no-repeat;
         background-position: center calc(10% - 1vw);
         background-size: auto;
@@ -111,9 +111,9 @@
 }
 
 .reveal-pin-wrap {
+    background-image: url('/main/section2_bg.png');
     height: 100vh;
     position: relative;
-    background: #ffffff;
     overflow: hidden;
 
     .reveal-pin-bg {
@@ -572,7 +572,7 @@
     min-height: 400vh;
     overflow: hidden;
     background: #fff;
-
+    padding-bottom: 160px;
     .title {
         display: flex;
         justify-content: center;
@@ -620,6 +620,8 @@
             height: 864px;
             border-radius: 30px;
             object-fit: cover;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .insta-dog2 {
@@ -628,6 +630,8 @@
             border-radius: 30px;
             object-fit: cover;
             background: #060606;
+            filter: brightness(0.4);
+            z-index: 1;
         }
 
         .card-text {
@@ -637,7 +641,7 @@
             font-weight: 700;
             font-family: Paperlogy, sans-serif;
             text-align: center;
-            pointer-events: none;
+            z-index: 10;
         }
 
         .insta-text {
@@ -648,8 +652,8 @@
             font-family: Paperlogy, sans-serif;
             text-align: center;
             opacity: 0;
-            pointer-events: none;
-
+            z-index: 10;
+            pointer-events: auto;
             p {
                 margin: 0;
             }
@@ -658,6 +662,7 @@
                 left: 25%;
                 top: 50%;
                 transform: translate(-50%, -50%);
+                pointer-events: none;
                 .logo {
                     display: block;
                     margin: 0 auto 87px;
@@ -670,6 +675,7 @@
                 left: 75%;
                 top: 50%;
                 transform: translate(-50%, -50%);
+                z-index: 10;
             }
         }
     }
@@ -688,5 +694,16 @@
             border-radius: 18px;
             object-fit: cover;
         }
+    }
+    p {
+        color: var(--Green-green-600, #b0dad8);
+        text-align: center;
+        font-family: Paperlogy;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        margin-top: 49px;
     }
 }

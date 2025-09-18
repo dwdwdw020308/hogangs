@@ -1,66 +1,117 @@
-@forward './myContent1';
-@forward './myContent2';
-@forward './myContent3';
-@forward './myContent4';
-@forward './dogInfo';
+@forward "./myContent1";
+@forward "./myContent2";
+@forward "./myContent3";
+@forward "./myContent4";
 
 #myPage {
-    min-height: 100vh;
+  min-height: 100vh;
+  position: relative;
+  background: #ffffff;
+
+  .topheader {
     position: relative;
-    background: #ffffff;
-    .topheader {
-        position: relative;
-        background-color: #b7e2df;
-        height: 414px;
-        // top: 84px;
-        .topName {
-            width: 100%;
-            // padding: 28px 260px;
-            right: 260px;
-            bottom: 28px;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            justify-content: end;
-            align-items: end;
-            gap: 20px;
-            img {
-                border-radius: 100%;
-                width: 94px;
-                height: 94px;
-            }
-            p {
-                color: var(--Black, #060606);
-                font-family: Paperlogy;
-                font-size: 24px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: normal;
-                letter-spacing: 0.24px;
-            }
+    background-color: #b7e2df;
+    height: 414px;
+
+    .topName {
+      width: 100%;
+      right: 260px;
+      bottom: 28px;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      align-items: end;
+      gap: 20px;
+      .topName-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        img {
+          border-radius: 100%;
+          width: 94px;
+          height: 94px;
+          object-fit: cover;
         }
-        .nav {
+        p {
+          color: var(--Black, #060606);
+          font-family: Paperlogy;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          letter-spacing: 0.24px;
+        }
+      }
+    }
+
+    .nav {
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      justify-content: space-evenly;
+      width: 443px;
+      gap: 42px;
+      left: 260px;
+      cursor: pointer;
+
+      ul {
+        display: flex;
+        align-items: center;
+
+        li {
+          position: relative;
+          color: var(--White, #fefefe);
+          text-align: center;
+          font-family: Pretendard;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          display: inline-flex;
+          padding: 10px 1px 16px 1px;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+
+          // 위에 점
+          &::after {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #5ec8c1;
+            position: absolute;
+            left: 50%;
+            top: -20px;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease, top 0.3s ease;
+          }
+
+          // 밑줄
+          &::before {
+            content: "";
             position: absolute;
             bottom: 0;
-            display: flex;
-            justify-content: space-evenly;
-            width: 443px;
-            gap: 42px;
-            left: 260px;
-            cursor: pointer;
-            ul {
-                display: flex;
-                align-items: center;
-                li {
-                    color: var(--White, #fefefe);
-                    text-align: center;
-                    font-family: Pretendard;
-                    font-size: 24px;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: normal;
-                }
-            }
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #5ec8c1;
+            transition: width 0.3s ease;
+          }
+
+          // active 상태일 때
+          &.active::after {
+            opacity: 1;
+            top: -15px;
+          }
+          &.active::before {
+            width: 100%; // 밑줄 꽉 차게
+          }
         }
+      }
     }
+  }
 }

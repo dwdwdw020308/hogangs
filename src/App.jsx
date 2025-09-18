@@ -8,6 +8,7 @@ import {
 import {
   Auth,
   AuthCallback,
+  Grooming,
   Hotel,
   Main,
   MyPage,
@@ -19,9 +20,10 @@ import "./styles/index.scss";
 import AboutUs from "./pages/About";
 
 import ScrollTop from "./components/util/ScrollTop";
-import Detail from "./pages/ott/Detail";
 import { useEffect } from "react";
 import useCommonStore from "./store/useCommonStore";
+import MovieDetail from "./pages/ott/movie/MovieDetail";
+import YoutubeDetail from "./pages/ott/youtube/YoutubeDetail";
 
 const App = () => {
   const { setActiveMenu, setIsMain } = useCommonStore();
@@ -39,10 +41,12 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
           <Route path="/video" element={<Ott />} />
-          <Route path="video/:id" element={<Detail />} />
+          <Route path="video/movie/:id" element={<MovieDetail />} />
+          <Route path="video/youtube/:id" element={<YoutubeDetail />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="mypage" element={<MyPage />} />
           <Route path="hotel" element={<Hotel />} />
+          <Route path="grooming" element={<Grooming />} />
         </Route>
         <Route path="*" element={<NotFiles />} />
         <Route path="oauth" element={<Auth />} />

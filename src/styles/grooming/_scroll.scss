@@ -1,91 +1,123 @@
-@use "./../utils" as *;
-
 #grooming_scroll_section {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .inner {
-    width: 1906px;
-    position: relative;
-    .story {
-      min-height: 300vh;
-      background: #fff;
-    }
-    .story-viewport {
-      position: relative;
-      width: min(1800px, 92vw);
-      height: 80vh;
-      margin: 0 auto;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      align-items: end;
-    }
-    .story-media {
-      height: 60vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      overflow: visible;
-      position: relative;
-      .stage {
-        width: min(1100px, 72vw);
-        aspect-ratio: 16/9;
-        background: #ccc; /* 로딩 전 회색 */
-        border-radius: 12px;
-        // transform-origin: center bottom;
-        will-change: transform;
-        position: absolute;
-        left: 50%;
-        top: 25%;
-        transform: translate(-50%, -25%);
-      }
-    }
+    width: 100%;
+    height: 1164px;
+    background-color: #fff;
 
-    /* 겹쳐 둔 프레임들 */
-    .frame {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: inherit;
-      opacity: 0; /* GSAP가 autoAlpha로 제어 */
-      will-change: opacity;
-    }
-
-    /* 1604px 고정 바 */
-    .story-pagination {
-      position: relative;
-      padding: 28px 0 8px;
-    }
-    .bar {
-      position: relative;
-      width: 1604px;
-      height: 10px;
-      margin: 0 auto;
-      background: #e9eceb;
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    .fill {
-      position: absolute;
-      inset: 0;
-      width: 0;
-      background: #7ed0c5;
-    }
-    .dot {
-      position: absolute;
-      top: 50%;
-      left: 5%;
-      transform: translate(-50%, -50%);
-      font-size: 22px;
-      i {
+    padding: 0;
+    .viewport {
+        width: 100%;
+        height: 100%;
         display: flex;
-        width: 100.9px;
-        height: 82.75px;
-        background: url("/grooming/scroll/hobok.png") no-repeat center/contain;
-      }
+        flex-direction: column;
+
+        .frame {
+            width: 100%;
+            height: 560px;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .img {
+                width: 960px;
+                height: 280px;
+                background-color: #ccc;
+            }
+        }
+        .pagination {
+            width: 100%;
+            height: 340px;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            .pagination_inner {
+                .bar {
+                    width: 1400px;
+                    height: 6px;
+                    background: rgba(178, 178, 178, 0.25);
+                    border-radius: 3px;
+                    position: relative;
+                    .fill {
+                        position: absolute;
+                        inset: 0;
+                        width: 0;
+                        background: #b0dad8;
+                    }
+                    .dot {
+                        position: absolute;
+                        top: 50%;
+                        left: 0;
+                        transform: translate(-50%, -50%);
+                        z-index: 2;
+                        i {
+                            display: block;
+                            width: 83.13px;
+                            height: 64.43px;
+                            background: url('/grooming/scroll/hobok.png') no-repeat center/contain;
+                        }
+                    }
+
+                    .ticks {
+                        position: absolute;
+                        left: 0;
+                        bottom: -30px; // 바 아래로 내릴 거면 이렇게, 위로 올릴 땐 top 사용
+                        width: 100%;
+                        height: 0; // 자체 높이 필요 없음
+
+                        li {
+                            width: 200px;
+                            text-align: center;
+                            position: absolute;
+                            transform: translateX(-50%);
+
+                            .tick {
+                                display: block;
+                                width: 0;
+                                height: 46px;
+                                margin: 0 auto 8px;
+                                border-left: 2px dotted #9fd3c7; // 연한 민트 점선
+                                opacity: 0.7;
+                            }
+                            .label {
+                                color: rgba(0, 0, 0, 0.2);
+
+                                /* Medium/24px */
+                                font-family: Paperlogy;
+                                font-size: 24px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: normal;
+                                position: relative;
+                                text-align: left;
+                            }
+
+                            &.active .label {
+                                color: #000;
+                            }
+                            .desc {
+                                position: absolute;
+                                opacity: 0;
+                                text-align: left;
+                                color: var(--Grey-grey-800, #353535);
+                                font-family: Pretendard;
+                                font-size: 18px;
+                                top: 110px;
+                                left: 20px;
+                                white-space: nowrap;
+                            }
+                            &:first-child .desc {
+                                left: 30px;
+                            }
+                            &:last-child .desc {
+                                left: 6px;
+                            }
+                            &.active .desc {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 }

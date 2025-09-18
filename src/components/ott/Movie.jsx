@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { PiArrowCircleLeftThin } from 'react-icons/pi';
-import { PiArrowCircleRightThin } from 'react-icons/pi';
 import { Navigation, Pagination } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -32,6 +31,7 @@ const Movie = () => {
             date: '2016',
         },
     ];
+    const navigate = useNavigate();
 
     return (
         <div className="movie-list">
@@ -52,7 +52,11 @@ const Movie = () => {
             >
                 {poster.map((poster) => (
                     <SwiperSlide key={poster.id}>
-                        <img src={poster.img} alt={poster.title} />
+                        <img
+                            src={poster.img}
+                            alt={poster.title}
+                            onClick={() => navigate(`/video/movie/${poster.id}`)}
+                        />
                         <p>{poster.title}</p>
                         <div className="info">
                             <span className="type">{poster.type}</span>
