@@ -45,7 +45,7 @@ const Visual = () => {
     <section id="main-visual">
       <HeadLine />
       <figure className="intro" ref={introRef}>
-        <img src="/main/dog.png" alt="" />
+        <img src="/main/dog3.png" alt="" />
         <figcaption className="caption" ref={captionRef}></figcaption>
         <span className="overlay" ref={overlayRef}>
           <svg
