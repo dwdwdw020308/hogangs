@@ -5,7 +5,7 @@
   height: 330px;
   background: #b7e2df;
   position: relative;
-  .nav {
+  .res_nav {
     width: 346px;
     height: 55px;
     display: flex;
@@ -38,7 +38,7 @@
         background: #5ec8c1;
         position: absolute;
         left: 30%;
-        bottom: 125%;
+        bottom: 124%;
       }
       &:hover {
         &::after {
@@ -48,7 +48,7 @@
           background: #5ec8c1;
           position: absolute;
           left: 0;
-          top: 140%;
+          top: 124%;
         }
         &::before {
           content: "";
@@ -58,7 +58,7 @@
           background: #5ec8c1;
           position: absolute;
           left: 30%;
-          bottom: 125%;
+          bottom: 124%;
         }
       }
     }

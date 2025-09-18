@@ -1,0 +1,130 @@
+#hotel_reservation_grooming {
+    width: 100%;
+    height: 634px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .inner {
+        height: 514px;
+        display: flex;
+        justify-content: space-between;
+        .block {
+            width: 175px;
+            height: 175px;
+        }
+        .check_area {
+            width: 760px;
+            display: flex;
+            flex-flow: column;
+            .title {
+                color: #000;
+                font-family: Paperlogy;
+                font-size: 30px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                margin-bottom: 18px;
+            }
+            p {
+                color: var(--Grey-grey-400, #818181);
+                font-family: Pretendard;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 130%; /* 20.8px */
+                margin-bottom: 34px;
+            }
+
+            .radio_area {
+                display: flex;
+                gap: 37px;
+                margin-bottom: 34px;
+            }
+
+            .beauties {
+                width: 100%;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                margin-bottom: 76px;
+                li {
+                    cursor: pointer;
+                    width: 134px;
+                    height: 60px;
+                    border-radius: 10px;
+                    border: 1px solid var(--Grey-grey-200, #b6b6b6);
+                    background: var(--White, #fefefe);
+                    display: flex;
+                    flex-flow: column;
+                    justify-content: center;
+                    .bold_text {
+                        color: var(--Black, #060606);
+                        text-align: center;
+
+                        /* SemiBold/16px */
+                        font-family: Pretendard;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                    }
+                    .g_text {
+                        color: var(--Grey-grey-700, #454545);
+                        text-align: center;
+                        /* Regular/12px */
+                        font-family: Pretendard;
+                        font-size: 12px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                    }
+                    &.check {
+                        background: #8dd2ce;
+                        .bold_text,
+                        .g_text {
+                            color: #fefefe;
+                        }
+                    }
+                }
+            }
+
+            .add_option {
+                width: 502px;
+                height: 213px;
+                h4 {
+                    color: #000;
+                    /* Medium/24px */
+                    font-family: Pretendard;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                    margin-bottom: 18px;
+                }
+                .radio_areas {
+                    width: 100%;
+                    height: 113px;
+
+                    display: flex;
+                    flex-flow: column;
+                    gap: 22px;
+                    p {
+                        margin-bottom: 0;
+                        height: 23px;
+                        display: flex;
+                        &.fst {
+                            gap: 126px;
+                        }
+                        &.sec {
+                            gap: 163px;
+                        }
+                        &.thd {
+                            gap: 218px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

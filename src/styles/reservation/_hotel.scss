@@ -1,9 +1,14 @@
-@forward "./hotel/calendar";
+@forward './hotel/calendar';
+@forward './hotel/checkout';
+@forward './hotel/weight';
+@forward './hotel/grooming';
+@forward './hotel/request';
+@forward './hotel/agree';
 
 #hotel_reservation_section {
-  width: 100%;
-  height: 3342px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    height: 3342px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

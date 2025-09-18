@@ -1,11 +1,21 @@
-import Calendar from "./hotel/Calendar";
+import Agree from './hotel/Agree';
+import Calendar from './hotel/Calendar';
+import CheckGroomingService from './hotel/CheckGroomingService';
+import CheckOutService from './hotel/CheckOutService';
+import CheckWeight from './hotel/CheckWeight';
+import Request from './hotel/Request';
 
 const Hotel = () => {
-  return (
-    <>
-      <Calendar />
-    </>
-  );
+    return (
+        <>
+            <Calendar />
+            <CheckOutService />
+            <CheckWeight />
+            <CheckGroomingService />
+            <Request />
+            <Agree />
+        </>
+    );
 };
 
 export default Hotel;

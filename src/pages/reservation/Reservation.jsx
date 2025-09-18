@@ -7,7 +7,7 @@ const Reservation = () => {
   return (
     <>
       <section id="reservation_top">
-        <ul className="nav">
+        <ul className="res_nav">
           <li
             onClick={() => {
               setHotel(true);
