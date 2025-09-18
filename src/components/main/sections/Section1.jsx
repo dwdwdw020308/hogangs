@@ -24,7 +24,7 @@ export default function Section1() {
             const lines = root.current.querySelectorAll('.copy-line'); // 2개 그룹 (겹쳐 놓기)
             const copyEl = root.current.querySelector('.copy');
 
-            // 텍스트 초기값
+            // 텍스트 초기값 (opacity/visibility만)
             gsap.set(lines, { autoAlpha: 0, yPercent: 10, willChange: 'opacity, transform' });
 
             // 섹션 안에서만 copy 레이어 보이기
@@ -59,22 +59,20 @@ export default function Section1() {
                             scrub: true,
                             onLeave: () => gsap.set(bgRef.current, { opacity: 0 }),
                             onLeaveBack: () => gsap.set(bgRef.current, { opacity: 0 }),
-                            // markers: true,
                         },
                     }
                 );
             }
 
-            // 진행도에 따라 한 그룹만 보여주기 (if문 구조)
+            // 진행도에 따라 한 그룹만 보여주기
             let current = -1;
-            const D_IN = 0.25; // 나타날 때
-            const D_OUT = 0.25; // 사라질 때
+            const D_IN = 0.25;
+            const D_OUT = 0.25;
 
             const showOnly = (idx) => {
                 if (idx === current) return;
                 current = idx;
 
-                // 전부 사라지게
                 gsap.to(lines, {
                     autoAlpha: 0,
                     yPercent: -10,
@@ -83,7 +81,6 @@ export default function Section1() {
                     overwrite: true,
                 });
 
-                // 타겟만 나타나게
                 if (idx >= 0 && lines[idx]) {
                     gsap.to(lines[idx], {
                         autoAlpha: 1,
@@ -107,7 +104,6 @@ export default function Section1() {
                     else if (p < 0.9) showOnly(1);
                     else showOnly(-1);
                 },
-                // markers: true,
             });
 
             // 이미지 파랄럭스
@@ -148,10 +144,8 @@ export default function Section1() {
 
     return (
         <section className="section1" ref={root}>
-            {/* 배경 오버레이 (SCSS에 .section1__bg 스타일 있어야 함) */}
             <div ref={bgRef} className="section1__bg" aria-hidden />
 
-            {/* 이미지 풀폭 */}
             <div className="photo-list">
                 {PHOTOS.map((src, i) => (
                     <figure className={`photo ${i % 2 ? 'left' : 'right'}`} key={i}>
@@ -163,6 +157,7 @@ export default function Section1() {
                 <div className="copy">
                     <div
                         className="copy-line"
+                        data-cursor="hogangs"
                         onClick={() => {
                             navigate('/hotel');
                         }}
@@ -173,6 +168,7 @@ export default function Section1() {
                     </div>
                     <div
                         className="copy-line"
+                        data-cursor="hogangs"
                         onClick={() => {
                             navigate('/hotel');
                         }}

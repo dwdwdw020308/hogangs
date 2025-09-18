@@ -169,9 +169,6 @@ export default function Content1() {
                     style={{ backgroundImage: `url(${LARGE_IMG})` }}
                     aria-hidden
                 />
-                {/* <div className="gif-overlay">
-                    <img src="/about/hobok.gif" alt="" />
-                </div> */}
 
                 <h2 className="side left with-reflect" ref={leftRef}>
                     <span className="accent">호강의</span>&nbsp;시작

@@ -126,7 +126,8 @@
       height: 28px;
       @include flexbox($justify: space-between);
       @include fontFormat();
-      .btn {
+      .join_btn,
+      .login_btn {
         cursor: pointer;
         position: relative;
         @include fontFormat(

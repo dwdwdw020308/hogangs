@@ -2,19 +2,29 @@
 
 .episode {
     padding: 60px 260px;
-    display: grid;
-    gap: 25px 130px;
-    grid-template-columns: repeat(2, 1fr);
+
+    // 에피소드 아이템들을 위한 그리드 컨테이너
+    .episode-grid {
+        display: grid;
+        gap: 25px 130px;
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 60px; // 페이지네이션과의 간격
+    }
+
     .episode-item {
         display: flex;
         gap: 20px;
+
         img {
+            // 이미지 스타일
         }
+
         .text-wrap {
             strong {
                 font-size: 18px;
                 font-weight: 600;
             }
+
             p {
                 margin-top: 10px;
                 white-space: pre-line;
@@ -23,6 +33,54 @@
                 font-weight: 500;
                 line-height: 130%;
             }
+        }
+    }
+
+    .pagination {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 130%;
+        text-align: center;
+        display: flex;
+        gap: 3px;
+        justify-content: center;
+        align-items: center;
+        width: 100%; // 전체 너비 사용
+        margin: 0 auto 160px auto; // 중앙 정렬 및 하단 마진
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            padding: 0 var(--padding-3, 8px) 0 var(--padding-2, 4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            span {
+                color: var(--Grey-grey-900, #515151);
+            }
+        }
+
+        .current {
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            color: var(--Grey-grey-900, #515151);
+
+            &:hover {
+                border-radius: 40px;
+                background: var(--Green-green-300, #d8f3f1);
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .active {
+            font-weight: 500;
+            color: var(--Green-green-750, #7abab6);
         }
     }
 }

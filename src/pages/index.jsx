@@ -7,3 +7,4 @@ export { default as MyPage } from "./MyPage";
 export { default as NotFiles } from "./notfiles/NotFiles";
 export { default as Hotel } from "./hotel/Hotel";
 export { default as Grooming } from "./grooming/Grooming";
+export { default as Reservation } from "./reservation/Reservation";

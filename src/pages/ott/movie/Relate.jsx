@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
+
 const Relate = () => {
     const videolist = [
         { id: 1, img: '/ott/detail-thumb9.png', title: '말리와 나' },
@@ -22,6 +23,7 @@ const Relate = () => {
         { id: 7, img: '/ott/person7.png', name: '베티 길핀', type: '조연 • 글로리아' },
         { id: 8, img: '/ott/person8.png', name: '마그 헨젤버거', type: '조연 • 한나' },
     ];
+
     return (
         <div className="detail-relate">
             <strong>고객들이 시청한 다른 작품</strong>
