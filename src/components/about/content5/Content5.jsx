@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Hogang from "./\bHogang";
 import Hobok from "./Hobok";
 
 const Content5 = () => {
@@ -22,10 +21,7 @@ const Content5 = () => {
               <img src="/about/hobokSmall.png" alt="hobokSmall" />
             </button>
           </div>
-          <div className="tabContent">
-            {activeTab === "hogang" && <Hogang />}
-            {activeTab === "hobok" && <Hobok />}
-          </div>
+          <div className="tabContent">{activeTab === "hobok" && <Hobok />}</div>
         </div>
       </div>
       <div className="banner"></div>
