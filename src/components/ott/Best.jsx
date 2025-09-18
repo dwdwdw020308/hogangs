@@ -1,3 +1,4 @@
+// 메인con2-best
 import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -34,10 +35,10 @@ const Best = () => {
         },
         {
             id: 4,
-            img: '/ott/movie2.png',
-            title: '마리와 강아지 이야기',
-            desc: '재해 속에서 주인과 다시 만나기 위해 \n 애쓰는 아기 강아지들의 감동 실화',
-            date: '2007',
+            img: '/ott/movie7.png',
+            title: '볼트',
+            desc: '슈퍼히어로라 믿던 강아지 볼트가 \n 모험을 통해 진짜 용기를 찾아가는 이야기',
+            date: '2008',
         },
         {
             id: 5,
@@ -122,6 +123,9 @@ const Best = () => {
                                     onClick={() => navigate(`/video/movie/${movie.id}`)}
                                 >
                                     <p>지금보러가기</p>
+                                    <p>
+                                        <img src="/ott/icon-paw.png" alt="지금보러가기" />
+                                    </p>
                                 </div>
                             </div>
                         </SwiperSlide>
@@ -136,10 +140,10 @@ const Best = () => {
                         onClick={handlePrev}
                     >
                         <span className={`icon ${hoverLeft ? 'hide' : 'show'}`}>
-                            <PiArrowCircleLeftThin />
+                            <img src="/ott/button_prev.svg" alt="이전버튼" />
                         </span>
                         <span className={`icon ${hoverLeft ? 'show' : 'hide'}`}>
-                            <PiCaretCircleLeftThin />
+                            <img src="/ott/button_prev-hover.svg" alt="이전버튼" />
                         </span>
                     </button>
 
@@ -150,10 +154,10 @@ const Best = () => {
                         onClick={handleNext}
                     >
                         <span className={`icon ${hoverRight ? 'hide' : 'show'}`}>
-                            <PiArrowCircleRightThin />
+                            <img src="/ott/button_next.svg" alt="다음 버튼" />
                         </span>
                         <span className={`icon ${hoverRight ? 'show' : 'hide'}`}>
-                            <PiCaretCircleRightThin />
+                            <img src="/ott/button_next-hover.svg" alt="다음 버튼" />
                         </span>
                     </button>
                 </div>

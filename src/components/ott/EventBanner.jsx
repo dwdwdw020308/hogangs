@@ -1,3 +1,4 @@
+// 메인con4-이벤트배너
 import { useEffect, useState } from 'react';
 
 const EventBanner = () => {

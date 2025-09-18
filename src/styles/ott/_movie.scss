@@ -1,16 +1,19 @@
 @use './../utils' as *;
 
 .movie-list {
-    margin: 160px 260px;
+    background: #fff;
+    padding: 160px 260px;
     position: relative;
+
     strong {
+        display: flex;
+        gap: 12px;
         font-family: Paperlogy;
         font-size: 32px;
         font-weight: 600;
-        display: block;
         margin-bottom: 34px;
         span {
-            color: var(--Green-green-750, #7abab6);
+            color: var(--Green-green-800, #4a9f99);
         }
     }
     .swiper {

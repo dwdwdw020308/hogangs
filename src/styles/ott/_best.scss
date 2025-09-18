@@ -1,10 +1,11 @@
 @use './../utils' as *;
 
 .best-movie {
+    background: #fff;
     padding: 160px 0 160px 437px;
     display: flex;
     position: relative;
-
+    height: 1080px;
     .left {
         width: 407px;
         padding-right: 50px;
@@ -20,8 +21,8 @@
 
         h2 {
             font-family: Paperlogy;
-            font-size: 42px;
-            font-weight: 600;
+            font-size: 72px;
+            font-weight: 700;
             line-height: 1;
             margin-bottom: 18px;
             min-height: 42px;
@@ -37,16 +38,16 @@
         .bg {
             position: absolute;
             left: -450px;
-            top: 310px;
-            color: var(--Green-green-800, #4a9f99);
+            top: 430px;
+            color: var(--Green-green-100, #eef9f8);
             font-size: 240px;
             font-family: Paperlogy;
-            opacity: 0.03;
+            opacity: 0.6;
             font-weight: 800;
             line-height: 249px;
             pointer-events: none;
             user-select: none;
-            z-index: -1;
+            // z-index: -1;
             will-change: transform; // 렌더링 최적화
         }
     }
@@ -98,34 +99,39 @@
             }
 
             .title {
-                font-size: 18px;
+                font-size: 24px;
                 line-height: 1;
-                margin-top: 10px;
+                margin-top: 20px;
                 margin-right: 6px;
                 height: 18px;
             }
 
             .date {
                 color: var(--Grey-grey-300, #959595);
-                font-size: 16px;
-                height: 16px;
-                margin-top: 4px;
+                font-size: 18px;
+                margin-top: 6px;
             }
-
+            // 지금보러가기버튼
             .btn {
-                text-align: center;
+                display: flex;
+                gap: 12px;
                 color: #fff;
-                display: none;
-                width: 170px;
-                border: 2px solid #fff;
+                align-items: center;
                 border-radius: 42px;
                 padding: 10.4px 38.75px 9.6px 37.25px;
                 position: absolute;
-                left: 50%;
-                top: 45%;
-                transform: translate(-50%, -45%);
+                left: 8%;
+                top: 38%;
                 cursor: pointer;
                 transition: opacity 0.3s ease;
+                display: none;
+                p {
+                    font-size: 24px;
+                }
+                img {
+                    width: 30px;
+                    height: 27px;
+                }
             }
         }
 
@@ -142,13 +148,13 @@
                 }
 
                 &:hover {
-                    img {
+                    > img {
                         filter: brightness(30%);
-                        transition: filter 0.3s ease;
+                        transition: filter 0.2s ease;
                     }
 
                     .btn {
-                        display: block;
+                        display: flex;
                         opacity: 1;
                     }
                 }
@@ -166,7 +172,7 @@
 
     .btns {
         position: absolute;
-        top: 374px;
+        top: 510px;
         left: 410px;
         display: flex;
         z-index: 10;
@@ -177,13 +183,13 @@
         background: none;
         border: none;
         font-size: 42px;
-        width: 42px;
+        width: 60px;
         cursor: pointer;
         margin-right: 18px;
         transition: transform 0.2s ease;
 
         &:hover {
-            transform: scale(1.1);
+            // transform: scale(1.1);
         }
     }
 

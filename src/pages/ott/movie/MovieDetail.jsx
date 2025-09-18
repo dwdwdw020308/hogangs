@@ -1,3 +1,4 @@
+// 영화 상세페이지 하단(탭)
 import { useEffect, useState } from 'react';
 
 import DetailBanner from './DetailBanner';
@@ -7,16 +8,15 @@ import Photo from '../movie/Photo';
 import Review from '../movie/Review';
 
 const MovieDetail = () => {
-
     const videolist = [
-        { id: 1, img: '/ott/detail-thumb9.png', title: '말리와 나' },
-        { id: 2, img: '/ott/detail-thumb2.png', title: '콜 오브 와일드' },
-        { id: 3, img: '/ott/detail-thumb3.png', title: '마리강아지와 아이들' },
-        { id: 4, img: '/ott/detail-thumb4.png', title: '레이싱 인더 레인' },
-        { id: 5, img: '/ott/detail-thumb5.png', title: '더 웨이 홈' },
+        { id: 1, img: '/ott/detail-thumb9.png', title: '볼트' },
+        { id: 2, img: '/ott/detail-thumb2.png', title: '말리와 나' },
+        { id: 3, img: '/ott/detail-thumb3.png', title: '콜 오브 와일드' },
+        { id: 4, img: '/ott/detail-thumb4.png', title: '마리강아지와 아이들' },
+        { id: 5, img: '/ott/detail-thumb5.png', title: '레이싱 인더 레인' },
         { id: 6, img: '/ott/detail-thumb6.png', title: '도그' },
-        { id: 7, img: '/ott/detail-thumb7.png', title: 'TOGO' },
-        { id: 8, img: '/ott/detail-thumb8.png', title: '볼트' },
+        { id: 7, img: '/ott/detail-thumb7.png', title: '더 웨이 홈' },
+        { id: 8, img: '/ott/detail-thumb8.png', title: 'TOGO' },
     ];
     const person = [
         { id: 1, img: '/ott/person1.png', name: '게일 맨쿠소', type: '감독' },
@@ -28,8 +28,26 @@ const MovieDetail = () => {
         { id: 7, img: '/ott/person7.png', name: '베티 길핀', type: '조연 • 글로리아' },
         { id: 8, img: '/ott/person8.png', name: '마그 헨젤버거', type: '조연 • 한나' },
     ];
-
-
+    const photo = [
+        { id: 1, img: '/ott/detail-photo1-2.png', title: '안녕베일리포토' },
+        { id: 2, img: '/ott/detail-photo1-18.png', title: '안녕베일리포토' },
+        { id: 3, img: '/ott/detail-photo1-3.png', title: '안녕베일리포토' },
+        { id: 4, img: '/ott/detail-photo1-4.png', title: '안녕베일리포토' },
+        { id: 5, img: '/ott/detail-photo1-5.png', title: '안녕베일리포토' },
+        { id: 6, img: '/ott/detail-photo1-6.png', title: '안녕베일리포토' },
+        { id: 7, img: '/ott/detail-photo1-7.png', title: '안녕베일리포토' },
+        { id: 8, img: '/ott/detail-photo1-8.png', title: '안녕베일리포토' },
+        { id: 9, img: '/ott/detail-photo1-9.png', title: '안녕베일리포토' },
+        { id: 10, img: '/ott/detail-photo1-10.png', title: '안녕베일리포토' },
+        { id: 11, img: '/ott/detail-photo1-11.png', title: '안녕베일리포토' },
+        { id: 12, img: '/ott/detail-photo1-12.png', title: '안녕베일리포토' },
+        { id: 13, img: '/ott/detail-photo1-13.png', title: '안녕베일리포토' },
+        { id: 14, img: '/ott/detail-photo1-14.png', title: '안녕베일리포토' },
+        { id: 15, img: '/ott/detail-photo1-15.png', title: '안녕베일리포토' },
+        { id: 16, img: '/ott/detail-photo1-16.png', title: '안녕베일리포토' },
+        { id: 17, img: '/ott/detail-photo1-17.png', title: '안녕베일리포토' },
+        { id: 18, img: '/ott/detail-photo1-1.png', title: '안녕베일리포토' },
+    ];
     const [activeTab, setActiveTab] = useState('relate');
 
     useEffect(() => {
@@ -64,9 +82,8 @@ const MovieDetail = () => {
             </nav>
             {/* 탭 콘텐츠 */}
             <section className="tab-content">
-
                 {activeTab === 'relate' && <Relate videolist={videolist} person={person} />}
-                {activeTab === 'photo' && <Photo />}
+                {activeTab === 'photo' && <Photo photo={photo} />}
                 {activeTab === 'review' && <Review />}
             </section>
         </div>
