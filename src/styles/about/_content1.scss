@@ -25,7 +25,7 @@ body {
         width: 100%;
         min-height: 100vh;
         min-height: 100dvh;
-        
+
         display: grid;
         grid-template-columns: auto;
         align-items: center;
@@ -41,7 +41,6 @@ body {
         @supports (min-height: 100svh) {
             min-height: 100svh;
         }
-
     }
 
     /* ★ 큰 이미지 전용 레이어: 항상 stage 전체를 cover로 덮음 → 여백 X */
@@ -62,7 +61,7 @@ body {
         width: 100%;
         height: 100vh;
         height: 100dvh;
-        
+
         margin: 0;
         padding: 0;
         overflow: hidden;
