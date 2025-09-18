@@ -1,3 +1,4 @@
+// 메인 con3-#강아지랑 보면 더 재밌는 영화
 import { useState } from 'react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +37,8 @@ const Movie = () => {
     return (
         <div className="movie-list">
             <strong>
-                <span># </span>강아지랑 보면 더 재밌는 영화
+                <img src="/ott/icon-paw-green.svg" alt="발바닥" />
+                호강이와 함께하는 <span>힐링 무비</span>
             </strong>
             <Swiper
                 modules={[Navigation, Pagination]}

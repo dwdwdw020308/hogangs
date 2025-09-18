@@ -1,3 +1,5 @@
+// 메인 con1-비주얼
+
 const posters = [
     '/ott/movie1.png',
     '/ott/movie2.png',
