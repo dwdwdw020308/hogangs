@@ -2,7 +2,7 @@
 
 .DetailBanner {
     background: linear-gradient(0deg, rgba(6, 6, 6, 0.7) 0%, rgba(108, 108, 108, 0) 100%),
-        url('/ott/detail-big.png'); // ✅ 기본 배경 (MovieDetail)
+        url('/ott/detail-big.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,7 +17,7 @@
             font-family: Paperlogy;
             font-size: 96px;
             font-weight: 800;
-            line-height: 1;
+            line-height: 1.2;
         }
         strong {
             color: var(--White, #fefefe);
@@ -27,12 +27,20 @@
         }
         ul {
             display: flex;
-            gap: 20px;
+            gap: 10px;
             color: var(--Grey-grey-50, #efefef);
             font-weight: 700;
             font-size: 20px;
             margin-top: 32px;
             line-height: 1;
+            li {
+                color: #fff;
+                border-right: 1px solid #fff;
+                padding-right: 10px;
+                &:nth-of-type(4) {
+                    border-right: none;
+                }
+            }
         }
     }
 

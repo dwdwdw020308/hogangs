@@ -707,7 +707,7 @@
           letter-spacing: 8.8px;
           text-transform: uppercase;
           color: transparent;
-          -webkit-text-stroke: 1px #b7e2df; /* 기본 라인 텍스트 */
+          -webkit-text-stroke: 3px #b7e2df; /* 기본 라인 텍스트 */
 
           /* 내부 색상용 배경 (가운데에서 퍼지도록 radial-gradient 사용) */
           background: radial-gradient(circle, #c2f0ed 0%, transparent 60%);
@@ -720,7 +720,7 @@
           transition: background-size 0.8s ease;
         }
         &:hover span {
-          -webkit-text-stroke: 0px;
+          -webkit-text-stroke: 1px;
           background-size: 200% 200%; /* hover 시 크게 확장 */
         }
       }

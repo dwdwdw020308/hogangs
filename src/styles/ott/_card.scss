@@ -1,18 +1,21 @@
 @use './../utils' as *;
 
 .card {
-    margin: 160px 260px;
+    background: var(--Grey-grey-900, #292929);
+    padding: 160px 260px;
     text-align: center;
     strong {
         font-family: Paperlogy;
-        font-size: 48px;
+        font-size: 40px;
         font-weight: 600;
+        color: var(--White, #fefefe);
+
         span {
-            color: var(--Green-green-750, #7abab6);
+            color: var(--Green-green-650, #8dd2ce);
         }
     }
     p {
-        color: var(--Grey-grey-600, #585858);
+        color: var(--Grey-grey-400, #818181);
         font-size: 24px;
         line-height: 140%;
         margin: 16px 0 68px;
@@ -26,13 +29,6 @@
             color: var(--Green-green-750, #7abab6);
         }
     }
-    // .swiper {
-    //     width: 100%;
-    // }
-    // .swiper-wrapper {
-    //     display: flex;
-    //     width: 100%;
-    // }
     .card-list {
         display: flex;
         justify-content: space-between;

@@ -166,7 +166,7 @@ const Main = () => {
             </div>
 
             {landingOn && <BubbleLanding onClose={handleCloseLanding} />}
-            <ChannelTalk />
+            
             <img ref={pawRef} src="/Paw.svg" alt="" className="paw-fixed" aria-hidden />
             <HogangsCursor src="/main/circle.svg" size={150} speed={3} />
         </>

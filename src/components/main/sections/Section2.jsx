@@ -1,12 +1,14 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Section2() {
     const sectionRef = useRef(null);
     const bgRef = useRef(null);
+    const navigate = useNavigate();
 
     // 3D 텍스트 교차용
     const swapRef = useRef(null);
@@ -186,7 +188,9 @@ export default function Section2() {
                     </div>
                 </div>
 
-                <span className="endtext reveal-on-end">Brand story</span>
+                <span style={{ cursor: 'pointer' }} className="endtext reveal-on-end">
+                    Brand story
+                </span>
             </div>
         </section>
     );

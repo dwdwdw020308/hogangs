@@ -1,3 +1,4 @@
+// 메인 con5- 카드
 import { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +22,7 @@ const Card = () => {
     return (
         <div className="card">
             <strong>
-                오늘 <span>뭐</span>볼까?
+                우리의 오늘을 특별하개 <span>호강스 pick !</span>
             </strong>
             <p>쉿! 카드 뒤에 호강이 PICK 영상이 숨어있어요!</p>
             <div className="card-list">
@@ -54,9 +55,7 @@ const Card = () => {
                     </ReactCardFlip>
                 ))}
             </div>
-            <p className="desc">
-                * 카드를 <span>클릭</span>해 보세요, 카드 뒷면이 보여요!
-            </p>
+            <p className="desc">* 살짝 클릭해 보세요, 카드 뒷면이 보여요!</p>
         </div>
     );
 };
