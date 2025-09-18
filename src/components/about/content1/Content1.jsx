@@ -12,6 +12,8 @@ const FINAL_R = 400;
 // 이미지
 const LARGE_IMG = '/about/about_visual.png'; // 풀배경(여백 X)
 const SMALL_IMG = '/about/Brandstory.png'; // 프레임 안(잘림 X)
+const TEXT_GIF = '/about/hobock.gif';
+const TEXT_GIF2 = '/about/hogang.gif';
 
 export default function Content1() {
     const sectionRef = useRef(null);
@@ -26,7 +28,12 @@ export default function Content1() {
     const wavedOnceRef = useRef(false);
     const waveTweenRef = useRef(null);
 
+    const gifRef1 = useRef(null);
+    const gifRef2 = useRef(null);
+
     useLayoutEffect(() => {
+        const gif1 = gifRef1.current;
+        const gif2 = gifRef2.current;
         const section = sectionRef.current;
         const stage = stageRef.current;
         const frame = frameRef.current;
@@ -68,6 +75,7 @@ export default function Content1() {
         gsap.set(frame, { width: '100%', borderRadius: 0 });
         gsap.set(imgS, { autoAlpha: 0 });
         gsap.set([left, right], { autoAlpha: 0 });
+        gsap.set([gif1, gif2], { autoAlpha: 1 });
 
         const showText = () => {
             if (visibleRef.current) return;
@@ -94,9 +102,19 @@ export default function Content1() {
                     stage.classList.toggle('with-sides', p >= 0.65);
                     if (p >= 0.7 && p <= 1) showText();
                     else hideText();
-                    if (p >= 0.92 && !wavedOnceRef.current) {
-                        wavedOnceRef.current = true;
-                        startWave();
+                    if (p >= 0.92) {
+                        if (!wavedOnceRef.current) {
+                            wavedOnceRef.current = true;
+                            startWave();
+                            // show-dots클래스
+                            const accentEls = section.querySelectorAll('.accent');
+                            accentEls.forEach((el) => el.classList.add('show-dots'));
+                        }
+                    } else {
+                        wavedOnceRef.current = false;
+                        // show-dots클래스
+                        const accentEls = section.querySelectorAll('.accent');
+                        accentEls.forEach((el) => el.classList.remove('show-dots'));
                     }
                 },
                 onLeaveBack() {
@@ -133,10 +151,15 @@ export default function Content1() {
         // 작은 이미지 페이드인(프레임 안에서 contain)
         tl.to(imgS, { autoAlpha: 1, duration: 0.6 }, 0.45);
 
+        if (gif1 && gif2) {
+            tl.to([gif1, gif2], { autoAlpha: 0, duration: 0.6 }, 0.2);
+        }
+
         function startWave() {
             const leftChars = Array.from(left.querySelectorAll('.ch'));
             const rightChars = Array.from(right.querySelectorAll('.ch'));
             const seq = leftChars.concat(rightChars);
+
             gsap.killTweensOf(seq);
             gsap.set(seq, { y: 0 });
             waveTweenRef.current = gsap.to(seq, {
@@ -169,9 +192,27 @@ export default function Content1() {
                     style={{ backgroundImage: `url(${LARGE_IMG})` }}
                     aria-hidden
                 />
+                <div
+                    className="gif-cover1"
+                    ref={gifRef1}
+                    style={{ backgroundImage: `url(${TEXT_GIF})` }}
+                    aria-hidden
+                />
+                <div
+                    className="gif-cover2"
+                    ref={gifRef2}
+                    style={{ backgroundImage: `url(${TEXT_GIF2})` }}
+                    aria-hidden
+                />
 
                 <h2 className="side left with-reflect" ref={leftRef}>
-                    <span className="accent">호강의</span>&nbsp;시작
+                    <span className="accent">호강</span>
+                    의&nbsp;시작
+                    <ul className="dots">
+                        <li className="dot"></li>
+                        <li className="dot"></li>
+                        {/* <li className="dot"></li> */}
+                    </ul>
                 </h2>
 
                 <figure className="hero-frame" ref={frameRef}>
@@ -185,8 +226,23 @@ export default function Content1() {
                 </figure>
 
                 <h2 className="side right with-reflect" ref={rightRef}>
-                    <span className="accent">호강스</span>에서
+                    <span className="accent">호강스</span>
+                    에서
+                    <ul className="dots">
+                        <li className="dot"></li>
+                        <li className="dot"></li>
+                        <li className="dot"></li>
+                    </ul>
                 </h2>
+            </div>
+            <div className="text_marquee_area">
+                <div className="marquee_wrapper">
+                    <div className="marquee__inner">
+                        <span>Hogangs</span>
+                        <span>Hogangs</span>
+                        <span>Hogangs</span>
+                    </div>
+                </div>
             </div>
         </section>
     );

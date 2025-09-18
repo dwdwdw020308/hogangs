@@ -10,7 +10,7 @@ const Content2 = () => {
     const rootRef = useRef(null);
 
     useEffect(() => {
-        AOS.init({ duration: 500, easing: 'ease-out', once: false, offset: 0 });
+        AOS.init({ duration: 800, easing: 'ease-out', once: false, offset: 0 });
         AOS.refresh();
     }, []);
 
@@ -89,13 +89,23 @@ const Content2 = () => {
     return (
         <section id="content2" ref={rootRef}>
             <div className="slogan">
-                <img
+                <img src="/about/TitleBox.png" alt="" />
+                <span
                     data-aos="fade-up"
-                    data-aos-easing="linear"
-                    data-aos-duration="500"
-                    src="/about/TitleBox.png"
-                    alt=""
-                />
+                    data-aos-delay="200" // 0.2초 후 실행
+                    data-aos-duration="2000"
+                    data-aos-easing="ease-out"
+                >
+                    HOGANGS
+                </span>
+                <h3
+                    data-aos="fade-up"
+                    data-aos-delay="600" // 0.6초 후 실행 (span보다 늦게)
+                    data-aos-duration="2000"
+                    data-aos-easing="ease-out"
+                >
+                    Brandstory
+                </h3>
             </div>
 
             <ul className="texttitle">
