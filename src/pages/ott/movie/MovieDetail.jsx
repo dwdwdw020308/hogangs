@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
+
 import DetailBanner from './DetailBanner';
+
 import Relate from '../movie/Relate';
 import Photo from '../movie/Photo';
 import Review from '../movie/Review';
 
 const MovieDetail = () => {
-    // const [activeTab, setActiveTab] = useState(() => {
-    //     return sessionStorage.getItem('activeTab') || 'relate';
-    // });
+
     const videolist = [
         { id: 1, img: '/ott/detail-thumb9.png', title: '말리와 나' },
         { id: 2, img: '/ott/detail-thumb2.png', title: '콜 오브 와일드' },
@@ -28,6 +28,7 @@ const MovieDetail = () => {
         { id: 7, img: '/ott/person7.png', name: '베티 길핀', type: '조연 • 글로리아' },
         { id: 8, img: '/ott/person8.png', name: '마그 헨젤버거', type: '조연 • 한나' },
     ];
+
 
     const [activeTab, setActiveTab] = useState('relate');
 
@@ -63,6 +64,7 @@ const MovieDetail = () => {
             </nav>
             {/* 탭 콘텐츠 */}
             <section className="tab-content">
+
                 {activeTab === 'relate' && <Relate videolist={videolist} person={person} />}
                 {activeTab === 'photo' && <Photo />}
                 {activeTab === 'review' && <Review />}
