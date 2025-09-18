@@ -1,0 +1,140 @@
+/* src/styles/admin/_videos.scss */
+
+.admin-videos {
+  .toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+
+    h1 { font-size: 20px; margin: 0; }
+
+    .right { display: flex; gap: 8px; align-items: center; }
+
+    .search {
+      width: 280px; height: 36px; padding: 0 12px;
+      border: 1px solid #e5e7eb; border-radius: 8px;
+      outline: none;
+      &:focus { border-color:#1677ff; box-shadow: 0 0 0 3px rgba(22,119,255,.15); }
+    }
+
+    .primary {
+      background: #1677ff; color: #fff; border: none; border-radius: 8px;
+      padding: 8px 14px; cursor: pointer;
+      &:hover { filter: brightness(1.05); }
+    }
+  }
+
+  .title-cell {
+    b { display:block }
+    .desc { color:#6b7280; font-size:12px; margin-top:2px; }
+  }
+
+  .row-actions {
+    display:flex; gap:8px;
+    button { border:1px solid #e5e7eb; border-radius:6px; padding:6px 10px; background:#fff; }
+    .danger { color:#fff; background:#ef4444; border:none; }
+  }
+
+  /* ───────────────────────────
+     모달 (AdminVideos 내부에 렌더링되는 경우)
+     만약 포털로 body에 붙이면 아래 두 선택자를 .admin-videos 밖(전역)으로 빼세요.
+  ─────────────────────────── */
+  .modal-backdrop{
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.35);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;                 /* 작은 화면 여백 */
+    z-index:1000;
+  }
+  .modal{
+    box-sizing: border-box;        /* 🔒 패딩 포함 계산 */
+    display: flex; flex-direction: column;
+    width: min(1200px, 96vw);      /* ▶ 더 넓게 */
+    max-height: 88vh;              /* ▶ 더 높게 */
+    overflow: auto;                /* 내용 길어지면 스크롤 */
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 30px 80px rgba(0,0,0,.25);
+    padding: 28px 32px;
+  }
+
+  /* 폼 레이아웃 */
+  .video-form{
+    display: grid;
+    grid-template-columns: 1fr;    /* 기본 1열 */
+    gap: 14px;
+    flex: 1;                       /* 모달 내부를 채우도록 */
+  }
+
+  /* 라벨/필드 기본 */
+  .video-form label {
+    display:block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color:#111827;
+  }
+
+  .video-form input,
+  .video-form select,
+  .video-form textarea{
+    width:100%;
+    border:1px solid #e6e6e6;
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:16px;
+    outline: none;
+    background: #fff;
+    &:focus { border-color:#1677ff; box-shadow: 0 0 0 3px rgba(22,119,255,.12); }
+  }
+  .video-form textarea{
+    min-height: 180px;             /* 설명 박스 높이↑ */
+    resize: vertical;
+  }
+
+  /* 반응형 2/3열 */
+  @media (min-width: 880px){
+    .video-form .row-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    .video-form .row-3{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:14px;
+    }
+    /* 설명, 파일 업로드 줄은 가로 꽉 채우기 */
+    .video-form label.full,
+    .video-form .files,
+    .video-form textarea{
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* 하단 버튼(스크롤해도 보이게) */
+  .video-form .actions{
+    display:flex; gap:10px; justify-content:flex-end;
+    margin-top:8px;
+    position: sticky; bottom:0;
+    background:#fff; padding-top:8px;
+  }
+
+  /* 테이블 정렬 아이콘 */
+  th { cursor: pointer; user-select: none; white-space: nowrap; }
+  th .sort {
+    margin-left: 6px;
+    border: 5px solid transparent;
+    border-top-color:#c7c7c7;
+    display:inline-block;
+    transform: translateY(2px);
+  }
+  th .sort.asc  { border-top-color: transparent; border-bottom: 5px solid #111827; transform: translateY(-2px); }
+  th .sort.desc { border-top: 5px solid #111827; }
+}
+
+/* ✅ 선택 사항: 모달 포털을 body에 렌더링한다면, 위 .modal-backdrop/.modal 블록을
+   아래처럼 전역으로 한 번 더 선언해두면 어디서든 스타일이 먹습니다. */
+/*
+.modal-backdrop{ ...same as above... }
+.modal{ ...same as above... }
+*/
