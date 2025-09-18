@@ -1,3 +1,4 @@
+@forward "./_datePicker";
 #hotel_reservation_calendar {
   width: 100%;
   height: 988px;
@@ -49,9 +50,10 @@
             align-items: center;
             .context {
               width: 231px;
-              height: 100px;
+              height: 100%;
               display: flex;
               flex-flow: column;
+              justify-content: center;
               .text1 {
                 color: #818181;
                 font-family: Pretendard;
@@ -84,21 +86,100 @@
               font-style: normal;
               font-weight: 700;
               line-height: normal;
-              svg {
-                // display: none;
-                display: block;
-              }
+            }
+            .done {
+              display: none;
             }
             &.check {
-              i {
-                svg {
-                  display: block;
-                }
+              //처리완료
+              .none {
+                display: none;
+              }
+              .done {
+                display: block;
+              }
+              .text1 {
+                color: #959595;
+                font-size: 17.797px;
+                font-weight: 600;
+              }
+              .text2 {
+                color: #959595;
+                font-size: 11.865px;
+              }
+            }
+            &.ing {
+              //처리중
+              .none {
+                background: #7abab6;
+                color: #fff;
+              }
+              .text1 {
+                color: #292929;
+                font-size: 17.797px;
+                font-weight: 600;
+              }
+              .text2 {
+                color: #585858;
+                font-size: 11.865px;
               }
             }
           }
         }
       }
+      .price_modal_btn {
+        width: 341px;
+        height: 56px;
+        border-radius: 56px;
+        background: var(--Green-green-750, #7abab6);
+        color: var(--White, #fff);
+        text-align: center;
+
+        /* Bold/16px */
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+    .calendar_area {
+      width: 760px;
+      height: 768px;
+      display: flex;
+      flex-flow: column;
+      gap: 60px;
+      border: 1px solid #000;
+      .notice_area {
+        width: 100%;
+        height: 97px;
+        display: flex;
+        flex-flow: column;
+        gap: 20px;
+        .title {
+          color: #000;
+          font-family: Paperlogy;
+          font-size: 30px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+        p {
+          color: #818181;
+          /* Medium/16px */
+          font-family: Pretendard;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 130%; /* 20.8px */
+        }
+      }
     }
   }
 }
+// ----------------------------------------------

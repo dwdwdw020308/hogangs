@@ -6,64 +6,72 @@ $yellow: #ffda00;
 *,
 *:before,
 *:after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 #main-visual {
-    width: 100%;
-    height: 100vh;
-    //
+  width: 100%;
+  height: 100vh;
+  //
+  position: relative;
+  .main_headline {
+    position: absolute;
+    top: 13%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
 }
 
 .intro {
-    position: relative;
-    height: auto;
-    transform: translateZ(0);
+  position: relative;
+  height: auto;
+  transform: translateZ(0);
 
-    img {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: auto;
-        z-index: 1;
-        mix-blend-mode: multiply;
-        transform: translateX(0%) translateY(0%);
-    }
+  img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    mix-blend-mode: multiply;
+    transform: translateX(0%) translateY(0%);
+  }
 }
 
 .intro .caption {
-    position: absolute;
-    bottom: 25%;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    z-index: 3;
-    color: white;
+  position: absolute;
+  bottom: 25%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 3;
+  color: white;
 
-    h1 {
-        display: inline-block;
-        width: 70%;
-        font-size: 6vw;
-        font-weight: 100;
-    }
+  h1 {
+    display: inline-block;
+    width: 70%;
+    font-size: 6vw;
+    font-weight: 100;
+  }
 }
 
 .intro .overlay {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+
+  svg {
     position: absolute;
-    bottom: -2px;
+    top: 0%;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2;
-    pointer-events: none;
-
-    svg {
-        position: absolute;
-        top: 0%;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+  }
 }

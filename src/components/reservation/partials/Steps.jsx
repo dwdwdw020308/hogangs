@@ -1,3 +1,5 @@
+import useStepStore from "../../../store/useStepStore";
+
 const HOTEL_STEPS = [
   {
     id: 1,
@@ -27,18 +29,24 @@ const HOTEL_STEPS = [
 ];
 
 const Steps = ({ type }) => {
+  const steps = useStepStore((s) => s.steps);
+
   let data = [];
   switch (type) {
     case "hotel":
       data = HOTEL_STEPS;
       break;
   }
+
   return (
     <ul className="steps">
-      {data.map((el) => (
-        <li key={el.id}>
-          {/* <i className="none">{el.id}</i> */}
-          <i>
+      {data.map((el, idx) => (
+        <li
+          key={el.id}
+          className={el.id === steps[idx].id ? steps[idx].process : ""}
+        >
+          <i className="none">{el.id}</i>
+          <i className="done">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
