@@ -37,8 +37,9 @@
       flex-direction: column;
       gap: 34px;
       .infoBox {
-        display: flex;
+        display: grid;
         gap: 34px;
+        grid-template-columns: repeat(3, 1fr);
         .infoBox-empty {
           display: flex;
           flex-direction: column;
@@ -92,55 +93,67 @@
         }
         .infoBox-add {
           display: flex;
-          gap: 18.5px;
           width: 463px;
           height: 454px;
           padding: 22px 26px 46.5px 25px;
           flex-direction: column;
           align-items: flex-end;
-          gap: 18.5px;
           border-radius: 30px;
           border: 4px solid var(--Green-green-200, #e2f8f7);
           background: var(--Green-green-50, #f9fefd);
           .edit {
-            width: 412px;
-            justify-content: flex-end;
-            display: flex;
-            margin-bottom: 18.5px;
+            display: flex; // 글자 + 화살표 나란히
+            align-items: center; // 세로 가운데 정렬
+            gap: 6px; // 글자와 화살표 사이 간격
+
             span {
-              position: absolute;
+              font-family: "Pretendard";
               font-size: 14px;
-              color: #4a9f99;
+              font-weight: 500;
+              color: #7abab6;
               cursor: pointer;
+
+              &:hover {
+                text-decoration: underline; // 마우스 올리면 밑줄
+              }
+            }
+
+            svg {
+              width: 6px;
+              height: 9px;
+              stroke: #7abab6; // 혹시 색상 덮어씌우기
             }
           }
+
           .box {
             display: flex;
             flex-direction: column;
             gap: 30px;
             .top {
               width: 412px;
+              display: flex;
+              justify-content: center;
               .hogangPic {
-                position: relative;
-                width: 200px;
-                height: 200px;
-                margin: 0 auto;
+                width: 216px;
+                height: 216px;
                 border-radius: 50%;
-                overflow: hidden;
+                // overflow: hidden;
+                position: relative;
 
                 .dog-photo {
                   width: 100%;
                   height: 100%;
                   object-fit: cover;
                   border-radius: 50%;
+                  border: 1px solid #e9e9e9;
                 }
 
                 .dog-bone {
                   position: absolute;
-                  bottom: -12px; // 사진 밖으로 살짝 나옴
+                  bottom: -53px; // 원하는 위치 조정
                   left: 50%;
                   transform: translateX(-50%);
-                  width: 60px;
+                  width: 100px;
                   height: auto;
                 }
               }
@@ -307,7 +320,7 @@
             cursor: pointer;
 
             &.sns:hover {
-              color: #135d38; // ✅ SNS 연동 hover 컬러
+              color: #3e8d88; //  SNS 연동 hover 컬러
             }
 
             &.logout {
@@ -315,7 +328,8 @@
               font-weight: 500;
 
               &:hover {
-                color: #d9534f; // ✅ 로그아웃은 빨간 느낌
+                // color: #d9534f; //  로그아웃은 빨간 느낌
+                text-decoration: underline;
               }
             }
           }
@@ -327,30 +341,66 @@
       flex-direction: column;
       gap: 34px;
       .tab {
-        width: 100%;
-        height: 54px;
         display: flex;
-        gap: 37px;
+        justify-content: space-between;
+        height: 66px;
         border-bottom: 1px solid #cecece;
-        li {
-          cursor: pointer;
-          color: var(--Grey-grey-300, #959595);
-          font-family: Paperlogy;
-          font-size: 24px;
-          font-style: normal;
-          font-weight: 600;
-          line-height: normal;
-          letter-spacing: 0.24px;
-          &.on {
-            color: var(--Black, #060606);
+        .couponTab {
+          display: flex;
+          gap: 20px;
+          margin-bottom: 20px;
+
+          li {
+            cursor: pointer;
+            color: var(--Grey-grey-300, #959595);
+            font-family: Paperlogy;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 0.24px;
+
+            &.on {
+              color: #000;
+              font-weight: 700;
+            }
+          }
+        }
+        .subTab {
+          display: flex;
+          gap: 12px;
+          margin-bottom: 30px;
+
+          li {
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            background: #fff;
+            color: #555;
+            color: var(--Grey-grey-600, #959595);
+            text-align: center;
+            font-family: Pretendard;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+
+            &.on {
+              border-radius: 40px;
+              border: 1px solid var(--Grey-grey-300, #959595);
+              background: var(--Grey-grey-50, #efefef);
+              color: #585858;
+            }
           }
         }
       }
       .couponList {
         display: grid;
+        gap: 43px;
         grid-template-columns: repeat(3, 1fr);
-        width: 100%;
-        gap: 39px;
       }
     }
   }
@@ -497,18 +547,37 @@
         align-items: center;
         gap: 20px;
         .hogangprofile {
-          display: flex;
           width: 216px;
           height: 216px;
-          padding: 44.031px 29.908px 44.031px 29.077px;
-          border-radius: 216px;
-          background: var(--Grey-gery-75, #e9e9e9);
-          img {
-            width: 157.015px;
-            height: 127.938px;
-            flex-shrink: 0;
+          border-radius: 50%;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &.default {
+            padding: 44.031px 29.908px 44.031px 29.077px;
+            background: var(--Grey-gery-75, #e9e9e9);
+
+            img {
+              width: 157.015px;
+              height: 127.938px;
+              flex-shrink: 0;
+            }
+          }
+
+          &.filled {
+            background: none;
+            padding: 0;
+            border: 1px solid #e9e9e9;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
           }
         }
+
         .btnWrap {
           display: flex;
           gap: 8px;
@@ -528,6 +597,7 @@
             font-family: Pretendard;
             font-size: 14px;
             font-weight: 500;
+            cursor: pointer;
           }
         }
       }
@@ -639,7 +709,7 @@
 
         //  체크됐을 때 스타일
         input:checked + p {
-          background: #b0dad8;
+          background: #7abab6;
           border-color: #b0dad8;
           color: #fff;
 

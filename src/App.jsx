@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Auth, AuthCallback, Grooming, Hotel, Main, MyPage, NotFiles, Ott, Reservation } from './pages';
 import Layout from './common/Layout';
@@ -57,6 +58,7 @@ const App = () => {
             </Routes>
         </>
     );
+
 };
 
 export default App;
