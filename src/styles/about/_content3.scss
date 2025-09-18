@@ -1,6 +1,7 @@
 @use './../utils/' as *;
 
 #content3 {
+    position: relative;
     box-sizing: border-box;
     height: 100vh;
     background: #d8f3f1;
@@ -11,15 +12,15 @@
     position: relative;
     background-image: url('/about/Brand_Identity.png');
     background-repeat: no-repeat;
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 17.2344vw;
-        background: url('/about/bone.png') repeat-x center;
-    }
+    // &::after {
+    //     content: '';
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 17.2344vw;
+    //     background: url('/about/bone.png') repeat-x center;
+    // }
     h2 {
         position: absolute;
         top: 10%;
@@ -155,6 +156,16 @@
             }
         }
     }
+    .boneBanner {
+        position: absolute;
+        width: 100%;
+        height: 78.9px;
+        background-size: auto 78px;
+        background: url('/about/bone.png') repeat-x;
+        animation: moveBanner 15s linear infinite;
+        bottom: 55px;
+        left: 0;
+    }
 }
 
 @keyframes fill {
@@ -163,5 +174,13 @@
     }
     to {
         stroke-dashoffset: 0;
+    }
+}
+@keyframes moveBanner {
+    from {
+        background-position-x: 0; // 시작 위치
+    }
+    to {
+        background-position-x: -1000px; // 왼쪽으로 이동 (값은 이미지 폭 맞춰 조정)
     }
 }

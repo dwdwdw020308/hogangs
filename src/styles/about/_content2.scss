@@ -6,10 +6,59 @@
     margin: auto;
     text-align: center;
     background-color: #fff;
-    padding: 5.4688vw 13.5417vw;
+    padding: 180px 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
 
     .slogan {
-        padding-bottom: 4.4333vw;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 254px;
+        justify-content: center;
+        align-items: center;
+        img {
+            z-index: 1;
+            width: 405px;
+            height: 254px;
+        }
+        span {
+            color: var(--Grey-grey-500, #616161);
+            text-align: center;
+            font-family: Paperlogy;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 1.44px;
+            z-index: 2;
+            position: absolute;
+            left: 50%;
+            top: 122px;
+            transform: translateX(-50%);
+        }
+        h3 {
+            position: absolute;
+            color: var(--Green-green-700, #8bbab7);
+            text-align: center;
+            font-family: Paperlogy;
+            font-size: 40px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            height: 59px;
+            letter-spacing: 0.4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-self: stretch;
+            z-index: 2;
+            left: 50%;
+            bottom: 52px;
+            transform: translateX(-50%);
+        }
     }
 
     .texttitle {
@@ -82,7 +131,6 @@
     .dogicon {
         display: flex;
         justify-content: center;
-        padding-top: 80px;
         padding-bottom: 150px;
 
         span {

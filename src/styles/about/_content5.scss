@@ -1,112 +1,114 @@
-@use "./../utils/" as *;
+@use './../utils/' as *;
 
 #about-content5 {
-  position: relative;
-  min-height: 100vh;
-  padding: 160px 260px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  .dogTabs {
-    display: flex;
-    gap: 66px;
-    .tabBtn {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      justify-content: center;
-      button {
-        width: 145px;
-        height: 145px;
-        border-radius: 1703px;
-        background: var(--Grey-grey-50, #efefef);
-        border: none;
-        &.active {
-          border-radius: 1703px;
-          border: 4px solid var(--Green-green-800, #4a9f99);
-          background: var(--Green-green-300, #d8f3f1);
-        }
-      }
-    }
-  }
-  .banner {
-    position: absolute;
-    width: 100%;
-    height: 78px;
-    background-size: auto 78px;
-    background: url("/about/boneBanner.png") repeat-x;
-    animation: moveBanner 15s linear infinite;
-    bottom: 0;
-    left: 0;
-  }
-}
-@keyframes moveBanner {
-  from {
-    background-position-x: 0; // 시작 위치
-  }
-  to {
-    background-position-x: -1000px; // 왼쪽으로 이동 (값은 이미지 폭 맞춰 조정)
-  }
-}
-
-#dogAbout {
-  display: flex;
-  justify-content: center;
-  gap: 77px;
-  .dogImg {
-    width: 474px;
-    height: 496px;
-    padding: 35px 60px 35.966px 59px;
-    border: 1px solid #000;
-  }
-  .about {
+    position: relative;
+    min-height: 100vh;
+    padding: 160px 260px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 33px;
-    width: 640px;
-    .name {
-      width: 100%;
-      height: 89px;
-      //   border-bottom: 1px solid #292929;
-      h2 {
-        color: var(--Grey-grey-900, #292929);
-        font-family: Paperlogy;
-        font-size: 64px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: 0.64px;
-      }
-    }
-    .section {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
-      align-self: stretch;
-      .title {
-        strong {
-          color: #127d75;
-          font-family: Paperlogy;
-          font-size: 24px;
-          font-style: normal;
-          font-weight: 600;
-          line-height: normal;
-          letter-spacing: 0.24px;
+    background: #eef9f8;
+    .dogTabs {
+        display: flex;
+        gap: 66px;
+        .tabBtn {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: center;
+            button {
+                width: 145px;
+                height: 145px;
+                border-radius: 1703px;
+                background: var(--Grey-grey-50, #efefef);
+                border: none;
+                cursor: pointer;
+                &.active {
+                    border-radius: 1703px;
+                    border: 4px solid var(--Green-green-800, #4a9f99);
+                    background: var(--Green-green-300, #d8f3f1);
+                }
+            }
         }
-      }
-      .content {
-        p {
-          color: var(--Grey-grey-900, #292929);
-          font-family: Pretendard;
-          font-size: 18px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 130%;
-        }
-      }
     }
-  }
+    .banner {
+        position: absolute;
+        width: 100%;
+        height: 78px;
+        background-size: auto 78px;
+        background: url('/about/boneBanner.png') repeat-x;
+        animation: moveBanner 15s linear infinite;
+        bottom: 0;
+        left: 0;
+    }
+}
+@keyframes moveBanner {
+    from {
+        background-position-x: 0; // 시작 위치
+    }
+    to {
+        background-position-x: -1000px; // 왼쪽으로 이동 (값은 이미지 폭 맞춰 조정)
+    }
+}
+
+#dogAbout {
+    display: flex;
+    justify-content: center;
+    gap: 77px;
+    .dogImg {
+        width: 474px;
+        height: 496px;
+        padding: 35px 60px 35.966px 59px;
+        border: 1px solid #000;
+    }
+    .about {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 33px;
+        width: 640px;
+        .name {
+            width: 100%;
+            height: 89px;
+            //   border-bottom: 1px solid #292929;
+            h2 {
+                color: var(--Grey-grey-900, #292929);
+                font-family: Paperlogy;
+                font-size: 64px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                letter-spacing: 0.64px;
+            }
+        }
+        .section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            align-self: stretch;
+            .title {
+                strong {
+                    color: #127d75;
+                    font-family: Paperlogy;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    letter-spacing: 0.24px;
+                }
+            }
+            .content {
+                p {
+                    color: var(--Grey-grey-900, #292929);
+                    font-family: Pretendard;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 130%;
+                }
+            }
+        }
+    }
 }
