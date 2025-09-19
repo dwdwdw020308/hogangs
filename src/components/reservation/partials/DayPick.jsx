@@ -1,15 +1,14 @@
-import { useState } from 'react';
 import { DayPicker, useDayPicker, useNavigation } from 'react-day-picker';
 import { differenceInCalendarDays, format, isSameDay, startOfToday } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
 import useReservationStore from '../../../store/useReservationStore';
+import { useState } from 'react';
 
-export default function DatePick({ setForm }) {
-    const [range, setRange] = useState({ from: undefined, to: undefined });
+export default function DayPick() {
+    const [selected, setSelected] = useState(undefined);
     const setStepProcesses = useReservationStore((s) => s.setStepProcesses);
     const setFormField = useReservationStore((s) => s.setFormField);
-
     const PrevIcon = ({ onClick }) => {
         return (
             <svg
@@ -62,43 +61,29 @@ export default function DatePick({ setForm }) {
         );
     };
 
-    const handleSelect = (r) => {
-        setRange(r);
+    const handleSelect = (day) => {
+        setSelected(day);
 
-        // 부분 선택 중일 때도 안전하게 병합
-        const payload = {};
-        if (r?.from) payload.startDate = format(r.from, 'yyyy-MM-dd');
-        if (r?.to) payload.endDate = format(r.to, 'yyyy-MM-dd');
-
-        // 숙박수(1박=다음날 오전까지)가 필요하면 함께 계산해서 넣기 (선택)
-        if (r?.from && r?.to) {
-            payload.nights = Math.max(1, differenceInCalendarDays(r.to, r.from));
-        } else {
-            // 진행 중이면 nights 제거(선택)
-            payload.nights = undefined; // setForm이 undefined를 무시하지 않으면 제거 로직 사용
+        if (!day) {
+            // 지우고 싶으면(선택 취소 시) 명시적으로 제거
+            setFormField('groomingDate', undefined);
+            return;
         }
-
-        setFormField('resType', 'hotel');
-        setFormField('startDate', payload.startDate);
-        setFormField('endDate', payload.endDate);
-        setFormField('nights', payload.nights);
+        setFormField('resType', 'grooming');
+        setFormField('groomingDate', format(day, 'yyyy-MM-dd'));
         setStepProcesses({ 1: 'done', 2: 'ing' });
     };
 
     return (
         <div className="calendar_area">
             <div className="notice_area">
-                <h3 className="title">입실·퇴실 날짜를 선택해 주세요</h3>
-                <p>
-                    체크인은 오전 8시부터 오후 6시까지 가능합니다.
-                    <br />
-                    1박은 입실 시간과 관계없이 다음날 오전 8시까지입니다.
-                </p>
+                <h3 className="title">미용 예약을 원하는 날짜를 선택해주세요.</h3>
+                <p>날짜와 시간을 선택하면 예약 가능 여부를 확인할 수 있습니다.</p>
             </div>
 
             <DayPicker
-                mode="range"
-                selected={range}
+                mode="single"
+                selected={selected}
                 onSelect={handleSelect}
                 locale={ko}
                 showOutsideDays

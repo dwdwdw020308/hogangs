@@ -1,0 +1,225 @@
+.rdp-root {
+    --rdp-day-width: calc(760px / 7);
+    --rdp-day-height: 78px;
+    --rdp-chip-size: min(var(--rdp-day-width), var(--rdp-day-height));
+
+    --rdp-today-color: #060606;
+    --rdp-range_middle-background-color: #8dd2ce;
+    --hg-range: #8dd2ce;
+    .rdp-selected > button,
+    .rdp-range_start > button,
+    .rdp-range_end > button,
+    .rdp-day_range_middle > button,
+    .rdp-day:hover > button,
+    .rdp-day:focus-within > button,
+    .rdp-selected .rdp-day_button,
+    .rdp-range_start .rdp-day_button,
+    .rdp-range_end .rdp-day_button,
+    .rdp-day_range_middle .rdp-day_button {
+        background: transparent !important;
+        color: inherit !important;
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    border-bottom: 2px solid #e3e3e3;
+    .rdp-month_caption {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 27px;
+        .rdp-caption_label {
+            color: #060606;
+            text-align: center;
+            font-family: Pretendard;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 36.579px; /* 166.268% */
+        }
+    }
+}
+/* ✅ 단일 선택 하이라이트 */
+.calendar_area td.rdp-selected > button,
+.calendar_area td.rdp-selected .rdp-day_button {
+    background: #8dd2ce !important;
+    color: #fff !important;
+    border-radius: 9999px !important;
+}
+
+/* 버튼이 셀을 정확히 채우게 */
+.rdp-day > button,
+.rdp-day .rdp-day_button {
+    width: var(--rdp-day-width);
+    height: var(--rdp-day-height);
+    margin: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 9999px; /* 단일 선택 시에도 pill */
+    display: flex; /* 라벨 두 줄 레이아웃용 */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+/* 알약(범위) 채우기 */
+.rdp-range_middle {
+    background: var(--hg-range) !important;
+    color: #fff !important;
+    border-radius: 0; /* 가운데는 직선 */
+}
+.rdp-range_start {
+    background: var(--hg-range) !important;
+    color: #fff !important;
+    border-radius: 9999px 0 0 9999px;
+}
+.rdp-range_end {
+    background: var(--hg-range) !important;
+    color: #fff !important;
+    border-radius: 0 9999px 9999px 0;
+}
+/* 시작=끝(하루만 선택) */
+.rdp-range_start .rdp-range_end > button,
+.rdp-range_start .rdp-range_end button {
+    border-radius: 9999px;
+}
+
+/* 라벨 공통 */
+.rdp-range_start > button::after,
+.rdp-range_end > button::after,
+.rdp-range_start .rdp-day_button::after,
+.rdp-range_end .rdp-day_button::after {
+    content: '';
+    display: block;
+    font-size: 16px;
+    line-height: 1;
+    color: #fefefe;
+    font-weight: 400;
+    line-height: 25.148px;
+    font-family: Quicksand;
+}
+
+.rdp-range_start > button::after,
+.rdp-range_start .rdp-day_button::after {
+    content: '입실';
+}
+
+.rdp-range_end > button::after,
+.rdp-range_end .rdp-day_button::after {
+    content: '퇴실';
+}
+
+//=========================================================
+.calendar_area .rdp {
+    width: 760px;
+    height: 611px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.rdp-month {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* 캡션 ↔ 요일 ↔ 달력 간격 */
+    flex: 1; /* 높이 분배 */
+}
+
+.rdp-weekdays {
+    height: 60px;
+    border-top: 2px solid #e3e3e3;
+    display: table-row; /* 테이블 레이아웃 유지 */
+}
+
+/* 균등 7열 */
+.rdp-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+//=======================================================
+.rdp-weekdays th,
+.rdp-day {
+    color: #4a4a4a;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20.004px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32.007px; /* 160% */
+}
+
+// 일요일 색 변경
+.rdp-weekdays th,
+.rdp-day {
+    &:first-child {
+        color: #ff635e;
+    }
+}
+
+.rdp-day button {
+    margin: auto;
+}
+
+/* 캘린더 전체 폭/정렬은 래퍼에 걸어줘 */
+.calendar_area .rdp {
+    width: 760px;
+    margin: 0 auto;
+}
+
+/* 표 레이아웃 고정: 7등분이 예쁘게 떨어짐 */
+.rdp-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+/* 요일 행: 테이블 기본 흐름 유지 (flex 금지) */
+.rdp-weekdays {
+    height: 81px;
+    border-top: 2px solid #e3e3e3;
+}
+
+/* 각 요일 셀 스타일만 손봐 */
+.rdp-weekday {
+    text-align: center;
+    padding: 12px 0;
+    font-weight: 600;
+    color: #9ca3af;
+}
+
+.rdp-month {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 27px;
+}
+.cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 233px;
+}
+.caption {
+    color: #060606;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 36.579px; /* 166.268% */
+}
+.my-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    cursor: pointer;
+}

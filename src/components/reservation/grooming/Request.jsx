@@ -5,14 +5,14 @@ const Request = () => {
     const [request, setRequest] = useState('');
     const setFormField = useReservationStore((s) => s.setFormField);
     const placeholder =
-        '예) 사료 두 번 급여해주세요, 특이 질병 있음 (약 복용 시간 오전 9시), 사료 대신 간식 급여, 분리불안이 심해요';
+        '예) 얼굴은 둥글게, 꼬리는 짧게 / 피부 알러지 있어 순한 샴푸 사용 / 귀청소 꼼꼼히 부탁드려요';
     const onChange = (e) => {
         const value = e.target.value;
         setRequest(value);
         setFormField('requestMessage', value);
     };
     return (
-        <section id="hotel_reservation_request">
+        <section id="grooming_reservation_request">
             <div className="inner">
                 <div className="block"></div>
                 <div className="check_area">

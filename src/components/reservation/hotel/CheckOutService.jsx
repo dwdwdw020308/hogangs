@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import Radio from '../partials/Radio';
+import useReservationStore from '../../../store/useReservationStore';
 
 const CHECKOUT_TIME = ['09 : 00', '10 : 00', '11 : 00', '12 : 00'];
 const CheckOutService = () => {
     const [enableTime, setEnableTime] = useState(false);
     const [selectTime, setSelectTime] = useState(0);
+    const setStepProcesses = useReservationStore((s) => s.setStepProcesses);
+    const setFormField = useReservationStore((s) => s.setFormField);
+    const onClick = (idx) => {
+        setSelectTime(idx + 1);
+        setFormField('checkOutTime', CHECKOUT_TIME[idx]);
+        setStepProcesses({ 2: 'done', 3: 'ing' });
+    };
     return (
         <section id="hotel_reservation_checkout">
             <div className="inner">
@@ -23,7 +31,7 @@ const CheckOutService = () => {
                                 <li
                                     className={selectTime === idx + 1 ? 'check' : ''}
                                     onClick={() => {
-                                        setSelectTime(idx + 1);
+                                        onClick(idx);
                                     }}
                                 >
                                     {i}

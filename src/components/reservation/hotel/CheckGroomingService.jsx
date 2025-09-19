@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import RadioInput from '../../common/RadioInput';
+import useReservationStore from '../../../store/useReservationStore';
 
 const GROOMING_TYPE = [
     { id: 1, type: '목욕', des: '기본 세정 + 드라이' },
@@ -9,11 +10,50 @@ const GROOMING_TYPE = [
     { id: 5, type: '가위컷', des: '세밀한 수작업 컷' },
 ];
 const CheckGroomingService = () => {
-    const [beauty, setBeauty] = useState('no');
+    const [beauty, setBeauty] = useState('');
     const [option, setOption] = useState('');
     const [select, setSelect] = useState(0);
-    const onChange = (value) => setBeauty(value);
-    const onChangeOption = (value) => setOption(value);
+    const setStepProcesses = useReservationStore((s) => s.setStepProcesses);
+    const setFormField = useReservationStore((s) => s.setFormField);
+
+    const onChange = (value) => {
+        setBeauty(value);
+        setFormField('groomingService', value);
+        if (value === 'no') {
+            setStepProcesses({ 4: 'done', 5: 'ing' });
+        }
+    };
+    const onSelect = (value) => {
+        setSelect(value);
+        const type = GROOMING_TYPE.find((i) => i.id === value).type;
+        setFormField('type', type);
+    };
+    const onChangeOption = (value) => {
+        setOption(value);
+        let option = '';
+        switch (value) {
+            case 'option1':
+                option = '얼굴컷 / 발톱 / 귀청소';
+                break;
+            case 'option2':
+                option = '엉킴 제거';
+                break;
+            case 'option3':
+                option = '발바닥 각질 케어';
+                break;
+            case 'option4':
+                option = '눈물 자국 케어';
+                break;
+            case 'option5':
+                option = '탄산스파';
+                break;
+            case 'option6':
+                option = '선택 안함';
+                break;
+        }
+        setFormField('option', option);
+        setStepProcesses({ 4: 'done', 5: 'ing' });
+    };
     return (
         <section id="hotel_reservation_grooming">
             <div className="inner">
@@ -45,7 +85,7 @@ const CheckGroomingService = () => {
                                 <li
                                     key={el.id}
                                     onClick={() => {
-                                        setSelect(el.id);
+                                        onSelect(el.id);
                                     }}
                                     className={el.id === select ? 'check' : ''}
                                 >

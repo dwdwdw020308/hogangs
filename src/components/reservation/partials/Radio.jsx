@@ -1,9 +1,19 @@
 import { useEffect, useState } from 'react';
 import RadioInput from '../../common/RadioInput';
+import useReservationStore from '../../../store/useReservationStore';
 
 const Radio = ({ setEnableTime }) => {
-    const [value, setValue] = useState('ok'); // "extend" | "ok"
-    const onChange = (value) => setValue(value);
+    const [value, setValue] = useState(''); // "extend" | "ok"
+    const setStepProcesses = useReservationStore((s) => s.setStepProcesses);
+    const setFormField = useReservationStore((s) => s.setFormField);
+    const onChange = (value) => {
+        setValue(value);
+        const payload = { checkOut: value };
+        setFormField('checkOut', value);
+        if (value === 'ok') {
+            setStepProcesses({ 2: 'done', 3: 'ing' });
+        }
+    };
 
     useEffect(() => {
         setEnableTime(value === 'extend');

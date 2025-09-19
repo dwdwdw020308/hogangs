@@ -1,6 +1,16 @@
-
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Auth, AuthCallback, Grooming, Hotel, Main, MyPage, NotFiles, Ott, Reservation } from './pages';
+import {
+    Auth,
+    AuthCallback,
+    Grooming,
+    Hotel,
+    Main,
+    MyPage,
+    NotFiles,
+    Ott,
+    Reservation,
+    Pay,
+} from './pages';
 import Layout from './common/Layout';
 import './styles/index.scss';
 import AboutUs from './pages/About';
@@ -39,6 +49,7 @@ const App = () => {
                     <Route path="hotel" element={<Hotel />} />
                     <Route path="grooming" element={<Grooming />} />
                     <Route path="reservation" element={<Reservation />} />
+                    <Route path="pay" element={<Pay />} />
                 </Route>
                 <Route path="*" element={<NotFiles />} />
                 <Route path="oauth" element={<Auth />} />
@@ -54,11 +65,9 @@ const App = () => {
                         {/*<Route path="reservation" element={<AdminReservation />} /> */}
                     </Route>
                 </Route>
-
             </Routes>
         </>
     );
-
 };
 
 export default App;

@@ -17,7 +17,7 @@ const CheckWeight = () => {
         setStepProcesses({ 3: 'done', 4: 'ing' });
     };
     return (
-        <section id="hotel_reservation_weight">
+        <section id="grooming_reservation_weight">
             <div className="inner">
                 <div className="block"></div>
                 <div className="check_area">
