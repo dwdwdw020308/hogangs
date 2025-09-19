@@ -108,7 +108,6 @@ const defaultReviews = [
 ];
 
 const Review = () => {
-    // ✅ 초기화: 저장된 내 리뷰를 맨 앞에, 기본 리뷰를 뒤에 배치
     const [reviews, setReviews] = useState(() => {
         const saved = JSON.parse(localStorage.getItem('reviews')) || [];
         const sortedSaved = saved.sort((a, b) => b.createdAt - a.createdAt);
@@ -252,7 +251,7 @@ const Review = () => {
                             return (
                                 <FaStar
                                     key={i}
-                                    size={38}
+                                    size={34}
                                     color={starValue <= (hover || rating) ? '#4A9F99' : '#959595'}
                                     onClick={() => setRating(starValue)}
                                     onMouseEnter={() => setHover(starValue)}
@@ -268,7 +267,7 @@ const Review = () => {
                         {[...Array(5)].map((_, i) => (
                             <FaStar
                                 key={i}
-                                size={38}
+                                size={34}
                                 color={i < Math.round(averageRating) ? '#4A9F99' : '#959595'}
                             />
                         ))}

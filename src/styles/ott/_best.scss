@@ -2,12 +2,13 @@
 
 .best-movie {
     background: #fff;
-    padding: 160px 0 160px 437px;
+    padding: 160px 0 160px 260px;
     display: flex;
     position: relative;
     height: 1080px;
+
     .left {
-        width: 407px;
+        width: 610px;
         padding-right: 50px;
         position: relative;
 
@@ -37,18 +38,17 @@
 
         .bg {
             position: absolute;
-            left: -450px;
-            top: 430px;
-            color: var(--Green-green-100, #eef9f8);
-            font-size: 240px;
+            left: -272px;
+            top: 334px;
+            color: var(--Green-green-500, #b7e2df);
+            font-size: 230px;
             font-family: Paperlogy;
-            opacity: 0.6;
             font-weight: 800;
-            line-height: 249px;
+            line-height: 90%;
+            opacity: 0.3;
             pointer-events: none;
             user-select: none;
-            // z-index: -1;
-            will-change: transform; // 렌더링 최적화
+            will-change: transform;
         }
     }
 
@@ -56,41 +56,67 @@
         flex: 1;
         overflow: hidden;
 
-        .slide-wrapper {
-            overflow: visible !important;
-            padding-top: 14px;
-            padding-left: 25px;
-            display: flex;
-            height: 520px; // Swiper 컨테이너 높이 고정
-
-            .swiper-slide {
-                transform: scale(1);
-                transition: transform 0.4s ease;
-            }
-
-            .swiper-slide.first-active {
-                transform: scale(1.09);
-                transition: transform 0.4s ease;
-                z-index: 2;
-            }
-        }
-
+        .slide-wrapper,
         .swiper {
             overflow: visible !important;
             height: 520px;
         }
 
+        .slide-wrapper {
+            padding-top: 14px;
+            padding-left: 37px;
+            display: flex;
+
+            .swiper-slide {
+                transform: scale(1);
+                transition: transform 0.4s ease;
+                // &.swiper-slide-active {
+                // }
+                &.first-active {
+                    transform: scale(1.17);
+                    transform-origin: center right;
+                    z-index: 2;
+                    // margin-right: 80px !important;
+
+                    .poster {
+                        .title,
+                        .date {
+                            display: inline-block;
+                        }
+
+                        &:hover {
+                            > img {
+                                filter: brightness(30%);
+                                transition: filter 0.2s ease;
+                            }
+
+                            .btn {
+                                display: flex;
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+
+                &:not(.first-active) {
+                    .poster img {
+                        margin-top: 27px;
+                    }
+                }
+            }
+        }
+
         .poster {
-            width: 100%;
-            flex-shrink: 0;
+            width: 290px;
+            // height: 421px;
             position: relative;
-            height: 500px;
+            flex-shrink: 0;
 
             img {
                 width: 100%;
-                height: 429px;
-                display: block;
+                height: 412px;
                 object-fit: cover;
+                display: block;
             }
 
             .title,
@@ -111,12 +137,12 @@
                 font-size: 18px;
                 margin-top: 6px;
             }
-            // 지금보러가기버튼
+
             .btn {
-                display: flex;
+                display: none;
+                align-items: center;
                 gap: 12px;
                 color: #fff;
-                align-items: center;
                 border-radius: 42px;
                 padding: 10.4px 38.75px 9.6px 37.25px;
                 position: absolute;
@@ -124,47 +150,14 @@
                 top: 38%;
                 cursor: pointer;
                 transition: opacity 0.3s ease;
-                display: none;
+
                 p {
                     font-size: 24px;
                 }
+
                 img {
                     width: 30px;
                     height: 27px;
-                }
-            }
-        }
-
-        .swiper-slide.first-active {
-            opacity: 1;
-            transform: scale(1.09);
-            transform-origin: center right;
-            z-index: 2;
-
-            .poster {
-                .title,
-                .date {
-                    display: inline-block;
-                }
-
-                &:hover {
-                    > img {
-                        filter: brightness(30%);
-                        transition: filter 0.2s ease;
-                    }
-
-                    .btn {
-                        display: flex;
-                        opacity: 1;
-                    }
-                }
-            }
-        }
-
-        .swiper-slide:not(.first-active) {
-            .poster {
-                img {
-                    margin-top: 18px;
                 }
             }
         }
@@ -172,8 +165,8 @@
 
     .btns {
         position: absolute;
-        top: 510px;
-        left: 410px;
+        top: 373px;
+        left: 235px;
         display: flex;
         z-index: 10;
     }
@@ -183,28 +176,20 @@
         background: none;
         border: none;
         font-size: 42px;
-        width: 60px;
+        width: 50px;
         cursor: pointer;
         margin-right: 18px;
         transition: transform 0.2s ease;
-
-        &:hover {
-            // transform: scale(1.1);
-        }
     }
 
     .icon {
         position: absolute;
         transition: opacity 0.2s ease;
         opacity: 0;
-    }
 
-    .icon.show {
-        opacity: 1;
-    }
-
-    .icon.hide {
-        opacity: 0;
+        &.show {
+            opacity: 1;
+        }
     }
 
     .progress {
@@ -212,8 +197,8 @@
         height: 4px;
         background: #e9e9e9;
         margin-top: 70px;
-        overflow: hidden;
         position: relative;
+        overflow: hidden;
 
         .bar {
             background: #4a9f99;

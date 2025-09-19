@@ -19,7 +19,7 @@ const Movie = () => {
         },
         { id: 3, img: '/ott/movie3.png', title: '토고', type: '서바이벌', date: '2019' },
         { id: 4, img: '/ott/movie4.png', title: '콜 오브 와일드', type: '모험', date: '2020' },
-        { id: 5, img: '/ott/movie5.png', title: '볼트', type: '어드벤처', date: '2008' },
+        { id: 5, img: '/ott/movie5.png', title: '말리와 나', type: '어드벤처', date: '2008' },
         { id: 6, img: '/ott/movie6.png', title: '도그', type: '코미디', date: '2022' },
         { id: 7, img: '/ott/movie7.png', title: '레이싱 인 더 레인', type: '스포츠', date: '2019' },
         { id: 8, img: '/ott/movie8.png', title: '더 웨이 홈', type: '모험', date: '2019' },

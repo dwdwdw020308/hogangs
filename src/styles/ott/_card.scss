@@ -1,9 +1,13 @@
-@use './../utils' as *;
-
 .card {
     background: var(--Grey-grey-900, #292929);
     padding: 160px 260px;
+    // margin: 160px 260px;
     text-align: center;
+    position: relative;
+    // perspective: 1000px;
+    height: 1120px;
+    // border: 1px solid #fff;
+
     strong {
         font-family: Paperlogy;
         font-size: 40px;
@@ -14,23 +18,167 @@
             color: var(--Green-green-650, #8dd2ce);
         }
     }
+
     p {
         color: var(--Grey-grey-400, #818181);
         font-size: 24px;
         line-height: 140%;
         margin: 16px 0 68px;
     }
+
     .desc {
+        margin-top: 100px;
         color: var(--Grey-grey-300, #959595);
         font-size: 18px;
         line-height: 140%;
-        margin-top: 32px;
-        span {
-            color: var(--Green-green-750, #7abab6);
+        display: inline-flex; // 아이콘 + 글씨 나란히
+        align-items: center;
+        img {
+            margin-right: 6px;
+            display: block;
         }
     }
-    .card-list {
+
+    .carousel-track {
+        width: 100%;
+        height: 450px;
+        margin-top: 120px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        transform-style: preserve-3d;
+        // position: relative;
+        .card-back {
+            position: relative;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5); // 반투명 검정
+                z-index: 1;
+            }
+
+            button {
+                position: absolute;
+                bottom: 50%;
+                right: 24%;
+                z-index: 2;
+                display: inline-flex;
+                align-items: center;
+                background: transparent;
+                border: none;
+                text-align: center;
+                cursor: pointer;
+                img {
+                    width: 36px;
+                    margin-left: 14px;
+                }
+                span {
+                    color: #fff;
+                    font-size: 28px;
+                    font-weight: 500;
+                }
+                opacity: 0;
+            }
+            &:hover {
+                button {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .card-wrap {
+        position: absolute;
+        width: 280px;
+        height: 380px;
+        border-radius: 27.221px; // 디자인 가이드 반영
+        overflow: hidden;
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    /* 중앙 카드 */
+    .center {
+        width: 404px;
+        height: auto;
+        z-index: 10;
+        // transform: scale(1.1) ;
+        box-shadow: 0 0.907px 1.815px rgba(0, 0, 0, 0.05), 0 0 22.684px rgba(0, 0, 0, 0.35); // 디자인 값 그대로
+    }
+
+    /* 좌우 카드 */
+    .left-1 {
+        width: 381.1px;
+        height: 519.92px;
+        z-index: 6;
+        transform: translateX(-305px);
+        opacity: 0.9;
+        box-shadow: 0 0.974px 1.949px rgba(0, 0, 0, 0.05), 0 0 31.18px rgba(0, 0, 0, 0.35);
+    }
+
+    .left-2 {
+        width: 350.25px;
+        height: 480px;
+        z-index: 3;
+        transform: translateX(-520px);
+        opacity: 0.5;
+        box-shadow: 0 0.974px 1.949px rgba(0, 0, 0, 0.05), 0 0 31.18px rgba(0, 0, 0, 0.35);
+    }
+
+    .right-1 {
+        width: 381.1px;
+        height: auto;
+        z-index: 6;
+        transform: translateX(305px);
+        opacity: 0.9;
+        box-shadow: 0 0.974px 1.949px rgba(0, 0, 0, 0.05), 0 0 31.18px rgba(0, 0, 0, 0.35);
+    }
+
+    .right-2 {
+        width: 350.25px;
+        height: auto;
+        z-index: 3;
+        transform: translateX(520px);
+        opacity: 0.5;
+        box-shadow: 0 0.974px 1.949px rgba(0, 0, 0, 0.05), 0 0 31.18px rgba(0, 0, 0, 0.35);
+    }
+
+    .hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .nav-arrow {
+        position: absolute;
+        top: 56%;
+        transform: translateY(-56%);
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 20;
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+        border: none;
+        outline: none;
+        &.left {
+            left: 180px;
+        }
+        &.right {
+            right: 180px;
+        }
     }
 }
