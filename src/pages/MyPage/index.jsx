@@ -50,7 +50,7 @@ const MyPage = () => {
       </div>
       <div className="contents">
         {activeTab === "content1" && (
-          <MyContent1 onUpdateDogProfile={setDogProfile} /> //  props 전달
+          <MyContent1 onUpdateDogProfile={setDogProfile} />
         )}
         {activeTab === "content2" && <MyContent2 />}
         {activeTab === "content3" && <MyContent3 />}
