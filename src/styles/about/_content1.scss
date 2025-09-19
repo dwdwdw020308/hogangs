@@ -1,294 +1,255 @@
 :root {
-    --header-h: 80px;
-    --frame-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  --header-h: 80px;
+  --frame-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-x: clip;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: clip;
 }
 
 /* 섹션 풀폭 */
 #content1 {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: #fff;
+
+  .stage {
     position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    background: #fff;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    justify-items: center;
+    overflow: hidden;
+    will-change: transform;
+    line-height: 0;
 
-    .stage {
+    &.with-sides {
+      grid-template-columns: 1fr auto 1fr;
+      column-gap: 30px;
+    }
+    @supports (min-height: 100svh) {
+      min-height: 100svh;
+    }
+  }
+
+  /* ★ 큰 이미지 전용 레이어 */
+  .bg-cover {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    will-change: opacity, transform;
+  }
+
+  .gif-cover1 {
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    width: 306.89px;
+    height: 308.825px;
+    transform: rotate(-30deg);
+    left: 30px;
+    top: 256px;
+  }
+  .gif-cover2 {
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    width: 318.262px;
+    height: 332.957px;
+    transform: rotate(34.011deg);
+    right: 30px;
+    top: 200px;
+  }
+
+  /* 프레임 */
+  .hero-frame {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: var(--frame-shadow);
+    line-height: 0;
+
+    .img-small {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      backface-visibility: hidden;
+      background: #fff;
+    }
+    @supports (height: 100svh) {
+      height: 100svh;
+    }
+  }
+
+  /* 사이드 텍스트 */
+  .side {
+    position: relative;
+    z-index: 2;
+    font-family: Paperlogy, Pretendard, system-ui, -apple-system, sans-serif;
+    font-weight: 800;
+    white-space: nowrap;
+    line-height: 1.1;
+    font-size: clamp(40px, 7vw, 110px);
+    color: #000;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+
+    .dots {
+      position: absolute;
+      top: -65%;
+      display: flex;
+      width: 295px;
+      height: 98px;
+      //   .dot {
+      //     width: 95px;
+      //     height: 100%;
+      //     position: relative;
+      //     // animation: dot-bounce 1.2s ease-in-out;
+      //     &::after {
+      //       content: "";
+      //       width: 14px;
+      //       height: 14px;
+      //       border-radius: 100%;
+      //       background: #7abab6;
+      //       position: absolute;
+      //       left: 50%;
+      //       top: 50%;
+      //       transform: translate(-50%, -50%);
+      //     }
+      //   }
+      .dot {
         position: relative;
-        width: 100%;
-        min-height: 100vh;
-        min-height: 100dvh;
-        z-index: 1;
-        display: grid;
-        grid-template-columns: auto;
-        align-items: center;
-        justify-items: center;
-        overflow: hidden;
-        will-change: transform;
-        line-height: 0;
+        width: 95px;
+        height: 100%;
 
-        &.with-sides {
-            grid-template-columns: 1fr auto 1fr;
-            column-gap: 30px;
+        .dot-inner {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: #7abab6;
+          transform: translate(-50%, -50%);
         }
-        @supports (min-height: 100svh) {
-            min-height: 100svh;
-        }
+      }
     }
 
-    /* ★ 큰 이미지 전용 레이어 */
-    .bg-cover {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        will-change: opacity, transform;
+    .ch {
+      display: inline-block;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
-    .gif-cover1 {
-        position: absolute;
-        background-size: cover;
-        background-position: center;
-        width: 306.89px;
-        height: 308.825px;
-        transform: rotate(-30deg);
-        left: 30px;
-        top: 256px;
-    }
-    .gif-cover2 {
-        position: absolute;
-        background-size: cover;
-        background-position: center;
-        width: 318.262px;
-        height: 332.957px;
-        transform: rotate(34.011deg);
-        right: 30px;
-        top: 200px;
+    /* wave 효과 */
+    .ch.wave {
+      display: inline-block;
+      animation: wave-bounce 2s ease-in-out;
+      animation-delay: calc(0.1s * var(--i));
     }
 
-    /* 프레임 */
-    .hero-frame {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        height: 100dvh;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        border-radius: 0;
-        box-shadow: var(--frame-shadow);
-        line-height: 0;
-
-        .img-small {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            backface-visibility: hidden;
-            background: #fff;
-        }
-        @supports (height: 100svh) {
-            height: 100svh;
-        }
+    .accent .ch {
+      color: #7abab6;
     }
 
-    /* 사이드 텍스트 */
-    .side {
-        position: relative;
-        z-index: 2;
-        font-family: Paperlogy, Pretendard, system-ui, -apple-system, sans-serif;
-        font-weight: 800;
-        white-space: nowrap;
-        line-height: 1.1;
-        font-size: clamp(40px, 7vw, 110px);
-        color: #000;
-        pointer-events: none;
-        opacity: 0;
-        visibility: hidden;
-        .dots {
-            position: absolute;
-            top: -65%;
-            display: flex;
-            width: 295px;
-            height: 98px;
-            .dot {
-                width: 95px;
-                height: 100%;
-                position: relative;
-                animation: dot-bounce 1.2s ease-in-out;
-                &::after {
-                    content: '';
-                    width: 14px;
-                    height: 14px;
-                    border-radius: 100%;
-                    background: #7abab6;
-                    position: absolute;
-                    left: 50%;
-                    top: 50%;
-                    transform: translate(-50%, -50%);
-                }
-            }
-        }
-
-        // .dot {
-        //     position: absolute;
-        //     top: -0.6rem;
-        //     width: 0.2em;
-        //     height: 0.2em;
-        //     border-radius: 50%;
-        //     background: #7abab6;
-        //     animation: dot-bounce 1.2s ease-in-out infinite;
-        //     margin-left: -0.9em;
-        // }
-
-        .ch {
-            display: inline-block;
-            will-change: transform;
-            transform: translateZ(0);
-        }
-
-        /* wave 효과 */
-        .ch.wave {
-            display: inline-block;
-            animation: wave-bounce 2s ease-in-out;
-            animation-delay: calc(0.1s * var(--i));
-        }
-
-        .accent .ch {
-            color: #7abab6;
-        }
-
-        &.left {
-            justify-self: end;
-            text-align: right;
-        }
-        &.right {
-            justify-self: start;
-            text-align: left;
-        }
+    &.left {
+      justify-self: end;
+      text-align: right;
     }
-
-    /* wave keyframes */
-    @keyframes wave-bounce {
-        0% {
-            transform: translateY(0);
-        }
-        20% {
-            transform: translateY(-14px);
-        }
-        40%,
-        100% {
-            transform: translateY(0);
-        }
+    &.right {
+      justify-self: start;
+      text-align: left;
     }
-    @keyframes dot-bounce {
-        0% {
-            transform: translateY(0);
-        }
-        20% {
-            transform: translateY(-14px);
-        }
-        40%,
-        100% {
-            transform: translateY(0);
-        }
+  }
+
+  /* wave keyframes */
+  @keyframes wave-bounce {
+    0% {
+      transform: translateY(0);
     }
-
-    .accent {
-        display: inline-block;
-        position: relative;
-        color: #7abab6;
-
-        // &::before,
-        // &::after {
-        //     content: '';
-        //     position: absolute;
-        //     top: -0.5em;
-        //     width: 0.2em;
-        //     height: 0.2em;
-        //     border-radius: 50%;
-        //     background: #7abab6;
-        //     opacity: 0;
-        //     left: 50%;
-        //     transform: translateX(-50%);
-        //     pointer-events: none;
-        // }
-
-        // &::before {
-        //     margin-left: -0.9em;
-        // }
-        // &::after {
-        //     margin-left: 0em;
-        // }
-
-        // &.show-dots::before,
-        // &.show-dots::after {
-        //     opacity: 1;
-        //     animation: dot-bounce 1.2s ease-in-out;
-        // }
-        // &.show-dots::before {
-        //     animation-delay: 0.05s;
-        // }
-        // &.show-dots::after {
-        //     animation-delay: 0.25s;
-        // }
+    20% {
+      transform: translateY(-14px);
     }
-
-    @keyframes dot-bounce {
-        0%,
-        100% {
-            transform: translateX(-50%) translateY(0) scale(1);
-        }
-        35% {
-            transform: translateX(-50%) translateY(-0.4em) scale(1.1);
-        }
-        55% {
-            transform: translateX(-50%) translateY(0) scale(0.95);
-        }
+    40%,
+    100% {
+      transform: translateY(0);
     }
+  }
 
-    .text_marquee_area {
-        width: 100%;
-        position: absolute;
-        bottom: 100px;
+  /* dot keyframes */
+  //   @keyframes dot-bounce {
+  //     0%,
+  //     100% {
+  //       transform: translateY(0) scale(1);
+  //     }
+  //     35% {
+  //       transform: translateY(-0.4em) scale(1.1);
+  //     }
+  //     55% {
+  //       transform: translateY(0) scale(0.95);
+  //     }
+  //   }
 
-        .marquee_wrapper {
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
-            background: white;
+  .accent {
+    display: inline-block;
+    position: relative;
+    color: #7abab6;
+  }
 
-            .marquee__inner {
-                display: inline-flex;
-                animation: marquee 30s linear infinite;
+  .text_marquee_area {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 
-                span {
-                    -webkit-text-stroke-width: 5px;
-                    -webkit-text-stroke-color: var(--Green-green-500, #b7e2df);
-                    font-family: Paperlogy;
-                    font-size: 360px;
-                    font-weight: 800;
-                    text-transform: uppercase;
-                    color: transparent;
-                    -webkit-text-stroke: 1px #eef9f8;
-                    background: #eef9f8;
-                    background-clip: text;
-                }
-            }
+    .marquee_wrapper {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      background: white;
+
+      .marquee__inner {
+        display: inline-flex;
+        animation: marquee 30s linear infinite;
+
+        span {
+          -webkit-text-stroke-width: 5px;
+          -webkit-text-stroke-color: var(--Green-green-500, #b7e2df);
+          font-family: Paperlogy;
+          font-size: 360px;
+          font-weight: 800;
+          text-transform: uppercase;
+          color: transparent;
+          -webkit-text-stroke: 1px #eef9f8;
+          background: #eef9f8;
+          background-clip: text;
         }
+      }
     }
+  }
 }
 
 

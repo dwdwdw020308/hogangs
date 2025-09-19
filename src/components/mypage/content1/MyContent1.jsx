@@ -3,6 +3,7 @@ import DogInfo from "./DogInfo";
 import CouponItem from "./CouponItem";
 import ExpiredCouponItem from "./ExpiredCouponItem";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../../store/useAuthStore";
 
 const MyContent1 = ({ onUpdateDogProfile }) => {
   //  props로 받음
@@ -14,6 +15,8 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
   const [periodTab, setPeriodTab] = useState("3m"); // 기본 3개월
 
   const navigate = useNavigate();
+
+  const logout = useAuthStore((state) => state.logout);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -176,7 +179,15 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
                 </div>
                 <div className="actions">
                   <span className="sns">SNS 연동하기</span>
-                  <span className="logout">로그아웃</span>
+                  <span
+                    className="logout"
+                    onClick={() => {
+                      logout();
+                      navigate("/");
+                    }}
+                  >
+                    로그아웃
+                  </span>
                 </div>
               </dl>
             </div>
