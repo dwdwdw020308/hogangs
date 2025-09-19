@@ -290,3 +290,96 @@ body {
         }
     }
 }
+
+
+@media (max-width: 640px) {
+  #content1 {
+    .stage {
+      &.with-sides { }
+    }
+
+    .bg-cover {
+      position: relative;
+      top: 10%;
+      background-image: url('/about/about_visual_mobile.png') !important;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: auto;
+      width: 390px !important;
+      height: 636px !important;
+    }
+
+    .gif-cover1 {
+      position: absolute;
+      top: 30%;
+      width: 114px;
+      height: 114px;
+    }
+
+    .gif-cover2 {
+      position: absolute;
+      top: 28%;
+      width: 114px;
+      height: 114px;
+    }
+
+    /* 프레임 */
+    .hero-frame {
+      position: absolute;
+      width: 220px !important;
+      height: 300px !important;
+
+      .img-small { }
+    }
+
+    /* 사이드 텍스트 */
+    .side {
+      position: relative;
+      z-index: 2;
+      font-family: Paperlogy, Pretendard, system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      white-space: nowrap;
+      line-height: 1.1;
+      font-size: clamp(40px, 7vw, 110px);
+      color: #000;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+
+      .dots {
+        .dot {
+          display: none;
+          &::after { }
+        }
+      }
+
+      .ch { }
+      .ch.wave { }
+
+      .accent .ch { }
+
+      &.left {
+        position: absolute;
+        bottom: 20%;
+        font-size: 38px;
+        right: 5%;
+      }
+      &.right {
+        position: absolute;
+        bottom: 20%;
+        font-size: 38px;
+        left: 5%;
+      }
+    }
+
+    .accent { }
+
+    .text_marquee_area {
+      .marquee_wrapper {
+        .marquee__inner {
+          span { }
+        }
+      }
+    }
+  }
+}

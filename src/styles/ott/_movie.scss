@@ -1,7 +1,7 @@
 @use './../utils' as *;
 
 .movie-list {
-    background: #fff;
+    background: var(--Green-green-50, #f9fefd);
     padding: 160px 260px;
     position: relative;
 
@@ -26,7 +26,7 @@
         // width: 264px !important ;/
 
         img {
-            width: 100%;
+            width: 264px;
             height: 376px;
         }
         p {

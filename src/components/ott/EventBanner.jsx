@@ -15,7 +15,7 @@ const EventBanner = () => {
                 <div className="slide">
                     <p>영화도 호강, 호텔도 호강!</p>
                     <strong>
-                        오늘 하루 <span> 호강 </span>예약 완료
+                        오늘 하루, <span> 호강 </span>예약 완료
                     </strong>
 
                     <div className="imgs">

@@ -2,12 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import {
-    PiArrowCircleLeftThin,
-    PiArrowCircleRightThin,
-    PiCaretCircleRightThin,
-    PiCaretCircleLeftThin,
-} from 'react-icons/pi';
+
 import { useNavigate } from 'react-router-dom';
 
 const Best = () => {
@@ -104,7 +99,7 @@ const Best = () => {
                     ref={swiperRef}
                     slidesPerView={3.5}
                     slidesPerGroup={1}
-                    spaceBetween={20}
+                    spaceBetween={80}
                     loop={true}
                     autoHeight={false}
                     centeredSlides={false}

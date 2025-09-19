@@ -170,3 +170,104 @@
     background-clip: text;
     color: transparent;
 }
+
+@media (max-width: 640px) {
+  #content2 {
+    /* 390 디자인 기준 스케일러 */
+    --m: calc(100vw / 390);
+
+    width: 100vw;
+    max-width: 390px;
+    min-height: calc(var(--m) * 844);
+    margin-inline: auto;
+    box-sizing: border-box;
+
+    /* 데스크톱 값 → 모바일 스케일 */
+    padding: calc(var(--m) * 24) calc(var(--m) * 20);
+    gap: calc(var(--m) * 32);
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #fff;
+  }
+
+  #content2 .slogan {
+    height: calc(var(--m) * 220);
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  #content2 .slogan img {
+    width: calc(var(--m) * 320);
+    height: auto;
+    width: 242px;
+  }
+
+  #content2 .slogan span {
+    font-size: 13px;
+    letter-spacing: calc(var(--m) * 1.2);
+    left: 50%;
+    top: calc(var(--m) * 98);
+    transform: translateX(-50%);
+
+  }
+
+  #content2 .slogan h3 {
+    font-size: 26px;
+    letter-spacing: calc(var(--m) * 0.3);
+    left: 50%;
+    bottom: calc(var(--m) * 60);
+    transform: translateX(-50%);
+    height: auto;
+  }
+
+  #content2 .texttitle {
+    padding: 0 calc(var(--m) * 8);
+    
+    
+  }
+
+  #content2 .texttitle .textline {
+    line-height: 1.6;
+    margin: 0 0 calc(var(--m) * 16);
+    font-size: 13px !important;
+
+    /* 모바일에서도 자연스럽게 */
+    --stagger: 90ms;
+    --dur: 0.6s;
+    --rise: 0.5em;
+    --blur: 2px;
+    --gradDur: 800ms;
+
+    background-size: 200% 100%;
+    background-position: 100% 0;
+  }
+
+  #content2 .texttitle .textline .word {
+    display: inline-block;
+  }
+
+  #content2 .texttitle .textline.is-in {
+    background-position: 0 0;
+  }
+
+  #content2 .dogicon {
+    padding-bottom: calc(var(--m) * 60);
+    gap: calc(var(--m) * 8);
+  }
+
+  #content2 .dogicon span img {
+    width: calc(var(--m) * 40);
+    height: auto;
+    margin-right: calc(var(--m) * 8);
+  }
+
+  #content2 .dogicon span:last-child img {
+    margin-right: 0;
+  }
+}
+
+
+
