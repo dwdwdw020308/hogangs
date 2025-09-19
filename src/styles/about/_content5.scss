@@ -59,7 +59,7 @@
         width: 474px;
         height: 496px;
         padding: 35px 60px 35.966px 59px;
-        border: 1px solid #000;
+        // border: 1px solid #000;
     }
     .about {
         display: flex;
@@ -111,4 +111,145 @@
             }
         }
     }
+}
+@media (max-width: 640px) {
+  #about-content5 {
+
+    --m: calc(100vw / 440);
+
+    min-height: 100svh;
+    padding: calc(var(--m) * 24) calc(var(--m) * 20);
+    background: #eaf6f5; 
+    .dogTabs {
+      position: relative;
+      display: block; /* 한 컬럼 */
+
+      /* 좌측 동그라미 탭: 화면 왼쪽에 세로로 */
+      .tabBtn {
+        position: absolute;
+        left: calc(var(--m) * 12);
+        top: calc(var(--m) * 120);
+        gap: calc(var(--m) * 12);
+        z-index: 3;
+
+        button {
+          width: calc(var(--m) * 56);
+          height: calc(var(--m) * 56);
+          border-radius: 50%;
+          border: 1.5px solid rgba(74, 159, 153, 0.35);
+          background: #ffffffcc;
+          backdrop-filter: blur(2px);
+          box-shadow: 0 calc(var(--m) * 2) calc(var(--m) * 8) rgba(0,0,0,0.08);
+
+          img { 
+            width: 70%; height: auto; 
+        }
+
+          &.active {
+            border-color: #4a9f99;
+            background: #d8f3f1;
+          }
+        }
+      }
+
+      /* 컨텐츠 박스 */
+      .tabContent {
+        position: relative;
+        z-index: 1;
+        padding-top: calc(var(--m) * 12);
+      }
+    }
+
+    /* 호강/호복 내부 레이아웃을 스샷처럼 중앙 정렬 */
+    #dogAbout {
+      flex-direction: column;
+      align-items: center;
+      gap: calc(var(--m) * 18);
+
+      .dogImg {
+        width: auto;
+        height: auto;
+        padding: 0;
+        border: none;
+        display: grid;
+        place-items: center;
+
+        img {
+          width: calc(var(--m) * 220);  /* 중앙 큰 강아지 */
+          height: auto;
+        }
+      }
+
+      .about {
+        width: 100%;
+        max-width: calc(var(--m) * 330);
+        gap: calc(var(--m) * 14);
+
+        .name {
+          height: auto;
+          text-align: center;
+         > img{
+            display: none;
+          }
+
+          h2 {
+            font-size: calc(var(--m) * 24);
+            margin: 0;
+            letter-spacing: calc(var(--m) * 0.2);
+
+            &::after {
+              left: 50%;
+              right: auto;
+              transform: translateX(-50%);
+              width: 60%;
+              bottom: calc(var(--m) * -8) ;
+              height: 1.5px;
+              background: #292929;
+              opacity: .15;
+
+            }
+          }
+        }
+
+        /* 화이트 라운드 카드 */
+        .section {
+          width: 100%;
+          margin-top: calc(var(--m) * 18);
+          padding: calc(var(--m) * 16) calc(var(--m) * 16) calc(var(--m) * 18);
+          background: #fff;
+          border-radius: calc(var(--m) * 18);
+          box-shadow: 0 calc(var(--m) * 6) calc(var(--m) * 18) rgba(0,0,0,0.06);
+          border: 1px solid rgba(0,0,0,0.04);
+          gap: calc(var(--m) * 10);
+          align-items: center; 
+          word-break: keep-all;  
+          text-wrap: balance; 
+          overflow-wrap: break-word; 
+
+          .title strong {
+            display: block;
+            text-align: center ;
+            color: #0f8077;
+            font-size: calc(var(--m) * 16);
+            letter-spacing: calc(var(--m) * 0.2);
+          }
+
+          .content p {
+            font-size: calc(var(--m) * 12.5);
+            line-height: 1.65;
+            color: #36524f;
+            text-align: center;
+            white-space: pre-line;
+          }
+        }
+      }
+    }
+
+    .banner {
+      height: calc(var(--m) * 36);
+      background-size: auto calc(var(--m) * 36);
+      bottom: 0;
+      animation-duration: 12s;
+    }
+  }
 }
