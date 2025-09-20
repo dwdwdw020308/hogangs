@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useReservationStore from '../../store/useReservationStore';
 
 const Cancel = () => {
     const [cancelAgree, setCancelAgree] = useState(false);
+    const setPaymentProcesses = useReservationStore((s) => s.setPaymentProcesses);
 
     const clickCheckBox = () => {
         setCancelAgree(!cancelAgree);
     };
+
+    useEffect(() => {
+        setPaymentProcesses('cancel', cancelAgree);
+    }, [cancelAgree, setPaymentProcesses]);
     return (
         <section id="pay_cancel">
             <div className="inner">

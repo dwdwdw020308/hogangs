@@ -6,8 +6,26 @@ const initialSteps = [
     { id: 4, process: 'none' },
     { id: 5, process: 'none' },
 ];
+const initialPaySteps = [
+    { id: 'user', process: false },
+    { id: 'terms', process: false },
+    { id: 'cancel', process: false },
+    { id: 'payment', process: false },
+];
+
+const ALERT_BY_ID = {
+    user: '회원 정보를 모두 입력해 주세요.',
+    terms: '모든 약관에 동의해 주세요.',
+    cancel: '취소/환불 규정에 동의해 주세요.',
+    payment: '결제 수단을 선택해 주세요.',
+};
+
+const ORDER = ['user', 'terms', 'cancel', 'payment'];
+
 const useReservationStore = create((set, get) => ({
     steps: initialSteps,
+    isNormalLogic: false,
+    paymentProcesses: initialPaySteps,
     form: {},
 
     setStepProcesses: (updates) =>
@@ -18,6 +36,12 @@ const useReservationStore = create((set, get) => ({
                 ),
             };
         }),
+    setPaymentProcesses: (id, value) =>
+        set((state) => ({
+            paymentProcesses: state.paymentProcesses.map((p) =>
+                p.id === id ? { ...p, process: Boolean(value) } : p
+            ),
+        })),
     setFormField: (key, value) =>
         set((state) => {
             const form = { ...state.form, [key]: value };
@@ -53,6 +77,25 @@ const useReservationStore = create((set, get) => ({
         } catch (e) {
             console.error('localStorage load error:', e);
         }
+    },
+
+    //예약중
+    setBeingReservation: () => {
+        set({ isNormalLogic: true });
+    },
+
+    paymentProcessValidate: () => {
+        const { paymentProcesses } = get();
+        // id → boolean 맵
+        const status = Object.fromEntries(paymentProcesses.map((p) => [p.id, Boolean(p.process)]));
+
+        // 정해둔 순서대로 첫 실패 찾기
+        for (const id of ORDER) {
+            if (!status[id]) {
+                return { ok: false, id, message: ALERT_BY_ID[id] || '필수 항목을 완료해 주세요.' };
+            }
+        }
+        return { ok: true };
     },
 }));
 

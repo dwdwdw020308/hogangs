@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RadioInput from '../common/RadioInput';
+import useReservationStore from '../../store/useReservationStore';
 const card_list = [
     'KB국민카드',
     'BC카드',
@@ -15,9 +16,17 @@ const card_list = [
 const Payment = () => {
     const [payType, setPayType] = useState('card');
     const [checkPayment, setCheckPayment] = useState('');
+    const setPaymentProcesses = useReservationStore((s) => s.setPaymentProcesses);
+
     const onClick = (card) => {
         setCheckPayment(card);
     };
+
+    useEffect(() => {
+        if (checkPayment !== '') {
+            setPaymentProcesses('payment', true);
+        }
+    }, [checkPayment, setPaymentProcesses]);
     return (
         <section id="payment_section">
             <div className="inner">

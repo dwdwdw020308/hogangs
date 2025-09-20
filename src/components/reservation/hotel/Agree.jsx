@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import useReservationStore from '../../../store/useReservationStore';
+import { useNavigate } from 'react-router-dom';
 
 const Agree = () => {
     const [agree, setAgree] = useState(false);
     const form = useReservationStore((s) => s.form);
     const setLocalStorageForm = useReservationStore((s) => s.setLocalStorageForm);
+    const setBeingReservation = useReservationStore((s) => s.setBeingReservation);
+    const navigate = useNavigate();
     const onChange = (e) => {
         setAgree(e.target.checked);
     };
@@ -30,6 +33,8 @@ const Agree = () => {
         }
 
         setLocalStorageForm();
+        setBeingReservation();
+        navigate('/pay');
     };
 
     return (
