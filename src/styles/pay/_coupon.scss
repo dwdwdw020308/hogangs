@@ -1,0 +1,123 @@
+#pay_coupon {
+    width: 100%;
+    height: 352px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    .inner {
+        height: 232px;
+        display: flex;
+        justify-content: space-between;
+        .coupon_context {
+            width: 957px;
+            height: 100%;
+            display: flex;
+            flex-flow: column;
+            position: relative;
+            .title {
+                color: var(--Black, #060606);
+                font-family: Paperlogy;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                letter-spacing: 0.24px;
+                margin-bottom: 30px;
+            }
+            .coupon_line {
+                width: 100%;
+                height: 1px;
+                background: #cecece;
+                margin-bottom: 42px;
+            }
+            .coupon_area {
+                width: 100%;
+                height: 124px;
+                display: flex;
+                align-items: center;
+                .coupon {
+                    width: 300px;
+                    height: 140px;
+                    background: url('/coupon.png') no-repeat center/cover;
+                    position: relative;
+                    .coupon_info {
+                        position: absolute;
+                        top: 10px;
+                        left: 20px;
+                        width: 199px;
+                        height: 110px;
+                        display: flex;
+                        flex-flow: column;
+                        justify-content: space-between;
+
+                        .badge {
+                            width: 45px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: var(--White, #fefefe);
+                            text-align: center;
+                            font-family: Paperlogy;
+                            font-size: 8.219px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                            border-radius: 20.548px;
+                            background: var(--Green-green-750, #7abab6);
+                        }
+                        .coupon_name {
+                            color: var(--Black, #060606);
+
+                            /* Paperogy-SemiBold/32px */
+                            font-family: Paperlogy;
+                            font-size: 32px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                            letter-spacing: 0.32px;
+                        }
+
+                        .coupon_period {
+                            color: var(--Black, #060606);
+                            font-family: Pretendard;
+                            font-size: 12.329px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: normal;
+                        }
+                    }
+                }
+            }
+            .none_coupon {
+                width: 100%;
+                height: 124px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--Grey-grey-500, #616161);
+
+                /* Medium/16px */
+                font-family: Pretendard;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 130%; /* 20.8px */
+            }
+            .sel_coupon {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 300px;
+                height: 36px;
+                border-radius: 10px;
+                border: 1px solid var(--Grey-grey-200, #b6b6b6);
+                background: var(--White, #fefefe);
+                outline: none;
+
+                padding: 6px 5px 6px 11px;
+                background: url('/arrow_down.png') no-repeat right 10px center;
+            }
+        }
+    }
+}

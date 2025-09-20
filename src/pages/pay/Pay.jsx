@@ -1,33 +1,26 @@
-import Step1 from '../../components/pay/Step1';
+import Cancel from '../../components/pay/Cancel';
+import Coupon from '../../components/pay/Coupon';
+import Payment from '../../components/pay/Payment';
+import PaymentInfo from '../../components/pay/PaymentInfo';
+import ReservationTerms from '../../components/pay/ReservationTerms';
 
 const Pay = () => {
     const reservationForm = JSON.parse(localStorage.getItem('reservationForm'));
     const { resType } = reservationForm;
-    console.log(resType);
 
     return (
         <>
             <section id="reservation_top">
                 <ul className="res_nav">
-                    <li
-                        // onClick={() => {
-                        //     setHotel(true);
-                        // }}
-                        className={resType === 'hotel' ? 'active' : ''}
-                    >
-                        Hotel 예약
-                    </li>
-                    <li
-                        // onClick={() => {
-                        //     setHotel(false);
-                        // }}
-                        className={resType === 'grooming' ? 'active' : ''}
-                    >
-                        Grooming 예약
-                    </li>
+                    <li className={resType === 'hotel' ? 'active' : ''}>Hotel 예약</li>
+                    <li className={resType === 'grooming' ? 'active' : ''}>Grooming 예약</li>
                 </ul>
             </section>
-            <Step1 resType={resType} form={reservationForm} />
+            <PaymentInfo resType={resType} form={reservationForm} />
+            <Coupon />
+            <ReservationTerms />
+            <Cancel />
+            <Payment />
         </>
     );
 };
