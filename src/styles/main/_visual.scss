@@ -41,6 +41,7 @@ $yellow: #ffda00;
 }
 
 .intro .caption {
+  display: none;
   position: absolute;
   bottom: 25%;
   left: 0;
@@ -109,6 +110,7 @@ $yellow: #ffda00;
 
   /* 캡션은 정적 배치 */
   #main-visual .intro .caption {
+    display: block;
     position: static !important;
     margin: 24px auto 40px;
     padding: 0 20px;
