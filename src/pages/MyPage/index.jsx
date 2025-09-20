@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import MyContent1 from "../../components/mypage/content1/MyContent1";
-import MyContent2 from "../../components/mypage/content2/MyContent2";
 import MyContent3 from "../../components/mypage/content3/MyContent3";
 
 const MyPage = () => {
@@ -29,16 +28,6 @@ const MyPage = () => {
             >
               MyPage
             </li>
-          </ul>
-          <ul>
-            <li
-              className={activeTab === "content2" ? "active" : ""}
-              onClick={() => setActiveTab("content2")}
-            >
-              HotelㆍGrooming
-            </li>
-          </ul>
-          <ul>
             <li
               className={activeTab === "content3" ? "active" : ""}
               onClick={() => setActiveTab("content3")}
@@ -52,7 +41,6 @@ const MyPage = () => {
         {activeTab === "content1" && (
           <MyContent1 onUpdateDogProfile={setDogProfile} />
         )}
-        {activeTab === "content2" && <MyContent2 />}
         {activeTab === "content3" && <MyContent3 />}
       </div>
     </div>

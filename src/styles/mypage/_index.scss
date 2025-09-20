@@ -50,16 +50,14 @@
       position: absolute;
       bottom: 0;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: flex-start;
       width: 443px;
-      gap: 42px;
       left: 260px;
       cursor: pointer;
-
       ul {
         display: flex;
         align-items: center;
-
+        gap: 42px;
         li {
           position: relative;
           color: var(--White, #fefefe);
@@ -73,14 +71,12 @@
           padding: 10px 1px 16px 1px;
           justify-content: center;
           align-items: center;
-          gap: 10px;
-
           // 위에 점
           &::after {
             content: "";
             width: 7px;
             height: 7px;
-            border-radius: 50%;
+            border-radius: 100%;
             background: #5ec8c1;
             position: absolute;
             left: 50%;
@@ -109,6 +105,34 @@
           }
           &.active::before {
             width: 100%; // 밑줄 꽉 차게
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #myPage {
+    width: 390px;
+    .topheader {
+      height: 207px;
+      .topName {
+        display: none;
+      }
+      .nav {
+        width: 100%;
+        left: 22px;
+        ul {
+          gap: 30px;
+          justify-content: flex-start;
+          li {
+            font-size: 16px;
+            &::after {
+              width: 3.642px;
+              height: 3.642px;
+              top: -7px !important;
+            }
           }
         }
       }
