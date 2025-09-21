@@ -38,7 +38,23 @@
             display: block;
         }
     }
-
+    .btns {
+        position: absolute;
+        top: 373px;
+        left: 235px;
+        display: flex;
+        z-index: 10;
+        .icon-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 42px;
+            width: 50px;
+            cursor: pointer;
+            margin-right: 18px;
+            transition: transform 0.2s ease;
+        }
+    }
     .carousel-track {
         width: 100%;
         height: 450px;
@@ -64,7 +80,7 @@
 
             button {
                 position: absolute;
-                bottom: 50%;
+                bottom: 48%;
                 right: 24%;
                 z-index: 2;
                 display: inline-flex;
@@ -159,6 +175,7 @@
         pointer-events: none;
     }
 
+    // 좌우버튼
     .nav-arrow {
         position: absolute;
         top: 56%;
@@ -175,10 +192,14 @@
         border: none;
         outline: none;
         &.left {
-            left: 180px;
+            left: 160px;
+            // &:hover {
+            //     background: url('/ott/button_prev-hover.svg');
+            //     background-position: 0 0;
+            // }
         }
         &.right {
-            right: 180px;
+            right: 160px;
         }
     }
 }

@@ -25,6 +25,7 @@
             font-weight: 600;
             color: #fff;
             margin-bottom: 8px;
+            font-weight: 700;
             span {
                 color: var(--Green-green-500, #b7e2df);
                 position: relative;
@@ -104,5 +105,66 @@
         line-height: 0;
         -webkit-user-drag: none;
         -moz-user-drag: none;
+    }
+}
+@media screen and (max-width: 600px) {
+    .ottmain-visual {
+        height: 455px;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        margin-top: 85px;
+        background: #292929;
+        .title {
+            strong {
+                letter-spacing: 0.5px;
+                padding-top: 60px;
+                font-size: 18px;
+                margin-bottom: 10px;
+                span {
+                    color: var(--Green-green-500, #b7e2df);
+                    position: relative;
+                    &:nth-of-type(2) {
+                        &::after,
+                        &::before {
+                            display: none;
+                        }
+                    }
+                    &:nth-of-type(1)::after {
+                        content: '\A';
+                        white-space: pre;
+                    }
+                }
+            }
+            h2 {
+                font-size: 50px;
+                letter-spacing: 0.5px;
+                line-height: 1;
+            }
+        }
+        .movie-film {
+            padding: 38px 0;
+            margin-top: 0px;
+            .film-inner {
+                margin: 32px 0;
+                .posterlist {
+                    .poster {
+                        width: 130px;
+                        height: 186px;
+                        margin-right: 8px;
+                        img {
+                            width: 130px;
+                            height: 186px;
+                        }
+                    }
+                }
+            }
+        }
+        .img {
+            img {
+                width: 386px;
+                height: 202px;
+            }
+        }
     }
 }
