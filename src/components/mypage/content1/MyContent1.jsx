@@ -4,20 +4,24 @@ import CouponItem from "./CouponItem";
 import ExpiredCouponItem from "./ExpiredCouponItem";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../../store/useAuthStore";
+import HotelReservation from "../content2/HotelReservation";
+import GroomingReservation from "../content2/GroomingReservation";
+import SnsModal from "./SnsModal";
 
 const MyContent1 = ({ onUpdateDogProfile }) => {
-  //  props로 받음
   const [pageTab, setPageTab] = useState("default");
   const [userInfo, setUserInfo] = useState(null);
-  const [dogProfiles, setDogProfiles] = useState([]);
+  const [dogProfiles, setDogProfiles] = useState([]); // 항상 배열 보장
   const [editIndex, setEditIndex] = useState(null);
   const [couponTab, setCouponTab] = useState("available");
-  const [periodTab, setPeriodTab] = useState("3m"); // 기본 3개월
+  const [periodTab, setPeriodTab] = useState("3m");
+  const [activeTab, setActiveTab] = useState("upcoming");
+  const [showSNSModal, setShowSNSModal] = useState(false);
 
   const navigate = useNavigate();
-
   const logout = useAuthStore((state) => state.logout);
 
+  // 유저 정보 불러오기
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -29,6 +33,16 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
     if (!phone) return "연락처 없음";
     return phone.replace(/(\d{3})(\d{3,4})(\d{4})/, "$1-$2-$3");
   };
+
+  // 예시 예약 데이터
+  const upcomingReservations = [
+    { id: 1, type: "hotel" },
+    { id: 2, type: "grooming" },
+  ];
+  const pastReservations = [
+    { id: 3, type: "hotel" },
+    { id: 4, type: "grooming" },
+  ];
 
   return (
     <section id="mycontent1">
@@ -158,7 +172,7 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
               </div>
             </div>
 
-            {/*  주인 정보 */}
+            {/* 주인 정보 */}
             <div className="ownerInfo">
               <div className="title">
                 <h2>주인님의 정보</h2>
@@ -178,7 +192,9 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
                   <dd>{userInfo?.email || "이메일 없음"}</dd>
                 </div>
                 <div className="actions">
-                  <span className="sns">SNS 연동하기</span>
+                  <span className="sns" onClick={() => setShowSNSModal(true)}>
+                    SNS 연동하기
+                  </span>
                   <span
                     className="logout"
                     onClick={() => {
@@ -191,8 +207,65 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
                 </div>
               </dl>
             </div>
+            {showSNSModal && (
+              <SnsModal onClose={() => setShowSNSModal(false)} />
+            )}
 
-            {/*  쿠폰 */}
+            {/* 예약 현황 */}
+            <div className="reservation">
+              <div className="title">
+                <h2>예약 현황</h2>
+              </div>
+
+              <ul className="tab">
+                <li
+                  className={activeTab === "upcoming" ? "on" : ""}
+                  onClick={() => setActiveTab("upcoming")}
+                >
+                  다가오는 예약
+                </li>
+                <li
+                  className={activeTab === "past" ? "on" : ""}
+                  onClick={() => setActiveTab("past")}
+                >
+                  지난 예약
+                </li>
+              </ul>
+
+              {activeTab === "upcoming" ? (
+                upcomingReservations.length === 0 ? (
+                  <div className="reservationList empty">
+                    <span>다가오는 예약이 없습니다.</span>
+                  </div>
+                ) : (
+                  <div className="reservationList hasData">
+                    {upcomingReservations.map((res) =>
+                      res.type === "hotel" ? (
+                        <HotelReservation key={res.id} />
+                      ) : (
+                        <GroomingReservation key={res.id} />
+                      )
+                    )}
+                  </div>
+                )
+              ) : pastReservations.length === 0 ? (
+                <div className="reservationList empty">
+                  <span>지난 예약이 없습니다.</span>
+                </div>
+              ) : (
+                <div className="reservationList hasData">
+                  {pastReservations.map((res) =>
+                    res.type === "hotel" ? (
+                      <HotelReservation key={res.id} isPast />
+                    ) : (
+                      <GroomingReservation key={res.id} isPast />
+                    )
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* 쿠폰 */}
             <div className="coupon">
               <div className="title">
                 <h2>쿠폰</h2>
@@ -212,7 +285,6 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
                     사용기간 만료 쿠폰
                   </li>
                 </ul>
-                {/* 기간 탭 */}
                 <ul className="subTab">
                   <li
                     className={periodTab === "1m" ? "on" : ""}

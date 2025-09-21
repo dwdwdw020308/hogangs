@@ -13,7 +13,7 @@ const Hobok = () => {
         </div>
         <div className="section">
           <div className="title">
-            <strong>안전하고 편안한 휴식, 호강이와 함께해요!</strong>
+            <strong>세심하고 따뜻한 케어, 호복이가 함께해요!</strong>
           </div>
           <div className="content">
             <p>

@@ -1,1 +1,51 @@
 @forward './step1';
+@forward './cancel';
+@forward './payment';
+@forward './terms';
+@forward './coupon';
+
+@use './../utils/' as *;
+
+#pay_top {
+    width: 100%;
+    height: 330px;
+    background: #b7e2df;
+    position: relative;
+    .res_nav {
+        width: 346px;
+        height: 55px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        left: 260px;
+        bottom: 0;
+        li {
+            color: var(--White, #fefefe);
+            text-align: center;
+            /* Medium/24px */
+            font-family: Pretendard;
+            font-size: 24px;
+            position: relative;
+            &.active::after {
+                content: '';
+                width: 100%;
+                height: 3px;
+                background: #5ec8c1;
+                position: absolute;
+                left: 0;
+                top: 124%;
+            }
+            &.active::before {
+                content: '';
+                width: 6px;
+                height: 6px;
+                border-radius: 18px;
+                background: #5ec8c1;
+                position: absolute;
+                left: 30%;
+                bottom: 124%;
+            }
+        }
+    }
+}

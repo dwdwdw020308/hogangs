@@ -1,133 +1,418 @@
+/* ============= 공통 틀 ============= */
 .admin-users {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 24px;
+    /* 상단 툴바 */
+    .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
 
-  .toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+        h1 {
+            font-size: 20px;
+            margin: 0;
+        }
 
-    h1 {
-      font-size: 20px;
-      font-weight: 700;
-      margin: 0;
+        .right {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .search {
+            width: 280px;
+            height: 36px;
+            padding: 0 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            outline: none;
+            &:focus {
+                border-color: #1677ff;
+                box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.15);
+            }
+        }
+
+        .page-size {
+            height: 36px;
+            padding: 0 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #fff;
+            outline: none;
+            &:focus {
+                border-color: #1677ff;
+                box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.12);
+            }
+        }
+
+        button {
+            height: 36px;
+            padding: 0 12px;
+            cursor: pointer;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #fff;
+            &:hover {
+                filter: brightness(1.03);
+            }
+        }
+        .primary {
+            background: #1677ff;
+            color: #fff;
+            border: none;
+            &:hover {
+                filter: brightness(1.05);
+            }
+        }
+        .refresh {
+        }
     }
 
-    .right {
-      display: flex;
-      gap: 8px;
-      align-items: center;
+    /* 공통 카드 */
+    .card {
+        background: #fff;
+        border: 1px solid #eef0f3;
+        border-radius: 12px;
+        padding: 16px 18px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        & + .card {
+            margin-top: 16px;
+        }
+    }
+    .card-title {
+        margin: 0 0 12px;
+        font-size: 17px;
+        font-weight: 700;
+        color: #111827;
     }
 
-    .search {
-      width: 260px;
-      height: 36px;
-      padding: 0 12px;
-      border: 1px solid #e7e7e7;
-      border-radius: 8px;
-      background: #fff;
+    /* 그리드 유틸 */
+    .grid.two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 18px;
+        > div {
+            display: block;
+        }
+        label {
+            display: block;
+            color: #6b7280;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
     }
 
-    .page-size, .refresh {
-      height: 36px;
-      border-radius: 8px;
-      border: 1px solid #e7e7e7;
-      background: #fff;
-      padding: 0 12px;
-      cursor: pointer;
-    }
-  }
-
-  .table-wrap {
-    background: #fff;
-    border: 1px solid #ececec;
-    border-radius: 10px;
-    overflow: auto;
-  }
-
-  .admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 840px;
-
-    thead th {
-      position: sticky;
-      top: 0;
-      background: #fafafa;
-      font-weight: 700;
-      font-size: 13px;
-      color: #333;
-      text-align: left;
-      padding: 12px;
-      border-bottom: 1px solid #eee;
-      user-select: none;
-      cursor: pointer;
-
-      .sort {
-        margin-left: 6px;
+    /* 태그/뱃지 */
+    .pill {
         display: inline-block;
-        width: 0; height: 0;
-        border-left: 4px solid transparent;
-        border-right: 4px solid transparent;
-        border-top: 6px solid #bbb; // default caret
-        &.asc   { border-top-color: #1677ff; transform: rotate(180deg); }
-        &.desc  { border-top-color: #1677ff; }
-      }
-    }
-
-    tbody td {
-      padding: 12px;
-      font-size: 14px;
-      border-bottom: 1px solid #f1f1f1;
-      color: #333;
-      vertical-align: middle;
-
-      .pill {
-        display: inline-block;
-        padding: 2px 8px;
+        padding: 6px 10px;
         border-radius: 999px;
-        font-size: 12px;
-        background: #eef2ff;
-        color: #3b5bdb;
-
-        &.admin { background:#fff4e6; color:#d9480f; }
-        &.manager { background:#e6fcf5; color:#0ca678; }
-        &.user { background:#eef2ff; color:#3b5bdb; }
-      }
-      .dot {
-        display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px;
-        &.green { background:#12b886; }
-        &.grey  { background:#adb5bd; }
-      }
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        font-size: 12.5px;
+        &.user {
+            background: #f3f4f6;
+        }
+        &.admin {
+            background: #fde68a;
+        }
+        &.grey {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        &.green {
+            background: #16a34a;
+            color: #fff;
+            border: none;
+        }
+        &.blue {
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+        }
+    }
+    .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 6px;
+        transform: translateY(-1px);
+        &.green {
+            background: #22c55e;
+        }
+        &.grey {
+            background: #d1d5db;
+        }
     }
 
-    tr.skeleton td { padding: 8px 12px; }
-    tr.skeleton .sk {
-      height: 12px; border-radius: 6px; background: linear-gradient(90deg,#f2f2f2, #eaeaea, #f2f2f2);
-      background-size: 200% 100%;
-      animation: shine 1.2s infinite linear;
+    /* 테이블 */
+    .table-wrap {
+        width: 100%;
+        overflow: auto;
+    }
+    .admin-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 14px;
+        thead th {
+            text-align: left;
+            font-weight: 700;
+            color: #374151;
+            background: #f9fafb;
+            border-bottom: 1px solid #eef0f3;
+            padding: 10px 12px;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        tbody td {
+            border-bottom: 1px solid #f1f3f5;
+            padding: 10px 12px;
+            color: #111827;
+        }
+
+        tr:hover td {
+            background: #fafafa;
+        }
     }
 
-    tr:hover td { background: #fafcff; }
-    .empty, .error { text-align:center; color:#888; padding: 40px 0; }
-    .error { color:#d9480f; }
-  }
-
-  .pager {
-    display: flex; align-items: center; gap: 12px; justify-content: flex-end;
-
-    button {
-      height: 32px; padding: 0 12px; border: 1px solid #e7e7e7; border-radius: 8px; background:#fff;
-      cursor: pointer;
-      &:disabled { opacity:.5; cursor: not-allowed; }
+    /* 로우 액션 버튼 */
+    .row-actions {
+        display: flex;
+        gap: 8px;
+        button {
+            padding: 6px 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            background: #fff;
+        }
+        .danger {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+        }
     }
-  }
+
+    /* 상태 */
+    .empty,
+    .error {
+        padding: 16px;
+        color: #6b7280;
+    }
+    .sk {
+        height: 44px;
+        background: linear-gradient(90deg, #f3f4f6, #eef0f3, #f3f4f6);
+        background-size: 200% 100%;
+        border-radius: 8px;
+        animation: sk 1.2s infinite;
+    }
+    .sk.lg {
+        height: 120px;
+    }
+    @keyframes sk {
+        0% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: -200% 50%;
+        }
+    }
+
+    /* SNS 아이콘 */
+    .sns-icons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .sns-icon {
+        opacity: 0.28;
+        transition: opacity 0.2s ease;
+    }
+    .sns-icon.on {
+        opacity: 1;
+    }
+
+    .sns-badges {
+        display: flex;
+        gap: 8px;
+    }
 }
 
-@keyframes shine {
-  0%   { background-position: 200% 0; }
-  100% { background-position: 0 0; }
+/* ============= 상세 페이지: 2컬럼 ============= */
+.admin-users.detail {
+    .two-col {
+        display: grid;
+        grid-template-columns: 360px 1fr; /* 왼쪽 폭 조정 */
+        gap: 16px;
+        align-items: start;
+    }
+
+    .profile-card {
+        max-width: 360px;
+        position: sticky;
+        top: 12px; /* 원치 않으면 두 줄 제거 */
+    }
+
+    /* 프로필 카드 타이트 정렬 */
+    .profile-card .grid.two {
+        grid-template-columns: 1fr;
+        row-gap: 8px;
+    }
+    .profile-card .grid.two > div {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    .profile-card label {
+        width: 64px;
+        margin: 0;
+        color: #6b7280;
+        font-size: 12px;
+    }
+    .profile-card .grid.two > div > div {
+        flex: 1;
+    }
+}
+
+/* ============= Compact 모드(여백/행간 축소) ============= */
+.admin-users.detail.compact {
+    .toolbar {
+        margin-bottom: 10px;
+    }
+    .toolbar h1 {
+        font-size: 18px;
+    }
+    .toolbar .right {
+        gap: 6px;
+    }
+    .toolbar button,
+    .toolbar .search,
+    .toolbar .page-size {
+        height: 32px;
+    }
+
+    .two-col {
+        gap: 12px;
+    }
+    .left > .card + .card,
+    .right > .card + .card {
+        margin-top: 12px;
+    }
+
+    .card {
+        padding: 12px 14px;
+    }
+    .card-title {
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    .profile-card .grid.two {
+        row-gap: 6px;
+    }
+    .profile-card label {
+        width: 56px;
+        font-size: 11.5px;
+    }
+    .profile-card .grid.two > div {
+        gap: 8px;
+    }
+
+    .sns-icons {
+        gap: 6px;
+    }
+    .sns-badges .pill {
+        padding: 3px 8px;
+        font-size: 12px;
+    }
+
+    .admin-table {
+        font-size: 13px;
+        th,
+        td {
+            padding: 7px 10px;
+            line-height: 1.25;
+        }
+        thead th {
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+    }
+
+    .row-actions {
+        gap: 6px;
+    }
+    .row-actions button {
+        padding: 4px 8px;
+        font-size: 12.5px;
+    }
+
+    .sk.lg {
+        height: 80px;
+    }
+    .empty,
+    .error {
+        padding: 10px 12px;
+    }
+}
+
+/* ============= 반응형 ============= */
+@media (max-width: 980px) {
+    .admin-users.detail .two-col {
+        grid-template-columns: 1fr;
+    }
+    .admin-users.detail .profile-card {
+        position: static;
+        max-width: 100%;
+    }
+}
+/* ───────────────────────────────────────────
+   높이 강제 축소 패치 (users detail)
+   ─────────────────────────────────────────── */
+
+/* 1) 그리드에서 아이템이 서로 높이 맞춰 늘어나지 않도록 */
+.admin-users.detail .two-col {
+    align-items: start !important;
+}
+.admin-users.detail .two-col > * {
+    align-self: start !important;
+}
+
+/* 2) 왼쪽/오른쪽 컬럼 안의 card가 100% 키우는 스타일 무력화 */
+.admin-users.detail .left .card,
+.admin-users.detail .right .card,
+.admin-users.detail .card.profile-card {
+    height: auto !important;
+    min-height: auto !important;
+}
+
+/* 3) 왼쪽 컬럼 자체도 콘텐츠 높이만큼만 가지게 */
+.admin-users.detail .left {
+    display: grid; /* 쌓임 + 간격 */
+    gap: 12px;
+    align-content: start; /* 세로로도 늘지 않게 */
+}
+
+/* 4) (선택) 더 납작한 여백 – compact 없이도 적용되게 최소치 강제 */
+.admin-users.detail .card {
+    padding: 12px 14px !important;
+}
+.admin-users.detail .card-title {
+    margin-bottom: 8px !important;
+    font-size: 16px;
+}
+.admin-users.detail .admin-table th,
+.admin-users.detail .admin-table td {
+    padding: 7px 10px !important;
+    line-height: 1.25;
+}
+
+/* 5) 빈 상태/스켈레톤도 얇게 */
+.admin-users.detail .empty,
+.admin-users.detail .error {
+    padding: 8px 10px !important;
+}
+.admin-users.detail .sk.lg {
+    height: 60px !important;
 }

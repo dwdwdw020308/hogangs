@@ -1,0 +1,102 @@
+/* === Global modal base === */
+.modal-backdrop {
+    position: fixed;
+    inset: 0; /* top:0;right:0;bottom:0;left:0 */
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 10000; /* 항상 맨 위에 */
+}
+
+.modal {
+    box-sizing: border-box;
+    width: min(720px, 96vw);
+    max-height: 88vh;
+    overflow: auto;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+    padding: 20px 24px;
+}
+
+/* === Form layout used inside modal === */
+.video-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.video-form label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #111827;
+}
+
+.video-form input,
+.video-form select,
+.video-form textarea {
+    width: 100%;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    background: #fff;
+    outline: none;
+}
+.video-form input:focus,
+.video-form select:focus,
+.video-form textarea:focus {
+    border-color: #1677ff;
+    box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.12);
+}
+
+.video-form .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.video-form .actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.video-form .actions .primary {
+    background: #1677ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+}
+.video-form .actions button {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 14px;
+    background: #fff;
+}
+
+/* skeleton */
+.sk {
+    height: 44px;
+    background: linear-gradient(90deg, #f3f4f6, #eef0f3, #f3f4f6);
+    background-size: 200% 100%;
+    border-radius: 8px;
+    animation: sk 1.2s infinite;
+}
+.sk.lg {
+    height: 100px;
+}
+@keyframes sk {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: -200% 50%;
+    }
+}
