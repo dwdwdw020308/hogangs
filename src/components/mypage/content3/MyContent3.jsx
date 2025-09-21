@@ -26,7 +26,18 @@ const MyContent3 = () => {
             </div>
           ) : (
             <div className="recordList hasData">
-              <Swiper spaceBetween={18} slidesPerView={3}>
+              <Swiper
+                spaceBetween={18}
+                slidesPerView={3}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 1.5,
+                  },
+                  600: {
+                    slidesPerView: 3,
+                  },
+                }}
+              >
                 {recordData.map((item, idx) => (
                   <SwiperSlide key={idx}>
                     <RecordItem data={item} />
@@ -48,7 +59,18 @@ const MyContent3 = () => {
             </div>
           ) : (
             <div className="steamingList hasData">
-              <Swiper spaceBetween={18} slidesPerView={3}>
+              <Swiper
+                spaceBetween={18}
+                slidesPerView={3}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 1.5,
+                  },
+                  600: {
+                    slidesPerView: 3,
+                  },
+                }}
+              >
                 {steamingData.map((item, idx) => (
                   <SwiperSlide key={idx}>
                     <SteamingItem data={item} />

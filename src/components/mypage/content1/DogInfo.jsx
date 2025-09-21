@@ -14,7 +14,7 @@ const DogInfo = ({ onSave, initialData }) => {
   const [healthNote, setHealthNote] = useState("");
   const [moreNote, setMoreNote] = useState("");
 
-  // ✅ 프로필 이미지 상태
+  // 프로필 이미지 상태
   const [profileImage, setProfileImage] = useState("/mypage/hogangprofile.png");
   const fileInputRef = useRef(null);
 
@@ -62,7 +62,7 @@ const DogInfo = ({ onSave, initialData }) => {
       hospital,
       healthNote,
       moreNote,
-      // ✅ 사진 수정 안했으면 기본 이미지 적용
+      //  사진 수정 안했으면 기본 이미지 적용
       profileImage:
         profileImage === "/mypage/hogangprofile.png"
           ? "/mypage/hogangImg.png"
@@ -83,7 +83,7 @@ const DogInfo = ({ onSave, initialData }) => {
     }
   };
 
-  // ✅ 기생충 체크박스 선택 처리
+  // 기생충 체크박스 선택 처리
   const handleParasiteCheck = (value) => {
     setParasites((prev) =>
       prev.includes(value)
@@ -92,7 +92,7 @@ const DogInfo = ({ onSave, initialData }) => {
     );
   };
 
-  // ✅ 사진 변경 핸들러
+  // 사진 변경 핸들러
   const handleUploadClick = () => {
     fileInputRef.current?.click();
   };

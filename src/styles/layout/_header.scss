@@ -179,7 +179,8 @@
         justify-content: flex-end;
         align-items: center;
         border-radius: 50%;
-        background: var(--Grey-grey-700, #454545);
+        // background: var(--Grey-grey-700, #454545);
+        border: 1px solid #cecece;
         img {
           border-radius: 100%;
           width: 100%;
