@@ -102,9 +102,9 @@
           border: 4px solid var(--Green-green-200, #e2f8f7);
           background: var(--Green-green-50, #f9fefd);
           .edit {
-            display: flex; // 글자 + 화살표 나란히
-            align-items: center; // 세로 가운데 정렬
-            gap: 6px; // 글자와 화살표 사이 간격
+            display: flex;
+            align-items: center;
+            gap: 6px;
 
             span {
               font-family: "Pretendard";
@@ -114,14 +114,14 @@
               cursor: pointer;
 
               &:hover {
-                text-decoration: underline; // 마우스 올리면 밑줄
+                text-decoration: underline;
               }
             }
 
             svg {
               width: 6px;
               height: 9px;
-              stroke: #7abab6; // 혹시 색상 덮어씌우기
+              stroke: #7abab6;
             }
           }
 
@@ -320,7 +320,7 @@
             cursor: pointer;
 
             &.sns:hover {
-              color: #3e8d88; //  SNS 연동 hover 컬러
+              color: #3e8d88;
             }
 
             &.logout {
@@ -328,11 +328,59 @@
               font-weight: 500;
 
               &:hover {
-                // color: #d9534f; //  로그아웃은 빨간 느낌
                 text-decoration: underline;
               }
             }
           }
+        }
+      }
+    }
+    .reservation {
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+      .tab {
+        display: flex;
+        gap: 37px;
+        width: 100%;
+        height: 54px;
+        border-bottom: 1px solid #cecece;
+        cursor: pointer;
+        li {
+          color: var(--Grey-grey-300, #959595);
+          font-family: Paperlogy;
+          font-size: 24px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          letter-spacing: 0.24px;
+          &.on {
+            color: var(--Black, #060606);
+          }
+        }
+      }
+      .reservationList {
+        display: flex;
+        width: 100%;
+        height: 165px;
+        justify-content: center;
+        align-items: center;
+        &.empty {
+          height: 124px;
+        }
+        &.hasData {
+          justify-content: left;
+          display: flex;
+          gap: 26px;
+        }
+        span {
+          color: var(--Grey-grey-500, #616161);
+          text-align: center;
+          font-family: Pretendard;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 130%;
         }
       }
     }
@@ -771,6 +819,317 @@
       font-style: normal;
       font-weight: 600;
       line-height: normal;
+    }
+  }
+}
+
+#sns-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9998;
+  @include flexbox();
+  .sns-modal {
+    width: 338px;
+    height: 162px;
+    border-radius: 30px;
+    background: #fff;
+    .top {
+      border-radius: 30px 30px 0 0;
+      width: 100%;
+      background: var(--Green-green-600, #b0dad8);
+      border-bottom: 1px solid #b0dad8;
+      .close-btn {
+        display: flex;
+        justify-content: right;
+        padding: 8px 19px 8px 299px;
+        cursor: pointer;
+      }
+    }
+    .bottom {
+      .snsWrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 30px;
+        margin-top: 36px;
+        .sns {
+          display: flex;
+          gap: 6px;
+          .icon {
+            display: flex;
+            align-items: center;
+          }
+          .txt {
+            display: flex;
+            width: 65px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            p {
+              color: var(--Grey-grey-900, #292929);
+              text-align: center;
+              font-family: Pretendard;
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: normal;
+            }
+            span {
+              color: var(--Grey-grey-400, #818181);
+              text-align: center;
+              font-family: Pretendard;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: normal;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #mycontent1 {
+    padding: 60px 16px 40px 16px;
+    margin-top: 0;
+    .inner {
+      gap: 40px;
+      .title {
+        gap: 14px;
+        h2 {
+          font-size: 18px;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+      .dogInfo {
+        gap: 13.96px;
+        .infoBox {
+          gap: 13.96px;
+          .infoBox-empty {
+            width: 240px;
+            height: 290px;
+            padding: 57.836px 16px;
+            gap: 20px;
+            .puppyImg {
+              img {
+                width: 97.533px;
+                height: 46.742px;
+              }
+            }
+            .text {
+              gap: 7.59px;
+              width: 100%;
+              strong {
+                font-size: 14px;
+              }
+              p {
+                font-size: 13px;
+              }
+            }
+            .btn {
+              button {
+                width: 112px;
+                height: 30px;
+                border-radius: 30.344px;
+                font-size: 13px;
+              }
+            }
+          }
+          .infoBox-add {
+            width: 240px;
+            height: 290px;
+            padding: 11px 8px 24px 8px;
+            .edit {
+              gap: 4px;
+              span {
+                font-size: 12px;
+              }
+            }
+            .box {
+              width: 223.242px;
+              .top {
+                width: 100%;
+                .hogangPic {
+                  width: 113px;
+                  height: 110px;
+                }
+              }
+              .bottom {
+                width: 100%;
+                .about {
+                  width: 100%;
+                  gap: 3.25px;
+                  .name {
+                    font-size: 16px;
+                  }
+                  .age {
+                    font-size: 10px;
+                  }
+                }
+                .uses {
+                  width: 100%;
+                  margin-top: 14px;
+                  div {
+                    gap: 6px;
+                    p {
+                      font-size: 13px;
+                    }
+                    strong {
+                      font-size: 16px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .infoBox-another {
+            width: 240px;
+            height: 290px;
+            padding: 57.836px 16px;
+            gap: 20px;
+            .puppyImg {
+              img {
+                width: 97.533px;
+                height: 46.742px;
+              }
+            }
+            .text {
+              gap: 7.59px;
+              width: 100%;
+              strong {
+                font-size: 14px;
+              }
+              p {
+                font-size: 13px;
+              }
+            }
+            .btn {
+              button {
+                width: 112px;
+                height: 30px;
+                border-radius: 30.344px;
+                font-size: 13px;
+              }
+            }
+          }
+        }
+      }
+      .ownerInfo {
+        dl {
+          gap: 12px;
+          .row {
+            gap: 6px;
+            dt {
+              width: 65px;
+              font-size: 13px;
+            }
+            dd {
+              font-size: 14px;
+            }
+          }
+          .actions {
+            gap: 18px;
+            span {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+      .reservation {
+        .tab {
+          gap: 10px;
+          height: 33px;
+          li {
+            font-size: 13px;
+          }
+        }
+        .reservationList {
+          height: 158px;
+          &.hasData {
+            gap: 10px;
+          }
+          span {
+            font-size: 10px;
+          }
+        }
+      }
+      .coupon {
+        gap: 10px;
+        .tab {
+          height: 44px;
+          .couponTab {
+            gap: 10px;
+            li {
+              font-size: 13px;
+            }
+          }
+          .subTab {
+            display: none;
+          }
+        }
+        .couponList {
+          gap: 10px;
+        }
+      }
+    }
+  }
+  #couponItem {
+    gap: 10px;
+    .couponImg {
+      background-image: url(/mypage/couponMobile.png);
+      width: 174px;
+      height: 159px;
+      .txt {
+        padding-left: 20px;
+        margin-top: -50px;
+        gap: 6px;
+        span {
+          font-size: 10px;
+          width: 42px;
+          padding: 1.932px 7.727px;
+        }
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  #ExpiredCouponItem {
+    gap: 10px;
+    .couponImg {
+      background-image: url(/mypage/ExpiredCouponMobile.png);
+      width: 174px;
+      height: 159px;
+      .txt {
+        padding-left: 20px;
+        margin-top: -50px;
+        gap: 6px;
+        span {
+          font-size: 10px;
+          width: 42px;
+          padding: 1.932px 7.727px;
+        }
+        h3 {
+          font-size: 16px;
+        }
+        p {
+          font-size: 12px;
+        }
+      }
     }
   }
 }

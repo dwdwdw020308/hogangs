@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RadioInput from '../common/RadioInput';
+import useReservationStore from '../../store/useReservationStore';
 
 const TERMS = [
     {
@@ -35,7 +36,9 @@ const TERMS = [
 const ReservationTerms = () => {
     const [open, setOpen] = useState(new Set());
     const [radio, setRadio] = useState(new Set());
-    const [agree, setAgree] = useState({});
+
+    const setPaymentProcesses = useReservationStore((s) => s.setPaymentProcesses);
+    const paymentProcesses = useReservationStore((s) => s.paymentProcesses);
 
     const toggle = (key) => {
         setOpen((prev) => {
@@ -52,17 +55,23 @@ const ReservationTerms = () => {
             return s;
         });
     };
-    const onCheck = (key, checked) => {
-        setAgree((prev) => {
-            const next = { ...prev, [key]: checked };
 
-            // if (onAgreeChange) {
-            //     const allAgreed = TERMS.every((t) => next[t.key]);
-            //     onAgreeChange(allAgreed, next);
-            // }
-            return next;
+    useEffect(() => {
+        const radioKey = ['radio_date', 'radio_penalty', 'radio_ownership'];
+        radioKey.map((key) => {
+            const s = new Set(radio);
+            if (!s.has(key)) {
+                return false;
+            }
+            setPaymentProcesses('terms', true);
+            return true;
         });
-    };
+    }, [radio, setPaymentProcesses]);
+
+    // useEffect(() => {
+    //     console.log('paymentProcesses changed:', paymentProcesses);
+    // }, [paymentProcesses]);
+
     return (
         <section id="pay_terms">
             <div className="inner">
@@ -105,9 +114,7 @@ const ReservationTerms = () => {
                                         name={term.radioKey}
                                         value={term.radioKey}
                                         checked={radio.has(term.radioKey)}
-                                        onClick={() => {
-                                            agreeRadio(term.radioKey);
-                                        }}
+                                        onChange={() => agreeRadio(term.radioKey)}
                                     />
 
                                     <span className="txt">{term.text}</span>

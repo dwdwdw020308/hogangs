@@ -25,6 +25,9 @@ import RequireAdmin from './pages/admin/RequireAdmin';
 import AdminLayout from './common/AdminLayout';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminVideos from './pages/admin/AdminVideos';
+import AdminCoupons from './pages/admin/AdminCoupons';
+import AdminUserDetail from './pages/admin/AdminUserDetail';
+import AdminReservations from './pages/admin/AdminReservation';
 
 const App = () => {
     const { setActiveMenu, setIsMain } = useCommonStore();
@@ -61,8 +64,10 @@ const App = () => {
                     <Route element={<AdminLayout />}>
                         <Route index element={<AdminUsers />} />
                         <Route path="users" element={<AdminUsers />} />
+                        <Route path="users/:id" element={<AdminUserDetail />} />
                         <Route path="video" element={<AdminVideos />} />
-                        {/*<Route path="reservation" element={<AdminReservation />} /> */}
+                        <Route path="coupon" element={<AdminCoupons />} />
+                        <Route path="reservation" element={<AdminReservations />} />
                     </Route>
                 </Route>
             </Routes>

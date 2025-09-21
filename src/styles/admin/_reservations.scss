@@ -1,0 +1,148 @@
+.admin-reservations {
+    .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+        .right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .search {
+            width: 280px;
+            height: 36px;
+            padding: 0 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            outline: none;
+            &:focus {
+                border-color: #1677ff;
+                box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.15);
+            }
+        }
+        button {
+            height: 36px;
+            padding: 0 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+        }
+    }
+
+    .tabs {
+        display: flex;
+        gap: 6px;
+        background: #f5f7fb;
+        padding: 4px;
+        border-radius: 10px;
+        button {
+            border: none;
+            background: transparent;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #475569;
+            &.active {
+                background: #fff;
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+                color: #111827;
+            }
+        }
+    }
+
+    .table-wrap {
+        width: 100%;
+        overflow: auto;
+    }
+    .admin-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 14px;
+        thead th {
+            text-align: left;
+            font-weight: 700;
+            color: #374151;
+            background: #f9fafb;
+            border-bottom: 1px solid #eef0f3;
+            padding: 10px 12px;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+        th .sort {
+            margin-left: 6px;
+            border: 5px solid transparent;
+            border-top-color: #c7c7c7;
+            display: inline-block;
+            transform: translateY(2px);
+        }
+        th .sort.asc {
+            border-top-color: transparent;
+            border-bottom: 5px solid #111827;
+            transform: translateY(-2px);
+        }
+        th .sort.desc {
+            border-top: 5px solid #111827;
+        }
+
+        tbody td {
+            border-bottom: 1px solid #f1f3f5;
+            padding: 10px 12px;
+            color: #111827;
+            white-space: nowrap;
+        }
+        tr:hover td {
+            background: #fafafa;
+        }
+    }
+
+    .pill {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        font-size: 12.5px;
+        &.hotel {
+            background: #e0f2fe;
+            border: none;
+        }
+        &.grooming {
+            background: #e9d5ff;
+            border: none;
+        }
+    }
+
+    .empty,
+    .error {
+        padding: 16px;
+        color: #6b7280;
+    }
+
+    .skeleton .sk {
+        height: 44px;
+        background: linear-gradient(90deg, #f3f4f6, #eef0f3, #f3f4f6);
+        background-size: 200% 100%;
+        border-radius: 8px;
+        animation: sk 1.2s infinite;
+    }
+    @keyframes sk {
+        0% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: -200% 50%;
+        }
+    }
+}

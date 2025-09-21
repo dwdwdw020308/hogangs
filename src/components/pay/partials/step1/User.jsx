@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import useReservationStore from '../../../../store/useReservationStore';
 
 const User = () => {
     const [isSync, setIsSync] = useState(false);
@@ -6,6 +7,8 @@ const User = () => {
     const [lockDomain, setLockDomain] = useState(false);
     const domainRef = useRef(null);
     const telFirstRef = useRef(null);
+    const setPaymentProcesses = useReservationStore((s) => s.setPaymentProcesses);
+    const paymentProcesses = useReservationStore((s) => s.paymentProcesses);
 
     const splitPhone344 = (str) => {
         const digits = (str || '').replace(/\D/g, '');
@@ -64,6 +67,19 @@ const User = () => {
         }
         domainRef.current.value = value;
     };
+
+    useEffect(() => {
+        getMyInfo();
+    }, []);
+    useEffect(() => {
+        const { emailDomain, emailId, name, telFirst, telSecond, telThird } = userInfo ?? {};
+        const allFilled = [emailDomain, emailId, name, telFirst, telSecond, telThird].every(
+            (v) => typeof v === 'string' && v.trim() !== ''
+        );
+
+        setPaymentProcesses('user', allFilled);
+    }, [userInfo, setPaymentProcesses]);
+
     return (
         <div className="pay_user">
             <h3 className="user_label">예약자 정보</h3>
@@ -134,7 +150,7 @@ const User = () => {
                             readOnly={lockDomain}
                             onChange={onChangeInput}
                         />
-                        <select
+                        {/* <select
                             name="emailList"
                             id="emailList"
                             className="emailList"
@@ -144,22 +160,18 @@ const User = () => {
                             <option value="google.com">google.com</option>
                             <option value="naver.com">naver.com</option>
                             <option value="nate.com">nate.com</option>
-                        </select>
+                        </select> */}
                     </div>
-                </li>
-                <li>
-                    <span className="info_label">요청사항</span>
-                    <select className="request_list" name="request" id="requestList"></select>
                 </li>
             </ul>
 
             {/* 내 정보 가져오기 버튼 */}
-            <div className="check__line">
+            {/* <div className="check__line">
                 <input id="isSync" type="checkbox" checked={isSync} onChange={getMyInfo} />
                 <label htmlFor="isSync" className={isSync ? 'checked' : ''}>
                     <span>내 정보 가져오기</span>
                 </label>
-            </div>
+            </div> */}
         </div>
     );
 };
