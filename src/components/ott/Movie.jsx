@@ -51,6 +51,20 @@ const Movie = () => {
                 slidesPerGroup={5}
                 loop={true}
                 spaceBetween={20}
+                breakpoints={{
+                    0: {
+                        // 모바일 (0px ~ 600px)
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                        spaceBetween: 10,
+                    },
+                    601: {
+                        // 태블릿 이상
+                        slidesPerView: 5,
+                        slidesPerGroup: 5,
+                        // spaceBetween: 15,
+                    },
+                }}
             >
                 {poster.map((poster) => (
                     <SwiperSlide key={poster.id}>

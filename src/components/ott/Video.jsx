@@ -27,24 +27,23 @@ const Video = () => {
             <strong>
                 오늘의 <span>댕댕이 TV</span>
             </strong>
+            <p>강아지가 전하는 작지만 확실한 행복</p>
             <Swiper
                 modules={[Scrollbar]}
-                // pagination={{ clickable: true }}
                 slidesPerView="auto"
-                // slidesPerGroup={20}
-                spaceBetween={26}
+                // spaceBetween={26}
                 loop={false}
                 scrollbar={{ hide: false, draggable: true }}
             >
                 {video.map((video) => (
-                    <SwiperSlide key={video.id} style={{ width: 480 }}>
+                    <SwiperSlide key={video.id} className="video-slide">
                         <div className="slide-card">
                             <img
                                 src={video.img}
                                 alt={video.title}
                                 onClick={() => navigate(`/video/youtube/${video.id}`)}
                             />
-                            <p>{video.title}</p>
+                            <p className="title">{video.title}</p>
                         </div>
                     </SwiperSlide>
                 ))}

@@ -2,7 +2,7 @@
 
 .movie-list {
     background: var(--Green-green-50, #f9fefd);
-    padding: 160px 260px;
+    padding: 0 260px 160px 260px;
     position: relative;
 
     strong {
@@ -87,5 +87,69 @@
         height: 10px;
         background: var(--Green-green-700, #8bbab7);
         // position: absolute;
+    }
+}
+@media screen and (max-width: 600px) {
+    .movie-list {
+        padding: 20.5128vw 4.1026vw;
+        strong {
+            img {
+                width: 5.641vw;
+            }
+            font-size: 18px;
+            margin-bottom: 11.2821vw;
+        }
+        .swiper {
+            padding-bottom: 15.3846vw;
+        }
+        .swiper-slide {
+            img {
+                width: 45.1282vw;
+                height: 64.6154vw;
+            }
+            p {
+                font-size: 14px;
+                font-weight: 500;
+                margin-top: 4.6154vw;
+            }
+            .info {
+                font-size: 13px;
+                color: var(--Grey-grey-600, #585858);
+                .type {
+                    padding-right: 1.5385vw;
+                    position: relative;
+                    &::after {
+                        position: absolute;
+                        content: '';
+                        width: 0.2564vw;
+                        height: 3.5897vw;
+                        background: #585858;
+                        right: 0;
+                        top: 70%;
+                        transform: translateY(-70%);
+                    }
+                }
+                .date {
+                    padding-left: 1.5385vw;
+                }
+            }
+        }
+        position: relative;
+
+        .swiper-pagination {
+            bottom: 0;
+        }
+        .swiper-pagination-bullet {
+            width: 1.5385vw;
+            height: 1.5385vw;
+            background: #b6b6b6;
+            // position: absolute;
+        }
+        .swiper-pagination-bullet-active {
+            width: 1.5385vw;
+            height: 1.5385vw;
+            background: var(--Green-green-700, #8bbab7);
+            // position: absolute;
+        }
     }
 }

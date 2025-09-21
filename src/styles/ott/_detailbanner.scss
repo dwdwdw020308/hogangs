@@ -165,3 +165,110 @@
         line-height: 1.1;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .DetailBanner {
+        background: linear-gradient(0deg, rgba(6, 6, 6, 0.7) 0%, rgba(108, 108, 108, 0) 100%),
+            url('/ott/detail-big-m.png');
+        margin-top: 20.5128vw;
+        height: 160.2564vw;
+        padding: 23.0769vw 4.1026vw 0 4.1026vw;
+        position: relative;
+        .title-box {
+            h2 {
+                font-size: 38px;
+                line-height: 1.2;
+            }
+            strong {
+                display: none;
+            }
+            ul {
+                font-weight: 500;
+                font-size: 13px;
+                margin-top: 2.5641vw;
+            }
+        }
+
+        .line {
+            width: 100%;
+            margin-top: 2.5641vw;
+        }
+
+        .desc-box {
+            margin-top: 2.5641vw;
+            flex-direction: column;
+            right: 0;
+            .left {
+                position: relative;
+                img {
+                    position: absolute;
+                    right: 0;
+                    bottom: -92.8205vw;
+                    border-radius: 2.5641vw;
+                    margin-bottom: 0vw;
+                    width: 46.1538vw;
+                }
+                button {
+                    position: absolute;
+                    left: 42.3077vw;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    img {
+                        width: 6.9231vw;
+                        right: -30.7692vw;
+                        bottom: -82.0513vw;
+                    }
+                }
+            }
+
+            .center {
+                margin-left: 0px;
+                p {
+                    color: var(--White, #fefefe);
+                    line-height: 140%;
+                    font-size: 13px;
+                    font-weight: 400;
+                    width: 70.5128vw;
+                    br {
+                        display: none;
+                    }
+                }
+                ul {
+                    margin-top: 7.1795vw;
+                    gap: 1.5385vw;
+                    li {
+                        button {
+                            width: 25.1282vw;
+                            height: 6.6667vw;
+                            font-size: 12px;
+
+                            svg {
+                                margin-right: 2.0513vw;
+                                width: 3.5897vw;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .right {
+                img {
+                    position: absolute;
+                    right: 35.8974vw;
+                }
+            }
+        }
+    }
+
+    .DetailBanner.youtube-detail {
+        background: linear-gradient(0deg, rgba(6, 6, 6, 0.7) 0%, rgba(108, 108, 108, 0) 100%),
+            url('/ott/detail-big2-m.png');
+        h2 {
+            font-size: 90px;
+            line-height: 1.1;
+        }
+    }
+}

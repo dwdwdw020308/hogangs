@@ -109,18 +109,18 @@
 }
 @media screen and (max-width: 600px) {
     .ottmain-visual {
-        height: 455px;
+        height: 116.6667vw;
         width: 100%;
         text-align: center;
         justify-content: center;
-        margin-top: 85px;
+        margin-top: 21.7949vw;
         background: #292929;
         .title {
             strong {
                 letter-spacing: 0.5px;
-                padding-top: 60px;
+                padding-top: 15.3846vw;
                 font-size: 18px;
-                margin-bottom: 10px;
+                margin-bottom: 2.5641vw;
                 span {
                     color: var(--Green-green-500, #b7e2df);
                     position: relative;
@@ -143,18 +143,18 @@
             }
         }
         .movie-film {
-            padding: 38px 0;
+            padding: 9.7436vw 0;
             margin-top: 0px;
             .film-inner {
                 margin: 32px 0;
                 .posterlist {
                     .poster {
-                        width: 130px;
-                        height: 186px;
-                        margin-right: 8px;
+                        width: 33.3333vw;
+                        height: 47.6923vw;
+                        margin-right: 2.0513vw;
                         img {
-                            width: 130px;
-                            height: 186px;
+                            width: 33.3333vw;
+                            height: 47.6923vw;
                         }
                     }
                 }
@@ -162,8 +162,8 @@
         }
         .img {
             img {
-                width: 386px;
-                height: 202px;
+                width: 98.9744vw;
+                height: 51.7949vw;
             }
         }
     }

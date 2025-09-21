@@ -103,6 +103,8 @@ const Best = () => {
                     BEST <br />
                     MOVIE
                 </span>
+                <span className="bg1">BEST</span>
+                <span className="bg2">MOVIE</span>
             </div>
 
             <div className="right">
@@ -120,8 +122,8 @@ const Best = () => {
                     className="slide-wrapper"
                     breakpoints={{
                         0: {
-                            slidesPerView: 1.5, // 모바일 → 2.5개씩 보이게
-                            spaceBetween: 10, // 모바일 간격
+                            slidesPerView: 1.7, // 모바일 → 2.5개씩 보이게
+                            spaceBetween: 0, // 모바일 간격
                         },
                         601: {
                             slidesPerView: 3.5, // PC
@@ -183,8 +185,11 @@ const Best = () => {
                     <div
                         className="bar"
                         style={{
-                            width: `${1076 / best5.length}px`,
-                            transform: `translateX(${(1076 / best5.length) * currentIndex}px)`,
+                            width: `${(window.innerWidth <= 600 ? 30 : 1076) / best5.length}px`,
+                            transform: `translateX(${
+                                ((window.innerWidth <= 600 ? 300 : 1076) / best5.length) *
+                                currentIndex
+                            }px)`,
                         }}
                     ></div>
                 </div>
