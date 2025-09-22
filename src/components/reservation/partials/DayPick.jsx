@@ -66,11 +66,12 @@ export default function DayPick() {
 
         if (!day) {
             // 지우고 싶으면(선택 취소 시) 명시적으로 제거
-            setFormField('groomingDate', undefined);
+            setFormField('startDate', undefined);
             return;
         }
         setFormField('resType', 'grooming');
-        setFormField('groomingDate', format(day, 'yyyy-MM-dd'));
+        setFormField('startDate', format(day, 'yyyy-MM-dd'));
+        setFormField('endDate', format(day, 'yyyy-MM-dd'));
         setStepProcesses({ 1: 'done', 2: 'ing' });
     };
 

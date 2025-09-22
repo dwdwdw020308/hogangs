@@ -12,8 +12,8 @@ const CheckWeight = () => {
     const setFormField = useReservationStore((s) => s.setFormField);
     const onClick = (value) => {
         setSize(value);
-        const payload = { size: SIZE_DATA[value].size };
-        setFormField('size', SIZE_DATA[value].size);
+
+        setFormField('size', SIZE_DATA[value - 1].size);
         setStepProcesses({ 3: 'done', 4: 'ing' });
     };
     return (

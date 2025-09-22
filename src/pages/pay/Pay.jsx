@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Cancel from '../../components/pay/Cancel';
 import Coupon from '../../components/pay/Coupon';
 import Payment from '../../components/pay/Payment';
@@ -8,19 +8,34 @@ import { useNavigate } from 'react-router-dom';
 import useReservationStore from '../../store/useReservationStore';
 
 const Pay = () => {
-    const reservationForm = JSON.parse(localStorage.getItem('reservationForm') || []);
-    const { resType } = reservationForm;
+    const reservationForm = useReservationStore((s) => s.reservationForm);
     const isNormalLogic = useReservationStore((s) => s.isNormalLogic);
     const navigate = useNavigate();
-    // useEffect(() => {
-    //     // 정상 접근이 아닌경우 Main으로 리디렉션
-    //     if (!isNormalLogic) {
-    //         navigate('/');
-    //     }
-    //     if (reservationForm.length === 0) {
-    //         navigate('/');
-    //     }
-    // }, [isNormalLogic]);
+    const { resType } = reservationForm;
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // 정상 접근이 아닌경우 Main으로 리디렉션
+        if (!isNormalLogic) {
+            navigate('/');
+        }
+        if (reservationForm.length === 0) {
+            navigate('/');
+        }
+    }, [isNormalLogic]);
+
+    // reservationForm 데이터 불러오기
+    useEffect(() => {
+        if (!reservationForm) return;
+        setLoading(false);
+    }, [reservationForm]);
+    if (loading) {
+        return (
+            <section id="pay_result">
+                <div className="inner">불러오는 중...</div>
+            </section>
+        );
+    }
     return (
         <>
             <section id="pay_top">

@@ -43,7 +43,7 @@ const CheckGroomingService = () => {
                 option = '선택 안함';
                 break;
         }
-        setFormField({ option });
+        setFormField('option', option);
         setStepProcesses({ 4: 'done', 5: 'ing' });
     };
     return (

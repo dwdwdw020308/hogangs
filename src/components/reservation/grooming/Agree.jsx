@@ -1,27 +1,30 @@
 import { useState } from 'react';
 import useReservationStore from '../../../store/useReservationStore';
+import { useNavigate } from 'react-router-dom';
 
 const Agree = () => {
     const [agree, setAgree] = useState(false);
     const form = useReservationStore((s) => s.form);
     const setLocalStorageForm = useReservationStore((s) => s.setLocalStorageForm);
+    const setBeingReservation = useReservationStore((s) => s.setBeingReservation);
+    const navigate = useNavigate();
     const onChange = (e) => {
         setAgree(e.target.checked);
     };
 
     const validate = () => {
-        const { startDate, checkOut, size, groomingService } = form;
+        const { startDate, resTime, size, type } = form;
 
         if (startDate === '' || !startDate) {
             alert('입ㆍ퇴실 날짜를 선택해주세요.');
             return;
-        } else if (checkOut === '' || !checkOut) {
-            alert('퇴실 연장 여부를 체크를 해주세요.');
+        } else if (resTime === '' || !resTime) {
+            alert('예약 시간을 체크를 해주세요.');
             return;
         } else if (size === '' || !size) {
             alert('사이즈를 선택해주세요.');
             return;
-        } else if (groomingService === '' || !groomingService) {
+        } else if (type === '' || !type) {
             alert('미용 서비스를 여부를 선택해주세요.');
             return;
         } else if (!agree) {
@@ -30,6 +33,9 @@ const Agree = () => {
         }
 
         setLocalStorageForm();
+        setBeingReservation();
+
+        navigate('/pay');
     };
 
     return (

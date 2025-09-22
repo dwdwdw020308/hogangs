@@ -39,6 +39,7 @@ const Time = () => {
                     <ul className="times">
                         {RES_TIME.map((i, idx) => (
                             <li
+                                key={idx}
                                 className={selectTime === idx + 1 ? 'check' : ''}
                                 onClick={() => {
                                     onClick(idx);

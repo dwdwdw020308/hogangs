@@ -5,12 +5,12 @@ import {
     HotelLateCheckOut,
     priceByGroomingService,
 } from '../../../../utils/Calc';
+import useReservationStore from '../../../../store/useReservationStore';
 
 const Receipt = ({ resType, form, totalPrice, setTotalPrice }) => {
     const [items, setItems] = useState([]);
-
+    const reservationForm = useReservationStore((s) => s.reservationForm);
     useEffect(() => {
-        if (!form) return;
         const {
             size = '',
             nights = 0,
@@ -19,7 +19,9 @@ const Receipt = ({ resType, form, totalPrice, setTotalPrice }) => {
             groomingService = '',
             type = '',
             option = '',
-        } = form;
+            resTime = '',
+            resType,
+        } = reservationForm;
 
         const nextItems = [];
         let total = 0;
@@ -28,38 +30,44 @@ const Receipt = ({ resType, form, totalPrice, setTotalPrice }) => {
             const price = Number(HotelBasicPrice(size, nights) || 0);
             nextItems.push({ label: `객실 기본 요금: ${size}`, price });
             total += price;
-        }
+            if (checkOut === 'extend') {
+                const price = Number(HotelLateCheckOut(size, checkOutTime) || 0);
+                nextItems.push({ label: '객실 추가 요금: 퇴실연장', price });
+                total += price;
+            }
 
-        if (checkOut === 'extend') {
-            const price = Number(HotelLateCheckOut(size, checkOutTime) || 0);
-            nextItems.push({ label: '객실 추가 요금: 퇴실연장', price });
-            total += price;
-        }
+            if (groomingService === 'beauty') {
+                const price = Number(priceByGroomingService(size, type, option) || 0);
+                nextItems.push({ label: `미용 서비스: ${type}`, price });
+                total += price;
+            }
 
-        if (groomingService === 'beauty') {
-            const price = Number(priceByGroomingService(size, type, option) || 0);
+            if (option) {
+                const price = Number(addPriceByGroomingOption(option) || 0);
+                nextItems.push({ label: `추가옵션: ${option}`, price });
+                total += price;
+            }
+        } else if (resType === 'grooming') {
+            // nextItems.push({
+            //     label: `미용 서비스: ${type}`,
+            //     class: 'g500',
+            // });
+
+            const price = Number(priceByGroomingService(size, type) || 0);
             nextItems.push({ label: `미용 서비스: ${type}`, price });
             total += price;
-        }
 
-        if (option) {
-            const price = Number(addPriceByGroomingOption(option) || 0);
-            nextItems.push({ label: `추가옵션: ${option}`, price });
-            total += price;
+            if (option) {
+                const price = Number(addPriceByGroomingOption(option) || 0);
+                nextItems.push({ label: `추가옵션: ${option}`, price });
+                total += price;
+            }
         }
 
         setItems(nextItems);
+
         setTotalPrice(total);
-    }, [
-        resType,
-        form?.size,
-        form?.nights,
-        form?.checkOut,
-        form?.checkOutTime,
-        form?.groomingService,
-        form?.type,
-        form?.option,
-    ]);
+    }, [reservationForm]);
     return (
         <div className="receipt">
             <div className="receipt_inner">

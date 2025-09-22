@@ -372,6 +372,10 @@ function drawCapHighlight(ctx, b, { angleDeg, widthDeg, rOuter, rInner, alpha, b
 }
 
 /** ★ 원형 테두리를 부드럽게 지우는 페더 마스크 */
+// function applyEdgeFeather(ctx, b) {
+//     const inner = b.r * (1 - b.edgeFeather ?? 0); // 미사용 방지용
+// }
 function applyEdgeFeather(ctx, b) {
-    const inner = b.r * (1 - b.edgeFeather ?? 0); // 미사용 방지용
+    const feather = b?.edgeFeather ?? 0; // 0~1 기대
+    const inner = b.r * (1 - feather);
 }

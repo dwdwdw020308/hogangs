@@ -10,6 +10,7 @@ import {
     Ott,
     Reservation,
     Pay,
+    Result,
 } from './pages';
 import Layout from './common/Layout';
 import './styles/index.scss';
@@ -53,6 +54,8 @@ const App = () => {
                     <Route path="grooming" element={<Grooming />} />
                     <Route path="reservation" element={<Reservation />} />
                     <Route path="pay" element={<Pay />} />
+                    <Route path="result" element={<Result />} />
+                    <Route path="result/:id" element={<Result />} />
                 </Route>
                 <Route path="*" element={<NotFiles />} />
                 <Route path="oauth" element={<Auth />} />
