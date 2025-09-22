@@ -12,7 +12,7 @@ export default function AdminLogin() {
     const navigate = useNavigate();
     const onLogin = async (e) => {
         e.preventDefault();
-        const url = API_URL + '/admin/login';
+        const url = API_URL.replace(/\/+$/, '') + '/admin/login';
 
         const res = await axios.post(url, loginForm, {
             headers: { 'Content-Type': 'application/json' },
