@@ -59,7 +59,10 @@ const Login = () => {
                 break;
             case 'kakao':
                 const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
-                url = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+                url = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI.replace(
+                    /\/+$/,
+                    ''
+                )}&response_type=code`;
                 window.open(url, '_blank', 'width=500,height=600');
                 break;
         }
