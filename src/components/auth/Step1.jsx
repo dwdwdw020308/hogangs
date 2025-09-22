@@ -1,10 +1,11 @@
 import React from 'react';
 import useAuthStore from '../../store/useAuthStore';
 import axios from 'axios';
+import { API_URL } from '../../config';
 
 const Step1 = ({ setStep, step, user, setUser }) => {
     const setJoinModal = useAuthStore((state) => state.setJoinModal);
-    const apiUrl = import.meta.env.VITE_API_URL;
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUser((prev) => ({ ...prev, [name]: value }));
@@ -23,7 +24,9 @@ const Step1 = ({ setStep, step, user, setUser }) => {
             return;
         }
 
-        const res = await axios.post(apiUrl + '/user/duplicate', { email: user.email });
+        const res = await axios.post(`${API_URL.replace(/\/+$/, '')}/user/duplicate`, {
+            email: user.email,
+        });
 
         if (res.data.error === 0) {
             setStep(step + 1);
