@@ -3,6 +3,7 @@
 @forward './payment';
 @forward './terms';
 @forward './coupon';
+@forward './result';
 
 @use './../utils/' as *;
 

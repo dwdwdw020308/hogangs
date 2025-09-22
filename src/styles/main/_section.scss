@@ -419,12 +419,16 @@ body {
       border-radius: 1.0417vw;
       margin-right: 30px;
       text-align: center;
-
+      top: 10%;
       &:nth-child(odd) {
         background-image: url("/main/ReviewsContent01.png");
+        background-repeat: no-repeat;
+        background-size: cover;
       }
       &:nth-child(even) {
         background-image: url("/main/ReviewsContent02.png");
+                background-repeat: no-repeat;
+        background-size: cover;
       }
 
       .cilp {
@@ -822,4 +826,161 @@ body {
     }
   }
 }
+#section3 {
+  width: 100%;
+  height:100%;
+  .s3-door {
+
+  }
+  .s3-door--left {
+
+  }
+  .s3-door--right {
+
+  }
+
+  .s3-door--img {
+    display: none;
+  }
+  .s3-door--left.s3-door--img {
+  }
+  .s3-door--right.s3-door--img {
+  }
+
+  /* ===== 컨텐츠 ===== */
+  .inner {
+
+
+    .textcontent {
+      margin-top: 50%;
+      h2 {
+
+      }
+      p {
+
+      }
+    }
+  }
+
+  .video {
+
+    .video-frame {
+    }
+
+    .video-frame > video {
+    }
+  }
+}
+/* =========================
+   모바일(<=640px) — 리스트 & 아이템만
+   ========================= */
+@media (max-width: 640px) {
+  /* 카드 리스트 정렬 */
+  #main_Section4List .rotating-bg{
+    width: 600px;
+    height: 600px;
+    top: 27%;
+    left: -20%;
+  }
+  #main_Section4List .inner h2{
+    font-size: 18px;
+  }
+  #main_Section4List .inner .text{
+    p{
+      font-size: 32px;
+    }
+    span {
+      font-size: 32px;
+    }
+  }
+  #main_Section4List .items {
+    margin-left: 1000px;        /* 데스크탑 여백 제거 */
+    padding: 0 16px;       /* 좌우 살짝 여백 */
+    gap: 10px;             /* 카드 사이 간격 */
+    justify-content: center;
+    align-items: stretch;
+    overflow: visible;     /* GSAP 간섭 최소화 */
+  }
+
+  /* 카드 본체 사이즈/레이아웃 고정 */
+  #main_Section4List .main_Section4item .con1 {
+    width: 51vw;                         /* ≈ 198.9px @390 */
+    aspect-ratio: 198.8 / 271.336;       /* 비율 고정 → 높이 자동 ≈271.3px */
+    height: auto;
+    border-radius: 12px;
+    margin-right: 0;
+
+    /* 내부 정렬: 위→아래 고정 */
+    display: grid;
+    grid-template-rows: auto auto auto 1fr; /* 이름, 이미지, 별점, 본문 */
+    justify-items: center;
+    align-items: start;
+    row-gap: 6px;
+
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;                     /* 회전/이동 시 튀는 부분 컷 */
+
+    /* 종이클립: 모바일 축소 */
+    .cilp {
+      top: -4%;
+      right: 6%;
+      transform: rotate(-8deg) scale(0.6);
+      transform-origin: top right;
+      pointer-events: none;
+    }
+
+    /* 강아지 원형 이미지 (직계 첫 img가 사진) */
+    > img:first-of-type {
+      width: 101px;              /* 카드 폭 대비 비율로 제어(≈87~90px) */
+      aspect-ratio: 1 / 1;
+      max-width: 101px;
+      height: 101px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 8px auto 4px;
+    }
+
+    /* 타이틀/별점/본문 타이포 축소 */
+    .h3 {
+      font-size: 13.29px;
+      line-height: 1.2;
+    }
+
+    .star {
+      padding: 0;
+      gap: 6px;
+
+      img { height: 12px; }
+      span {
+        font-size: 13px;
+        padding-left: 6px;
+      }
+    }
+
+    p {
+      /* 혹시 전역 columns / writing-mode 먹은 경우 강제 해제 */
+      writing-mode: horizontal-tb !important;
+      columns: auto !important;
+      column-count: initial !important;
+      column-gap: normal !important;
+
+      font-size: 8.8px;
+      line-height: 1.45;
+      text-align: center;
+      padding: 0 12px 12px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+
+      /* 너무 길면 5줄까지만 */
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
 }

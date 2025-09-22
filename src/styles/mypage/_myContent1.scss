@@ -903,6 +903,7 @@
     margin-top: 0;
     .inner {
       gap: 40px;
+      width: 100%;
       .title {
         gap: 14px;
         h2 {
@@ -1047,6 +1048,8 @@
         }
       }
       .reservation {
+        gap: 20px;
+        height: 314px;
         .tab {
           gap: 10px;
           height: 33px;
@@ -1058,6 +1061,7 @@
           height: 158px;
           &.hasData {
             gap: 10px;
+            margin-top: 23px;
           }
           span {
             font-size: 10px;
@@ -1129,6 +1133,123 @@
         p {
           font-size: 12px;
         }
+      }
+    }
+  }
+  #dogInfoBox {
+    padding-bottom: 80px;
+    .inner {
+      gap: 80px;
+    }
+    .infoForm {
+      gap: 30px;
+      height: 547px;
+      .infoFormBox {
+        flex-direction: column;
+        gap: 30px;
+        .infoLeft {
+          flex-direction: row;
+          .hogangprofile {
+            width: 146px;
+            height: 146px;
+            &.default {
+              padding: 29.761px 20.215px 29.762px 19.654px;
+              img {
+                width: 106.131px;
+                height: 86.477px;
+              }
+            }
+          }
+          .btnWrap {
+            flex-direction: column;
+            button {
+              width: 84px;
+              height: 34px;
+              font-size: 13px;
+            }
+          }
+        }
+        .infoRight {
+          width: 358px;
+          height: 320px;
+          .form-row {
+            label {
+              font-size: 14px;
+            }
+            input {
+              width: 268px;
+              padding: 8px 95px 9px 14px;
+              font-size: 13px;
+            }
+            .radioWrap {
+              label {
+              }
+            }
+            .selectWrap {
+              select {
+                width: 135px;
+                font-size: 13px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .vaccination,
+    .parasite {
+      width: 358px;
+      .title {
+        display: flex;
+        flex-direction: column;
+        h2 {
+          width: 100%;
+        }
+        span {
+          justify-content: flex-start;
+          width: 100%;
+        }
+      }
+      .checkBox-Group {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        label {
+          width: 174px;
+          height: 62px;
+          p {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    .vaccination {
+      label {
+        &:last-child {
+          width: 358px;
+          grid-column: span 2;
+        }
+      }
+    }
+    .health,
+    .more {
+      gap: 20px;
+      .title {
+        width: 100%;
+      }
+      .txt {
+        width: 100%;
+        input {
+          width: 100%;
+          padding: 15px 0 78px 13px;
+          font-size: 13px;
+        }
+      }
+    }
+    .btn {
+      button {
+        width: 358px;
+        height: 50px;
+        font-size: 14px;
       }
     }
   }

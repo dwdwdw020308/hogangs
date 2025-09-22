@@ -9,3 +9,4 @@ export { default as Hotel } from './hotel/Hotel';
 export { default as Grooming } from './grooming/Grooming';
 export { default as Reservation } from './reservation/Reservation';
 export { default as Pay } from './pay/Pay';
+export { default as Result } from './pay/Result';

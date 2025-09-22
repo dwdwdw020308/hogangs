@@ -11,50 +11,12 @@ import useReservationStore from '../../store/useReservationStore';
 const PaymentInfo = ({ resType, form }) => {
     const [payAgree, setPayAgree] = useState(false);
     const [btnEnable, setBtnEnable] = useState(false);
-    const [totalPrice, setTotalPrice] = useState(0);
     const [submitting, setSubmitting] = useState(false);
-    const paymentProcessValidate = useReservationStore((s) => s.paymentProcessValidate);
     const navigate = useNavigate();
-
-    const buildPayload = () => {
-        // form에서 필요한 값들 구조분해 (네 프로젝트 키 기준으로 맞춰주세요)
-
-        const user = JSON.parse(localStorage.getItem('user'));
-        const reservationForm = JSON.parse(localStorage.getItem('reservationForm'));
-        const {
-            checkOut,
-            checkOutTime,
-            endDate,
-            groomingService,
-            nights,
-            option,
-            requestMessage,
-            resType,
-            size,
-            startDate,
-            type,
-            resTime,
-        } = reservationForm;
-        return {
-            userId: user._id,
-            resType, // prop으로 받는 값
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            regDate: new Date(), // ISO 문자열 권장: "2025-09-20T12:00:00Z"
-            startDate,
-            endDate,
-            lateCheckOutTime: checkOutTime ?? '', // 없으면 빈값/undefined 중 택1 (DTO @IsOptional이면 undefined 추천)
-            beautyTime: resTime ?? '',
-            size: size ?? '',
-            beautyType: type ?? '',
-            beautyOption: option ?? '',
-            totalPrice: Number(totalPrice) || 0,
-            // couponId: couponId ?? '',
-            couponId: '',
-            request: requestMessage ?? '',
-        };
-    };
+    const paymentProcessValidate = useReservationStore((s) => s.paymentProcessValidate);
+    const doPay = useReservationStore((s) => s.doPay);
+    const setTotalPrice = useReservationStore((s) => s.setTotalPrice);
+    const totalPrice = useReservationStore((s) => s.totalPrice);
 
     const clickEvent = () => {
         setPayAgree((prev) => !prev);
@@ -71,20 +33,11 @@ const PaymentInfo = ({ resType, form }) => {
             return;
         }
 
-        const payload = buildPayload();
         try {
-            const { data: json } = await axios.post(`${API_URL}/reservation`, payload, {
-                headers: { 'Content-Type': 'application/json' },
-            });
-
-            // 서버 응답 형식: { error, message, data } 가정
-            if (json.error !== 0) {
-                throw new Error(json.message || '예약 저장에 실패했습니다.');
-            }
-
-            const id = json?.data?.id;
-            console.log(id);
-            // navigate(`/payment/success/${id}`);
+            // store 에서 결제 처리 실행
+            const res = await doPay();
+            // 완료
+            navigate(`/result/${res.id}`);
         } catch (err) {
             // axios는 2xx가 아니면 예외를 던짐
             const msg =

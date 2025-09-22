@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { create } from 'zustand';
+import { API_URL } from '../config';
 const initialSteps = [
     { id: 1, process: 'ing' },
     { id: 2, process: 'none' },
@@ -22,12 +24,28 @@ const ALERT_BY_ID = {
 
 const ORDER = ['user', 'terms', 'cancel', 'payment'];
 
+// 로컬스토리지 값 가져오기
+const getLocalStorage = (k) => {
+    try {
+        return JSON.parse(localStorage.getItem(k) ?? '{}');
+    } catch {
+        return {};
+    }
+};
+
 const useReservationStore = create((set, get) => ({
     steps: initialSteps,
     isNormalLogic: false,
     paymentProcesses: initialPaySteps,
+    selectedCouponId: '',
+    totalPrice: 0,
+    reservationForm: getLocalStorage('reservationForm') ?? {},
     form: {},
 
+    init: () => {
+        set({ steps: initialSteps, form: {} });
+        localStorage.removeItem('reservationForm');
+    },
     setStepProcesses: (updates) =>
         set((state) => {
             return {
@@ -84,6 +102,11 @@ const useReservationStore = create((set, get) => ({
         set({ isNormalLogic: true });
     },
 
+    // 총 결제금액 입력
+    setTotalPrice: (p) => {
+        set({ totalPrice: p });
+    },
+
     paymentProcessValidate: () => {
         const { paymentProcesses } = get();
         // id → boolean 맵
@@ -96,6 +119,79 @@ const useReservationStore = create((set, get) => ({
             }
         }
         return { ok: true };
+    },
+    // 결제시 쿠폰 선택
+    setCouponId: (c) => {
+        set({ selectedCouponId: c });
+    },
+    // 결제하기
+    doPay: async () => {
+        //회원정보
+        const user = getLocalStorage('user');
+        //예약폼 데이터
+
+        //쿠폰선택항목
+
+        const { totalPrice, selectedCouponId, reservationForm } = get();
+
+        const {
+            checkOut,
+            checkOutTime,
+            endDate,
+            groomingService,
+            nights,
+            option,
+            requestMessage,
+            resType,
+            size,
+            startDate,
+            type,
+            resTime,
+        } = reservationForm;
+
+        const payload = {
+            userId: user._id,
+            resType, // prop으로 받는 값
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            regDate: new Date(),
+            startDate,
+            endDate,
+            lateCheckOutTime: checkOutTime ?? '', // 없으면 빈값/undefined 중 택1 (DTO @IsOptional이면 undefined 추천)
+            beautyTime: resTime ?? '',
+            size: size ?? '',
+            beautyType: type ?? '',
+            beautyOption: option ?? '',
+            totalPrice: totalPrice,
+            couponId: selectedCouponId,
+            request: requestMessage ?? '',
+        };
+
+        const res = await axios.post(`${API_URL}/reservation`, payload, {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        const { data, error, message } = res.data;
+
+        if (error === 0) {
+            localStorage.removeItem('reservationForm');
+            return data;
+        }
+    },
+
+    cancelReservation: async (resId, couponId) => {
+        console.log(couponId);
+        const { res } = await axios.patch(`${API_URL}/reservation/${resId}/cancel`, {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        // coupon 사용 취소 처리
+        if (res.error === 0) {
+            const { res2 } = await axios.patch(`${API_URL}/user-coupon/${couponId}/cancel`, {
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            return res2.error;
+        }
     },
 }));
 

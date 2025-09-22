@@ -29,6 +29,7 @@ const CheckOutService = () => {
                         <ul className="times">
                             {CHECKOUT_TIME.map((i, idx) => (
                                 <li
+                                    key={idx}
                                     className={selectTime === idx + 1 ? 'check' : ''}
                                     onClick={() => {
                                         onClick(idx);

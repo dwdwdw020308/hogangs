@@ -5,9 +5,11 @@ import CheckGroomingService from './hotel/CheckGroomingService';
 import CheckOutService from './hotel/CheckOutService';
 import CheckWeight from './hotel/CheckWeight';
 import Request from './hotel/Request';
+import useReservationStore from '../../store/useReservationStore';
 
 const Hotel = () => {
     const [form, setForm] = useState({});
+    const init = useReservationStore((s) => s.init);
 
     return (
         <>

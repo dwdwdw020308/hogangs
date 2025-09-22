@@ -3,7 +3,14 @@ import useReservationStore from '../../../../store/useReservationStore';
 
 const User = () => {
     const [isSync, setIsSync] = useState(false);
-    const [userInfo, setUserInfo] = useState({});
+    const [userInfo, setUserInfo] = useState({
+        name: '',
+        emailId: '',
+        emailDomain: '',
+        telFirst: '',
+        telSecond: '',
+        telThird: '',
+    });
     const [lockDomain, setLockDomain] = useState(false);
     const domainRef = useRef(null);
     const telFirstRef = useRef(null);
