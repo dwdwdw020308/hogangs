@@ -24,7 +24,7 @@ const DetailBanner = () => {
     return (
         <div className="DetailBanner youtube-detail">
             <div className="title-box">
-                <h2>
+                <h2 style={{ fontSize: 38 }}>
                     강아지 짖지마
                     <br />
                     교육법
@@ -74,9 +74,9 @@ const DetailBanner = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="right">
+                {/* <div className="right">
                     <img src="/ott/score.png" alt="별점" />
-                </div>
+                </div> */}
             </div>
             {isOpen && (
                 <div className="video-fullscreen" style={{ '--origin': origin }}>

@@ -199,11 +199,30 @@
         font-size: 1.5rem;
         border: none;
         outline: none;
+
         &.left {
             left: 160px;
+            background: url('/ott/button_1.svg');
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            &:hover {
+                background: url('/ott/button_prev-hover.svg');
+            }
         }
         &.right {
             right: 160px;
+            background: url('/ott/button_2.svg');
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            &:hover {
+                background: url('/ott/button_next-hover.svg');
+            }
         }
     }
 }
@@ -220,7 +239,10 @@
                 margin-top: 0.5128vw;
             }
         }
-
+        .nav-arrow {
+            &.left {
+            }
+        }
         p {
             color: var(--Grey-grey-100, #cecece);
             font-size: 13px;
@@ -362,11 +384,30 @@
             font-size: 1.5rem;
             border: none;
             outline: none;
+
             &.left {
                 left: 4.1026vw;
+                background: url('/ott/button_1-m.svg');
+                width: 36px;
+                height: 36px;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                &:hover {
+                    background: url('/ott/button_1-m.svg');
+                }
             }
             &.right {
                 right: 4.1026vw;
+                background: url('/ott/button_2-m.svg');
+                width: 36px;
+                height: 36px;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                &:hover {
+                    background: url('/ott/button_2-m.svg');
+                }
             }
         }
     }

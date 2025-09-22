@@ -86,3 +86,101 @@
         }
     }
 }
+@media screen and (max-width: 600px) {
+    .episode {
+        padding: 36px 16px;
+        .episode-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px 130px;
+            margin-bottom: 60px; // 페이지네이션과의 간격
+        }
+
+        .episode-item {
+            display: flex;
+            gap: 14px;
+
+            img {
+                // 이미지 스타일
+                width: 125px;
+                height: 77px;
+            }
+
+            .text-wrap {
+                line-height: 1;
+                strong {
+                    line-height: 1;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                p {
+                    width: 220px;
+                    margin-top: 10px;
+                    white-space: pre-line;
+                    color: var(--Grey-grey-200, #b6b6b6);
+                    font-size: 13px;
+                    // font-weight: 500;
+                    // line-height: 130%;
+                    display: -webkit-box; // flexbox 기반 레이아웃
+                    -webkit-line-clamp: 3; // ✅ 최대 4줄까지만 보여줌
+                    -webkit-box-orient: vertical; // ✅ 세로 정렬
+                    overflow: hidden; // 넘치는 부분 숨김
+                    text-overflow: ellipsis; // ... 표시
+                    white-space: normal;
+                }
+            }
+        }
+
+        .pagination {
+            font-size: 12px;
+            // font-weight: 500;
+            // line-height: 130%;
+            // text-align: center;
+            // display: flex;
+            // gap: 3px;
+            // justify-content: center;
+            // align-items: center;
+            // width: 100%; // 전체 너비 사용
+            margin: 0 auto 44px auto; // 중앙 정렬 및 하단 마진
+
+            button {
+                // cursor: pointer;
+                // border: none;
+                // background: transparent;
+                // padding: 0 var(--padding-3, 8px) 0 var(--padding-2, 4px);
+                // display: flex;
+                // align-items: center;
+                // justify-content: center;
+                // text-align: center;
+
+                span {
+                    // color: var(--Grey-grey-900, #515151);
+                }
+                img {
+                    width: 16px;
+                }
+            }
+
+            .current {
+                // cursor: pointer;
+                // padding: 0;
+                width: 30px;
+                height: 40px;
+                color: var(--Grey-grey-900, #515151);
+
+                &:hover {
+                    border-radius: 40px;
+                    background: var(--Green-green-300, #d8f3f1);
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+
+            .active {
+                font-weight: 500;
+                color: var(--Green-green-750, #7abab6);
+            }
+        }
+    }
+}

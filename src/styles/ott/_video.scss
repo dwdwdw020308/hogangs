@@ -53,21 +53,21 @@
 }
 @media screen and (max-width: 600px) {
     .youtube {
-        padding: 80px 16px 0;
+        padding: 20.5128vw 0 20.5128vw 4.1026vw;
         strong {
             font-size: 20px;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 1.5385vw;
         }
         p {
             text-align: center;
             font-size: 13px;
-            margin-bottom: 27px;
+            margin-bottom: 6.9231vw;
         }
         .swiper {
             .swiper-slide.video-slide {
-                width: 280px;
-                margin-right: 14px;
+                width: 71.7949vw;
+                margin-right: 3.5897vw;
             }
             .swiper-slide {
                 .slide-card {
@@ -75,7 +75,7 @@
                         font-size: 13px;
                         font-weight: 500;
                         line-height: 1;
-                        padding: 7px 0 43px;
+                        padding: 1.7949vw 0 11.0256vw;
                         text-align: start;
                         margin-bottom: 0;
                     }
@@ -89,7 +89,7 @@
         .swiper-scrollbar {
             left: 50%;
             transform: translateX(-50%);
-            width: 192px !important;
+            width: 49.2308vw !important;
         }
         .swiper-scrollbar-drag {
         }

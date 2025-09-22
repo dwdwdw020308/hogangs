@@ -7,26 +7,6 @@ import 'swiper/css/grid';
 import 'swiper/css/scrollbar';
 
 const Photo = ({ photo }) => {
-    // const photo = [
-    //     { id: 1, img: '/ott/detail-photo1-2.png', title: '안녕베일리포토' },
-    //     { id: 2, img: '/ott/detail-photo1-18.png', title: '안녕베일리포토' },
-    //     { id: 3, img: '/ott/detail-photo1-3.png', title: '안녕베일리포토' },
-    //     { id: 4, img: '/ott/detail-photo1-4.png', title: '안녕베일리포토' },
-    //     { id: 5, img: '/ott/detail-photo1-5.png', title: '안녕베일리포토' },
-    //     { id: 6, img: '/ott/detail-photo1-6.png', title: '안녕베일리포토' },
-    //     { id: 7, img: '/ott/detail-photo1-7.png', title: '안녕베일리포토' },
-    //     { id: 8, img: '/ott/detail-photo1-8.png', title: '안녕베일리포토' },
-    //     { id: 9, img: '/ott/detail-photo1-9.png', title: '안녕베일리포토' },
-    //     { id: 10, img: '/ott/detail-photo1-10.png', title: '안녕베일리포토' },
-    //     { id: 11, img: '/ott/detail-photo1-11.png', title: '안녕베일리포토' },
-    //     { id: 12, img: '/ott/detail-photo1-12.png', title: '안녕베일리포토' },
-    //     { id: 13, img: '/ott/detail-photo1-13.png', title: '안녕베일리포토' },
-    //     { id: 14, img: '/ott/detail-photo1-14.png', title: '안녕베일리포토' },
-    //     { id: 15, img: '/ott/detail-photo1-15.png', title: '안녕베일리포토' },
-    //     { id: 16, img: '/ott/detail-photo1-16.png', title: '안녕베일리포토' },
-    //     { id: 17, img: '/ott/detail-photo1-17.png', title: '안녕베일리포토' },
-    //     { id: 18, img: '/ott/detail-photo1-1.png', title: '안녕베일리포토' },
-    // ];
     return (
         <div className="video-photo">
             <Swiper
@@ -37,6 +17,21 @@ const Photo = ({ photo }) => {
                 slidesPerGroup={3}
                 // loop={false}
                 scrollbar={{ hide: false, draggable: true }}
+                breakpoints={{
+                    0: {
+                        // 모바일 (0px ~ 600px)
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                        spaceBetween: 6, // 간격 좁게'
+                        grid: { rows: 5, fill: 'row' },
+                    },
+                    601: {
+                        // 태블릿 이상
+                        slidesPerView: 3,
+                        slidesPerGroup: 3,
+                        spaceBetween: 15,
+                    },
+                }}
             >
                 {photo.map((photo) => (
                     <SwiperSlide>

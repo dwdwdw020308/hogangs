@@ -114,7 +114,7 @@ const Best = () => {
                     slidesPerGroup={1}
                     spaceBetween={80}
                     loop={true}
-                    loopedSlides={5}
+                    // loopAdditionalSlides={5}
                     autoHeight={false}
                     centeredSlides={false}
                     onSlideChange={handleSlideChange}
