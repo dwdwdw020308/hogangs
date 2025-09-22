@@ -220,3 +220,144 @@
         }
     }
 }
+@media screen and (max-width: 600px) {
+    .review-wrapper {
+        padding: 9.2308vw 4.1026vw 41.0256vw 4.1026vw;
+        .reveiw-score {
+            gap: 7.6923vw;
+            .stars-box {
+                strong {
+                    font-size: 20px;
+                }
+                p {
+                    font-size: 13px;
+                    margin: 2.5641vw 0 3.5897vw 0;
+                }
+                svg {
+                    width: 6.6667vw;
+                    margin-right: 0.5128vw;
+                    &:nth-of-type(5) {
+                        margin-right: 0;
+                    }
+                }
+            }
+            .average {
+                strong {
+                    font-size: 20px;
+                }
+                p {
+                    font-size: 13px;
+                }
+                svg {
+                    width: 6.6667vw;
+                    margin-right: 0.5128vw;
+                    &:nth-of-type(5) {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+        .bar {
+            position: absolute;
+            top: 150px;
+            top: 38.4615vw;
+        }
+        .review-form {
+            textarea {
+                height: 35.8974vw;
+                padding: 5.641vw 0 0 6.1538vw;
+                border: 1px solid var(--Grey-grey-100, #cecece);
+                margin-top: 52.5641vw;
+                &:focus {
+                    outline: none;
+                }
+            }
+            button {
+                font-size: 14px;
+                &:disabled {
+                }
+            }
+        }
+        .review-list {
+            strong {
+                font-size: 16px;
+            }
+            .like-filter {
+                p {
+                    font-size: 14px;
+                }
+                img {
+                    height: 3.5897vw;
+                    width: 6.1538vw;
+                }
+            }
+
+            .review-item {
+                margin-top: 9.2308vw;
+                &.last {
+                }
+                svg {
+                    margin-right: 0.5128vw;
+                    width: 3.8462vw;
+                    &:nth-of-type(5) {
+                        margin-right: 0px;
+                    }
+                }
+                .date {
+                    font-size: 12px;
+                    margin: 2.0513vw 0;
+                    line-height: 1;
+                    margin-left: 0px;
+                }
+                .score-length {
+                    font-size: 14px;
+                    left: 23.5897vw;
+                    top: 0.5128vw;
+                }
+                p {
+                    margin-left: 0px;
+                    font-size: 13px;
+                }
+                button {
+                    margin: 2.0513vw 0 5.1282vw 0;
+                    p {
+                        font-size: 14px;
+                    }
+                }
+                .more {
+                    .dropdown {
+                        width: 63.5897vw;
+                        height: 25.641vw;
+                        position: absolute;
+                        right: 2.5641vw;
+                        top: 11.5385vw;
+                        background: #fff;
+                        z-index: 10;
+                        li {
+                            padding-left: 5.1282vw;
+                            height: 12.8205vw;
+                            line-height: 12.8205vw;
+                            font-size: 14px;
+                            &:hover {
+                            }
+                            &:nth-last-child(1) {
+                            }
+                        }
+                    }
+                }
+            }
+            .pagination {
+                font-size: 12px;
+                button {
+                    margin: 15.3846vw 0 0vw 0;
+                    span {
+                    }
+                }
+                .current {
+                }
+                .active {
+                }
+            }
+        }
+    }
+}

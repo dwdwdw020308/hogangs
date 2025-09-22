@@ -47,6 +47,12 @@ const Card = () => {
             </strong>
             <p>쉿! 카드 뒤에 호강이 PICK 영상이 숨어있어요!</p>
             <img src="/ott/button_1-1.svg" alt="" className="nav-arrow left" onClick={handlePrev} />
+            <img
+                src="/ott/button_prev-hover.svg"
+                alt=""
+                className="nav-arrow left"
+                onClick={handlePrev}
+            />
 
             <div className="carousel-track">
                 {cards.map((card, index) => (

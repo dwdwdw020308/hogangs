@@ -10,7 +10,21 @@ const Relate = ({ videolist, person }) => {
             <p className="more">
                 <span>+</span> 더보기
             </p>
-            <Swiper slidesPerView={4.5} loop={false} spaceBetween={14}>
+            <Swiper
+                slidesPerView={4.5}
+                loop={false}
+                spaceBetween={14}
+                breakpoints={{
+                    0: {
+                        slidesPerView: 2.5,
+                        spaceBetween: 30,
+                    },
+                    600: {
+                        slidesPerView: 4.5,
+                        spaceBetween: 14,
+                    },
+                }}
+            >
                 {videolist.map((videolist) => (
                     <SwiperSlide key={videolist.id}>
                         <div className="poster-list">

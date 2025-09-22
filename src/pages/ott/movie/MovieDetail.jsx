@@ -20,7 +20,7 @@ const MovieDetail = () => {
     ];
     const person = [
         { id: 1, img: '/ott/person1.png', name: '게일 맨쿠소', type: '감독' },
-        { id: 2, img: '/ott/person2.png', name: '애비 라이더 포트슨', type: '주연 • 어린 씨제이' },
+        { id: 2, img: '/ott/person2.png', name: '애비 라이더', type: '주연 • 어린 씨제이' },
         { id: 3, img: '/ott/person3.png', name: '헨리', type: '조연 • 트렌트' },
         { id: 4, img: '/ott/person4.png', name: '데니스 퀘이드', type: '주연 • 이든' },
         { id: 5, img: '/ott/person5.png', name: '조시 게드', type: '주연 • 베일리' },

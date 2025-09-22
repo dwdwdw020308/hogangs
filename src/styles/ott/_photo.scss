@@ -1,7 +1,7 @@
 @use './../utils' as *;
 
 .video-photo {
-    padding: 60px 260px 0 260px;
+    padding: 60px 260px 160px 260px;
     position: relative;
 
     .swiper {
@@ -9,6 +9,7 @@
         margin: 0 auto 180px;
         // min-width: 1400px;
         position: relative;
+        margin-bottom: 0;
 
         .swiper-slide {
             &:nth-last-child(3) {
@@ -33,6 +34,44 @@
             width: 100%;
             height: 100%;
         }
-        margin-bottom: 180px;
+        margin-bottom: 0px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .video-photo {
+        padding: 9.2308vw 4.1026vw 20.5128vw 4.1026vw;
+        // position: relative;
+        .swiper {
+            // width: 100%;
+            // margin: 0 auto 0px;
+            // min-width: 1400px;
+            // position: relative;
+            padding-bottom: 14.359vw;
+            .swiper-slide {
+                margin-right: 1.5385vw !important;
+                &:nth-last-child(3) {
+                    margin-bottom: 0px;
+                }
+            }
+            .swiper-scrollbar {
+                // background: #e9e9e9;
+                width: 192px !important;
+                // left: 50%;
+                // right: 50% !important;
+                // transform: translateX(-50%);
+                // margin: 0;
+            }
+
+            .swiper-scrollbar-drag {
+                // background: #7abab6;
+                width: 24.6154vw !important;
+            }
+            img {
+                // width: 100%;
+                // height: 100%;
+            }
+            margin-bottom: 0px;
+        }
     }
 }
