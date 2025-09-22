@@ -1,10 +1,11 @@
 import React from 'react';
-import useAuthStore from '../../store/useAuthStore';
+
 import { hashPassword } from '../../utils/Crypto';
 import axios from 'axios';
+import useAuthStore from '../../store/useAuthStore';
 
 const Step2 = ({ setStep, step, user, setUser }) => {
-    const setJoinModal = useAuthStore((state) => state.closeJoinModal);
+    const setJoinModal = useAuthStore((state) => state.setJoinModal);
     const apiUrl = import.meta.env.VITE_API_URL;
     const years = Array.from({ length: 100 }, (_, i) => 2011 - i);
     const months = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -84,6 +85,7 @@ const Step2 = ({ setStep, step, user, setUser }) => {
         }
     };
     const [telFirst, telMiddle, telLast] = user.tel.split('-');
+
     return (
         <div className="join-overlay">
             <div className="join-modal">
