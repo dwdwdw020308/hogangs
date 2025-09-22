@@ -214,3 +214,32 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    #grooming_price {
+        width: 390px;
+        height: 2467px;
+        background: url('/grooming/priceMobile.png') no-repeat center;
+        .top_bg {
+            display: none;
+        }
+        .inner {
+            width: 100%;
+            height: 1145px;
+            .top {
+                display: none;
+                .top_inner {
+                    width: 100%;
+                    height: 1145px;
+                    position: relative;
+                    .price_table {
+                        display: none;
+                    }
+                }
+            }
+            .bottom {
+                display: none;
+            }
+        }
+    }
+}

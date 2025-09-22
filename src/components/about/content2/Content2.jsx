@@ -21,33 +21,33 @@ const Content2 = () => {
         const lines = Array.from(root.querySelectorAll('.texttitle .textline'));
 
         // 텍스트 split (중복 방지)
-        lines.forEach((line) => {
-            if (line.dataset.split === 'done') return;
+        // lines.forEach((line) => {
+        //     if (line.dataset.split === 'done') return;
 
-            const original = line.textContent;
-            line.setAttribute('aria-label', original);
-            line.textContent = '';
+        //     const original = line.textContent;
+        //     line.setAttribute('aria-label', original);
+        //     line.textContent = '';
 
-            const tokens = original.split(/(\s+)/);
-            const wordIndices = tokens.map((t, i) => ({ i, t })).filter((x) => x.t.trim() !== '');
-            const order = [...wordIndices.keys()].sort(() => Math.random() - 0.5);
+        //     const tokens = original.split(/(\s+)/);
+        //     const wordIndices = tokens.map((t, i) => ({ i, t })).filter((x) => x.t.trim() !== '');
+        //     const order = [...wordIndices.keys()].sort(() => Math.random() - 0.5);
 
-            let wordCounter = 0;
-            tokens.forEach((tok) => {
-                if (tok.trim() === '') {
-                    line.appendChild(document.createTextNode('\u00A0'.repeat(tok.length)));
-                } else {
-                    const span = document.createElement('span');
-                    span.className = 'word';
-                    span.style.setProperty('--i', String(order[wordCounter] ?? 0));
-                    span.textContent = tok;
-                    line.appendChild(span);
-                    wordCounter++;
-                }
-            });
+        //     let wordCounter = 0;
+        //     tokens.forEach((tok) => {
+        //         if (tok.trim() === '') {
+        //             line.appendChild(document.createTextNode('\u00A0'.repeat(tok.length)));
+        //         } else {
+        //             const span = document.createElement('span');
+        //             span.className = 'word';
+        //             span.style.setProperty('--i', String(order[wordCounter] ?? 0));
+        //             span.textContent = tok;
+        //             line.appendChild(span);
+        //             wordCounter++;
+        //         }
+        //     });
 
-            line.dataset.split = 'done';
-        });
+        //     line.dataset.split = 'done';
+        // });
 
         // ScrollTrigger
         const triggers = lines.map((el) =>
@@ -74,15 +74,15 @@ const Content2 = () => {
                     data-aos="fade-up"
                     data-aos-delay="200" // 0.2초 후 실행
                     data-aos-duration="2000"
-                    data-aos-easing="ease-out"
+                    data-aos-easing="zoom-in"
                 >
                     HOGANGS
                 </span>
                 <h3
                     data-aos="fade-up"
-                    data-aos-delay="600" // 0.6초 후 실행 (span보다 늦게)
+                    data-aos-delay="800" // 0.6초 후 실행 (span보다 늦게)
                     data-aos-duration="2000"
-                    data-aos-easing="ease-out"
+                    data-aos-easing="zoom-in"
                 >
                     Brandstory
                 </h3>
@@ -107,13 +107,13 @@ const Content2 = () => {
             </ul>
 
             <div className="dogicon">
-                <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <span data-aos="fade-up" data-aos-duration="2000" data-aos-delay="1000">
                     <img src="/about/01.png" alt="" />
                 </span>
-                <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+                <span data-aos="fade-up" data-aos-duration="2000" data-aos-delay="1500">
                     <img src="/about/02.png" alt="" />
                 </span>
-                <span data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000">
+                <span data-aos="fade-up" data-aos-duration="2000" data-aos-delay="2000">
                     <img src="/about/03.png" alt="" />
                 </span>
             </div>
