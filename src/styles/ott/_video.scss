@@ -1,26 +1,42 @@
 @use './../utils' as *;
 .youtube {
     background: #fff;
-    padding: 160px 0;
+    padding: 160px 0 0;
     strong {
         text-align: center;
-        font-size: 32px;
+        font-size: 44px;
         font-weight: 600;
         font-family: Paperlogy;
-        margin-bottom: 64px;
+        margin-bottom: 20px;
         display: block;
+        line-height: 1;
         span {
             color: var(--Green-green-750, #7abab6);
         }
     }
+    p {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 112px;
+    }
     .swiper {
+        .swiper-slide.video-slide {
+            width: 480px; // 웹에서는 480px
+            margin-right: 26px;
+        }
         .swiper-slide {
             .slide-card {
-                p {
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+                .title {
                     font-size: 16px;
                     font-weight: 500;
                     line-height: 1;
                     padding: 18px 0 100px;
+                    text-align: start;
+                    margin-bottom: 0;
                 }
             }
         }
@@ -33,5 +49,49 @@
     }
     .swiper-scrollbar-drag {
         background: #7abab6;
+    }
+}
+@media screen and (max-width: 600px) {
+    .youtube {
+        padding: 80px 16px 0;
+        strong {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        p {
+            text-align: center;
+            font-size: 13px;
+            margin-bottom: 27px;
+        }
+        .swiper {
+            .swiper-slide.video-slide {
+                width: 280px;
+                margin-right: 14px;
+            }
+            .swiper-slide {
+                .slide-card {
+                    .title {
+                        font-size: 13px;
+                        font-weight: 500;
+                        line-height: 1;
+                        padding: 7px 0 43px;
+                        text-align: start;
+                        margin-bottom: 0;
+                    }
+                    img {
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+            }
+        }
+        .swiper-scrollbar {
+            left: 50%;
+            transform: translateX(-50%);
+            width: 192px !important;
+        }
+        .swiper-scrollbar-drag {
+        }
     }
 }

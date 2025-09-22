@@ -25,6 +25,7 @@
             font-weight: 600;
             color: #fff;
             margin-bottom: 8px;
+            font-weight: 700;
             span {
                 color: var(--Green-green-500, #b7e2df);
                 position: relative;
@@ -104,5 +105,66 @@
         line-height: 0;
         -webkit-user-drag: none;
         -moz-user-drag: none;
+    }
+}
+@media screen and (max-width: 600px) {
+    .ottmain-visual {
+        height: 116.6667vw;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        margin-top: 21.7949vw;
+        background: #292929;
+        .title {
+            strong {
+                letter-spacing: 0.5px;
+                padding-top: 15.3846vw;
+                font-size: 18px;
+                margin-bottom: 2.5641vw;
+                span {
+                    color: var(--Green-green-500, #b7e2df);
+                    position: relative;
+                    &:nth-of-type(2) {
+                        &::after,
+                        &::before {
+                            display: none;
+                        }
+                    }
+                    &:nth-of-type(1)::after {
+                        content: '\A';
+                        white-space: pre;
+                    }
+                }
+            }
+            h2 {
+                font-size: 50px;
+                letter-spacing: 0.5px;
+                line-height: 1;
+            }
+        }
+        .movie-film {
+            padding: 9.7436vw 0;
+            margin-top: 0px;
+            .film-inner {
+                margin: 32px 0;
+                .posterlist {
+                    .poster {
+                        width: 33.3333vw;
+                        height: 47.6923vw;
+                        margin-right: 2.0513vw;
+                        img {
+                            width: 33.3333vw;
+                            height: 47.6923vw;
+                        }
+                    }
+                }
+            }
+        }
+        .img {
+            img {
+                width: 98.9744vw;
+                height: 51.7949vw;
+            }
+        }
     }
 }

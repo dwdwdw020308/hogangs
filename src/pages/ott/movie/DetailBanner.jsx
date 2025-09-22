@@ -94,9 +94,9 @@ const DetailBanner = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="right">
+                {/* <div className="right">
                     <img src="/ott/score.png" alt="별점" />
-                </div>
+                </div> */}
             </div>
             {isOpen && (
                 <div className="video-fullscreen" style={{ '--origin': origin }}>

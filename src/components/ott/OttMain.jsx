@@ -6,6 +6,7 @@ import EventBanner from './EventBanner';
 import Movie from './Movie';
 import Video from './Video';
 import Visual from './Visual';
+import BoneBanner from './BoneBanner';
 
 const OttMain = () => {
     return (
@@ -16,6 +17,7 @@ const OttMain = () => {
             <EventBanner />
             <Card />
             <Video />
+            <BoneBanner />
         </div>
     );
 };

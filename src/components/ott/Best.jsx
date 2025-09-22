@@ -55,9 +55,20 @@ const Best = () => {
         if (swiperRef.current && swiperRef.current.swiper) {
             const swiper = swiperRef.current.swiper;
             const slides = swiper.slides;
-            slides.forEach((slide) => slide.classList.remove('first-active'));
+
+            // 모든 클래스 제거
+            slides.forEach((slide) => {
+                slide.classList.remove('first-active', 'first-slide');
+            });
+
             const activeSlide = slides[swiper.activeIndex];
-            if (activeSlide) activeSlide.classList.add('first-active');
+            if (activeSlide) {
+                activeSlide.classList.add('first-active');
+                // 현재 활성화된 슬라이드가 첫 번째면 first-slide도 추가
+                if (swiper.realIndex === 0) {
+                    activeSlide.classList.add('first-slide');
+                }
+            }
         }
     };
 
@@ -92,6 +103,8 @@ const Best = () => {
                     BEST <br />
                     MOVIE
                 </span>
+                <span className="bg1">BEST</span>
+                <span className="bg2">MOVIE</span>
             </div>
 
             <div className="right">
@@ -101,14 +114,25 @@ const Best = () => {
                     slidesPerGroup={1}
                     spaceBetween={80}
                     loop={true}
+                    loopedSlides={5}
                     autoHeight={false}
                     centeredSlides={false}
                     onSlideChange={handleSlideChange}
                     onSwiper={updateActiveSlide}
                     className="slide-wrapper"
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 1.7, // 모바일 → 2.5개씩 보이게
+                            spaceBetween: 0, // 모바일 간격
+                        },
+                        601: {
+                            slidesPerView: 3.5, // PC
+                            spaceBetween: 80,
+                        },
+                    }}
                 >
-                    {best5.map((movie) => (
-                        <SwiperSlide key={movie.id}>
+                    {best5.map((movie, idx) => (
+                        <SwiperSlide key={movie.id} className={idx === 0 ? 'first-slide' : ''}>
                             <div className="poster">
                                 <img src={movie.img} alt={movie.title} draggable={false} />
                                 <p className="title">{movie.title}</p>
@@ -161,8 +185,11 @@ const Best = () => {
                     <div
                         className="bar"
                         style={{
-                            width: `${1076 / best5.length}px`,
-                            transform: `translateX(${(1076 / best5.length) * currentIndex}px)`,
+                            width: `${(window.innerWidth <= 600 ? 30 : 1076) / best5.length}px`,
+                            transform: `translateX(${
+                                ((window.innerWidth <= 600 ? 300 : 1076) / best5.length) *
+                                currentIndex
+                            }px)`,
                         }}
                     ></div>
                 </div>

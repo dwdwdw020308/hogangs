@@ -1,3 +1,5 @@
+@use './../utils/' as *;
+
 .card {
     background: var(--Grey-grey-900, #292929);
     padding: 160px 260px;
@@ -28,17 +30,37 @@
 
     .desc {
         margin-top: 100px;
-        color: var(--Grey-grey-300, #959595);
+        color: #fff;
         font-size: 18px;
         line-height: 140%;
         display: inline-flex; // 아이콘 + 글씨 나란히
         align-items: center;
+        span {
+            color: var(--Green-green-650, #8dd2ce);
+            padding-right: 4px;
+        }
         img {
             margin-right: 6px;
             display: block;
         }
     }
-
+    .btns {
+        position: absolute;
+        top: 373px;
+        left: 235px;
+        display: flex;
+        z-index: 10;
+        .icon-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 42px;
+            width: 50px;
+            cursor: pointer;
+            margin-right: 18px;
+            transition: transform 0.2s ease;
+        }
+    }
     .carousel-track {
         width: 100%;
         height: 450px;
@@ -64,7 +86,7 @@
 
             button {
                 position: absolute;
-                bottom: 50%;
+                bottom: 48%;
                 right: 24%;
                 z-index: 2;
                 display: inline-flex;
@@ -123,7 +145,9 @@
         height: 519.92px;
         z-index: 6;
         transform: translateX(-305px);
-        opacity: 0.9;
+        // opacity: 0.9;
+        filter: brightness(60%);
+
         box-shadow: 0 0.974px 1.949px rgba(0, 0, 0, 0.05), 0 0 31.18px rgba(0, 0, 0, 0.35);
     }
 
@@ -132,8 +156,8 @@
         height: 480px;
         z-index: 3;
         transform: translateX(-520px);
-        opacity: 0.5;
-        box-shadow: 0 0.974px 1.949px rgba(0, 0, 0, 0.05), 0 0 31.18px rgba(0, 0, 0, 0.35);
+        // opacity: 0.5;
+        filter: brightness(30%);
     }
 
     .right-1 {
@@ -141,8 +165,8 @@
         height: auto;
         z-index: 6;
         transform: translateX(305px);
-        opacity: 0.9;
-        box-shadow: 0 0.974px 1.949px rgba(0, 0, 0, 0.05), 0 0 31.18px rgba(0, 0, 0, 0.35);
+        // opacity: 0.9;
+        filter: brightness(60%);
     }
 
     .right-2 {
@@ -150,8 +174,8 @@
         height: auto;
         z-index: 3;
         transform: translateX(520px);
-        opacity: 0.5;
-        box-shadow: 0 0.974px 1.949px rgba(0, 0, 0, 0.05), 0 0 31.18px rgba(0, 0, 0, 0.35);
+        // opacity: 0.5;
+        filter: brightness(30%);
     }
 
     .hidden {
@@ -159,6 +183,7 @@
         pointer-events: none;
     }
 
+    // 좌우버튼
     .nav-arrow {
         position: absolute;
         top: 56%;
@@ -175,10 +200,174 @@
         border: none;
         outline: none;
         &.left {
-            left: 180px;
+            left: 160px;
         }
         &.right {
-            right: 180px;
+            right: 160px;
+        }
+    }
+}
+@media screen and (max-width: 600px) {
+    .card {
+        padding: 20.5128vw 4.1026vw;
+        height: 187.1795vw;
+        strong {
+            font-size: 20px;
+            span {
+                font-size: 34px;
+                display: block;
+                line-height: 1;
+                margin-top: 0.5128vw;
+            }
+        }
+
+        p {
+            color: var(--Grey-grey-100, #cecece);
+            font-size: 13px;
+            margin: 2.5641vw 0 10.2564vw;
+        }
+
+        .desc {
+            margin-top: 0px;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            img {
+                margin-right: 1.5385vw;
+                display: block;
+                height: 3.5897vw;
+            }
+        }
+        .btns {
+            position: absolute;
+            top: 95.641vw;
+            left: 60.2564vw;
+            display: flex;
+            z-index: 10;
+            .icon-btn {
+                position: relative;
+                background: none;
+                border: none;
+                font-size: 42px;
+                width: 12.8205vw;
+                cursor: pointer;
+                margin-right: 4.6154vw;
+                transition: transform 0.2s ease;
+            }
+        }
+        .carousel-track {
+            width: 100%;
+            height: 115.3846vw;
+            margin-top: -10.2564vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transform-style: preserve-3d;
+            .card-back {
+                position: relative;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    z-index: 1;
+                }
+
+                button {
+                    img {
+                        width: 4.6154vw;
+                    }
+                    span {
+                        font-size: 18px;
+                    }
+                    opacity: 1;
+                }
+            }
+        }
+
+        .card-wrap {
+            position: absolute;
+            width: 71.7949vw;
+            height: 97.4359vw;
+            border-radius: 6.9797vw;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+            img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+        }
+
+        /* 중앙 카드 */
+        .center {
+            width: 66.6667vw;
+            height: 91.7949vw;
+            box-shadow: 0 0.907px 1.815px rgba(0, 0, 0, 0.05), 0 0 22.684px rgba(0, 0, 0, 0.35); // 디자인 값 그대로
+        }
+
+        /* 좌우 카드 */
+        .left-1 {
+            filter: brightness(50%);
+            width: 55.8974vw;
+            height: 73.8462vw;
+            transform: translateX(-120px);
+        }
+
+        .left-2 {
+            width: 55.8974vw;
+            height: 73.8462vw;
+            transform: translateX(-120px);
+            opacity: 0;
+        }
+
+        .right-1 {
+            filter: brightness(50%);
+            width: 55.8974vw;
+            height: 73.8462vw;
+            z-index: 6;
+            transform: translateX(120px);
+        }
+
+        .right-2 {
+            width: 55.8974vw;
+            height: 73.8462vw;
+            transform: translateX(120px);
+            opacity: 0;
+            // box-shadow: 0 0.974px 1.949px rgba(0, 0, 0, 0.05), 0 0 31.18px rgba(0, 0, 0, 0.35);
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        // 좌우버튼
+        .nav-arrow {
+            position: absolute;
+            height: 6.4103vw;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            border: none;
+            outline: none;
+            &.left {
+                left: 4.1026vw;
+            }
+            &.right {
+                right: 4.1026vw;
+            }
         }
     }
 }
