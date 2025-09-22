@@ -1,3 +1,4 @@
+
 body {
   background-image: url("/main/section1.png");
   background-size: cover;
@@ -702,4 +703,123 @@ body {
       display: none;
     }
   }
+}
+@media (max-width: 640px) {
+  .section1 {
+
+  .inner {
+
+  }
+
+  .copy {
+
+  }
+
+  .copy-line {
+
+
+    h3 {
+    color: var(--Grey-grey-600, #585858);
+    text-align: center;
+    font-family: Paperlogy;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    position: absolute;
+    top: 100%;
+    }
+    p {
+    color: var(--Black, #060606);
+    text-align: center;
+    font-family: Paperlogy;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;  
+    letter-spacing: 0.32px;
+    position: absolute;
+    top: 150%;
+
+    }
+    span {
+    color: var(--Green-green-800, #4A9F99);
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    position: absolute;
+    top: 230%;
+
+    }
+
+    &:hover span {
+
+    }
+  }
+
+  .photo-list {
+
+  }
+
+  .photo {
+
+
+    img {
+      width: 168px;
+      height: 168px;
+    }
+
+    &.right {
+      margin-right: -30px;
+    }
+    &.left {
+      margin-left: -30px;
+    }
+  }
+}
+// section2 시작
+.reveal-pin-wrap {
+
+  .reveal-pin-bg {
+
+  }
+
+  .reveal-pin-content {
+
+
+    .eyebrow {
+      font-size: 34px;
+    }
+
+    .swap3d {
+
+
+      .swap3d__sizer {
+
+      }
+
+      .swap3d-stage {
+
+        .pane {
+          margin-top: 25px;
+          font-size: 52px;
+        }
+
+        .pane--out {
+        }
+        .pane--in {
+
+        }
+      }
+    }
+
+    .endtext {
+      font-size: 16px;
+    }
+  }
+}
 }
