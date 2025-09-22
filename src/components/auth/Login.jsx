@@ -4,14 +4,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { hashPassword } from '../../utils/Crypto';
 import { b64url, randomVerifier } from '../../utils/GoogleLogin';
-import { KAKAO_REDIRECT_URI, GOOGLE_REDIRECT_URI } from '../../config';
+import { KAKAO_REDIRECT_URI, GOOGLE_REDIRECT_URI, API_URL } from '../../config';
 
 const Login = () => {
     const setLoginModal = useAuthStore((state) => state.setLoginModal);
     const setJoinModal = useAuthStore((state) => state.setJoinModal);
     const setLogin = useAuthStore((state) => state.setLogin);
     const setUser = useAuthStore((state) => state.setUser);
-    const apiUrl = import.meta.env.VITE_API_URL;
+
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -67,7 +67,7 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const res = await axios.post(apiUrl + '/login', {
+        const res = await axios.post(`${API_URL.replace(/\/+$/, '')}/login`, {
             email,
             password: hashPassword(password),
         });
