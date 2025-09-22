@@ -209,3 +209,30 @@
         transform: translateY(0) scale(0.98);
     }
 }
+
+@media screen and (max-width: 600px) {
+    #hotel_visual {
+        width: 100vw;
+        height: 163.0769vw;
+        background: url('/hotel/MainVisual_mobile.png') no-repeat center/cover;
+        display: flex;
+        flex-direction: column;
+        gap: 4.1026vw;
+        align-items: center;
+        .headline {
+            padding-top: 36.4103vw;
+            font-size: 10.2564vw;
+            width: 100%;
+            position: static;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sub {
+            position: static;
+            width: 72.3077vw;
+            height: 6.1538vw;
+            font-size: 3.5897vw;
+        }
+    }
+}

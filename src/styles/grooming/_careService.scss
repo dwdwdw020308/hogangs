@@ -1,91 +1,142 @@
-@use "./../utils" as *;
+@use './../utils' as *;
 #grooming_careService {
-  width: 100%;
-  height: 558px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #b7e2df;
-  .inner {
-    height: 358px;
+    width: 100%;
+    height: 558px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    .left {
-      width: 470px;
-      height: 216px;
-      display: flex;
-      flex-flow: column;
-      gap: 50px;
-      .top {
-        color: #fefefe;
-        font-family: Paperlogy;
-        font-size: 48px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-      }
-      .bottom {
-        color: #353535;
-        font-family: Pretendard;
-        font-size: 22px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-      }
-    }
-
-    .right {
-      width: 844px;
-      height: 366px;
-      .cards {
-        width: 100%;
-        height: 100%;
+    background: #b7e2df;
+    .inner {
+        height: 358px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        li {
-          width: 268px;
-          height: 100%;
-          border-radius: 20px;
-          background: #eef9f8;
-
-          display: flex;
-          justify-content: center;
-          flex-flow: column;
-          align-items: center;
-          .icon {
-            width: 140px;
-            height: 140px;
+        .left {
+            width: 470px;
+            height: 216px;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 100%;
-            background-color: #fefefe;
-            margin-bottom: 32px;
-          }
-          strong {
-            color: #060606;
-            text-align: center;
-            font-family: Paperlogy;
-            font-size: 22px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: normal;
-            margin-bottom: 16px;
-          }
-          p {
-            color: #353535;
-            text-align: center;
-            /* Medium/16px */
-            font-family: Pretendard;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 130%; /* 20.8px */
-          }
+            flex-flow: column;
+            gap: 50px;
+            .top {
+                color: #fefefe;
+                font-family: Paperlogy;
+                font-size: 48px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+            }
+            .bottom {
+                color: #353535;
+                font-family: Pretendard;
+                font-size: 22px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+            }
         }
-      }
+
+        .right {
+            width: 844px;
+            height: 366px;
+            .cards {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                li {
+                    width: 268px;
+                    height: 100%;
+                    border-radius: 20px;
+                    background: #eef9f8;
+
+                    display: flex;
+                    justify-content: center;
+                    flex-flow: column;
+                    align-items: center;
+                    .icon {
+                        width: 140px;
+                        height: 140px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 100%;
+                        background-color: #fefefe;
+                        margin-bottom: 32px;
+                    }
+                    strong {
+                        color: #060606;
+                        text-align: center;
+                        font-family: Paperlogy;
+                        font-size: 22px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        margin-bottom: 16px;
+                    }
+                    p {
+                        color: #353535;
+                        text-align: center;
+                        /* Medium/16px */
+                        font-family: Pretendard;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 130%; /* 20.8px */
+                    }
+                }
+            }
+        }
     }
-  }
+}
+
+@media screen and (max-width: 600px) {
+    #grooming_careService {
+        width: 100%;
+        height: 1127px;
+        .inner {
+            height: 967px;
+            flex-direction: column;
+            .left {
+                width: 100%;
+                height: 159px;
+                gap: 20px;
+                .top {
+                    font-size: 32px;
+                }
+                .bottom {
+                    font-size: 16px;
+                }
+            }
+            .right {
+                height: 768px;
+                .cards {
+                    flex-direction: column;
+                    gap: 15px;
+                    justify-content: center;
+                    li {
+                        width: 358px;
+                        height: 246px;
+                        padding: 25px 73px;
+                        .icon {
+                            width: 100px;
+                            height: 104px;
+                            padding: 23px 21px;
+                            margin-bottom: 24px;
+                            svg {
+                                width: 58px;
+                                height: 58px;
+                            }
+                        }
+                        strong {
+                            font-size: 18px;
+                        }
+                        p {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
