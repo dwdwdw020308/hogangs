@@ -6,10 +6,15 @@ import { useState } from 'react';
 
 const Layout = () => {
     const navigate = useNavigate();
-    const [hover, setHover] = useState(false); // hover 여부 state
+
+    // 버튼별 hover 상태
+    const [hover1, setHover1] = useState(false);
+    const [hover2, setHover2] = useState(false);
+    const [hover3, setHover3] = useState(false);
+    const [hover4, setHover4] = useState(false); // footer button2
 
     const handleScrollTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // 맨 위로 부드럽게 이동
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
@@ -17,23 +22,51 @@ const Layout = () => {
             <Header />
             <main className="main">
                 <ChannelTalk />
-                <div className="footer-buttons" aria-label="quick buttons">
-                    {/* 버튼1: 클릭하면 /about 이동 */}
+
+                {/* footer 버튼 1 */}
+                <div className="footer-buttons1" aria-label="quick buttons">
                     <img
-                        src="/footer/button1.png"
-                        alt="버튼1"
-                        onClick={() => navigate('/Reservation')}
+                        src={hover1 ? '/footer/Hotel-hover.png' : '/footer/Hotel.png'}
+                        alt="호텔 버튼"
+                        onClick={() => navigate('/Hotel')}
+                        onMouseEnter={() => setHover1(true)}
+                        onMouseLeave={() => setHover1(false)}
                         style={{ cursor: 'pointer' }}
                     />
                     <img
-                        src={hover ? '/footer/button2-hover.png' : '/footer/button2.png'}
-                        alt="버튼2"
-                        onMouseEnter={() => setHover(true)}
-                        onMouseLeave={() => setHover(false)}
-                        onClick={handleScrollTop}
+                        src={hover2 ? '/footer/Grooming-hover.png' : '/footer/Grooming.png'}
+                        alt="그루밍 버튼"
+                        onClick={() => navigate('/Grooming')}
+                        onMouseEnter={() => setHover2(true)}
+                        onMouseLeave={() => setHover2(false)}
+                        style={{ cursor: 'pointer' }}
+                    />
+                    <img
+                        src={
+                            hover3
+                                ? '/footer/Reservation-Button-hover.png'
+                                : '/footer/Reservation-Button.png'
+                        }
+                        alt="예약 버튼"
+                        onClick={() => navigate('/Reservation')}
+                        onMouseEnter={() => setHover3(true)}
+                        onMouseLeave={() => setHover3(false)}
                         style={{ cursor: 'pointer' }}
                     />
                 </div>
+
+                {/* footer 버튼 2 */}
+                <div className="footer-buttons2" aria-label="quick buttons">
+                    <img
+                        src={hover4 ? '/footer/button2-hover.png' : '/footer/button2.png'}
+                        alt="맨위로 버튼"
+                        onClick={handleScrollTop}
+                        onMouseEnter={() => setHover4(true)}
+                        onMouseLeave={() => setHover4(false)}
+                        style={{ cursor: 'pointer' }}
+                    />
+                </div>
+
                 <Outlet />
             </main>
             <Footer />
