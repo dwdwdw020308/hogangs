@@ -59,6 +59,7 @@ const Auth = () => {
 
                 const data = await response.json();
                 const { access_token } = data;
+                console.log(`나는거냐 : ${access_token}`);
                 if (access_token != '') {
                     const userInfo = await getKakaoUserInfo(access_token);
                     const params = { type: 'kakao', email: userInfo.email };
