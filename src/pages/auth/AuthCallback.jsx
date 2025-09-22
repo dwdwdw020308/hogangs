@@ -21,9 +21,9 @@ export default function AuthCallback() {
 
                 // 서버로 교환 요청
                 const body = { code, code_verifier };
-                const url = `${API_URL}/sns/google`;
-                console.log(url);
-                const res = await axios.post(url, body, {
+
+                console.log(`${API_URL}/sns/google`);
+                const res = await axios.post(`${API_URL}/sns/google`, body, {
                     headers: { 'Content-Type': 'application/json' },
                 });
 
