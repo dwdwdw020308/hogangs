@@ -3,10 +3,11 @@ import React from 'react';
 import { hashPassword } from '../../utils/Crypto';
 import axios from 'axios';
 import useAuthStore from '../../store/useAuthStore';
+import { API_URL } from '../../config';
 
 const Step2 = ({ setStep, step, user, setUser }) => {
     const setJoinModal = useAuthStore((state) => state.setJoinModal);
-    const apiUrl = import.meta.env.VITE_API_URL;
+
     const years = Array.from({ length: 100 }, (_, i) => 2011 - i);
     const months = Array.from({ length: 12 }, (_, i) => i + 1);
     const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -76,7 +77,7 @@ const Step2 = ({ setStep, step, user, setUser }) => {
             birth: birthDate, //19900605
         };
 
-        const res = await axios.post(apiUrl + '/user', newUser);
+        const res = await axios.post(`${API_URL.replace(/\/+$/, '')}/user`, newUser);
         console.log(res.data);
         if (res.data.error === 0) {
             setStep(step + 1);

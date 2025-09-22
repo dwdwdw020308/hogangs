@@ -29,6 +29,8 @@ import AdminVideos from './pages/admin/AdminVideos';
 import AdminCoupons from './pages/admin/AdminCoupons';
 import AdminUserDetail from './pages/admin/AdminUserDetail';
 import AdminReservations from './pages/admin/AdminReservation';
+import GoogleRegister from './pages/auth/GoogleRegister';
+import KakaoRegister from './pages/auth/KakaoRegister';
 
 const App = () => {
     const { setActiveMenu, setIsMain } = useCommonStore();
@@ -60,6 +62,8 @@ const App = () => {
                 <Route path="*" element={<NotFiles />} />
                 <Route path="oauth" element={<Auth />} />
                 <Route path="authCallback" element={<AuthCallback />} />
+                <Route path="googleRegister" element={<GoogleRegister />} />
+                <Route path="kakaoRegister" element={<KakaoRegister />} />
 
                 <Route path="admin/login" element={<AdminLogin />} />
 
