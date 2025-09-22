@@ -116,3 +116,112 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    #footer {
+        padding-top: 6.1538vw;
+        padding-bottom: 0px;
+        position: relative;
+        overflow: hidden;
+        .text_bg {
+            display: none;
+        }
+        .inner {
+            height: 82.5641vw;
+            position: relative;
+            margin: auto;
+            .logo {
+                margin-bottom: 10.2564vw;
+            }
+            .middle {
+                position: absolute;
+                top: 35.3846vw;
+                gap: 0.5128vw;
+                margin-bottom: 14.1026vw;
+                .first {
+                    width: 197.4359vw;
+                    height: 4.8718vw;
+                    justify-content: start;
+                    gap: 1.5385vw;
+                    flex-wrap: wrap;
+                    li {
+                        color: var(--Grey-grey-100, #cecece);
+                        font-size: 12px;
+                        line-height: normal;
+                        strong {
+                        }
+                        &:nth-child(1),
+                        &:nth-child(2),
+                        &:nth-child(3),
+                        &:nth-child(4),
+                        &:nth-child(5) {
+                            display: inline-flex;
+                            flex-basis: auto;
+                        }
+
+                        &:nth-child(6),
+                        &:nth-child(7),
+                        &:nth-child(8),
+                        &:nth-child(9) {
+                            display: inline-flex;
+                            flex-basis: auto;
+                        }
+                        &:nth-child(6) {
+                            flex-basis: 100%;
+                            display: flex;
+                            height: 0;
+                            opacity: 0;
+                        }
+                    }
+                }
+                .second {
+                    height: 4.8718vw;
+                    justify-content: start;
+                    gap: 1.5385vw;
+                    margin-top: 8.2051vw;
+                    li {
+                        font-size: 3.0769vw;
+                    }
+                }
+                span {
+                    font-size: 12px;
+                    margin-top: 6.1538vw;
+                }
+            }
+            .bottom-nav {
+                gap: 1.5385vw;
+                font-size: 12px;
+            }
+            .icons {
+                top: 10.2564vw;
+                right: 0;
+                width: 33.0769vw;
+                height: 0;
+                @include flexbox($justify: space-between);
+                li {
+                    svg {
+                        background: #fff;
+                        width: 6.6667vw;
+                        height: 6.6667vw;
+                        border-radius: 6.6667vw;
+                        path {
+                            transform: scale(0.9);
+                            transform-origin: center;
+                        }
+                    }
+                    &:nth-child(3) {
+                        svg {
+                            path {
+                                transform: scale(0.6);
+                                transform-origin: center;
+                            }
+                        }
+                    }
+                    width: 6.6667vw;
+                    height: 6.6667vw;
+                    border-radius: 6.6667vw;
+                }
+            }
+        }
+    }
+}

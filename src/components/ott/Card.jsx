@@ -46,14 +46,7 @@ const Card = () => {
                 우리의 오늘을 특별하게 <span>호강스 pick !</span>
             </strong>
             <p>쉿! 카드 뒤에 호강이 PICK 영상이 숨어있어요!</p>
-            <img src="/ott/button_1-1.svg" alt="" className="nav-arrow left" onClick={handlePrev} />
-            <img
-                src="/ott/button_prev-hover.svg"
-                alt=""
-                className="nav-arrow left"
-                onClick={handlePrev}
-            />
-
+            <div className="nav-arrow left" onClick={handlePrev}></div>
             <div className="carousel-track">
                 {cards.map((card, index) => (
                     <div key={card.id} className={getClassName(index)}>
@@ -83,7 +76,7 @@ const Card = () => {
                 ))}
             </div>
 
-            <img src="/ott/button_1.svg" alt="" className="nav-arrow right" onClick={handleNext} />
+            <div className="nav-arrow right" onClick={handleNext}></div>
             <p className="desc">
                 <img src="/ott/icon-bone.svg" alt="뼈다귀아이콘" />
                 <span>클릭해보개, </span>

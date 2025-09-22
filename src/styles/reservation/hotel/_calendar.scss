@@ -199,3 +199,41 @@
         }
     }
 }
+@media screen and (max-width: 600px) {
+    #hotel_reservation_calendar {
+        width: 100%;
+        height: 138.4615vw;
+        padding-top: 84.6154vw;
+        .inner {
+            justify-content: start;
+            margin: 20.5128vw 4.1026vw;
+            .step_area {
+                .board {
+                    display: none;
+                }
+                .price_modal_btn {
+                    display: none;
+                }
+            }
+            .calendar_area {
+                width: 100%;
+                height: 74.359vw;
+                display: flex;
+                flex-flow: column;
+                gap: 10.2564vw;
+
+                .notice_area {
+                    width: 100%;
+                    height: 15.3846vw;
+                    gap: 14px;
+                    .title {
+                        font-size: 18px;
+                    }
+                    p {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}

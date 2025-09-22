@@ -84,3 +84,90 @@
         }
     }
 }
+@media screen and (max-width: 600px) {
+    #hotel_reservation_checkout {
+        width: 100%;
+        height: 358px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        .inner {
+            height: 238px;
+            // display: flex;
+            // justify-content: space-between;
+            .block {
+                width: 0px;
+                // height: 175px;
+            }
+            .check_area {
+                width: 760px;
+                display: flex;
+                flex-flow: column;
+                .title {
+                    // color: #000;
+                    // font-family: Paperlogy;
+                    font-size: 18px;
+                    // font-style: normal;
+                    // font-weight: 600;
+                    // line-height: normal;
+                    margin-bottom: 18px;
+                }
+                p {
+                    // color: var(--Grey-grey-400, #818181);
+                    // font-family: Pretendard;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 130%; /* 20.8px */
+                    .bold {
+                        color: var(--Grey-grey-900, #292929);
+
+                        /* Medium/16px */
+                        font-family: Pretendard;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 130%;
+                    }
+                    margin-bottom: 34px;
+                }
+
+                .radio_area {
+                    display: flex;
+                    gap: 37px;
+                    margin-bottom: 34px;
+                }
+
+                .times {
+                    width: 588px;
+                    height: 52px;
+                    display: flex;
+                    justify-content: space-between;
+                    li {
+                        cursor: pointer;
+                        width: 121px;
+                        height: 52px;
+                        border-radius: 15px;
+                        border: 1px solid var(--Grey-grey-200, #b6b6b6);
+                        background: var(--White, #fefefe);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: var(--Grey-grey-800, #353535);
+                        /* Regular/18px */
+                        font-family: Pretendard;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 140%; /* 25.2px */
+                        &.check {
+                            background: #8dd2ce;
+                            color: #fefefe;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
