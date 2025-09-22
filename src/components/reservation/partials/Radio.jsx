@@ -7,12 +7,9 @@ const Radio = ({ setEnableTime }) => {
     const setStepProcesses = useReservationStore((s) => s.setStepProcesses);
     const setFormField = useReservationStore((s) => s.setFormField);
     const onChange = (value) => {
+        setStepProcesses({ 2: 'done', 3: 'ing' });
         setValue(value);
-        const payload = { checkOut: value };
         setFormField('checkOut', value);
-        if (value === 'ok') {
-            setStepProcesses({ 2: 'done', 3: 'ing' });
-        }
     };
 
     useEffect(() => {

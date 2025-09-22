@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DayPicker, useDayPicker, useNavigation } from 'react-day-picker';
 import { differenceInCalendarDays, format, isSameDay, startOfToday } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
 import useReservationStore from '../../../store/useReservationStore';
+import { useRouteError } from 'react-router-dom';
 
 export default function DatePick({ setForm }) {
     const [range, setRange] = useState({ from: undefined, to: undefined });
     const setStepProcesses = useReservationStore((s) => s.setStepProcesses);
     const setFormField = useReservationStore((s) => s.setFormField);
+    const form = useReservationStore((s) => s.form);
+    const [allCheck, setAllCheck] = useState(false);
 
     const PrevIcon = ({ onClick }) => {
         return (
@@ -82,9 +85,15 @@ export default function DatePick({ setForm }) {
         setFormField('startDate', payload.startDate);
         setFormField('endDate', payload.endDate);
         setFormField('nights', payload.nights);
-        setStepProcesses({ 1: 'done', 2: 'ing' });
+        setAllCheck(true);
     };
 
+    useEffect(() => {
+        if (allCheck) {
+            setAllCheck(false);
+            setStepProcesses({ 1: 'done', 2: 'ing' });
+        }
+    }, [allCheck]);
     return (
         <div className="calendar_area">
             <div className="notice_area">

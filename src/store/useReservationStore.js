@@ -46,14 +46,16 @@ const useReservationStore = create((set, get) => ({
         set({ steps: initialSteps, form: {} });
         localStorage.removeItem('reservationForm');
     },
-    setStepProcesses: (updates) =>
+    setStepProcesses: (updates) => {
         set((state) => {
+            console.log(updates);
             return {
                 steps: state.steps.map((s) =>
                     updates[s.id] ? { ...s, process: updates[s.id] } : s
                 ),
             };
-        }),
+        });
+    },
     setPaymentProcesses: (id, value) =>
         set((state) => ({
             paymentProcesses: state.paymentProcesses.map((p) =>

@@ -13,23 +13,19 @@ const Pay = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        // 정상 접근이 아닌경우 Main으로 리디렉션
-        if (!isNormalLogic) {
-            navigate('/');
-        }
-        if (!reservationForm) {
-            navigate('/');
-        }
-    }, [isNormalLogic]);
+    // useEffect(() => {
+    //     // 정상 접근이 아닌경우 Main으로 리디렉션
+    //     if (!isNormalLogic) {
+    //         navigate('/');
+    //     }
+    //     if (!reservationForm) {
+    //         navigate('/');
+    //     }
+    // }, [isNormalLogic]);
 
     // reservationForm 데이터 불러오기
-    useEffect(() => {
-        console.log(reservationForm);
-        // if (!reservationForm) return;
-        setLoading(false);
-    }, [reservationForm]);
-    if (loading) {
+
+    if (!reservationForm) {
         return (
             <section id="pay_result">
                 <div className="inner">불러오는 중...</div>
@@ -38,6 +34,11 @@ const Pay = () => {
     }
     const { resType } = reservationForm;
 
+    useEffect(() => {
+        console.log(reservationForm);
+        // if (!reservationForm) return;
+        setLoading(false);
+    }, [reservationForm]);
     return (
         <>
             <section id="pay_top">
