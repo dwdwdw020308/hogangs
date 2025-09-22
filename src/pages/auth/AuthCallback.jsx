@@ -6,7 +6,6 @@ import { API_URL } from '../../config';
 
 export default function AuthCallback() {
     const { setLogin, setUser, setLoginModal } = useAuthStore();
-    const apiUrl = API_URL;
 
     useEffect(() => {
         (async () => {
