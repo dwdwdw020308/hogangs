@@ -1,4 +1,23 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,300");
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300');
+
+#curve {
+    stroke: none;
+}
+.button {
+    position: absolute;
+    top: 80%;
+    left: 48%;
+    img {
+    }
+}
+.main-p {
+    p {
+        position: absolute;
+        top: 85%;
+        left: 50%;
+        z-index: 99;
+    }
+}
 
 $blue: #8dd9ff;
 $yellow: #ffda00;
@@ -6,151 +25,154 @@ $yellow: #ffda00;
 *,
 *:before,
 *:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 #main-visual {
-  width: 100%;
-  height: 100vh;
-  position: relative;
+    background-image: url('/main/section1.png');
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: relative;
 
-  .main_headline {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-  }
+    .main_headline {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+    }
 }
 
 .intro {
-  position: relative;
-  height: auto;
-  transform: translateZ(0);
-
-  img {
     position: relative;
-    display: block;
-    width: 100%;
     height: auto;
-    z-index: 1;
-    transform: translateX(0%) translateY(0%);
-  }
+    transform: translateZ(0);
+
+    img {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+        transform: translateX(0%) translateY(0%);
+    }
 }
 
 .intro .caption {
-  display: none;
-  position: absolute;
-  bottom: 25%;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 3;
-  color: white;
-
-  h1 {
-    display: inline-block;
-    width: 70%;
-    font-size: 4.0625vw;
-    font-weight: 100;
-  }
+    display: none;
+    position: absolute;
+    bottom: 25%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+    color: white;
+    h1 {
+        display: inline-block;
+        width: 70%;
+        font-size: 4.0625vw;
+        font-weight: 100;
+    }
 }
 
 .intro .overlay {
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-
-  svg {
     position: absolute;
-    top: 0%;
+    bottom: -2px;
     left: 0;
     width: 100%;
     height: 100%;
-  }
+    z-index: 2;
+    pointer-events: none;
+
+    svg {
+        position: absolute;
+        top: 0%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text {
+        }
+    }
 }
 
 /* =======================
    모바일 전용 스타일
    ======================= */
 @media (max-width: 640px) {
-  /* PC 이미지 안 보이게 */
-  #main-visual .intro img {
-    display: none !important;
-  }
-
-  /* 곡선 오버레이 안 보이게 */
-  #main-visual .intro .overlay {
-    display: none !important;
-  }
-
-  /* 메인 헤드라인 안 보이게 */
-  #main-visual .main_headline {
-    display: none !important;
-  }
-
-  /* 모바일 배경 */
-  #main-visual {
-    background-image: url("/main/Ellipse-65.png");
-    background-repeat: no-repeat;
-    background-position: center -50px;
-    background-size: cover;
-    min-height: 100svh;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* 텍스트를 아래로 붙이기 */
-  }
-
-  /* 캡션은 정적 배치 */
-  #main-visual .intro .caption {
-    display: block;
-    position: static !important;
-    margin: 24px auto 40px;
-    padding: 0 20px;
-    text-align: center;
-    color: #fff;
-     transform: translateY(-120px);
-
-    h1 {
-      position: relative;
-      font-size: 36px;
-      line-height: 130%;
-      font-weight: 700;
-
-      strong {
-        color: #94e4df;
-      }
+    /* PC 이미지 안 보이게 */
+    #main-visual .intro img {
+        display: none !important;
     }
 
-    /* "특별한" 위 점 3개 */
-    .special {
-      position: relative;
-      display: inline-block;
+    /* 곡선 오버레이 안 보이게 */
+    #main-visual .intro .overlay {
+        display: none !important;
+    }
 
-      .dots {
-        position: absolute;
-        top: -5px; 
-        left: 50%;
-        transform: translateX(-50%);
+    /* 메인 헤드라인 안 보이게 */
+    #main-visual .main_headline {
+        display: none !important;
+    }
+
+    /* 모바일 배경 */
+    #main-visual {
+        background-image: url('/main/Ellipse-65.png');
+        background-repeat: no-repeat;
+        background-position: center -50px;
+        background-size: cover;
+        min-height: 100svh;
+
         display: flex;
-        gap: 25px; 
-        justify-content: center;
-      }
-
-      .dots span {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: #94e4df; 
-        display: inline-block;
-      }
+        flex-direction: column;
+        justify-content: flex-end; /* 텍스트를 아래로 붙이기 */
     }
-  }
+
+    /* 캡션은 정적 배치 */
+    #main-visual .intro .caption {
+        display: block;
+        position: static !important;
+        margin: 24px auto 40px;
+        padding: 0 20px;
+        text-align: center;
+        color: #fff;
+        transform: translateY(-120px);
+
+        h1 {
+            position: relative;
+            font-size: 36px;
+            line-height: 130%;
+            font-weight: 700;
+
+            strong {
+                color: #94e4df;
+            }
+        }
+
+        /* "특별한" 위 점 3개 */
+        .special {
+            position: relative;
+            display: inline-block;
+
+            .dots {
+                position: absolute;
+                top: -5px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 25px;
+                justify-content: center;
+            }
+
+            .dots span {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background-color: #94e4df;
+                display: inline-block;
+            }
+        }
+    }
 }

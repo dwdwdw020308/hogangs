@@ -258,6 +258,14 @@
                     left: -90%;
                     transform: rotate(-90deg);
                 }
+                svg {
+                    position: absolute;
+                    inset: 0;
+                    width: 100px;
+                    height: 100%;
+                    left: -67%;
+                    transform: rotate(-90deg);
+                }
 
                 .bg {
                     stroke: rgba(255, 255, 255, 0.8);
