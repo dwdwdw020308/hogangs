@@ -3,7 +3,7 @@ import useAuthStore from "../../store/useAuthStore";
 
 const LoginMenu = () => {
   const user = useAuthStore((state) => state.user);
-  const profile = user != null ? user.profile : "";
+  const profile = user?.profile || "/mypage/hogangImg.png";
   const name = user != null ? user.name : "";
 
   const navigate = useNavigate();
