@@ -41,11 +41,11 @@ export default function CouponFormModal({ mode = 'create', initial, onClose, onS
 
             if (mode === 'edit' && (initial?.id || initial?._id)) {
                 const id = initial.id ?? initial._id;
-                await axios.put(`${API_URL}/coupon/${id}`, payload, {
+                await axios.put(`${API_URL.replace(/\/+$/, '')}/coupon/${id}`, payload, {
                     headers: { 'Content-Type': 'application/json' },
                 });
             } else {
-                await axios.post(`${API_URL}/coupon`, payload, {
+                await axios.post(`${API_URL.replace(/\/+$/, '')}/coupon`, payload, {
                     headers: { 'Content-Type': 'application/json' },
                 });
             }

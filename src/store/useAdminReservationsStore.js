@@ -24,7 +24,7 @@ export const useAdminReservationsStore = create((set, get) => ({
         set({ status: 'loading', error: '' });
         try {
             // 기본: /reservations?type=hotel|grooming
-            let url = `${API_URL}/reservation`;
+            let url = `${API_URL.replace(/\/+$/, '')}/reservation`;
             const { data } = await axios.get(url, { params: { type: resType } });
 
             // 서버가 data 래핑 없이 배열을 주거나 {data:[]} 로 줄 수 있으니 모두 케이스 처리
@@ -33,7 +33,9 @@ export const useAdminReservationsStore = create((set, get) => ({
         } catch (e1) {
             // 백엔드가 아직 /reservations 전체 리스트를 안 만들었으면 404가 떨어질 수 있음 → 임시 폴백
             try {
-                const { data } = await axios.get(`${API_URL}/reservation`, { params: {} });
+                const { data } = await axios.get(`${API_URL.replace(/\/+$/, '')}/reservation`, {
+                    params: {},
+                });
                 const arr = Array.isArray(data) ? data : Array.isArray(data?.data) ? data.data : [];
                 // 클라에서 타입 필터링
                 const filtered = arr.filter((v) => String(v?.resType).toLowerCase() === resType);

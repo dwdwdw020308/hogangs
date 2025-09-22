@@ -23,7 +23,7 @@ export default function AuthCallback() {
                 const body = { code, code_verifier };
 
                 console.log(`${API_URL.replace(/\/+$/, '')}/sns/google`);
-                const res = await axios.post(`${API_URL}/sns/google`, body, {
+                const res = await axios.post(`${API_URL.replace(/\/+$/, '')}/sns/google`, body, {
                     headers: { 'Content-Type': 'application/json' },
                 });
 

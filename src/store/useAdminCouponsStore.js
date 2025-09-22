@@ -46,7 +46,7 @@ const useAdminCouponsStore = create((set, get) => ({
 
         set({ status: 'loading', error: '' });
         try {
-            const res = await axios.get(`${API_URL}/coupon`, {
+            const res = await axios.get(`${API_URL.replace(/\/+$/, '')}/coupon`, {
                 headers: { 'Content-Type': 'application/json' },
             });
             const list = pickList(res.data);
@@ -58,7 +58,7 @@ const useAdminCouponsStore = create((set, get) => ({
 
     remove: async (id) => {
         if (!id) throw new Error('ID가 없습니다.');
-        await axios.delete(`${API_URL}/coupon/${id}`, {
+        await axios.delete(`${API_URL.replace(/\/+$/, '')}/coupon/${id}`, {
             headers: { 'Content-Type': 'application/json' },
         });
         // 로컬에서도 즉시 제거

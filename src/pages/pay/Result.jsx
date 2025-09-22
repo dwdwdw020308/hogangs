@@ -66,14 +66,16 @@ const Result = () => {
         (async () => {
             try {
                 setLoading(true);
-                const { data } = await axios.get(`${API_URL}/reservation/${id}`);
+                const { data } = await axios.get(
+                    `${API_URL.replace(/\/+$/, '')}/reservation/${id}`
+                );
                 console.log(data);
                 setReservationData(data);
 
                 if (data.couponId !== '') {
                     setIsCoupon(true);
                     const { data: coupon } = await axios.get(
-                        `${API_URL}/user-coupons/${data.couponId}`,
+                        `${API_URL.replace(/\/+$/, '')}/user-coupons/${data.couponId}`,
                         {
                             headers: { 'Content-Type': 'application/json' },
                         }

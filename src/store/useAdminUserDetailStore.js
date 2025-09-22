@@ -26,7 +26,7 @@ const useAdminUserDetailStore = create((set, get) => ({
     fetchUser: async (id) => {
         set({ userStatus: 'loading', userError: '' });
         try {
-            const { data } = await axios.get(`${API_URL}/user/${id}`);
+            const { data } = await axios.get(`${API_URL.replace(/\/+$/, '')}/user/${id}`);
             set({ user: data, userStatus: 'success' });
         } catch (e) {
             set({ userStatus: 'error', userError: err(e) });
@@ -37,7 +37,7 @@ const useAdminUserDetailStore = create((set, get) => ({
         set({ snsStatus: 'loading' });
         try {
             // 서버에서 GET /sns/user/:userId → [{provider:'kakao', linkedAt:...}, ...] 가정
-            const { data } = await axios.get(`${API_URL}/sns/user/${userId}`);
+            const { data } = await axios.get(`${API_URL.replace(/\/+$/, '')}/sns/user/${userId}`);
             set({ snsLinks: Array.isArray(data) ? data : [], snsStatus: 'success' });
         } catch {
             // SNS가 없을 수도 있으니 조용히 빈배열
@@ -48,7 +48,9 @@ const useAdminUserDetailStore = create((set, get) => ({
     fetchReservations: async (userId) => {
         set({ resvStatus: 'loading' });
         try {
-            const { data } = await axios.get(`${API_URL}/reservation/user/${userId}`);
+            const { data } = await axios.get(
+                `${API_URL.replace(/\/+$/, '')}/reservation/user/${userId}`
+            );
             set({ reservations: Array.isArray(data) ? data : [], resvStatus: 'success' });
         } catch (e) {
             set({ resvStatus: 'error' });
@@ -58,7 +60,9 @@ const useAdminUserDetailStore = create((set, get) => ({
     fetchUserCoupons: async (userId) => {
         set({ couponStatus: 'loading' });
         try {
-            const { data } = await axios.get(`${API_URL}/user-coupons/user/${userId}`);
+            const { data } = await axios.get(
+                `${API_URL.replace(/\/+$/, '')}/user-coupons/user/${userId}`
+            );
             set({ userCoupons: Array.isArray(data) ? data : [], couponStatus: 'success' });
         } catch (e) {
             set({ couponStatus: 'error' });
@@ -66,7 +70,7 @@ const useAdminUserDetailStore = create((set, get) => ({
     },
 
     markCouponUsed: async (userCouponId) => {
-        await axios.patch(`${API_URL}/user-coupons/${userCouponId}/use`);
+        await axios.patch(`${API_URL.replace(/\/+$/, '')}/user-coupons/${userCouponId}/use`);
         // 로컬 갱신
         set((state) => ({
             userCoupons: state.userCoupons.map((c) =>

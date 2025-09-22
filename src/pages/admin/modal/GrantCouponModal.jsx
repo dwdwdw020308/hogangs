@@ -19,7 +19,7 @@ export default function GrantCouponModal({ userId, onClose, onSuccess }) {
         (async () => {
             try {
                 setLoading(true);
-                const { data } = await axios.get(`${API_URL}/coupon`);
+                const { data } = await axios.get(`${API_URL.replace(/\/+$/, '')}/coupon`);
                 setCoupons(Array.isArray(data) ? data : []);
             } catch (e) {
                 alert(e?.response?.data?.message || e.message || '쿠폰 목록 로드 실패');
@@ -41,9 +41,13 @@ export default function GrantCouponModal({ userId, onClose, onSuccess }) {
         try {
             setSubmitting(true);
             const payload = { userId, couponId };
-            const { data } = await axios.post(`${API_URL}/user-coupons`, payload, {
-                headers: { 'Content-Type': 'application/json' },
-            });
+            const { data } = await axios.post(
+                `${API_URL.replace(/\/+$/, '')}/user-coupons`,
+                payload,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            );
             if (data.error) throw new Error(data.message || '쿠폰 지급 실패');
             onSuccess?.();
         } catch (e) {

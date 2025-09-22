@@ -23,9 +23,12 @@ const Coupon = () => {
         const getCoupons = async () => {
             const view = 'usable'; // 'usable' | 'expired' | 'all'
             const months = 4;
-            const res = await axios.get(`${API_URL}/user-coupons/user/${user._id}`, {
-                params: { view, months },
-            });
+            const res = await axios.get(
+                `${API_URL.replace(/\/+$/, '')}/user-coupons/user/${user._id}`,
+                {
+                    params: { view, months },
+                }
+            );
             setCoupons(res.data);
         };
 

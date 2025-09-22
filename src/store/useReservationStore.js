@@ -168,7 +168,7 @@ const useReservationStore = create((set, get) => ({
             request: requestMessage ?? '',
         };
 
-        const res = await axios.post(`${API_URL}/reservation`, payload, {
+        const res = await axios.post(`${API_URL.replace(/\/+$/, '')}/reservation`, payload, {
             headers: { 'Content-Type': 'application/json' },
         });
         const { data, error, message } = res.data;
@@ -181,14 +181,20 @@ const useReservationStore = create((set, get) => ({
 
     cancelReservation: async (resId, couponId) => {
         console.log(couponId);
-        const { res } = await axios.patch(`${API_URL}/reservation/${resId}/cancel`, {
-            headers: { 'Content-Type': 'application/json' },
-        });
+        const { res } = await axios.patch(
+            `${API_URL.replace(/\/+$/, '')}/reservation/${resId}/cancel`,
+            {
+                headers: { 'Content-Type': 'application/json' },
+            }
+        );
         // coupon 사용 취소 처리
         if (res.error === 0) {
-            const { res2 } = await axios.patch(`${API_URL}/user-coupon/${couponId}/cancel`, {
-                headers: { 'Content-Type': 'application/json' },
-            });
+            const { res2 } = await axios.patch(
+                `${API_URL.replace(/\/+$/, '')}/user-coupon/${couponId}/cancel`,
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            );
 
             return res2.error;
         }
