@@ -6,7 +6,7 @@ import { API_URL } from '../../config';
 
 export default function AuthCallback() {
     const { setLogin, setUser, setLoginModal } = useAuthStore();
-    // const apiUrl = API_URL;
+    const apiUrl = API_URL;
 
     useEffect(() => {
         (async () => {
@@ -22,8 +22,8 @@ export default function AuthCallback() {
 
                 // 서버로 교환 요청
                 const body = { code, code_verifier };
-                const url = `${API_URL}sns/google`;
-
+                const url = `${API_URL}/sns/google`;
+                console.log(url);
                 const res = await axios.post(url, body, {
                     headers: { 'Content-Type': 'application/json' },
                 });

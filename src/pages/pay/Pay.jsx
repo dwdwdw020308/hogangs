@@ -11,7 +11,6 @@ const Pay = () => {
     const reservationForm = useReservationStore((s) => s.reservationForm);
     const isNormalLogic = useReservationStore((s) => s.isNormalLogic);
     const navigate = useNavigate();
-    const { resType } = reservationForm;
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -19,14 +18,15 @@ const Pay = () => {
         if (!isNormalLogic) {
             navigate('/');
         }
-        if (reservationForm.length === 0) {
+        if (!reservationForm) {
             navigate('/');
         }
     }, [isNormalLogic]);
 
     // reservationForm 데이터 불러오기
     useEffect(() => {
-        if (!reservationForm) return;
+        console.log(reservationForm);
+        // if (!reservationForm) return;
         setLoading(false);
     }, [reservationForm]);
     if (loading) {
@@ -36,6 +36,8 @@ const Pay = () => {
             </section>
         );
     }
+    const { resType } = reservationForm;
+
     return (
         <>
             <section id="pay_top">

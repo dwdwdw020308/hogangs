@@ -5,18 +5,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #fff;
 
     .inner {
         height: 768px;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         .step_area {
+            background-color: #fff;
+            position: fixed;
+            left: 113px;
+            bottom: 4px;
             width: 340px;
-            height: 546px;
+            height: 504px;
             display: flex;
             flex-flow: column;
             align-items: center;
-            gap: 62px;
+            gap: 16px;
             .board {
                 width: 100%;
                 height: 428px;

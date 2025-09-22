@@ -117,7 +117,8 @@
                 justify-content: center;
                 align-items: center;
                 border-radius: 56px;
-                background: var(--Green-green-650, #8dd2ce);
+                background: var(--Grey-grey-200, #b6b6b6);
+
                 color: var(--White, #fff);
                 text-align: center;
 
@@ -128,6 +129,9 @@
                 font-weight: 600;
                 line-height: normal;
                 cursor: pointer;
+                &.enable {
+                    background: #8dd2ce;
+                }
             }
         }
     }

@@ -4,11 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 const Agree = () => {
     const [agree, setAgree] = useState(false);
+    const [btnEnable, setBtnEnable] = useState(false);
+
     const form = useReservationStore((s) => s.form);
     const setLocalStorageForm = useReservationStore((s) => s.setLocalStorageForm);
     const setBeingReservation = useReservationStore((s) => s.setBeingReservation);
     const navigate = useNavigate();
     const onChange = (e) => {
+        setBtnEnable(!btnEnable);
         setAgree(e.target.checked);
     };
 
@@ -91,7 +94,11 @@ const Agree = () => {
                         </label>
                     </div>
 
-                    <span className="step_btn" onClick={validate}>
+                    <span
+                        disabled={btnEnable}
+                        className={`step_btn ${btnEnable ? 'enable' : ''}`}
+                        onClick={validate}
+                    >
                         다음 단계
                     </span>
                 </div>

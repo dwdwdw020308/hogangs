@@ -256,10 +256,12 @@ select {
             }
         }
         .pay_right {
+            position: fixed;
+            right: 118px;
+            bottom: 118px;
             width: 420px;
             display: flex;
             flex-flow: column;
-            justify-content: space-between;
             gap: 40px;
             .receipt {
                 width: 100%;
