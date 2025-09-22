@@ -6,7 +6,7 @@ import axios from 'axios';
 const Auth = () => {
     const location = useLocation();
     const code = new URLSearchParams(location.search).get('code');
-    const apiUrl = API_URL;
+
     useEffect(() => {
         const getKakaoUserInfo = async (accessToken) => {
             try {
@@ -59,9 +59,13 @@ const Auth = () => {
                 if (access_token != '') {
                     const userInfo = await getKakaoUserInfo(access_token);
                     const params = { type: 'kakao', email: userInfo.email };
-                    const res = await axios.post(`${apiUrl.replace(/\/$/, '')}/sns/kakao`, params, {
-                        headers: { 'Content-Type': 'application/json' },
-                    });
+                    const res = await axios.post(
+                        `${API_URL.replace(/\/$/, '')}/sns/kakao`,
+                        params,
+                        {
+                            headers: { 'Content-Type': 'application/json' },
+                        }
+                    );
 
                     let { user, isLinked } = res.data;
 
