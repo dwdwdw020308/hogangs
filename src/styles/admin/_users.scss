@@ -156,7 +156,7 @@
         border-spacing: 0;
         font-size: 14px;
         thead th {
-            text-align: left;
+            text-align: center;
             font-weight: 700;
             color: #374151;
             background: #f9fafb;
@@ -180,6 +180,7 @@
     /* 로우 액션 버튼 */
     .row-actions {
         display: flex;
+        justify-content: center;
         gap: 8px;
         button {
             padding: 6px 10px;
@@ -415,4 +416,14 @@
 }
 .admin-users.detail .sk.lg {
     height: 60px !important;
+}
+
+thead th {
+    text-align: center; /* 기본 텍스트 가운데 */
+    vertical-align: middle; /* 세로도 가운데 */
+}
+
+thead th > * {
+    justify-content: center; /* flex일 때 */
+    text-align: center;
 }

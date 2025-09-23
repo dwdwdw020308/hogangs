@@ -3,12 +3,12 @@ const Toolbar = ({ fetchAllForUser, setModalOpen, navigate }) => {
         <div className="toolbar">
             <h1>User Detail</h1>
             <div className="right">
-                <button onClick={() => navigate(-1)}>Back</button>
+                <button onClick={() => navigate(-1)}>뒤로</button>
                 <button className="refresh" onClick={() => fetchAllForUser(id)}>
-                    Refresh
+                    새로고침
                 </button>
                 <button className="primary" onClick={() => setModalOpen(true)}>
-                    Grant Coupon
+                    쿠폰지급
                 </button>
             </div>
         </div>

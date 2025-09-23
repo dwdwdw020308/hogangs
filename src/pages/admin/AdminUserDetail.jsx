@@ -97,11 +97,11 @@ export default function AdminUserDetail() {
                                 <table className="admin-table">
                                     <thead>
                                         <tr>
-                                            <th>Type</th>
-                                            <th>Check-in</th>
-                                            <th>Check-out</th>
-                                            <th>Total</th>
-                                            <th>Created</th>
+                                            <th align="center">예약타입</th>
+                                            <th align="center">입실</th>
+                                            <th align="center">퇴실</th>
+                                            <th align="center">총결제</th>
+                                            <th align="center">예약일</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -131,13 +131,13 @@ export default function AdminUserDetail() {
                                 <table className="admin-table">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Type</th>
-                                            <th>Valid Days</th>
-                                            <th>Granted</th>
-                                            <th>Expires</th>
-                                            <th>Status</th>
-                                            <th style={{ width: 140 }}>Actions</th>
+                                            <th>쿠폰명</th>
+                                            <th>타입</th>
+                                            <th>가능일</th>
+                                            <th>지급일</th>
+                                            <th>만료일</th>
+                                            <th>상태</th>
+                                            <th style={{ width: 140 }}>기능</th>
                                         </tr>
                                     </thead>
                                     <tbody>
