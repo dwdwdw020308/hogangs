@@ -10,17 +10,18 @@
     z-index: 100;
     .text_bg {
         position: absolute;
-        bottom: -10px;
-        right: 0;
+        bottom: -19px;
+        right: -15px;
         width: 1212px;
         height: 212px;
         color: #1c1c1c;
+        opacity: 0.7;
         text-align: right;
         font-family: Paperlogy;
         font-size: 110px;
         font-style: normal;
         font-weight: 700;
-        line-height: 106px; /* 96.364% */
+        line-height: 106px;
     }
     .inner {
         height: 340px;
