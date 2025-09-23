@@ -8,6 +8,8 @@ import { IoMdClose } from 'react-icons/io';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../../config';
+import { useVideoStore } from '../../../store/useVideoStore';
+import useAuthStore from '../../../store/useAuthStore';
 
 const DetailBanner = () => {
     const [isOpen, setIsOpen] = useState(false); //영상 열렸는지아닌지
@@ -15,6 +17,8 @@ const DetailBanner = () => {
     const thumbRef = useRef(null); //이미지 위치(썸네일)
     const [like, setLike] = useState(false);
     const [recommended, setRecommended] = useState(false);
+    const saveHistory = useVideoStore((s) => s.saveHistory);
+    const user = useAuthStore((s) => s.user);
     // localhost:3001/video?id=68ca9d15e0859865b492077f
     const play = () => {
         if (thumbRef.current) {
@@ -22,6 +26,10 @@ const DetailBanner = () => {
             const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
             const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
             setOrigin(`${x}%${y}%`);
+        }
+        if (user) {
+            const userId = user._id;
+            saveHistory(userId, '68ca9d15e0859865b492077f');
         }
         setIsOpen(true);
     };
