@@ -160,7 +160,8 @@
         background-size: auto 78px;
         background: url('/about/bone.png') repeat-x;
         animation: moveBanner 15s linear infinite;
-        bottom: 55px;
+        // bottom: 55px;
+        top: 750px;
         left: 0;
     }
 }

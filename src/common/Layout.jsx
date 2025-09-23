@@ -2,10 +2,12 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Header from './header/Header';
 import Footer from './footer/Footer';
 import ChannelTalk from '../components/main/ChannelTalk';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import HeaderMobile from './header/HeaderMobile';
 
 const Layout = () => {
     const navigate = useNavigate();
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
 
     // 버튼별 hover 상태
     const [hover1, setHover1] = useState(false);
@@ -16,10 +18,15 @@ const Layout = () => {
     const handleScrollTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 600);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
         <div className="wrap">
-            <Header />
+            {isMobile ? <HeaderMobile /> : <Header />}
             <main className="main">
                 <ChannelTalk />
 

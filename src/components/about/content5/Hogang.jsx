@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+const IMAGES = [
+    '/about/Hogang1.png',
+    '/about/Hogang2.png',
+    '/about/Hogang3.png',
+    '/about/Hogang4.png',
+];
 
 const Hogang = () => {
+    const [current, setCurrent] = useState(0);
+    const [isPaused, setIsPaused] = useState(false);
+
+    // 2초마다 이미지 변경
+    useEffect(() => {
+        if (isPaused) return;
+        const interval = setInterval(() => {
+            setCurrent((prev) => (prev + 1) % IMAGES.length);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, [isPaused]);
+
     return (
         <section id="dogAbout">
-            <div className="dogImg">
-                <img src="/about/hogang1.png" alt="hogang1" />
+            <div
+                className="dogImg"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+            >
+                <img src={IMAGES[current]} alt={`Hogang${current + 1}`} />
             </div>
             <div className="about">
                 <div className="name">
@@ -20,7 +43,7 @@ const Hogang = () => {
                             호강이는 반려견들이 안심하고 머무를 수 있도록 호텔을 지켜주는 든든한
                             친구예요. <br />
                             따뜻하고 꼼꼼한 성격을 가진 호강이는, 호텔을 찾은 아이들이 집처럼
-                            편안하게 머무를 수 <br /> 있도록 늘 세심하게 살피고 있어요. <br /> 낯선
+                            편안하게 <br /> 머무를 수 있도록 늘 세심하게 살피고 있어요. <br /> 낯선
                             공간에 온 아이들이 불안해하지 않도록 다정한 목소리와 눈빛으로 안심시켜
                             주고, <br /> 24시간 CCTV와 청결 관리까지 책임지는 믿음직스러운
                             존재랍니다.
