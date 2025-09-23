@@ -13,19 +13,27 @@ import UserCoupon from './partials/UserCoupon';
 const MyContent1 = ({ onUpdateDogProfile }) => {
     const [pageTab, setPageTab] = useState('default');
     const [loading, setLoading] = useState(false);
-    const [dogProfiles, setDogProfiles] = useState([]); // 항상 배열 보장
+    // const [pets, setpets] = useState([]); // 항상 배열 보장
     const [editIndex, setEditIndex] = useState(null);
 
     const [activeTab, setActiveTab] = useState('upcoming');
     const [showSNSModal, setShowSNSModal] = useState(false);
     const [upComingReservations, setUpComingReservations] = useState([]);
     const [pastReservations, setPastReservations] = useState([]);
+
     const user = useMypageStore((s) => s.user);
     const reservations = useMypageStore((s) => s.reservations);
-    const setMyPets = useMypageStore((s) => s.setMyPets);
+    const pets = useMypageStore((s) => s.myPets);
+    const fetchMyPets = useMypageStore((s) => s.fetchMyPets);
+    const upsertPet = useMypageStore((s) => s.upsertPet);
 
     const navigate = useNavigate();
     const logout = useAuthStore((state) => state.logout);
+
+    // 내 반려견 목록 로드
+    useEffect(() => {
+        if (user?._id) fetchMyPets();
+    }, [user?._id, fetchMyPets]);
 
     useEffect(() => {
         setLoading(true);
@@ -90,7 +98,7 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
                             </div>
                             <div className="infoBox">
                                 {/* 아무 것도 없을 때 */}
-                                {dogProfiles.length === 0 && (
+                                {pets.length === 0 && (
                                     <div className="infoBox-empty">
                                         <div className="puppyImg">
                                             <img src="/mypage/puppy.png" alt="" />
@@ -116,7 +124,7 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
                                 )}
 
                                 {/* 등록된 강아지들 */}
-                                {dogProfiles.map((dog, index) => (
+                                {pets.map((dog, index) => (
                                     <div key={index} className="infoBox-add">
                                         <div className="edit">
                                             <span
@@ -181,7 +189,7 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
                                 ))}
 
                                 {/* 추가 버튼 */}
-                                {dogProfiles.length > 0 && (
+                                {pets.length > 0 && (
                                     <div className="infoBox-another">
                                         <div className="puppyImg">
                                             <img src="/mypage/puppy.png" alt="" />
@@ -308,26 +316,21 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
                 {/* 🐶 DogInfo 등록/수정 */}
                 {pageTab === 'dogInfo' && (
                     <DogInfo
-                        initialData={editIndex !== null ? dogProfiles[editIndex] : null}
+                        initialData={editIndex !== null ? pets[editIndex] : null}
                         isEdit={editIndex !== null}
-                        onSave={(data) => {
-                            if (editIndex !== null) {
-                                // 수정 모드
-                                setDogProfiles((prev) =>
-                                    prev.map((dog, i) => (i === editIndex ? data : dog))
-                                );
-                                setMyPets(data);
-                            } else {
-                                // 추가 모드
-                                setDogProfiles((prev) => [...prev, data]);
+                        onSave={async (data) => {
+                            // edit이면 _id 유지
+                            const payload =
+                                editIndex !== null ? { ...data, _id: pets[editIndex]?._id } : data;
 
-                                //topheader는 첫 번째 강아지가 등록될 때만 업데이트
-                                if (dogProfiles.length === 0 && onUpdateDogProfile) {
-                                    onUpdateDogProfile({
-                                        name: data.name || '호강이',
-                                        profileImage: data.profileImage || '/mypage/hogangImg.png',
-                                    });
-                                }
+                            await upsertPet(payload);
+
+                            // 첫 등록 시 상단 카드 업데이트
+                            if (editIndex === null && pets.length === 0 && onUpdateDogProfile) {
+                                onUpdateDogProfile({
+                                    name: data.name || '호강이',
+                                    profileImage: data.profileImage || '/mypage/hogangImg.png',
+                                });
                             }
 
                             setEditIndex(null);
