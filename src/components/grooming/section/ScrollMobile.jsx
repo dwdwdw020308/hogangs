@@ -4,7 +4,6 @@ import { ScrollTrigger } from 'gsap/all';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// 단계별 이미지 데이터
 const MILESTONES = [
     {
         key: 'm1',
@@ -13,7 +12,7 @@ const MILESTONES = [
             '방문 시 보호자와 함께 강아지의 컨디션 체크와 스타일 상담을 진행합니다.',
             '피부 상태, 털 상태, 원하는 스타일을 꼼꼼하게 기록해요.',
         ],
-        img: '/images/m1.png',
+        img: '/grooming/scroll/M1.png',
     },
     {
         key: 'm2',
@@ -22,7 +21,7 @@ const MILESTONES = [
             '강아지가 긴장하지 않도록 쓰담쓰담 교감 시간을 가져요.',
             '낯선 공간에서도 안심할 수 있도록 천천히 적응시킵니다.',
         ],
-        img: '/images/m2.png',
+        img: '/grooming/scroll/M2.png',
     },
     {
         key: 'm3',
@@ -31,7 +30,7 @@ const MILESTONES = [
             '프리미엄 샴푸와 스파로 털과 피부를 케어합니다.',
             '마사지로 피로를 풀고, 기분까지 상쾌하게!',
         ],
-        img: '/images/m3.png',
+        img: '/grooming/scroll/M3.png',
     },
     {
         key: 'm4',
@@ -40,17 +39,16 @@ const MILESTONES = [
             '강아지의 체형과 개성을 살린 디자인컷으로 완벽 변신!',
             '귀, 얼굴, 몸까지 맞춤 스타일로 마무리합니다.',
         ],
-        img: '/images/m4.png',
+        img: '/grooming/scroll/M4.png',
     },
     {
         key: 'm5',
         label: '포토타임 & 체크아웃',
         lines: ['예쁘게 변신한 모습을', '포토존에서 촬영 후 보호자에게 전송!'],
-        img: '/images/m5.png',
+        img: '/grooming/scroll/M5.png',
     },
 ];
 
-// 단계별 크기 (width, height)
 const SIZES = [
     { w: 230, h: 310 }, // 1단계
     { w: 260, h: 350 }, // 2단계
