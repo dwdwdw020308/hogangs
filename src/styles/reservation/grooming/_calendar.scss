@@ -217,160 +217,161 @@
             justify-content: start;
             margin: 20.5128vw 4.1026vw;
             .step_area {
+                display: none;
                 width: 100%;
                 height: 74.359vw;
-                display: flex;
                 flex-flow: column;
                 gap: 10.2564vw;
-                // .board {
-                //     width: 100%;
-                //     height: 428px;
-                //     border-radius: 14.831px;
-                //     border: 0.742px solid #cecece;
-                //     display: flex;
-                //     flex-flow: column;
-                //     align-items: center;
-                //     justify-content: center;
-                //     gap: 32px;
+                .board {
+                    display: none;
+                    width: 100%;
+                    height: 428px;
+                    border-radius: 14.831px;
+                    border: 0.742px solid #cecece;
+                    display: flex;
+                    flex-flow: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 32px;
 
-                //     .title {
-                //         width: 282px;
-                //         color: #4a9f99;
-                //         font-family: Paperlogy;
-                //         font-size: 17.797px;
-                //         font-style: normal;
-                //         font-weight: 600;
-                //         line-height: normal;
-                //         letter-spacing: 0.178px;
-                //     }
-                //     .steps {
-                //         width: 282px;
-                //         display: flex;
-                //         flex-flow: column;
-                //         gap: 34px;
+                    .title {
+                        width: 282px;
+                        color: #4a9f99;
+                        font-family: Paperlogy;
+                        font-size: 17.797px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        letter-spacing: 0.178px;
+                    }
+                    .steps {
+                        width: 282px;
+                        display: flex;
+                        flex-flow: column;
+                        gap: 34px;
 
-                //         li {
-                //             width: 100%;
-                //             height: 40px;
-                //             display: flex;
-                //             justify-content: space-between;
-                //             align-items: center;
-                //             position: relative;
+                        li {
+                            width: 100%;
+                            height: 40px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            position: relative;
 
-                //             &::after {
-                //                 content: '';
-                //                 position: absolute;
-                //                 width: 2px;
-                //                 height: 46px;
-                //                 background: #efefef;
-                //                 left: 5%;
-                //                 top: 88%;
-                //             }
-                //             &:last-child {
-                //                 &::after {
-                //                     content: none;
-                //                 }
-                //             }
-                //             .context {
-                //                 width: 231px;
-                //                 height: 100%;
-                //                 display: flex;
-                //                 flex-flow: column;
-                //                 justify-content: center;
-                //                 gap: 4.45px;
-                //                 .text1 {
-                //                     color: #818181;
-                //                     font-family: Pretendard;
-                //                     font-size: 13.348px;
-                //                     font-style: normal;
-                //                     font-weight: 600;
-                //                     line-height: normal;
-                //                 }
-                //                 .text2 {
-                //                     color: #959595;
-                //                     font-family: Pretendard;
-                //                     font-size: 8.898px;
-                //                     font-style: normal;
-                //                     font-weight: 400;
-                //                     line-height: normal;
-                //                 }
-                //             }
-                //             i {
-                //                 width: 30px;
-                //                 height: 30px;
-                //                 display: flex;
-                //                 align-items: center;
-                //                 justify-content: center;
-                //                 border-radius: 100%;
-                //                 background: #959595;
-                //                 color: #b6b6b6;
-                //                 text-align: center;
-                //                 font-family: Pretendard;
-                //                 font-size: 12px;
-                //                 font-style: normal;
-                //                 font-weight: 700;
-                //                 line-height: normal;
-                //             }
-                //             .done {
-                //                 display: none;
-                //             }
-                //             &.check {
-                //                 //처리완료
-                //                 .none {
-                //                     display: none;
-                //                 }
-                //                 .done {
-                //                     display: block;
-                //                 }
-                //                 .text1 {
-                //                     color: #959595;
-                //                     font-size: 17.797px;
-                //                     font-weight: 600;
-                //                 }
-                //                 .text2 {
-                //                     color: #959595;
-                //                     font-size: 11.865px;
-                //                 }
-                //             }
-                //             &.ing {
-                //                 //처리중
-                //                 .none {
-                //                     background: #7abab6;
-                //                     color: #fff;
-                //                 }
-                //                 .text1 {
-                //                     color: #292929;
-                //                     font-size: 17.797px;
-                //                     font-weight: 600;
-                //                 }
-                //                 .text2 {
-                //                     color: #585858;
-                //                     font-size: 11.865px;
-                //                 }
-                //             }
-                //         }
-                //     }
-                // }
-                // .price_modal_btn {
-                //     width: 341px;
-                //     height: 56px;
-                //     border-radius: 56px;
-                //     background: var(--Green-green-750, #7abab6);
-                //     color: var(--White, #fff);
-                //     text-align: center;
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                width: 2px;
+                                height: 46px;
+                                background: #efefef;
+                                left: 5%;
+                                top: 88%;
+                            }
+                            &:last-child {
+                                &::after {
+                                    content: none;
+                                }
+                            }
+                            .context {
+                                width: 231px;
+                                height: 100%;
+                                display: flex;
+                                flex-flow: column;
+                                justify-content: center;
+                                gap: 4.45px;
+                                .text1 {
+                                    color: #818181;
+                                    font-family: Pretendard;
+                                    font-size: 13.348px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    line-height: normal;
+                                }
+                                .text2 {
+                                    color: #959595;
+                                    font-family: Pretendard;
+                                    font-size: 8.898px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: normal;
+                                }
+                            }
+                            i {
+                                width: 30px;
+                                height: 30px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 100%;
+                                background: #959595;
+                                color: #b6b6b6;
+                                text-align: center;
+                                font-family: Pretendard;
+                                font-size: 12px;
+                                font-style: normal;
+                                font-weight: 700;
+                                line-height: normal;
+                            }
+                            .done {
+                                display: none;
+                            }
+                            &.check {
+                                //처리완료
+                                .none {
+                                    display: none;
+                                }
+                                .done {
+                                    display: block;
+                                }
+                                .text1 {
+                                    color: #959595;
+                                    font-size: 17.797px;
+                                    font-weight: 600;
+                                }
+                                .text2 {
+                                    color: #959595;
+                                    font-size: 11.865px;
+                                }
+                            }
+                            &.ing {
+                                //처리중
+                                .none {
+                                    background: #7abab6;
+                                    color: #fff;
+                                }
+                                .text1 {
+                                    color: #292929;
+                                    font-size: 17.797px;
+                                    font-weight: 600;
+                                }
+                                .text2 {
+                                    color: #585858;
+                                    font-size: 11.865px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .price_modal_btn {
+                    width: 341px;
+                    height: 56px;
+                    border-radius: 56px;
+                    background: var(--Green-green-750, #7abab6);
+                    color: var(--White, #fff);
+                    text-align: center;
 
-                //     /* Bold/16px */
-                //     font-family: Pretendard;
-                //     font-size: 16px;
-                //     font-style: normal;
-                //     font-weight: 700;
-                //     line-height: normal;
+                    /* Bold/16px */
+                    font-family: Pretendard;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;
 
-                //     display: flex;
-                //     justify-content: center;
-                //     align-items: center;
-                //     cursor: pointer;
-                // }
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
             }
             .calendar_area {
                 width: 100%;

@@ -165,14 +165,7 @@
                 width: 100%;
 
                 .title {
-                    // color: var(--Black, #060606);
-
-                    /* SemiBold/24px */
-                    // font-family: Pretendard;
                     font-size: 18px;
-                    // font-style: normal;
-                    // font-weight: 600;
-                    // line-height: normal;
                 }
                 .table {
                     width: 100%;
@@ -210,40 +203,10 @@
                         }
 
                         .left {
-                            // width: 355px;
-                            // height: 100%;
-                            // background-color: #efefef;
-                            // border: 1px solid #cecece;
-                            // display: flex;
-                            // align-items: center;
-                            // padding-left: 24px;
-                            // color: var(--Grey-grey-600, #585858);
-                            /* Medium/16px */
-                            // font-family: Pretendard;
                             font-size: 14px;
-                            // font-style: normal;
-                            // font-weight: 500;
-                            // line-height: 130%; /* 20.8px */
-                            // box-sizing: border-box;
-                            // border-bottom: none;
                         }
                         .right {
-                            // width: 602px;
-                            // height: 100%;
-                            // display: flex;
-                            // align-items: center;
-                            // color: var(--Grey-grey-800, #353535);
-                            /* Regular/16px */
-                            // font-family: Pretendard;
                             font-size: 14px;
-                            // font-style: normal;
-                            // font-weight: 400;
-                            // line-height: normal;
-                            // padding-left: 24px;
-                            // box-sizing: border-box;
-                            // border: 1px solid #cecece;
-                            // border-bottom: none;
-                            // border-left: none;
                         }
                     }
                 }
@@ -259,10 +222,7 @@
                     border: 0;
                 }
                 .check__line input[type='checkbox'] + label {
-                    // display: inline-block;
-                    // position: relative;
                     padding-left: 20px;
-                    // cursor: pointer;
                 }
             }
         }

@@ -1,13 +1,13 @@
 import React from 'react';
 
-const RecordItem = () => {
+const RecordItem = ({ data }) => {
     return (
         <div className="RecordItem" id="RecordItem">
             <div className="movieImg">
-                <img src="/mypage/ottImg.png" alt="" />
+                <img src={data.visual} alt="" />
             </div>
             <div className="title">
-                <p>영화 제목</p>
+                <p>{data.koTitle}</p>
             </div>
         </div>
     );

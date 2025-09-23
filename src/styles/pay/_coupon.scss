@@ -222,22 +222,8 @@
 }
 @media screen and (max-width: 600px) {
     #pay_coupon {
-        // width: 100%;
-        // height: 352px;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
-        // background-color: #fff;
         .inner {
-            // height: 232px;
-            // display: flex;
-            // justify-content: space-between;
             .coupon_context {
-                // width: 957px;
-                // height: 100%;
-                // display: flex;
-                // flex-flow: column;
-                // position: relative;
                 .title {
                     color: var(--Black, #060606);
                     font-family: Paperlogy;
@@ -334,48 +320,17 @@
                     width: 300px;
                 }
 
-                /* 트리거 버튼 (300×36) */
                 .sel_trigger {
-                    // width: 222px;
                     height: 30px;
-                    // padding: 0 34px 0 12px;
-                    // border-radius: 10px;
-                    // border: 1px solid var(--Grey-grey-200, #b6b6b6);
-                    // background: var(--White, #fefefe);
-                    // outline: none;
-                    // display: flex;
-                    // align-items: center;
-                    // justify-content: space-between;
-                    // font-family: Pretendard;
+
                     font-size: 14px;
-                    // color: #060606;
-                    // transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
                     .chev {
-                        // display: flex;
-                        // justify-content: center;
-                        // align-items: center;
-                        // opacity: 0.65;
-                        // transition: transform 0.18s ease;
                         width: 24px;
                         height: 24px;
-                        img {
-                            // width: 100%;
-                            // height: 100%;
-                        }
-                    }
-                    &.open .chev {
-                        transform: rotate(180deg);
-                    }
-                    &.ph {
-                        color: #9ca3af;
-                    }
-                    &:focus-visible {
-                        border-color: #8dd2ce;
-                        box-shadow: 0 0 0 3px rgba(141, 210, 206, 0.25);
                     }
                 }
 
-                /* ▼ 옵션 목록 컨테이너 — 네가 지정한 스타일 */
                 .sel_panel {
                     position: absolute;
                     top: calc(100% + 8px);
@@ -383,17 +338,8 @@
                     display: flex;
                     width: 300px;
                     padding: 24px 14px;
-                    justify-content: center;
-                    align-items: center;
-
-                    border-radius: 10px;
-                    border: 1px solid var(--Grey-grey-100, #cecece);
-                    background: var(--White, #fefefe);
-                    z-index: 20;
-                    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
                 }
 
-                /* 옵션 리스트와 아이템 */
                 .optlist {
                     width: 100%;
                     display: flex;

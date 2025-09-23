@@ -8,6 +8,9 @@ import { IoMdClose } from 'react-icons/io';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../../config';
+import { useVideoStore } from '../../../store/useVideoStore';
+import useAuthStore from '../../../store/useAuthStore';
+import useMypageStore from '../../../store/useMypageStore';
 
 const DetailBanner = () => {
     const [isOpen, setIsOpen] = useState(false); //영상 열렸는지아닌지
@@ -15,6 +18,12 @@ const DetailBanner = () => {
     const thumbRef = useRef(null); //이미지 위치(썸네일)
     const [like, setLike] = useState(false);
     const [recommended, setRecommended] = useState(false);
+    const saveHistory = useVideoStore((s) => s.saveHistory);
+    const user = useAuthStore((s) => s.user);
+    const toggleVideoLike = useMypageStore((s) => s.toggleVideoLike);
+    const videoLikes = useMypageStore((s) => s.videoLikes);
+    const fetchVideoLikes = useMypageStore((s) => s.fetchVideoLikes);
+
     // localhost:3001/video?id=68ca9d15e0859865b492077f
     const play = () => {
         if (thumbRef.current) {
@@ -23,9 +32,17 @@ const DetailBanner = () => {
             const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
             setOrigin(`${x}%${y}%`);
         }
+        if (user) {
+            const userId = user._id;
+            saveHistory(userId, '68ca9d15e0859865b492077f');
+        }
         setIsOpen(true);
     };
 
+    const clickLike = () => {
+        setLike(!like);
+        toggleVideoLike('68ca9d15e0859865b492077f');
+    };
     const [videoData, setVideoData] = useState(null);
     useEffect(() => {
         (async () => {
@@ -42,6 +59,10 @@ const DetailBanner = () => {
             }
         })();
     }, []);
+
+    useEffect(() => {
+        fetchVideoLikes();
+    }, [fetchVideoLikes]);
     return (
         <div className="DetailBanner">
             <div className="title-box">
@@ -75,7 +96,7 @@ const DetailBanner = () => {
                     </p>
                     <ul>
                         <li>
-                            <button onClick={() => setLike(!like)}>
+                            <button onClick={clickLike}>
                                 {like ? (
                                     <FaHeart style={{ color: 'red' }} size={14} />
                                 ) : (
