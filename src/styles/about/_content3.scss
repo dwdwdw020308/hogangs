@@ -210,7 +210,7 @@
                 /* 스샷처럼 클라우드 아래로 올라오게 약하게만 */
                 transform: translateY(calc(var(--m) * -60));
                 gap: calc(var(--m) * 12);
-                transform: translateY(-160%);
+                transform: translateY(-240%);
 
                 .title {
                     font-size: 17px;
@@ -264,7 +264,7 @@
                     inset: 0;
                     width: 100px;
                     height: 100%;
-                    left: -67%;
+                    left: -93%;
                     transform: rotate(-90deg);
                 }
 

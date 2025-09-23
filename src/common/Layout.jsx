@@ -33,7 +33,7 @@ const Layout = () => {
                 {/* footer 버튼 1 */}
                 <div className="footer-buttons1" aria-label="quick buttons">
                     <img
-                        src={hover1 ? '/footer/Hotel-hover.png' : '/footer/Hotel.png'}
+                        src={hover1 ? '/footer/Hotel.png' : '/footer/Hotel-1.png'}
                         alt="호텔 버튼"
                         onClick={() => navigate('/Hotel')}
                         onMouseEnter={() => setHover1(true)}
@@ -41,7 +41,7 @@ const Layout = () => {
                         style={{ cursor: 'pointer' }}
                     />
                     <img
-                        src={hover2 ? '/footer/Grooming-hover.png' : '/footer/Grooming.png'}
+                        src={hover2 ? '/footer/Grooming.png' : '/footer/Grooming-1.png'}
                         alt="그루밍 버튼"
                         onClick={() => navigate('/Grooming')}
                         onMouseEnter={() => setHover2(true)}
@@ -51,8 +51,8 @@ const Layout = () => {
                     <img
                         src={
                             hover3
-                                ? '/footer/Reservation-Button-hover.png'
-                                : '/footer/Reservation-Button.png'
+                                ? '/footer/Reservation-Button-2.png'
+                                : '/footer/Reservation-Button-1.png'
                         }
                         alt="예약 버튼"
                         onClick={() => navigate('/Reservation')}
