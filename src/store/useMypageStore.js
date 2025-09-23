@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { create } from 'zustand';
-// import { API_URL } from '../config';
-const API_URL = 'http://localhost:3000';
+import { API_URL } from '../config';
+// const API_URL = 'http://localhost:3000';
 // 안전한 JSON 로딩 유틸
 const load = (key, fallback) => {
     try {
