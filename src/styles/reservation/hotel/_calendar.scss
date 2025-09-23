@@ -209,17 +209,12 @@
     #hotel_reservation_calendar {
         width: 100%;
         height: 138.4615vw;
-        padding-top: 84.6154vw;
+        padding-top: 370px;
         .inner {
             justify-content: start;
             margin: 20.5128vw 4.1026vw;
             .step_area {
-                .board {
-                    display: none;
-                }
-                .price_modal_btn {
-                    display: none;
-                }
+                display: none;
             }
             .calendar_area {
                 width: 100%;
