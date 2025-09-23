@@ -17,7 +17,23 @@ const useMypageStore = create((set, get) => ({
     snsLinks: [],
     reservations: [],
     userCoupons: [],
+    myPets: [],
     // =================== 초기화 ========================
+    // 반려견 정보 등록
+    setMyPets: async (myPet) => {
+        try {
+            const user = get().user;
+            const userId = user?._id;
+            const payload = { ...myPet, userId };
+            await axios.post(`${API_URL.replace(/\/+$/, '')}/pets`, payload, {
+                headers: { 'Content-Type': 'application/json' },
+            });
+            const { data } = await axios.get(`${API_URL.replace(/\/+$/, '')}/pets`, {
+                params: { userId },
+            });
+            set({ myPets: Array.isArray(data) ? data : [] });
+        } catch {}
+    },
     fetchSns: async (userId) => {
         try {
             // 서버에서 GET /sns/user/:userId → [{provider:'kakao', linkedAt:...}, ...] 가정

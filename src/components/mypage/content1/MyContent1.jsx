@@ -22,6 +22,7 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
     const [pastReservations, setPastReservations] = useState([]);
     const user = useMypageStore((s) => s.user);
     const reservations = useMypageStore((s) => s.reservations);
+    const setMyPets = useMypageStore((s) => s.setMyPets);
 
     const navigate = useNavigate();
     const logout = useAuthStore((state) => state.logout);
@@ -315,6 +316,7 @@ const MyContent1 = ({ onUpdateDogProfile }) => {
                                 setDogProfiles((prev) =>
                                     prev.map((dog, i) => (i === editIndex ? data : dog))
                                 );
+                                setMyPets(data);
                             } else {
                                 // 추가 모드
                                 setDogProfiles((prev) => [...prev, data]);
