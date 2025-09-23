@@ -58,7 +58,7 @@ const Visual = () => {
         if (rotateRef.current) {
             gsap.to(rotateRef.current, {
                 rotation: 360,
-                duration: 6, // 한 바퀴 도는 시간(초)
+                duration: 10, // 한 바퀴 도는 시간(초)
                 ease: 'none',
                 repeat: -1, // 무한 반복
                 transformOrigin: '50% 50%',
@@ -77,7 +77,7 @@ const Visual = () => {
             <HeadLine />
             <figure className="intro" ref={introRef}>
                 {/* 데스크탑에서만 보이는 이미지 */}
-                <img src="/main/bg.png" alt="강아지 PC용" />
+                <img src="/main/visual-dog.PNG" alt="강아지 PC용" />
                 {/* 텍스트 */}
                 <figcaption className="caption" ref={captionRef}>
                     <h1>

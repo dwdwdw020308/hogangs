@@ -52,9 +52,9 @@ export default function BubbleCanvas({
     // ★ 가장자리 자연스러움(페더) 옵션
     edgeFeather = 0.12, // 페더 폭 비율(반지름 대비), 0.08~0.18 추천
     edgeFeatherAlpha = 0.55, // 페더 강도, 0.35~0.7
-    edgeElliptic = 0.06, // 타원 변형 정도(0~0.12), 살짝만
-    edgeRotateDeg = 25, // 타원 마스크 회전 각도
-    edgeJitter = 0.03, // 버블별 엘립틱/각도 살짝 랜덤 (0~0.05)
+    edgeElliptic = 0.06, // (클로저 버전에서는 미사용)
+    edgeRotateDeg = 25, // (클로저 버전에서는 미사용)
+    edgeJitter = 0.03, // (클로저 버전에서는 미사용)
 }) {
     const canvasRef = useRef(null);
     const rafRef = useRef(null);
@@ -88,6 +88,30 @@ export default function BubbleCanvas({
         const autoScale = responsive ? clamp(w / baseWidth, 0.6, 1.25) : 1.0;
         const R_SCALE = scale * autoScale;
 
+        // ★ 클로저로 props 캡처한 버전의 가장자리 페더 함수
+        const applyEdgeFeather = (ctx, b) => {
+            if (!edgeFeather || edgeFeather <= 0) return;
+
+            ctx.save();
+            ctx.globalCompositeOperation = 'destination-out';
+
+            // 페더 시작/끝 반지름
+            const featherStart = b.r * (1 - edgeFeather);
+            const featherEnd = b.r;
+
+            // 방사형 그라데이션 (안쪽은 영향 없음 → 바깥으로 갈수록 강하게 지움)
+            const gradient = ctx.createRadialGradient(b.x, b.y, featherStart, b.x, b.y, featherEnd);
+            gradient.addColorStop(0, `rgba(0,0,0,0)`); // 내부: 그대로 유지
+            gradient.addColorStop(1, `rgba(0,0,0,${edgeFeatherAlpha})`); // 가장자리: 가장 많이 지움
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, featherEnd, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+        };
+
         class Bubble {
             constructor() {
                 this.reset(true);
@@ -110,10 +134,6 @@ export default function BubbleCanvas({
                 this.phase = Math.random() * Math.PI * 2;
 
                 this.hue = wrapHue(rand(baseHue - hueSpread, baseHue + hueSpread));
-
-                // 가장자리 마스크에 약간의 랜덤성
-                this.edgeRot = ((edgeRotateDeg + rand(-12, 12) * edgeJitter) * Math.PI) / 180;
-                this.edgeEll = clamp(edgeElliptic + rand(-edgeJitter, edgeJitter), 0, 0.2);
             }
 
             update(dt) {
@@ -139,7 +159,7 @@ export default function BubbleCanvas({
             ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
             ctx.fillStyle = `hsla(${b.hue}, ${sat}%, ${light}%, ${b.opacity})`;
             ctx.fill();
-            // 가장자리 페더만 적용하려면 아래 호출 유지
+            // ★ 클로저 버전 페더 적용
             applyEdgeFeather(ctx, b);
         }
 
@@ -172,28 +192,32 @@ export default function BubbleCanvas({
             ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
             ctx.fill();
 
-            // 2) 하얀 림(은은)
+            // 2) 하얀 림 (안쪽 0 → 바깥쪽 흰색) - 수정
             ctx.save();
-            ctx.shadowColor = `rgba(0,0,0,${0.12 * b.opacity})`;
-            ctx.shadowBlur = Math.min(12, b.r * 0.6);
-            const rimLW = Math.max(0.7, b.r * 0.06);
-            ctx.lineWidth = rimLW;
-            ctx.strokeStyle = `hsla(0,0%,100%,${0.55 * b.opacity})`;
-            ctx.beginPath();
-            ctx.arc(b.x, b.y, b.r - rimLW * 0.6, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.restore();
 
-            // 3) 바깥 아주 옅은 외곽선
-            if (outlineAlpha > 0) {
-                ctx.save();
-                ctx.lineWidth = Math.max(0.5, b.r * 0.015);
-                ctx.strokeStyle = `rgba(0,0,0,${outlineAlpha})`;
-                ctx.beginPath();
-                ctx.arc(b.x, b.y, b.r + ctx.lineWidth * 0.5, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.restore();
-            }
+            const rimLW = Math.max(0.5, b.r * 0.03); // 얇은 두께
+            ctx.lineWidth = rimLW;
+
+            // 방사형 그라데이션: 안쪽은 항상 투명(0), 바깥은 더 강한 흰색
+            const rimGrad = ctx.createRadialGradient(
+                b.x,
+                b.y,
+                b.r - rimLW, // 시작 반지름
+                b.x,
+                b.y,
+                b.r // 끝 반지름
+            );
+            rimGrad.addColorStop(0, `hsla(0,0%,100%,0)`); // 중심: 무조건 알파 0
+            rimGrad.addColorStop(1, `hsla(0,0%,100%,${0.55 * b.opacity})`); // 바깥: 흰색, 좀 더 강한 알파
+
+            ctx.strokeStyle = rimGrad;
+
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.r - rimLW * 0.5, 0, Math.PI * 2);
+            ctx.stroke();
+
+            ctx.restore();
+            ////////////////////////////////////////////
 
             // 4) 컬러 링(은은)
             ctx.save();
@@ -248,7 +272,7 @@ export default function BubbleCanvas({
                 });
             }
 
-            // 7) ★ 가장자리 페더(마지막에 'destination-out'로 부드럽게 깎기)
+            // 7) ★ 클로저 버전 페더 적용
             applyEdgeFeather(ctx, b);
         }
 
@@ -368,14 +392,6 @@ function drawCapHighlight(ctx, b, { angleDeg, widthDeg, rOuter, rInner, alpha, b
     g.addColorStop(1.0, `rgba(255,255,255,0)`);
     ctx.fillStyle = g;
     ctx.fill();
-    ctx.restore();
-}
 
-/** ★ 원형 테두리를 부드럽게 지우는 페더 마스크 */
-// function applyEdgeFeather(ctx, b) {
-//     const inner = b.r * (1 - b.edgeFeather ?? 0); // 미사용 방지용
-// }
-function applyEdgeFeather(ctx, b) {
-    const feather = b?.edgeFeather ?? 0; // 0~1 기대
-    const inner = b.r * (1 - feather);
+    ctx.restore();
 }
