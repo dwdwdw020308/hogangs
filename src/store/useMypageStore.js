@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { format, parseISO, isDate } from 'date-fns';
 import { create } from 'zustand';
-// import { API_URL } from '../config';
+import { API_URL } from '../config';
 // const API_URL = 'http://localhost:3000';
 const BASE = API_URL.replace(/\/+$/, ''); // ← 도메인(끝 슬래시 제거)
 
@@ -13,6 +14,8 @@ const load = (key, fallback) => {
         return fallback;
     }
 };
+const toDate = (d) => (typeof d === 'string' ? parseISO(d) : isDate(d) ? d : new Date(d));
+const ymd = (d) => format(toDate(d), 'yyyy-MM-dd');
 
 const useMypageStore = create((set, get) => ({
     user: load('user', null),
@@ -26,6 +29,10 @@ const useMypageStore = create((set, get) => ({
     videoHistoryLite: [], // [{ id, koTitle, visual }] 만 담은 요약 리스트
     videoLikes: [], // 서버 원본(혹은 평탄화된 리스트)
     videoLikesLite: [], // [{id, koTitle, visual}] 전용
+    // ✅ 내가 쓴 리뷰
+    myReplies: [], // 서버 원본
+    myRepliesLite: [], // 카드용 {id, videoId, koTitle, visual, text, score, dateStr}
+
     // =================== 초기화 ========================
 
     // 목록 조회
@@ -204,7 +211,57 @@ const useMypageStore = create((set, get) => ({
             return null;
         }
     },
+    // ✅ 내가 쓴 리뷰 조회
+    fetchMyReplies: async () => {
+        const userId = get()?.user?._id;
+        if (!userId) return;
 
+        try {
+            // 서버 라우트 예: GET /reply/user/:userId  (네가 만든 컨트롤러에 맞춰 경로만 맞추면 됨)
+            const { data } = await axios.get(`${BASE}/replies/user/${userId}`, {
+                params: { page: 1, limit: 200 },
+            });
+            const rows = Array.isArray(data) ? data : data?.items || [];
+            // rows: [{ _id, userId, videoId, text, star, regDate, ... }]
+
+            // 1) 필요한 비디오 메타 모으기
+            const ids = [...new Set(rows.map((r) => r.videoId).filter(Boolean))];
+            const results = await Promise.allSettled(
+                ids.map((id) => axios.get(`${BASE}/video/${id}`))
+            );
+
+            // 2) 매핑
+            const videoMap = {};
+            results.forEach((r) => {
+                if (r.status === 'fulfilled') {
+                    const v = r.value?.data;
+                    if (v && (v._id || v.id)) videoMap[v._id || v.id] = v;
+                }
+            });
+
+            // 3) 카드에서 바로 쓸 수 있게 가공
+            const lite = rows
+                .map((r) => {
+                    const v = videoMap[r.videoId] || {};
+                    const src = v.visual ?? v.thumb ?? '';
+                    return {
+                        id: r._id,
+                        videoId: r.videoId,
+                        koTitle: v.koTitle || '',
+                        visual: `${BASE}${src}`,
+                        text: r.text || '',
+                        score: Number(r.star ?? 0),
+                        dateStr: ymd(r.regDate),
+                    };
+                })
+                .sort((a, b) => (b.dateStr > a.dateStr ? 1 : -1)); // 최신순
+
+            set({ myReplies: rows, myRepliesLite: lite });
+        } catch (e) {
+            console.error('fetchMyReplies error:', e?.response?.data || e);
+            set({ myReplies: [], myRepliesLite: [] });
+        }
+    },
     fetchAllForUser: async () => {
         const {
             user,
@@ -213,6 +270,7 @@ const useMypageStore = create((set, get) => ({
             fetchUserCoupons,
             fetchVideoHistory,
             fetchVideoLikes,
+            fetchMyReplies,
         } = get();
         const userId = user._id;
 
@@ -222,6 +280,7 @@ const useMypageStore = create((set, get) => ({
             fetchUserCoupons(userId),
             fetchVideoHistory(),
             fetchVideoLikes(),
+            fetchMyReplies(),
         ]);
     },
 }));

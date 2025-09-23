@@ -14,10 +14,12 @@ const MyContent3 = () => {
     const reviewData = [1, 2];
     const videoHistoryLite = useMypageStore((s) => s.videoHistoryLite);
     const likes = useMypageStore((s) => s.videoLikesLite);
+    const myRepliesLite = useMypageStore((s) => s.myRepliesLite);
+    const fetchMyReplies = useMypageStore((s) => s.fetchMyReplies);
     // const fetchVideoLikes = useMypageStore((s) => s.fetchVideoLikes);
     // const toggleVideoLike = useMypageStore((s) => s.toggleVideoLike);
 
-    useEffect(() => {}, [videoHistoryLite]);
+    useEffect(() => {}, [videoHistoryLite, fetchMyReplies]);
     return (
         <section id="mycontent3">
             <div className="inner">
@@ -92,14 +94,14 @@ const MyContent3 = () => {
                     <div className="title">
                         <h2>내가 쓴 리뷰</h2>
                     </div>
-                    {reviewData.length === 0 ? (
+                    {myRepliesLite.length === 0 ? (
                         <div className="myReviewList empty">
                             <span>작성하신 리뷰가 없습니다.</span>
                         </div>
                     ) : (
                         <div className="myReviewList hasData">
                             <Swiper spaceBetween={18} slidesPerView={2}>
-                                {reviewData.map((item, idx) => (
+                                {myRepliesLite.map((item, idx) => (
                                     <SwiperSlide key={idx}>
                                         <MyReviewItem data={item} />
                                     </SwiperSlide>

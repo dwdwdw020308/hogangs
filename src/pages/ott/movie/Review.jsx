@@ -1,242 +1,148 @@
-import { useEffect, useState } from 'react';
+// src/components/video/Review.jsx
+import { useEffect, useMemo, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { FiMoreVertical } from 'react-icons/fi';
 import { AiFillLike } from 'react-icons/ai';
+import useCommentStore from '../../../store/useCommentStore';
+import useMypageStore from '../../../store/useMypageStore';
+import { format, parseISO, isDate } from 'date-fns';
 
-// ✅ 기본 목업 데이터
-const defaultReviews = [
-    {
-        id: 1,
-        text: '따듯하고 가슴 뭉클한 영화였습니다.',
-        score: 4.0,
-        date: '2025-09-11',
-        like: 5,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-09-11').getTime(),
-    },
-    {
-        id: 2,
-        text: '영화보고 집에 와서 멍멍이를 꼬옥 안아줬어요 ㅠㅠ',
-        score: 5.0,
-        date: '2025-09-10',
-        like: 6,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-09-10').getTime(),
-    },
-    {
-        id: 3,
-        text: '강아지들과 함께하기에 우리는 축복받은 존재!',
-        score: 4.0,
-        date: '2025-09-05',
-        like: 7,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-09-05').getTime(),
-    },
-    {
-        id: 4,
-        text: '헨리 연기가 부자연스러워 보였어요',
-        score: 2.0,
-        date: '2025-09-01',
-        like: 25,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-09-01').getTime(),
-    },
-    {
-        id: 5,
-        text: '정말 재미있고 좋아요!',
-        score: 4.0,
-        date: '2025-08-23',
-        like: 1,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-08-23').getTime(),
-    },
-    {
-        id: 6,
-        text: '헨리야... 울다 뿜을뻔 했다..',
-        score: 3.0,
-        date: '2025-08-12',
-        like: 0,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-08-12').getTime(),
-    },
-    {
-        id: 7,
-        text: '베일리, 베일리, 베일리!',
-        score: 5.0,
-        date: '2025-08-12',
-        like: 5,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-08-12').getTime(),
-    },
-    {
-        id: 8,
-        text: '댕댕이들 연기 좋고~헨리 연기 자연스럽더라~',
-        score: 4.0,
-        date: '2025-08-02',
-        like: 4,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-08-02').getTime(),
-    },
-    {
-        id: 9,
-        text: '마음이 따뜻해지는 영화.',
-        score: 5.0,
-        date: '2025-07-22',
-        like: 22,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-07-22').getTime(),
-    },
-    {
-        id: 10,
-        text: '사랑스럽고 귀엽고ㅠ',
-        score: 5.0,
-        date: '2025-07-12',
-        like: 2,
-        liked: false,
-        isDefault: true,
-        createdAt: new Date('2025-07-12').getTime(),
-    },
-];
+// 문자열/Date/숫자 모두 안전 변환
+const toDate = (d) => (typeof d === 'string' ? parseISO(d) : isDate(d) ? d : new Date(d));
 
-const Review = () => {
-    const [reviews, setReviews] = useState(() => {
-        const saved = JSON.parse(localStorage.getItem('reviews')) || [];
-        const sortedSaved = saved.sort((a, b) => b.createdAt - a.createdAt);
-        return [...sortedSaved, ...defaultReviews];
-    });
+const SORTS = { latest: 0, starDesc: 1, starAsc: 2 };
 
-    const [openDropDown, setOpenDropDown] = useState(null);
-    const toggleDropDown = (id) => {
-        setOpenDropDown(openDropDown === id ? null : id);
-    };
+const Review = ({ videoId }) => {
+    const user = useMypageStore((s) => s.user);
 
+    // 댓글 스토어 훅
+    const byVideo = useCommentStore((s) => s.byVideo[videoId]);
+    const fetchList = useCommentStore((s) => s.fetchVideoReplies);
+    const stats = useCommentStore((s) => s.statsByVideo[videoId]);
+    const fetchStats = useCommentStore((s) => s.fetchVideoStats);
+    const create = useCommentStore((s) => s.createReply);
+    const update = useCommentStore((s) => s.updateReply);
+    const remove = useCommentStore((s) => s.deleteReply);
+    const likeReply = useCommentStore((s) => s.likeReply);
+
+    // 작성/수정 폼 상태
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(null);
     const [text, setText] = useState('');
     const [editingId, setEditingId] = useState(null);
 
-    useEffect(() => {
-        const userReviews = reviews.filter((r) => !r.isDefault);
-        localStorage.setItem('reviews', JSON.stringify(userReviews));
-    }, [reviews]);
-
-    const averageRating =
-        reviews.length > 0
-            ? (reviews.reduce((sum, review) => sum + review.score, 0) / reviews.length).toFixed(1)
-            : 0;
-
-    const onAdd = () => {
-        if (!rating || text.trim() === '') {
-            alert('별점과 리뷰를 입력해주세요');
-            return;
-        }
-        const now = Date.now();
-        const newReview = {
-            id: now,
-            text,
-            score: rating,
-            date: new Date().toISOString().slice(0, 10),
-            like: 0,
-            liked: false,
-            isDefault: false,
-            createdAt: now,
-        };
-        setReviews([newReview, ...reviews]);
-        setRating(0);
-        setText('');
-    };
-
-    const onDel = (id) => {
-        setReviews(reviews.filter((review) => review.id !== id));
-    };
-
-    const onEdit = (id, text, score) => {
-        setEditingId(id);
-        setText(text);
-        setRating(score);
-    };
-
-    const onSave = () => {
-        const updatedReviews = reviews.map((review) =>
-            review.id === editingId
-                ? { ...review, text, score: rating, createdAt: Date.now() }
-                : review
-        );
-        const editedReview = updatedReviews.find((r) => r.id === editingId);
-        const otherReviews = updatedReviews.filter((r) => r.id !== editingId);
-        setReviews([editedReview, ...otherReviews]);
-        setEditingId(null);
-        setText('');
-        setRating(0);
-    };
-
-    const handleLike = (id) => {
-        setReviews(
-            reviews.map((review) =>
-                review.id === id
-                    ? {
-                          ...review,
-                          like: review.liked ? review.like - 1 : review.like + 1,
-                          liked: !review.liked,
-                      }
-                    : review
-            )
-        );
-    };
-
-    // ✅ 정렬/페이지네이션
+    // 정렬/페이지
+    const [sortType, setSortType] = useState(SORTS.latest);
     const [currentPage, setCurrentPage] = useState(1);
-    const [sortType, setSortType] = useState(0);
-    const reviewsPerPage = 5;
+    const pageSize = 5;
 
-    const getSortedReviews = () => {
-        const reviewsCopy = [...reviews];
+    // 최초 로드
+    useEffect(() => {
+        if (!videoId) return;
+        fetchList(videoId, 1, 200);
+        fetchStats(videoId);
+        setCurrentPage(1);
+    }, [videoId, fetchList, fetchStats]);
+
+    const raw = byVideo?.items || [];
+    const loading = byVideo?.loading;
+
+    // 나의 댓글 여부 + 포맷/정렬용 값
+    const mapped = useMemo(() => {
+        return raw.map((r) => {
+            const dt = toDate(r.regDate);
+            const ts = Number.isFinite(dt?.getTime?.()) ? dt.getTime() : 0;
+            return {
+                ...r,
+                id: r._id,
+                isMine: user?._id && String(r.userId) === String(user._id),
+                dateStr: ts ? format(dt, 'yyyy-MM-dd') : '', // ✅ 문자열 포맷
+                score: r.star ?? 0,
+                ts, // ✅ 정렬용 숫자
+            };
+        });
+    }, [raw, user?._id]);
+
+    // 정렬
+    const sorted = useMemo(() => {
+        const arr = [...mapped];
         switch (sortType) {
-            case 1:
-                return reviewsCopy.sort((a, b) => {
-                    if (b.score !== a.score) return b.score - a.score;
-                    return b.createdAt - a.createdAt;
-                });
-            case 2:
-                return reviewsCopy.sort((a, b) => {
-                    if (a.score !== b.score) return a.score - b.score;
-                    return b.createdAt - a.createdAt;
-                });
-            default:
-                return reviewsCopy.sort((a, b) => b.createdAt - a.createdAt);
+            case SORTS.starDesc:
+                return arr.sort((a, b) => b.score - a.score || b.ts - a.ts);
+            case SORTS.starAsc:
+                return arr.sort((a, b) => a.score - b.score || b.ts - a.ts);
+            default: // 최신순
+                return arr.sort((a, b) => b.ts - a.ts);
         }
-    };
+    }, [mapped, sortType]);
 
-    const sortedReviews = getSortedReviews();
-    const totalPage = Math.ceil(sortedReviews.length / reviewsPerPage);
-
-    const indexOfLast = currentPage * reviewsPerPage;
-    const indexOfFirst = indexOfLast - reviewsPerPage;
-    const currentReviews = sortedReviews.slice(indexOfFirst, indexOfLast);
+    const totalPage = Math.max(1, Math.ceil(sorted.length / pageSize));
+    const current = sorted.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
     const handleSortToggle = () => {
-        setSortType((prev) => (prev === 2 ? 0 : prev + 1));
+        setSortType((prev) => (prev === SORTS.starAsc ? SORTS.latest : prev + 1));
         setCurrentPage(1);
     };
+    const getSortText = () =>
+        sortType === SORTS.starDesc
+            ? '별점 높은순'
+            : sortType === SORTS.starAsc
+            ? '별점 낮은순'
+            : '최신순';
 
-    const getSortText = () => {
-        switch (sortType) {
-            case 1:
-                return '별점 높은순';
-            case 2:
-                return '별점 낮은순';
-            default:
-                return '최신순';
+    // 작성
+    const onAdd = async () => {
+        if (!user?._id) return alert('로그인이 필요합니다.');
+        if (!rating || !text.trim()) return alert('별점과 리뷰를 입력해주세요.');
+        try {
+            await create({ userId: user._id, videoId, text, star: rating });
+            setText('');
+            setRating(0);
+        } catch (e) {
+            console.log(e);
+            alert('등록 실패');
         }
+    };
+
+    // 수정 준비/저장
+    const onEdit = (r) => {
+        setEditingId(r.id);
+        setText(r.text);
+        setRating(r.score);
+    };
+    const onSave = async () => {
+        try {
+            await update({ replyId: editingId, videoId, patch: { text, star: rating } });
+            setEditingId(null);
+            setText('');
+            setRating(0);
+        } catch (e) {
+            alert('수정 실패');
+        }
+    };
+
+    // 삭제
+    const onDel = async (id) => {
+        if (!confirm('정말 삭제하시겠습니까?')) return;
+        try {
+            await remove({ replyId: id, videoId });
+        } catch (e) {
+            alert('삭제 실패');
+        }
+    };
+
+    // 좋아요(+1/-1)
+    const [likedSet, setLikedSet] = useState(() => new Set());
+    const onLike = async (id) => {
+        const already = likedSet.has(id);
+        try {
+            await likeReply({ replyId: id, videoId, amount: already ? -1 : +1 });
+            setLikedSet((s) => {
+                const ns = new Set(s);
+                already ? ns.delete(id) : ns.add(id);
+                return ns;
+            });
+        } catch {}
     };
 
     return (
@@ -244,17 +150,17 @@ const Review = () => {
             <div className="inner">
                 <div className="reveiw-score">
                     <div className="stars-box">
-                        <strong>{rating}</strong>
+                        <strong>{rating || 0}</strong>
                         <p>별점을 남겨주세요</p>
                         {[...Array(5)].map((_, i) => {
-                            const starValue = i + 1;
+                            const v = i + 1;
                             return (
                                 <FaStar
                                     key={i}
                                     size={34}
-                                    color={starValue <= (hover || rating) ? '#4A9F99' : '#959595'}
-                                    onClick={() => setRating(starValue)}
-                                    onMouseEnter={() => setHover(starValue)}
+                                    color={v <= (hover || rating) ? '#4A9F99' : '#959595'}
+                                    onClick={() => setRating(v)}
+                                    onMouseEnter={() => setHover(v)}
                                     onMouseLeave={() => setHover(null)}
                                     style={{ cursor: 'pointer' }}
                                 />
@@ -262,13 +168,13 @@ const Review = () => {
                         })}
                     </div>
                     <div className="average">
-                        <strong>{averageRating}</strong>
-                        <p>{reviews.length}개의 별점</p>
+                        <strong>{Number(stats?.avgStar || 0).toFixed(1)}</strong>
+                        <p>{stats?.count || 0}개의 별점</p>
                         {[...Array(5)].map((_, i) => (
                             <FaStar
                                 key={i}
                                 size={34}
-                                color={i < Math.round(averageRating) ? '#4A9F99' : '#959595'}
+                                color={i < Math.round(stats?.avgStar || 0) ? '#4A9F99' : '#959595'}
                             />
                         ))}
                     </div>
@@ -286,78 +192,88 @@ const Review = () => {
                         style={{ resize: 'none' }}
                     />
                     {editingId ? (
-                        <button onClick={onSave}>수정완료</button>
+                        <button onClick={onSave} disabled={!rating || !text.trim()}>
+                            수정완료
+                        </button>
                     ) : (
-                        <button onClick={onAdd} disabled={!rating || text.trim() === ''}>
+                        <button onClick={onAdd} disabled={!user?._id || !rating || !text.trim()}>
                             등록
                         </button>
                     )}
                 </div>
 
                 <div className="review-list">
-                    <strong>리뷰 ({reviews.length})</strong>
+                    <strong>리뷰 ({sorted.length})</strong>
                     <div className="like-filter">
                         <p onClick={handleSortToggle}>{getSortText()}</p>
-                        <img src="/ott/icon-filter.png" alt="좋아요순" />
+                        <img src="/ott/icon-filter.png" alt="정렬" />
                     </div>
-                    {currentReviews.map((review, idx) => (
-                        <div
-                            key={review.id}
-                            className={`review-item ${
-                                idx === currentReviews.length - 1 ? 'last' : ''
-                            } ${!review.isDefault ? 'my-review' : ''}`}
-                        >
-                            {[...Array(5)].map((_, i) => (
-                                <FaStar
-                                    key={i}
-                                    size={24}
-                                    color={i < review.score ? '#4A9F99' : '#959595'}
-                                />
-                            ))}
-                            <span className="score-length">{review.score}</span>
-                            <span className="date">{review.date}</span>
-                            <p>{review.text}</p>
-                            <button onClick={() => handleLike(review.id)}>
-                                <AiFillLike
-                                    size={20}
-                                    color={review.liked ? '#4A9F99' : '#959595'}
-                                />
-                                <span>{review.like}</span>
-                            </button>
-                            <div className="more">
-                                <button onClick={() => toggleDropDown(review.id)}>
-                                    <FiMoreVertical />
+
+                    {loading ? (
+                        <div className="loading">불러오는 중…</div>
+                    ) : current.length === 0 ? (
+                        <div className="empty">아직 리뷰가 없습니다.</div>
+                    ) : (
+                        current.map((r, idx) => (
+                            <div
+                                key={r.id}
+                                className={`review-item ${
+                                    idx === current.length - 1 ? 'last' : ''
+                                } ${r.isMine ? 'my-review' : ''}`}
+                            >
+                                {[...Array(5)].map((_, i) => (
+                                    <FaStar
+                                        key={i}
+                                        size={24}
+                                        color={i < r.score ? '#4A9F99' : '#959595'}
+                                    />
+                                ))}
+                                <span className="score-length">{r.score}</span>
+                                <span className="date">{r.dateStr}</span>
+                                <p>{r.text}</p>
+
+                                <button onClick={() => onLike(r.id)}>
+                                    <AiFillLike
+                                        size={20}
+                                        color={likedSet.has(r.id) ? '#4A9F99' : '#959595'}
+                                    />
+                                    <span>{r.like ?? 0}</span>
                                 </button>
-                                {openDropDown === review.id && (
-                                    <ul className="dropdown" onClick={() => setOpenDropDown(null)}>
-                                        {review.isDefault ? (
-                                            <>
-                                                <li>스포일러로 신고</li>
-                                                <li>부적절한 표현으로 신고</li>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <li
-                                                    onClick={() =>
-                                                        onEdit(review.id, review.text, review.score)
-                                                    }
-                                                >
-                                                    수정
-                                                </li>
-                                                <li onClick={() => onDel(review.id)}>삭제</li>
-                                            </>
-                                        )}
-                                    </ul>
-                                )}
+
+                                <div className="more">
+                                    <button
+                                        onClick={() =>
+                                            setEditingId(editingId === r.id ? null : r.id)
+                                        }
+                                    >
+                                        <FiMoreVertical />
+                                    </button>
+                                    {editingId === r.id && (
+                                        <ul className="dropdown" onClick={() => setEditingId(null)}>
+                                            {r.isMine ? (
+                                                <>
+                                                    <li onClick={() => onEdit(r)}>수정</li>
+                                                    <li onClick={() => onDel(r.id)}>삭제</li>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <li>스포일러로 신고</li>
+                                                    <li>부적절한 표현으로 신고</li>
+                                                </>
+                                            )}
+                                        </ul>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    )}
+
                     <div className="pagination">
                         <button
-                            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                             disabled={currentPage === 1}
                         >
-                            <img src="/ott/icon-prev.png" alt="이전버튼" />
+                            <img src="/ott/icon-prev.png" alt="이전" />
                             <span>이전</span>
                         </button>
                         {Array.from({ length: totalPage }, (_, i) => (
@@ -370,11 +286,11 @@ const Review = () => {
                             </button>
                         ))}
                         <button
-                            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPage))}
+                            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPage))}
                             disabled={currentPage === totalPage}
                         >
                             <span>다음</span>
-                            <img src="/ott/icon-next.png" alt="다음버튼" />
+                            <img src="/ott/icon-next.png" alt="다음" />
                         </button>
                     </div>
                 </div>

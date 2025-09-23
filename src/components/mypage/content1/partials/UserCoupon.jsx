@@ -1,30 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import CouponItem from '../CouponItem';
 import ExpiredCouponItem from '../ExpiredCouponItem';
 import useMypageStore from '../../../../store/useMypageStore';
+import { addMonths } from 'date-fns';
 
 const UserCoupon = () => {
     const [couponTab, setCouponTab] = useState(0);
     const [periodTab, setPeriodTab] = useState(3);
     const userCoupons = useMypageStore((s) => s.userCoupons);
-    const [filtered, setFiltered] = useState([]);
+    // const [filtered, setFiltered] = useState([]);
 
-    useEffect(() => {
+    const filtered = useMemo(() => {
+        const arr = Array.isArray(userCoupons) ? userCoupons : [];
         const now = new Date();
-        const end = new Date(now);
-        end.setMonth(end.getMonth() + periodTab); // 개월 더하기
-        const list = (Array.isArray(userCoupons) ? userCoupons : [])
-            .filter((c) => c && typeof c === 'object')
-            .filter((c) => c.status === couponTab) // 탭 상태 필터
-            .filter((c) => {
-                if (!c.expiresAt) return false;
-                const exp = new Date(c.expiresAt);
-                return exp >= now && exp <= end; // 기간내 만료
-            })
-            .sort((a, b) => new Date(a.expiresAt) - new Date(b.expiresAt)); // 만료 임박순 정렬
+        const end = addMonths(now, periodTab);
 
-        setFiltered(list);
-    }, [couponTab, periodTab]);
+        return arr
+            .filter((c) => c && typeof c === 'object')
+            .filter((c) => {
+                const exp = c.expiresAt ? new Date(c.expiresAt) : null;
+
+                if (couponTab === 0) {
+                    // 사용 가능: 기간 내에 있고(오늘~N개월), 만료 안 됨
+                    if (!exp) return false;
+                    return (
+                        exp >= now &&
+                        exp <= end &&
+                        (c.status === 0 || c.status === 1 || c.status === 'available')
+                    );
+                } else {
+                    // 만료: 만료됐거나 상태가 만료/사용됨
+                    if (exp && exp < now) return true;
+                    return c.status === 2 || c.status === 'expired' || c.status === 'used';
+                }
+            })
+            .sort((a, b) => new Date(a.expiresAt) - new Date(b.expiresAt)); // 임박순
+    }, [userCoupons, couponTab, periodTab]);
     return (
         <div className="coupon">
             <div className="title">

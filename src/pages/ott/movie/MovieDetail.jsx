@@ -84,7 +84,7 @@ const MovieDetail = () => {
             <section className="tab-content">
                 {activeTab === 'relate' && <Relate videolist={videolist} person={person} />}
                 {activeTab === 'photo' && <Photo photo={photo} />}
-                {activeTab === 'review' && <Review />}
+                {activeTab === 'review' && <Review videoId={'68ca9d15e0859865b492077f'} />}
             </section>
         </div>
     );
