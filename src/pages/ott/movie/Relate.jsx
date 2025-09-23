@@ -7,9 +7,9 @@ const Relate = ({ videolist, person }) => {
     return (
         <div className="detail-relate">
             <strong>고객들이 시청한 다른 작품</strong>
-            <p className="more">
+            {/* <p className="more">
                 <span>+</span> 더보기
-            </p>
+            </p> */}
             <Swiper
                 slidesPerView={4.5}
                 loop={false}
