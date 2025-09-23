@@ -1,11 +1,16 @@
 #hotel_reservation_agree {
     width: 100%;
-    height: 897px;
+    height: 1897px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
+    position: relative;
     background-color: #fff;
+    overflow: visible;
+
     .inner {
+        position: absolute;
+        top: 150px;
         height: 777px;
         display: flex;
         justify-content: space-between;
