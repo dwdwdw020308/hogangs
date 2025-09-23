@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { create } from 'zustand';
-import { API_URL } from '../config';
+// import { API_URL } from '../config';
 // const API_URL = 'http://localhost:3000';
+const BASE = API_URL.replace(/\/+$/, ''); // ← 도메인(끝 슬래시 제거)
+
 // 안전한 JSON 로딩 유틸
 const load = (key, fallback) => {
     try {
@@ -22,6 +24,8 @@ const useMypageStore = create((set, get) => ({
 
     videoHistory: [], // 서버에서 온 원본 리스트
     videoHistoryLite: [], // [{ id, koTitle, visual }] 만 담은 요약 리스트
+    videoLikes: [], // 서버 원본(혹은 평탄화된 리스트)
+    videoLikesLite: [], // [{id, koTitle, visual}] 전용
     // =================== 초기화 ========================
 
     // 목록 조회
@@ -103,20 +107,47 @@ const useMypageStore = create((set, get) => ({
     fetchVideoHistory: async () => {
         const userId = get()?.user?._id;
         if (!userId) return;
+
         try {
             const { data } = await axios.get(`${BASE}/video-history`, { params: { userId } });
             const raw = Array.isArray(data) ? data : [];
 
-            // 서버 응답 형태가 ①비디오 문서 그대로 or ②{ video: {..} } or ③{ videoId: '...' }
+            const ids = [...new Set(raw.map((h) => h.videoId).filter(Boolean))];
+            if (!ids.length) {
+                set({ videoHistory: raw, videoHistoryLite: [] });
+                return;
+            }
+
+            const results = await Promise.allSettled(
+                ids.map((id) => axios.get(`${BASE}/video/${id}`))
+            );
+            const videoMap = {};
+            results.forEach((r) => {
+                if (r.status === 'fulfilled') {
+                    const v = r.value?.data;
+                    if (v && v._id) videoMap[v._id] = v;
+                }
+            });
+
+            // helper: base + path 안전하게 합치기
+            const withBase = (path) => {
+                if (!path) return '';
+                if (/^https?:\/\//i.test(path)) return path; // 이미 절대 URL
+                return `${BASE}${path.startsWith('/') ? '' : '/'}${path}`;
+            };
+
             const lite = raw
                 .map((item) => {
-                    const v = item.video || item.videoDoc || item; // 다양한 형태 대응
-                    const id = v?._id || item.videoId;
-                    const koTitle = v?.koTitle ?? '';
-                    const visual = v?.visual ?? v?.thumb ?? '';
-                    return { id, koTitle, visual };
+                    const v = videoMap[item.videoId];
+                    if (!v) return null;
+                    const src = v.visual ?? v.thumb ?? '';
+                    return {
+                        id: v._id,
+                        koTitle: v.koTitle ?? '',
+                        visual: withBase(src), // ← BASE 붙여서 반환
+                    };
                 })
-                .filter((x) => x.id && (x.koTitle || x.visual));
+                .filter(Boolean);
 
             set({ videoHistory: raw, videoHistoryLite: lite });
         } catch (e) {
@@ -124,8 +155,65 @@ const useMypageStore = create((set, get) => ({
             console.error('fetchVideoHistory error:', e?.response?.data || e);
         }
     },
+    // 찜 목록 조회
+    fetchVideoLikes: async () => {
+        const userId = get()?.user?._id;
+        if (!userId) return;
+
+        const { data } = await axios.get(`${BASE}/video-like`, { params: { userId } });
+        const rows = Array.isArray(data) ? data : [];
+
+        // 서버가 populate로 koTitle/visual을 이미 붙여준다 가정
+        const withBase = (path) => {
+            if (!path) return '';
+            if (/^https?:\/\//i.test(path)) return path;
+            return `${BASE}${path.startsWith('/') ? '' : '/'}${path}`;
+        };
+
+        const lite = rows
+            .map((r) => ({
+                id: r.videoId,
+                koTitle: r.koTitle || '',
+                visual: withBase(r.visual || r.thumb || ''),
+            }))
+            .filter((v) => v.id && (v.koTitle || v.visual));
+
+        set({ videoLikes: rows, videoLikesLite: lite });
+    },
+
+    // 찜 토글 (버튼 클릭용)
+    toggleVideoLike: async (videoId) => {
+        const userId = get()?.user?._id;
+        if (!userId || !videoId) return;
+
+        try {
+            const { data } = await axios.post(
+                `${BASE}/video-like/toggle`,
+                { userId, videoId },
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                }
+            );
+            const liked = !!data?.liked;
+
+            // 낙관적 갱신: 최소한 목록만 갱신
+            await get().fetchVideoLikes();
+            return liked;
+        } catch (e) {
+            console.error('toggleVideoLike error:', e?.response?.data || e);
+            return null;
+        }
+    },
+
     fetchAllForUser: async () => {
-        const { user, fetchSns, fetchReservations, fetchUserCoupons, fetchVideoHistory } = get();
+        const {
+            user,
+            fetchSns,
+            fetchReservations,
+            fetchUserCoupons,
+            fetchVideoHistory,
+            fetchVideoLikes,
+        } = get();
         const userId = user._id;
 
         await Promise.allSettled([
@@ -133,6 +221,7 @@ const useMypageStore = create((set, get) => ({
             fetchReservations(userId),
             fetchUserCoupons(userId),
             fetchVideoHistory(),
+            fetchVideoLikes(),
         ]);
     },
 }));

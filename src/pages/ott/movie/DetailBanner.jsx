@@ -10,6 +10,7 @@ import axios from 'axios';
 import { API_URL } from '../../../config';
 import { useVideoStore } from '../../../store/useVideoStore';
 import useAuthStore from '../../../store/useAuthStore';
+import useMypageStore from '../../../store/useMypageStore';
 
 const DetailBanner = () => {
     const [isOpen, setIsOpen] = useState(false); //영상 열렸는지아닌지
@@ -19,6 +20,10 @@ const DetailBanner = () => {
     const [recommended, setRecommended] = useState(false);
     const saveHistory = useVideoStore((s) => s.saveHistory);
     const user = useAuthStore((s) => s.user);
+    const toggleVideoLike = useMypageStore((s) => s.toggleVideoLike);
+    const videoLikes = useMypageStore((s) => s.videoLikes);
+    const fetchVideoLikes = useMypageStore((s) => s.fetchVideoLikes);
+
     // localhost:3001/video?id=68ca9d15e0859865b492077f
     const play = () => {
         if (thumbRef.current) {
@@ -34,6 +39,10 @@ const DetailBanner = () => {
         setIsOpen(true);
     };
 
+    const clickLike = () => {
+        setLike(!like);
+        toggleVideoLike('68ca9d15e0859865b492077f');
+    };
     const [videoData, setVideoData] = useState(null);
     useEffect(() => {
         (async () => {
@@ -50,6 +59,10 @@ const DetailBanner = () => {
             }
         })();
     }, []);
+
+    useEffect(() => {
+        fetchVideoLikes();
+    }, [fetchVideoLikes]);
     return (
         <div className="DetailBanner">
             <div className="title-box">
@@ -83,7 +96,7 @@ const DetailBanner = () => {
                     </p>
                     <ul>
                         <li>
-                            <button onClick={() => setLike(!like)}>
+                            <button onClick={clickLike}>
                                 {like ? (
                                     <FaHeart style={{ color: 'red' }} size={14} />
                                 ) : (

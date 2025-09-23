@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MyReviewItem = () => {
+const MyReviewItem = ({ data }) => {
     return (
         <div className="myReviewItem" id="myReviewItem">
             <h3>영화 제목</h3>

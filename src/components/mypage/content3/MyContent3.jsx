@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RecordItem from './RecordItem';
 import SteamingItem from './SteamingItem';
 import MyReviewItem from './MyReviewItem';
@@ -13,7 +13,11 @@ const MyContent3 = () => {
     const steamingData = [1];
     const reviewData = [1, 2];
     const videoHistoryLite = useMypageStore((s) => s.videoHistoryLite);
+    const likes = useMypageStore((s) => s.videoLikesLite);
+    // const fetchVideoLikes = useMypageStore((s) => s.fetchVideoLikes);
+    // const toggleVideoLike = useMypageStore((s) => s.toggleVideoLike);
 
+    useEffect(() => {}, [videoHistoryLite]);
     return (
         <section id="mycontent3">
             <div className="inner">
@@ -29,16 +33,16 @@ const MyContent3 = () => {
                     ) : (
                         <div className="recordList hasData">
                             <Swiper
+                                slidesPerView="auto"
                                 spaceBetween={18}
-                                slidesPerView={3}
-                                breakpoints={{
-                                    0: {
-                                        slidesPerView: 1.5,
-                                    },
-                                    600: {
-                                        slidesPerView: 3,
-                                    },
-                                }}
+                                // breakpoints={{
+                                //     0: {
+                                //         slidesPerView: 1.5,
+                                //     },
+                                //     600: {
+                                //         slidesPerView: 3,
+                                //     },
+                                // }}
                             >
                                 {videoHistoryLite.map((item, idx) => (
                                     <SwiperSlide key={idx}>
@@ -55,7 +59,7 @@ const MyContent3 = () => {
                     <div className="title">
                         <h2>영상 찜 목록</h2>
                     </div>
-                    {steamingData.length === 0 ? (
+                    {likes.length === 0 ? (
                         <div className="steamingList empty">
                             <span>찜한 영상이 없습니다.</span>
                         </div>
@@ -63,17 +67,17 @@ const MyContent3 = () => {
                         <div className="steamingList hasData">
                             <Swiper
                                 spaceBetween={18}
-                                slidesPerView={3}
-                                breakpoints={{
-                                    0: {
-                                        slidesPerView: 1.5,
-                                    },
-                                    600: {
-                                        slidesPerView: 3,
-                                    },
-                                }}
+                                slidesPerView="auto"
+                                // breakpoints={{
+                                //     0: {
+                                //         slidesPerView: 1.5,
+                                //     },
+                                //     600: {
+                                //         slidesPerView: 3,
+                                //     },
+                                // }}
                             >
-                                {steamingData.map((item, idx) => (
+                                {likes.map((item, idx) => (
                                     <SwiperSlide key={idx}>
                                         <SteamingItem data={item} />
                                     </SwiperSlide>
