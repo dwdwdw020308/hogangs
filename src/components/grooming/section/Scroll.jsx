@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.normalizeScroll(true); // 관성으로 넘치는 것 방지(권장)
@@ -11,6 +11,13 @@ const SIZES = [
     { w: 1400, h: 400 },
     { w: 1600, h: 480 },
     { w: 1920, h: 560 },
+];
+const IMAGES = [
+    '/grooming/scroll/1.png',
+    '/grooming/scroll/2.png',
+    '/grooming/scroll/3.png',
+    '/grooming/scroll/4.png',
+    '/grooming/scroll/5.png',
 ];
 
 const MILESTONES = [
@@ -67,6 +74,8 @@ const Scroll = () => {
     const dotRef = useRef(null);
     const ticksRef = useRef(null);
 
+    const [currentIdx, setCurrentIdx] = useState(0);
+
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
             const bar = barRef.current;
@@ -96,7 +105,7 @@ const Scroll = () => {
                     scrub: 0.5,
                     invalidateOnRefresh: true,
                     anticipatePin: 1,
-                    markers: true,
+                    // markers: true,
                     pin: true,
                     snap: {
                         snapTo: checkpoints,
@@ -120,6 +129,8 @@ const Scroll = () => {
                             ease: 'power2.inOut',
                             overwrite: 'auto',
                         });
+                        setCurrentIdx(idx);
+
                         const ticks = Array.from(ticksRef.current?.querySelectorAll('li') ?? []);
                         ticks.forEach((li, i) => li.classList.toggle('active', i === idx));
                         currentIdx = idx;
@@ -135,7 +146,12 @@ const Scroll = () => {
         <section id="grooming_scroll_section" ref={sectionRef}>
             <div className="viewport" ref={viewPortRef}>
                 <div className="frame">
-                    <div className="img" ref={imgRef}></div>
+                    <img
+                        ref={imgRef}
+                        src={IMAGES[currentIdx]}
+                        alt={`${currentIdx + 1}`}
+                        style={{ width: SIZES[currentIdx].w, height: SIZES[currentIdx].h }}
+                    />
                 </div>
                 <div className="pagination">
                     <div className="pagination_inner">
