@@ -9,6 +9,9 @@ const IntroduceService = () => {
           <CurveHeadLine />
         </div>
         <span>오늘도 예쁘게 변신했어요! 엄마 아빠가 보면 깜짝 놀랄 걸요?</span>
+        <span className="mobileTitle">
+          오늘도 예쁘게 변신했어요! <br /> 엄마 아빠가 보면 깜짝 놀랄 걸요?
+        </span>
         <GroomingIntroduceSwiper />
       </div>
     </section>

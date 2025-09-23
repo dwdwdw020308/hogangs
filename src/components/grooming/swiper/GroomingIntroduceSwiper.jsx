@@ -94,7 +94,7 @@ const GroomingIntroduceSwiper = () => {
               <strong>{card.title}</strong>
             </div>
             <img
-              src={`/hotel/introduce/${idx + 1}.png`}
+              src={`/grooming/introduce/${idx + 1}.png`}
               alt=""
               className="img"
             />
