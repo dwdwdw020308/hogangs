@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MyContent1 from '../../components/mypage/content1/MyContent1';
 import MyContent3 from '../../components/mypage/content3/MyContent3';
+import useMypageStore from '../../store/useMypageStore';
 
 const MyPage = () => {
     const [activeTab, setActiveTab] = useState('content1');
@@ -10,6 +11,14 @@ const MyPage = () => {
         name: '호강이',
         profileImage: '/mypage/hogangImg.png',
     });
+
+    // 초기 스토어 fetch
+    const fetchAllForuser = useMypageStore((s) => s.fetchAllForUser);
+    useEffect(() => {
+        (async () => {
+            fetchAllForuser();
+        })();
+    }, []);
     useEffect(() => {
         // 팝업이 아니면(부모창이면) 리스너 등록
         if (window.opener) return;

@@ -1,21 +1,27 @@
-import React from "react";
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import React from 'react';
 
-// HotelReservation.jsx
-const HotelReservation = ({ isPast }) => {
-  return (
-    <div id="hotelReservationBox" className={isPast ? "past" : "upcoming"}>
-      <div className="left">
-        <img src="/mypage/hotelDog.png" alt="hotelDog" />
-      </div>
-      <div className="right">
-        <p>호텔예약완료</p>
-        <span className="date">
-          25년 09월 18일 - <br />
-          25년 09월 19일
-        </span>
-      </div>
-    </div>
-  );
+const formatKRDate = (value) => {
+    return format(new Date(value), 'yy년 MM월 dd일', { locale: ko });
+};
+const HotelReservation = ({ data }) => {
+    const { type, startDate, endDate, status } = data;
+
+    return (
+        <div id="hotelReservationBox" className={status === 0 ? 'past' : 'upcoming'}>
+            <div className="left">
+                <img src="/mypage/hotelDog.png" alt="hotelDog" />
+            </div>
+            <div className="right">
+                <p>호텔예약완료</p>
+                <span className="date">
+                    {formatKRDate(startDate)} - <br />
+                    {formatKRDate(endDate)}
+                </span>
+            </div>
+        </div>
+    );
 };
 
 export default HotelReservation;

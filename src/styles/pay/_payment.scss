@@ -1,11 +1,13 @@
 #payment_section {
     width: 100%;
-    height: 452px;
+    height: 900px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     background-color: #fff;
     .inner {
+        position: absolute;
+        top: 150x;
         height: 307px;
         display: flex;
         justify-content: space-between;

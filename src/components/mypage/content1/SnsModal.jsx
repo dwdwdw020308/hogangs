@@ -8,12 +8,13 @@ import {
 } from '../../../config';
 import axios from 'axios';
 import { b64url, randomVerifier } from '../../../utils/GoogleLogin';
+import useMypageStore from '../../../store/useMypageStore';
 
 const SnsModal = ({ onClose }) => {
     const setLoginModal = useAuthStore((state) => state.setLoginModal);
     const [googleLink, setGoogleLink] = useState(false);
     const [kakaoLink, setKakaoLink] = useState(false);
-
+    const snsLinks = useMypageStore((s) => s.snsLinks);
     const googleRegister = async () => {
         const GOOGLE_LOGIN_URL = import.meta.env.VITE_GOOGLE_LOGIN_URL;
         const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -52,11 +53,8 @@ const SnsModal = ({ onClose }) => {
     };
 
     useEffect(() => {
-        (async () => {
-            const user = JSON.parse(localStorage.getItem('user'));
-            const userId = user._id;
-            const { data } = await axios.get(`${API_URL.replace(/\/+$/, '')}/sns/user/${userId}`);
-            data.map((i) => {
+        (() => {
+            snsLinks.map((i) => {
                 if (i.provider === 'google') {
                     setGoogleLink(true);
                 } else if (i.provider === 'kakao') {
