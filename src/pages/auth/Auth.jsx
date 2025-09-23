@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { API_URL, KAKAO_REDIRECT_URI } from '../../config';
 import axios from 'axios';
-import { constructFromSymbol } from 'date-fns/constants';
 
 const Auth = () => {
     const location = useLocation();
@@ -20,7 +19,7 @@ const Auth = () => {
                 });
 
                 const data = await response.json();
-                // console.log('카카오 사용자 정보:', data);
+                console.log('카카오 사용자 정보:', data);
 
                 // 필요한 값 추출
                 const kakaoAccount = data.kakao_account || {};
@@ -42,7 +41,8 @@ const Auth = () => {
 
         const getKakaoToken = async (code) => {
             try {
-                console.log(`어디서 : ${code}`);
+                console.log(`APIKEY : ${import.meta.env.VITE_KAKAO_REST_API_KEY}`);
+                console.log(`redirectURL : ${KAKAO_REDIRECT_URI}`);
                 const response = await fetch('https://kauth.kakao.com/oauth/token', {
                     method: 'POST',
                     headers: {
