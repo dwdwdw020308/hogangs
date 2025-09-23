@@ -31,6 +31,7 @@ const slides = [
 
 export default function Content3() {
     const [index, setIndex] = useState(0);
+    const [isActive, setIsActive] = useState(false);
     const pinSectionRef = useRef(null);
     const titleRef = useRef(null);
 
@@ -44,6 +45,12 @@ export default function Content3() {
                 scrub: true,
                 pin: true,
                 // markers: true,
+                onEnter: () => {
+                    setIsActive(true);
+                    setIndex(0);
+                },
+                onLeave: () => setIsActive(false),
+                onLeaveBack: () => setIsActive(false),
                 onUpdate: (self) => {
                     const newIndex = Math.min(
                         slides.length - 1,
