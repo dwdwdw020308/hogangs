@@ -229,7 +229,7 @@
         --rdp-day-width: calc(358px / 7);
         --rdp-day-height: 40px;
 
-        border-bottom: 1px solid #e3e3e3;
+        // border-bottom: 1px solid #e3e3e3;
         .rdp-month_caption {
             margin-bottom: 27px;
             .rdp-caption_label {
@@ -237,7 +237,12 @@
             }
         }
     }
-
+    .calendar_area td.rdp-selected .rdp-day_button {
+        // background: #8dd2ce !important;
+        // color: #fff !important;
+        // border-radius: 9999px !important;
+        line-height: 0.2;
+    }
     /* 버튼이 셀을 정확히 채우게 */
     .rdp-day > button,
     .rdp-day .rdp-day_button {
@@ -249,6 +254,7 @@
     .rdp-range_start .rdp-day_button::after,
     .rdp-range_end .rdp-day_button::after {
         font-size: 10px;
+        line-height: 2.3;
     }
 
     .rdp-month {
@@ -259,7 +265,7 @@
     .rdp-weekdays th,
     .rdp-day {
         font-size: 14px;
-        line-height: 32.007px;
+        // line-height: 32.007px;
     }
     .calendar_area .rdp {
         width: 760px;
@@ -291,7 +297,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 233px;
+        width: 144px;
+        svg {
+            height: 8px;
+        }
     }
     .caption {
         font-size: 16px;

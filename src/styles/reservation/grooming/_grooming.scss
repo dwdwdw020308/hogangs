@@ -124,3 +124,144 @@
         }
     }
 }
+@media screen and (max-width: 600px) {
+    #grooming_reservation_grooming {
+        width: 100%;
+        height: 700px;
+        padding-top: 70px;
+
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // background-color: #fff;
+
+        .inner {
+            height: 759px;
+            // display: flex;
+            // justify-content: space-between;
+            .block {
+                width: 0;
+                height: 0px;
+            }
+            .check_area {
+                width: 100%;
+                display: flex;
+                flex-flow: column;
+                .title {
+                    // color: #000;
+                    // font-family: Paperlogy;
+                    font-size: 18px;
+                    // font-style: normal;
+                    // font-weight: 600;
+                    // line-height: normal;
+                    margin-bottom: 14px;
+                }
+                p {
+                    // color: var(--Grey-grey-400, #818181);
+                    // font-family: Pretendard;
+                    font-size: 14px;
+                    // font-style: normal;
+                    // font-weight: 500;
+                    // line-height: 130%; /* 20.8px */
+                    margin-bottom: 30px;
+                }
+
+                .radio_area {
+                    // display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    margin-bottom: 30px;
+                }
+
+                .beauties {
+                    width: 100%;
+                    height: 62px;
+                    // display: flex;
+                    // align-items: center;
+                    gap: 10px;
+                    margin-bottom: 60px;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr); /* 4개까지만 한 줄 */
+                    li {
+                        cursor: pointer;
+                        width: 100%;
+                        height: 62px;
+                        // border-radius: 10px;
+                        // border: 1px solid var(--Grey-grey-200, #b6b6b6);
+                        // background: var(--White, #fefefe);
+                        // display: flex;
+                        flex-flow: column;
+                        justify-content: center;
+                        .bold_text {
+                            // color: var(--Black, #060606);
+                            // text-align: center;
+
+                            /* SemiBold/16px */
+                            // font-family: Pretendard;
+                            // font-size: 16px;
+                            // font-style: normal;
+                            // font-weight: 600;
+                            // line-height: normal;
+                        }
+                        .g_text {
+                            // color: var(--Grey-grey-700, #454545);
+                            // text-align: center;
+                            /* Regular/12px */
+                            // font-family: Pretendard;
+                            font-size: 13px;
+                            // font-style: normal;
+                            // font-weight: 400;
+                            // line-height: normal;
+                        }
+                        &.check {
+                            // background: #8dd2ce;
+                            // .bold_text,
+                            // .g_text {
+                            //     color: #fefefe;
+                            // }
+                        }
+                    }
+                }
+
+                .add_option {
+                    width: 100%;
+                    height: 213px;
+                    margin-top: 140px;
+                    h4 {
+                        color: #000;
+                        /* Medium/24px */
+                        // font-family: Pretendard;
+                        font-size: 16px;
+                        // font-style: normal;
+                        // font-weight: 500;
+                        // line-height: normal;
+                        margin-bottom: 8px;
+                    }
+                    .radio_areas {
+                        // width: 100%;
+                        // height: 113px;
+
+                        display: flex;
+                        flex-flow: column;
+                        gap: 16px;
+                        width: 100%;
+                        p {
+                            // margin-bottom: 0;
+                            height: 23px;
+                            display: flex;
+                            &.fst {
+                                gap: 30px;
+                            }
+                            &.sec {
+                                gap: 60px;
+                            }
+                            &.thd {
+                                gap: 104px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
