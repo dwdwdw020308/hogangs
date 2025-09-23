@@ -118,36 +118,19 @@
             }
             .check_area {
                 width: 100%;
-                // margin-top: 90px;
-                // display: flex;
-                // flex-flow: column;
                 .title {
-                    // color: #000;
-                    // font-family: Paperlogy;
                     font-size: 18px;
-                    // font-style: normal;
-                    // font-weight: 600;
-                    // line-height: normal;
                     margin-bottom: 14px;
                 }
                 p {
-                    // color: var(--Grey-grey-400, #818181);
-                    // font-family: Pretendard;
                     font-size: 14px;
-                    // font-style: normal;
-                    // font-weight: 500;
-                    // line-height: 130%; /* 20.8px */
                     margin-bottom: 30px;
                 }
             }
             .sizes {
                 width: 100%;
                 height: 116px;
-                // display: flex;
-                // justify-content: space-between;
-                // align-items: center;
                 li {
-                    // cursor: pointer;
                     width: 110px;
                     height: 116px;
                     border-radius: 13.168px;
@@ -168,7 +151,7 @@
                     .weight {
                         color: var(--Grey-grey-700, #454545);
                         text-align: center;
-                        /* Regular/14px */
+
                         font-family: Pretendard;
                         font-size: 14px;
                         font-style: normal;

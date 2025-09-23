@@ -24,7 +24,7 @@ const DetailBanner = () => {
     return (
         <div className="DetailBanner youtube-detail">
             <div className="title-box">
-                <h2 style={{ fontSize: 38 }}>
+                <h2>
                     강아지 짖지마
                     <br />
                     교육법
