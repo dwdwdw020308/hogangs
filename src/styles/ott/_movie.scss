@@ -2,7 +2,7 @@
 
 .movie-list {
     background: var(--Green-green-50, #f9fefd);
-    padding: 0 260px 160px 260px;
+    padding: 160px 260px 160px 260px;
     position: relative;
 
     strong {
@@ -12,6 +12,7 @@
         font-size: 32px;
         font-weight: 600;
         margin-bottom: 34px;
+        line-height: 1;
         span {
             color: var(--Green-green-800, #4a9f99);
         }
