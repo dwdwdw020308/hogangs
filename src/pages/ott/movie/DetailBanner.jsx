@@ -7,6 +7,7 @@ import { IoMdClose } from 'react-icons/io';
 
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../../config';
 
 const DetailBanner = () => {
     const [isOpen, setIsOpen] = useState(false); //영상 열렸는지아닌지
@@ -30,11 +31,12 @@ const DetailBanner = () => {
         (async () => {
             try {
                 const res = await axios.get(
-                    `${import.meta.env.VITE_API_URL}/video/68ca9d15e0859865b492077f`,
-                    { withCredentials: true }
+                    `${API_URL.replace(/\/+$/, '')}/video/68ca9d15e0859865b492077f`,
+                    {
+                        withCredentials: true,
+                    }
                 );
                 setVideoData(res.data);
-                // console.log(res.data);
             } catch (err) {
                 console.error(err);
             }
