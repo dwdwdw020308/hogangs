@@ -1,7 +1,8 @@
 // src/store/useCommentStore.js
 import axios from 'axios';
 import { create } from 'zustand';
-import { API_URL } from '@/config';
+import { API_URL } from '../config';
+
 // const API_URL = 'http://localhost:3000';
 const BASE = API_URL.replace(/\/+$/, '');
 
