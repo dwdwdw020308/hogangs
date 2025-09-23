@@ -3,9 +3,11 @@ import Hotel from '../../components/reservation/Hotel';
 import Grooming from '../../components/reservation/Grooming';
 import RequireLogin from '../../components/reservation/RequireLogin';
 import useReservationStore from '../../store/useReservationStore';
+import PriceModal from '../../components/reservation/partials/PriceModal';
 
 const Reservation = () => {
     const [hotel, setHotel] = useState(true);
+    const [modalShow, setModalShow] = useState(false);
     const init = useReservationStore((s) => s.init);
 
     useEffect(() => {
@@ -34,8 +36,9 @@ const Reservation = () => {
                     </li>
                 </ul>
             </section>
-            {hotel && <Hotel />}
-            {!hotel && <Grooming />}
+            {hotel && <Hotel setModalShow={setModalShow} />}
+            {!hotel && <Grooming setModalShow={setModalShow} />}
+            {modalShow && <PriceModal hotel={hotel} onClose={() => setModalShow(false)} />}
         </>
     );
 };

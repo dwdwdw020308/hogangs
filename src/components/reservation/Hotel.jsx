@@ -7,13 +7,13 @@ import CheckWeight from './hotel/CheckWeight';
 import Request from './hotel/Request';
 import useReservationStore from '../../store/useReservationStore';
 
-const Hotel = () => {
+const Hotel = ({ setModalShow }) => {
     const [form, setForm] = useState({});
     const init = useReservationStore((s) => s.init);
 
     return (
         <>
-            <Calendar setForm={setForm} />
+            <Calendar setForm={setForm} setModalShow={setModalShow} />
             <CheckOutService />
             <CheckWeight />
             <CheckGroomingService />

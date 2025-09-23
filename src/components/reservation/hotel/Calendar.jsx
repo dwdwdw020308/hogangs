@@ -1,7 +1,7 @@
 import DatePick from '../partials/DatePick';
 import Steps from '../partials/Steps';
 
-const Calendar = ({ setForm }) => {
+const Calendar = ({ setForm, setModalShow }) => {
     return (
         <section id="hotel_reservation_calendar">
             <div className="inner">
@@ -10,7 +10,14 @@ const Calendar = ({ setForm }) => {
                         <h3 className="title">지금은 호텔 예약 단계입니다.</h3>
                         <Steps type="hotel" />
                     </div>
-                    <div className="price_modal_btn">Hotel 가격 보기</div>
+                    <div
+                        className="price_modal_btn"
+                        onClick={() => {
+                            setModalShow(true);
+                        }}
+                    >
+                        Hotel 가격 보기
+                    </div>
                 </div>
                 <DatePick setForm={setForm} />
             </div>
