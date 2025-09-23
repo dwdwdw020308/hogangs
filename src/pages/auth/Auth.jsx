@@ -51,7 +51,7 @@ const Auth = () => {
                     body: new URLSearchParams({
                         grant_type: 'authorization_code',
                         client_id: import.meta.env.VITE_KAKAO_REST_API_KEY,
-                        redirect_uri: KAKAO_REDIRECT_URI,
+                        redirect_uri: KAKAO_REDIRECT_URI.replace(/\/$/, ''),
                         code,
                     }),
                 });
