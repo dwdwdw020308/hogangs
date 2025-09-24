@@ -1,5 +1,19 @@
 @use './../utils' as *;
-
+@media (max-width: 640px) {
+    /* 너네 실제 셀렉터로 바꿔 */
+    #channel-talk,
+    .ch-plugin,
+    #ch-plugin,
+    .chatbot-fab,
+    iframe[src*='channel.io'],
+    iframe[src*='crisp.chat'],
+    iframe[src*='tawk.to'],
+    iframe[src*='kakao'] {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+}
 .inner {
     width: 1400px;
     margin: auto;
@@ -26,4 +40,13 @@
     flex-direction: column;
     gap: 24px;
     z-index: 9999;
+}
+@media screen and (max-width: 600px) {
+    .footer-buttons1 {
+        transform: translateY(90%);
+        width: 48px;
+    }
+    .footer-buttons2 {
+        display: none;
+    }
 }

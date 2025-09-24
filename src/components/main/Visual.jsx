@@ -115,7 +115,7 @@ const Visual = () => {
                         preserveAspectRatio="none"
                     >
                         <path
-                            fill="#eef9f7"
+                            fill="#EEF9F8"
                             d="M250,246.5c-97.85,0-186.344-40.044-250-104.633V250h500V141.867C436.344,206.456,347.85,246.5,250,246.5z"
                         />
                     </svg>
