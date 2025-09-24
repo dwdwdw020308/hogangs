@@ -170,7 +170,7 @@
             height: 38px;
             display: flex;
             gap: 10px;
-            @include flexbox($justify: space-between);
+            @include flexbox();
             @include fontFormat();
             .profile {
                 width: 50px;
